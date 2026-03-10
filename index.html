@@ -202,10 +202,7 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
   <div class="card">
     <div class="card-title">WASSERWERTE ANPASSEN</div>
     <div class="water-grid" id="water-inputs"></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
-      <button class="btn-action" onclick="resetWater()" style="border:1px solid #2D6A2D;color:#6ee7b7;">AUGSBURG</button>
-      <button class="btn-action" onclick="clearWater()" style="border:1px solid #374151;color:#6b7280;">OSMOSE</button>
-    </div>
+  
   </div>
 </div>
 
@@ -315,17 +312,17 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
 
 <script>
 var SALTS = [
-  { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  step:0.005, val:0.500, preis:23.07, menge:25000 },
-  { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  step:0.005, val:0.250, preis:29.67, menge:25000 },
-  { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  step:0.005, val:0.200, preis:19.33, menge:25000 },
-  { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  step:0.005, val:0.150, preis:59.88, menge:25000 },
-  { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  step:0.005, val:0.125, preis:37.49, menge:25000 },
-  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  step:0.005, val:0.000, preis:0,     menge:25000 },
-  { key:'kwg',        label:'Kaliwasserglas',        unit:'ml/L', min:0, max:0.3,  step:0.001, val:0.073, preis:16.31, menge:2500  },
-  { key:'h3po4',      label:'Phosphorsaeure 85%',   unit:'ml/L', min:0, max:0.3,  step:0.001, val:0.060, preis:18.90, menge:1000  },
-  { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  step:0.05,  val:0.050, preis:22.97, menge:2500  },
-  { key:'wallup',     label:'Wall Up S',             unit:'g/L',  min:0, max:0.15, step:0.001, val:0.050, preis:51.05, menge:1000  },
-  { key:'fetrilon',   label:'Fetrilon Combi 1',      unit:'g/L',  min:0, max:0.06, step:0.001, val:0.020, preis:29.26, menge:1000  }
+  { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  origMax:1.5,  step:0.005, val:0.500, preis:23.07, menge:25000 },
+  { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.250, preis:29.67, menge:25000 },
+  { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.200, preis:19.33, menge:25000 },
+  { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.150, preis:59.88, menge:25000 },
+  { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.125, preis:37.49, menge:25000 },
+  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.000, preis:0,     menge:25000 },
+  { key:'kwg',        label:'Kaliwasserglas',        unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.073, preis:16.31, menge:2500  },
+  { key:'h3po4',      label:'Phosphorsaeure 85%',   unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.060, preis:18.90, menge:1000  },
+  { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  origMax:5.0,  step:0.05,  val:0.050, preis:22.97, menge:2500  },
+  { key:'wallup',     label:'Wall Up S',             unit:'g/L',  min:0, max:0.15, origMax:0.15, step:0.001, val:0.050, preis:51.05, menge:1000  },
+  { key:'fetrilon',   label:'Fetrilon Combi 1',      unit:'g/L',  min:0, max:0.06, origMax:0.06, step:0.001, val:0.020, preis:29.26, menge:1000  }
 ];
 
 var PRESETS = {
@@ -355,7 +352,7 @@ var MIXING = [
   {nr:4,color:'#fb923c',label:'MKP + SOP',desc:'Zusammen in 200ml',tip:'SOP in warmem Wasser (30-40 Grad) vorloesen'},
   {nr:5,color:'#4ade80',label:'Wall Up S',desc:'Alleine in 200ml',tip:'Si nach MKP - bei sinkendem pH stabiler'},
   {nr:6,color:'#86efac',label:'Fetrilon Combi 1',desc:'Alleine in 200ml',tip:'Chelate bei niedrigerem pH stabiler'},
-  {nr:7,color:'#60a5fa',label:'Kaliwasserglas 28Be',desc:'kwg',tip:'Niemals unverdunnt ins saure Reservoir! Si fallt sonst als Gel aus.'},
+  {nr:7,color:'#60a5fa',key:'kwg',label:'Kaliwasserglas 28Be',desc:'kwg',tip:'Niemals unverdunnt ins saure Reservoir! Si fallt sonst als Gel aus.'},
   {nr:8,color:'#fbbf24',label:'Phosphorsaeure 85%',desc:'In 200ml - pH auf 5,8-6,0 einstellen',tip:''},
   {nr:9,color:'#f87171',label:'Salpetersaeure 0,5M (optional)',desc:'Nur wenn pH noch zu hoch',tip:'Vorsicht: stark verduennt zugeben'}
 ];
@@ -505,7 +502,7 @@ function render() {
   var mixHtml='';
   for (var i=0; i<MIXING.length; i++) {
     var st=MIXING[i];
-    var desc = st.key==='kwg' ? 'In '+safeL+'L Leitungswasser vorverdunnen -> pH auf 6,5-7,0 -> ins Reservoir' : st.desc;
+    var desc = st.key==='kwg' ? 'In <strong style="color:#60a5fa">'+safeL+'L</strong> Leitungswasser vorverdunnen -> pH auf 6,5-7,0 -> ins Reservoir' : st.desc;
     mixHtml += '<div class="step-row">';
     mixHtml += '<div class="step-num" style="background:'+st.color+'">'+st.nr+'</div>';
     mixHtml += '<div style="flex:1"><div class="step-label">'+st.label+'</div>';
@@ -545,7 +542,7 @@ function buildSliders() {
     html += '<span class="slider-label">'+s.label+'</span>';
     html += '<span class="slider-value" id="sv-'+s.key+'">'+fmt(s.val,3)+' '+s.unit+'</span>';
     html += '</div>';
-    html += '<input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+s.val+'"';
+    html += '<input id="slider-'+s.key+'" type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+s.val+'"';
     html += ' oninput="onDose(\''+s.key+'\',this.value)" onchange="expandSlider(\''+s.key+'\',this)">';
     html += '<div class="slider-minmax"><span>'+s.min+'</span><span>'+s.max+' '+s.unit+'</span></div>';
     html += '</div>';
@@ -567,14 +564,23 @@ function expandSlider(key, input) {
   var salt=null;
   for (var i=0;i<SALTS.length;i++) if(SALTS[i].key===key){salt=SALTS[i];break;}
   if (!salt) return;
-  if (parseFloat(input.value)>=salt.max) {
-    salt.max=Math.round(salt.max*1.3*1000)/1000;
-    input.max=salt.max;
+  var val=parseFloat(input.value);
+  var currentMax=parseFloat(input.max);
+  if (val>=currentMax*0.999) {
+    var newMax=Math.round(val*1.3*1000)/1000;
+    salt.max=newMax;
+    input.max=newMax;
+    input.value=newMax*0.7;
+    doses[key]=val;
+    document.getElementById('sv-'+key).textContent=fmt(val,3)+' '+salt.unit;
+    var minmax=input.parentNode.querySelector('.slider-minmax');
+    if(minmax) minmax.lastElementChild.textContent=newMax+' '+salt.unit;
   }
 }
 
 function expandVol(input) {
-  if (parseInt(input.value)>=parseInt(input.max)) {
+  var val=parseInt(input.value);
+  if (val>=parseInt(input.max)) {
     input.max=Math.round(parseInt(input.max)*1.3);
   }
 }
@@ -608,10 +614,13 @@ function loadPreset(name) {
     var s=SALTS[i];
     if(p[s.key]===undefined) continue;
     doses[s.key]=p[s.key];
+    s.max=s.origMax;
     var el=document.getElementById('slider-'+s.key);
-    if(el) el.value=p[s.key];
+    if(el){el.value=p[s.key];el.max=s.origMax;}
     var lbl=document.getElementById('sv-'+s.key);
     if(lbl) lbl.textContent=fmt(p[s.key],3)+' '+s.unit;
+    var minmax=el?el.parentNode.querySelector('.slider-minmax'):null;
+    if(minmax) minmax.lastElementChild.textContent=s.origMax+' '+s.unit;
   }
   var btns=document.querySelectorAll('.btn-preset');
   for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===name);
