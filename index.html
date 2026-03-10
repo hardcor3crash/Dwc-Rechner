@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DWC Nahrstoffrechner</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DWC Rechner">
+<meta name="theme-color" content="#0a0f0a">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:16px; padding-top:max(16px,env(safe-area-inset-top)); padding-bottom:max(16px,env(safe-area-inset-bottom)); min-height:100vh; }
+.page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
+.page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#6ee7b7; margin-bottom:8px; }
+.divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,#4ade80,transparent); margin:8px auto 20px; }
+.max-w { max-width:900px; margin:0 auto; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px) { .grid-2 { grid-template-columns:1fr; } }
+.card { background:rgba(255,255,255,0.02); border:1px solid #1a3d26; border-radius:8px; padding:16px; margin-bottom:16px; }
+.card-title { font-size:9px; letter-spacing:4px; color:#6ee7b7; margin-bottom:12px; }
+.card-note { font-size:9px; color:#6b7280; }
+.presets { display:flex; gap:8px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+.btn-preset { padding:8px 18px; border-radius:4px; border:1px solid #1f4d2e; background:transparent; color:#6ee7b7; cursor:pointer; font-family:'Courier New',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; }
+.btn-preset.active { border-color:#4ade80; background:rgba(74,222,128,0.15); color:#4ade80; }
+.slider-row { margin-bottom:12px; }
+.slider-header { display:flex; justify-content:space-between; margin-bottom:3px; }
+.slider-label { font-size:11px; color:#a7f3d0; }
+.slider-value { font-size:12px; color:#4ade80; font-weight:700; }
+.slider-minmax { display:flex; justify-content:space-between; font-size:9px; color:#374151; margin-top:2px; }
+input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer; }
+.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.stat { text-align:center; }
+.stat-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:4px; }
+.stat-value { font-size:26px; font-weight:700; }
+.stat-unit { font-size:10px; color:#374151; }
+.ec-row { display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-ec { width:28px; height:28px; border-radius:50%; border:1px solid #1f4d2e; background:transparent; color:#4ade80; cursor:pointer; font-size:16px; line-height:1; font-family:'Courier New',monospace; }
+.bar-row { margin-bottom:8px; }
+.bar-header { display:flex; justify-content:space-between; margin-bottom:3px; }
+.bar-label { font-size:10px; color:#a7f3d0; }
+.bar-value { font-size:11px; font-weight:700; }
+.bar-bg { background:#0f2919; border-radius:2px; height:5px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:2px; }
+.npk { display:flex; align-items:center; justify-content:center; gap:16px; }
+.npk-item { text-align:center; }
+.npk-letter { font-size:10px; letter-spacing:2px; margin-bottom:2px; }
+.npk-val { font-size:22px; font-weight:700; }
+.micro-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
+.micro-item { display:flex; justify-content:space-between; padding:4px 8px; background:#0f2919; border-radius:4px; }
+.micro-label { font-size:10px; color:#6ee7b7; }
+.micro-val { font-size:10px; font-weight:700; }
+.total-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+.total-item { display:flex; justify-content:space-between; padding:3px 6px; }
+.total-label { font-size:9px; color:#6b7280; }
+.total-val { font-size:10px; color:#4ade80; font-weight:700; }
+.step-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
+.step-num { min-width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#000; flex-shrink:0; }
+.step-label { font-size:11px; color:#a7f3d0; font-weight:700; }
+.step-desc { font-size:10px; color:#6b7280; }
+.step-tip { font-size:9px; margin-top:2px; }
+.water-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+@media(max-width:500px) { .water-grid { grid-template-columns:repeat(2,1fr); } }
+.water-label { font-size:9px; color:#6ee7b7; letter-spacing:2px; margin-bottom:4px; }
+.water-input { width:100%; background:#0f2919; border:1px solid #1a3d26; border-radius:4px; color:#4ade80; font-family:'Courier New',monospace; font-size:12px; padding:6px 8px; outline:none; }
+.btn-action { padding:6px 14px; border-radius:4px; cursor:pointer; font-family:'Courier New',monospace; font-size:10px; letter-spacing:2px; background:transparent; }
+.io-textarea { width:100%; height:110px; background:#0a1a0a; border:1px solid #1a3d26; border-radius:4px; color:#4ade80; font-family:'Courier New',monospace; font-size:10px; padding:8px; outline:none; resize:none; margin-top:10px; }
+.feedback { font-size:10px; margin-top:8px; display:none; }
+.section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#6ee7b7; margin:24px 0 8px; }
+.footer { text-align:center; margin-top:24px; margin-bottom:8px; font-size:9px; color:#1f4d2e; letter-spacing:2px; }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">NAHRSTOFFRECHNER</h1>
+<div class="page-subtitle">DWC &middot; Haifa Mineralsalze</div>
+<div class="divider"></div>
+
+<div class="presets">
+  <button class="btn-preset active" onclick="loadPreset('VEG')">VEG</button>
+  <button class="btn-preset" onclick="loadPreset('BLOOM')">BLOOM</button>
+  <button class="btn-preset" onclick="loadPreset('EXPERIMENT')">EXPERIMENT</button>
+</div>
+
+<div class="max-w grid-2">
+  <div>
+    <div class="card">
+      <div class="card-title">DOSIERUNGEN / LITER</div>
+      <div id="sliders"></div>
+      <div style="border-top:1px solid #1a3d26;padding-top:12px;margin-top:4px;">
+        <div class="slider-row">
+          <div class="slider-header">
+            <span class="slider-label">Reservoir Volumen</span>
+            <span class="slider-value" id="vol-label">42 L</span>
+          </div>
+          <input type="range" id="vol-slider" min="1" max="100" step="1" value="42" oninput="onVol(this.value)" onchange="expandVol(this)">
+        </div>
+        <div class="slider-row" style="margin-top:8px;">
+          <div class="slider-header">
+            <span class="slider-label">Leitungswasser-Anteil</span>
+            <span class="slider-value" id="tap-label">50% Leitung - 50% Osmose</span>
+          </div>
+          <input type="range" id="tap-slider" min="0" max="100" step="5" value="50" oninput="onTap(this.value)">
+          <div class="slider-minmax"><span>0% Osmose</span><span>100% Leitung</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">EC GESAMT</div>
+          <div class="ec-row">
+            <button class="btn-ec" onclick="scaleEC(-0.05)">-</button>
+            <div class="stat-value" id="ec-val" style="color:#4ade80">-</div>
+            <button class="btn-ec" onclick="scaleEC(+0.05)">+</button>
+          </div>
+          <div class="stat-unit">mS/cm</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">IONENBILANZ</div>
+          <div class="stat-value" id="ion-val" style="color:#4ade80">-</div>
+          <div class="stat-unit" id="ion-label">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-label">CA : MG</div>
+          <div class="stat-value" id="camg-val" style="color:#f472b6">-</div>
+          <div class="stat-unit" id="camg-label">-</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">pH SCHATZUNG</div>
+          <div class="stat-value" id="ph-val" style="color:#4ade80">-</div>
+          <div class="stat-unit" id="ph-label">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">N &middot; P &middot; K VERHALTNIS</div>
+      <div class="npk" id="npk-display"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">MAKRONAHRSTOFFE (ppm)</div>
+      <div id="macro-bars"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">MIKRONAHRSTOFFE (ppm)</div>
+      <div class="micro-grid" id="micro-grid"></div>
+    </div>
+
+    <div class="card" style="background:rgba(74,222,128,0.03);">
+      <div class="card-title" id="total-title">GESAMTMENGE FUR 42L</div>
+      <div class="total-grid" id="total-grid"></div>
+    </div>
+
+    <div class="card" style="background:rgba(251,191,36,0.03);border-color:#2a2a1a;">
+      <div class="card-title" style="color:#fbbf24;">KOSTEN PRO ANSATZ</div>
+      <div class="stat-grid" style="margin-bottom:12px;">
+        <div class="stat">
+          <div class="stat-label" style="color:#fbbf24;">PRO LITER</div>
+          <div class="stat-value" id="cost-per-l" style="color:#fbbf24;font-size:20px;">-</div>
+          <div class="stat-unit">ct / L</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label" style="color:#fbbf24;">PRO RESERVOIR</div>
+          <div class="stat-value" id="cost-per-res" style="color:#fbbf24;font-size:22px;">-</div>
+          <div class="stat-unit" id="cost-res-label">EUR</div>
+        </div>
+      </div>
+      <div id="cost-breakdown" style="font-size:9px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="max-w">
+  <div class="section-title">ANRUHR-ANLEITUNG</div>
+  <div class="divider"></div>
+  <div class="card">
+    <div class="card-title">REIHENFOLGE DER ZUGABE</div>
+    <div class="card-note" style="margin-bottom:12px;">Jeden Nahrstoff separat in ~200ml Wasser vorlosen, dann ins Reservoir</div>
+    <div id="mixing-steps"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">MAX. LOSLICHKEIT IN 200ML</div>
+    <div id="solubility-table"></div>
+    <div class="card-note" style="color:#facc15;margin-top:8px;">SOP am schlechtesten loslich - warmes Wasser (30-40 Grad C) verwenden</div>
+  </div>
+</div>
+
+<div class="max-w">
+  <div class="section-title">LEITUNGSWASSER 100%</div>
+  <div class="divider"></div>
+  <div class="card">
+    <div class="card-title">WASSERWERTE ANPASSEN</div>
+    <div class="water-grid" id="water-inputs"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+      <button class="btn-action" onclick="resetWater()" style="border:1px solid #2D6A2D;color:#6ee7b7;">AUGSBURG</button>
+      <button class="btn-action" onclick="clearWater()" style="border:1px solid #374151;color:#6b7280;">OSMOSE</button>
+    </div>
+  </div>
+</div>
+
+<div class="max-w">
+  <div class="section-title">REZEPT SPEICHERN & LADEN</div>
+  <div class="divider"></div>
+  <div class="card">
+    <div class="card-title">EXPORT / IMPORT</div>
+    <input type="text" id="recipe-name" placeholder="Rezeptname z.B. BLOOM Woche 3"
+      style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Courier New',monospace;font-size:12px;padding:6px 10px;outline:none;margin-bottom:10px;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn-action" onclick="doExport()" style="border:1px solid #2D6A2D;color:#6ee7b7;">SPEICHERN</button>
+      <label class="btn-action" style="border:1px solid #374151;color:#6b7280;cursor:pointer;">
+        LADEN <input type="file" accept=".json" onchange="doImport(this)" style="display:none;">
+      </label>
+    </div>
+    <div id="io-feedback" class="feedback"></div>
+  </div>
+</div>
+
+<div class="max-w">
+  <div class="section-title">VERDUNNUNG & NACHFULLEN</div>
+  <div class="divider"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">VERDUNNUNGSRECHNER</div>
+      <div class="card-note" style="margin-bottom:12px;">Wie viel Wasser um EC zu senken?</div>
+      <div class="slider-row">
+        <div class="slider-header">
+          <span class="slider-label">Aktueller EC</span>
+          <span class="slider-value" id="dil-ec-cur-label">1,50 mS/cm</span>
+        </div>
+        <input type="range" min="0.1" max="4.0" step="0.05" value="1.5" oninput="onDilInput('ec-cur',this.value)">
+      </div>
+      <div class="slider-row">
+        <div class="slider-header">
+          <span class="slider-label">Ziel EC</span>
+          <span class="slider-value" id="dil-ec-tgt-label">1,20 mS/cm</span>
+        </div>
+        <input type="range" min="0.1" max="4.0" step="0.05" value="1.2" oninput="onDilInput('ec-tgt',this.value)">
+      </div>
+      <div class="slider-row">
+        <div class="slider-header">
+          <span class="slider-label">Aktuelles Volumen</span>
+          <span class="slider-value" id="dil-vol-label">42 L</span>
+        </div>
+        <input type="range" min="1" max="200" step="1" value="42" oninput="onDilInput('vol',this.value)">
+      </div>
+      <div class="slider-row" style="margin-top:8px;">
+        <div class="slider-header">
+          <span class="slider-label">Verdunnungswasser</span>
+          <span class="slider-value" id="dil-water-label">100% Leitung</span>
+        </div>
+        <input type="range" min="0" max="100" step="5" value="100" oninput="onDilInput('water',this.value)">
+        <div class="slider-minmax"><span>100% Osmose</span><span>100% Leitung</span></div>
+      </div>
+      <div style="margin-top:12px;padding:12px;background:#0f2919;border-radius:6px;text-align:center;">
+        <div style="font-size:9px;letter-spacing:3px;color:#6ee7b7;margin-bottom:6px;">WASSER HINZUFUGEN</div>
+        <div style="font-size:28px;font-weight:700;color:#60a5fa;" id="dil-result">-</div>
+        <div style="font-size:10px;color:#374151;">Liter</div>
+        <div style="font-size:9px;color:#6b7280;margin-top:4px;" id="dil-result-vol">-</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">NACHFULLRECHNER</div>
+      <div class="card-note" style="margin-bottom:12px;">Reservoir abgesunken - was nachkippen?</div>
+      <div class="slider-row">
+        <div class="slider-header">
+          <span class="slider-label">Soll-Volumen</span>
+          <span class="slider-value" id="ref-vol-soll-label">42 L</span>
+        </div>
+        <input type="range" min="1" max="200" step="1" value="42" oninput="onRefInput('soll',this.value)">
+      </div>
+      <div class="slider-row">
+        <div class="slider-header">
+          <span class="slider-label">Ist-Volumen</span>
+          <span class="slider-value" id="ref-vol-ist-label">35 L</span>
+        </div>
+        <input type="range" min="1" max="200" step="1" value="35" oninput="onRefInput('ist',this.value)">
+      </div>
+      <div class="slider-row">
+        <div class="slider-header">
+          <span class="slider-label">Ist-EC</span>
+          <span class="slider-value" id="ref-ec-ist-label">1,00 mS/cm</span>
+        </div>
+        <input type="range" min="0.1" max="4.0" step="0.05" value="1.0" oninput="onRefInput('ec',this.value)">
+      </div>
+      <div class="slider-row" style="margin-top:8px;">
+        <div class="slider-header">
+          <span class="slider-label">Auffullwasser</span>
+          <span class="slider-value" id="ref-water-label">100% Leitung</span>
+        </div>
+        <input type="range" min="0" max="100" step="5" value="100" oninput="onRefWater(this.value)">
+        <div class="slider-minmax"><span>100% Osmose</span><span>100% Leitung</span></div>
+      </div>
+      <div style="margin-top:12px;padding:12px;background:#0f2919;border-radius:6px;">
+        <div style="font-size:9px;letter-spacing:3px;color:#6ee7b7;margin-bottom:8px;text-align:center;">NACHFULLPLAN</div>
+        <div id="ref-result"></div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid #1a3d26;font-size:10px;color:#60a5fa;font-weight:700;" id="ref-water"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">DWC NAHRSTOFFRECHNER 2026</div>
+
+<script>
+var SALTS = [
+  { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  step:0.005, val:0.500, preis:23.07, menge:25000 },
+  { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  step:0.005, val:0.250, preis:29.67, menge:25000 },
+  { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  step:0.005, val:0.200, preis:19.33, menge:25000 },
+  { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  step:0.005, val:0.150, preis:59.88, menge:25000 },
+  { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  step:0.005, val:0.125, preis:37.49, menge:25000 },
+  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  step:0.005, val:0.000, preis:0,     menge:25000 },
+  { key:'kwg',        label:'Kaliwasserglas',        unit:'ml/L', min:0, max:0.3,  step:0.001, val:0.073, preis:16.31, menge:2500  },
+  { key:'h3po4',      label:'Phosphorsaeure 85%',   unit:'ml/L', min:0, max:0.3,  step:0.001, val:0.060, preis:18.90, menge:1000  },
+  { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  step:0.05,  val:0.050, preis:22.97, menge:2500  },
+  { key:'wallup',     label:'Wall Up S',             unit:'g/L',  min:0, max:0.15, step:0.001, val:0.050, preis:51.05, menge:1000  },
+  { key:'fetrilon',   label:'Fetrilon Combi 1',      unit:'g/L',  min:0, max:0.06, step:0.001, val:0.020, preis:29.26, menge:1000  }
+];
+
+var PRESETS = {
+  VEG:        { caNO3:0.500, mgNO3:0.250, bittersalz:0.200, mkp:0.150, sop:0.125, kno3:0.000, kwg:0.073, h3po4:0.060, hno3:0.050, wallup:0.050, fetrilon:0.020 },
+  BLOOM:      { caNO3:0.500, mgNO3:0.000, bittersalz:0.400, mkp:0.200, sop:0.200, kno3:0.000, kwg:0.073, h3po4:0.060, hno3:0.050, wallup:0.050, fetrilon:0.020 },
+  EXPERIMENT: { caNO3:0.000, mgNO3:0.000, bittersalz:0.000, mkp:0.000, sop:0.000, kno3:0.000, kwg:0.000, h3po4:0.000, hno3:0.000, wallup:0.000, fetrilon:0.000 }
+};
+
+var WATER_DEFAULTS = { Ca:64.6, Mg:19.5, K:1.3, N:1.22, S:6.54, Si:2.06, EC:0.50 };
+var WATER_FIELDS = [
+  {key:'Ca',label:'Calcium (ppm)'},{key:'Mg',label:'Magnesium (ppm)'},{key:'K',label:'Kalium (ppm)'},
+  {key:'N',label:'Stickstoff (ppm)'},{key:'S',label:'Schwefel (ppm)'},{key:'Si',label:'Silizium (ppm)'},{key:'EC',label:'EC (mS/cm)'}
+];
+
+var SOLUBILITY = {
+  caNO3:{label:'Calciumnitrat',losl:148},mgNO3:{label:'Magnesiumnitrat',losl:71},
+  bittersalz:{label:'Bittersalz',losl:71},mkp:{label:'MKP',losl:23},
+  sop:{label:'SOP',losl:9},kno3:{label:'Kaliumnitrat',losl:133},
+  h3po4:{label:'Phosphorsaeure',losl:999},hno3:{label:'Salpetersaeure',losl:999},
+  wallup:{label:'Wall Up S',losl:50},fetrilon:{label:'Fetrilon Combi 1',losl:10}
+};
+
+var MIXING = [
+  {nr:1,color:'#374151',label:'Reservoir fullen',desc:'Pumpe & Luftsteine einschalten',tip:''},
+  {nr:2,color:'#f472b6',label:'Calciumnitrat',desc:'Alleine in 200ml - ZUERST!',tip:'Ca2+ fallt sonst mit Phosphat aus'},
+  {nr:3,color:'#a78bfa',label:'Magnesiumnitrat + Bittersalz',desc:'Zusammen in 200ml',tip:''},
+  {nr:4,color:'#fb923c',label:'MKP + SOP',desc:'Zusammen in 200ml',tip:'SOP in warmem Wasser (30-40 Grad) vorloesen'},
+  {nr:5,color:'#4ade80',label:'Wall Up S',desc:'Alleine in 200ml',tip:'Si nach MKP - bei sinkendem pH stabiler'},
+  {nr:6,color:'#86efac',label:'Fetrilon Combi 1',desc:'Alleine in 200ml',tip:'Chelate bei niedrigerem pH stabiler'},
+  {nr:7,color:'#60a5fa',label:'Kaliwasserglas 28Be',desc:'kwg',tip:'Niemals unverdunnt ins saure Reservoir! Si fallt sonst als Gel aus.'},
+  {nr:8,color:'#fbbf24',label:'Phosphorsaeure 85%',desc:'In 200ml - pH auf 5,8-6,0 einstellen',tip:''},
+  {nr:9,color:'#f87171',label:'Salpetersaeure 0,5M (optional)',desc:'Nur wenn pH noch zu hoch',tip:'Vorsicht: stark verduennt zugeben'}
+];
+
+var ION_COLORS = {N:'#4ade80',P:'#fb923c',K:'#60a5fa',Ca:'#f472b6',Mg:'#a78bfa',S:'#facc15'};
+
+var volume = 42;
+var tapPct = 0.50;
+var tap = {Ca:64.6,Mg:19.5,K:1.3,N:1.22,S:6.54,Si:2.06,EC:0.50};
+var doses = {};
+for (var i=0; i<SALTS.length; i++) doses[SALTS[i].key] = SALTS[i].val;
+
+var dilState = {ecCur:1.5, ecTgt:1.2, vol:42, fillPct:1.0};
+var refState = {soll:42, ist:35, ecIst:1.0, fillPct:1.0};
+
+function fmt(v,d) { return parseFloat(v).toFixed(d===undefined?1:d).replace('.',','); }
+
+function calc() {
+  var d=doses, t=tapPct;
+  var wCa=tap.Ca*t, wMg=tap.Mg*t, wK=tap.K*t, wN=tap.N*t, wS=tap.S*t, wSi=tap.Si*t, wEC=tap.EC*t;
+  var N  = d.caNO3*1000*0.15 + d.mgNO3*1000*0.11 + (d.kno3||0)*1000*(14.01/101.11) + (d.hno3||0)*0.5*14.01 + wN;
+  var Ca = d.caNO3*1000*0.26*(40.08/56.08) + wCa;
+  var Mg = d.mgNO3*1000*0.16*(24.31/40.30) + d.bittersalz*1000*(24.31/246.48) + wMg + d.fetrilon*1000*0.033*(24.31/40.30);
+  var K  = d.mkp*1000*(39.10/136.09) + d.sop*1000*(2*39.10/174.26) + (d.kno3||0)*1000*(39.10/101.11) + d.kwg*67.24 + wK;
+  var P  = d.mkp*1000*(30.97/136.09) + d.h3po4*1.685*0.85*1000*(30.97/97.99);
+  var S  = d.bittersalz*1000*(32.06/246.48) + d.sop*1000*(32.06/174.26) + wS;
+  var Si = d.kwg*96.72 + d.wallup*1000*0.20 + wSi;
+  var Fe = d.wallup*1000*0.05 + d.fetrilon*1000*0.04;
+  var Mn = d.fetrilon*1000*0.04;
+  var Zn = d.fetrilon*1000*0.015;
+  var Cu = d.fetrilon*1000*0.015;
+  var B  = d.fetrilon*1000*0.005;
+  var ec = (N-wN+P+K-wK+Ca-wCa+Mg-wMg+S-wS)/500 + wEC;
+  var kat = (Ca/40.08)*2+(Mg/24.31)*2+(K/39.10)+(Fe/55.85)*2+(Mn/54.94)*2+(Zn/65.38)*2+(Cu/63.55)*2;
+  var ani = (N/14.01)+(P/30.97)+(S/32.06)*2;
+  var ion = (kat+ani)>0?(kat-ani)/(kat+ani)*100:0;
+  return {N:N,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,ec:ec,ion:ion};
+}
+
+function render() {
+  var r = calc();
+
+  // EC
+  var ecColor = r.ec<1.2?'#60a5fa':r.ec<1.8?'#4ade80':'#fb923c';
+  document.getElementById('ec-val').style.color = ecColor;
+  document.getElementById('ec-val').textContent = fmt(r.ec,2);
+
+  // Ionenbilanz
+  var abs = Math.abs(r.ion);
+  var ionColor = abs<5?'#4ade80':abs<10?'#facc15':'#f87171';
+  var ionText = abs<5?'sehr gut':abs<10?'gut':'pruefen';
+  document.getElementById('ion-val').style.color = ionColor;
+  document.getElementById('ion-val').textContent = (r.ion>0?'+':'') + fmt(r.ion,1) + '%';
+  document.getElementById('ion-label').textContent = ionText;
+
+  // Ca:Mg
+  var camg = r.Ca/(r.Mg||1);
+  var camgColor = camg<1.5?'#f87171':camg<=3.0?'#4ade80':'#facc15';
+  var camgText = camg<1.5?'Mg zu hoch':camg<=3.0?'optimal DWC':'Ca zu hoch';
+  document.getElementById('camg-val').style.color = camgColor;
+  document.getElementById('camg-val').textContent = fmt(camg,2) + ':1';
+  document.getElementById('camg-label').textContent = camgText;
+
+  // pH
+  var phHCO3 = (tapPct-0.5)*0.8;
+  var phEst = Math.min(7.8, Math.max(4.5, 7.5 - 28.33*doses.h3po4 - 1.5*(doses.hno3||0) + phHCO3));
+  var phColor = phEst<5.5?'#f87171':phEst<=6.2?'#4ade80':phEst<=6.8?'#facc15':'#f87171';
+  var phText = phEst<5.5?'zu sauer':phEst<=6.2?'optimal':phEst<=6.8?'leicht hoch':'zu hoch';
+  document.getElementById('ph-val').style.color = phColor;
+  document.getElementById('ph-val').textContent = fmt(phEst,1);
+  document.getElementById('ph-label').textContent = phText;
+
+  // NPK
+  var minNPK = Math.min(r.N,r.P,r.K)||1;
+  var npkData = [['N',r.N,'#4ade80'],['P',r.P,'#fb923c'],['K',r.K,'#60a5fa']];
+  var npkHtml = '';
+  for (var i=0; i<npkData.length; i++) {
+    if (i>0) npkHtml += '<div style="color:#1a3d26;font-size:20px">&middot;</div>';
+    npkHtml += '<div class="npk-item"><div class="npk-letter" style="color:'+npkData[i][2]+'">'+npkData[i][0]+'</div>';
+    npkHtml += '<div class="npk-val" style="color:'+npkData[i][2]+'">'+(npkData[i][1]/minNPK).toFixed(1)+'</div></div>';
+  }
+  document.getElementById('npk-display').innerHTML = npkHtml;
+
+  // Makros
+  var macros = [
+    {key:'N',label:'Stickstoff',val:r.N},{key:'P',label:'Phosphor',val:r.P},{key:'K',label:'Kalium',val:r.K},
+    {key:'Ca',label:'Calcium',val:r.Ca},{key:'Mg',label:'Magnesium',val:r.Mg},{key:'S',label:'Schwefel',val:r.S}
+  ];
+  var maxPPM = 1;
+  for (var i=0; i<macros.length; i++) if (macros[i].val>maxPPM) maxPPM=macros[i].val;
+  var macroHtml = '';
+  for (var i=0; i<macros.length; i++) {
+    var m=macros[i], c=ION_COLORS[m.key]||'#d1fae5';
+    macroHtml += '<div class="bar-row"><div class="bar-header">';
+    macroHtml += '<span class="bar-label">'+m.label+'</span>';
+    macroHtml += '<span class="bar-value" style="color:'+c+'">'+fmt(m.val)+' ppm</span></div>';
+    macroHtml += '<div class="bar-bg"><div class="bar-fill" style="width:'+((m.val/maxPPM)*100)+'%;background:'+c+'"></div></div></div>';
+  }
+  document.getElementById('macro-bars').innerHTML = macroHtml;
+
+  // Mikros
+  var mikroData = [
+    {label:'Silizium',val:r.Si,dec:1},{label:'Eisen',val:r.Fe,dec:2},{label:'Mangan',val:r.Mn,dec:2},
+    {label:'Zink',val:r.Zn,dec:2},{label:'Kupfer',val:r.Cu,dec:2},{label:'Bor',val:r.B,dec:2}
+  ];
+  var mikroHtml = '';
+  for (var i=0; i<mikroData.length; i++) {
+    mikroHtml += '<div class="micro-item"><span class="micro-label">'+mikroData[i].label+'</span>';
+    mikroHtml += '<span class="micro-val">'+fmt(mikroData[i].val,mikroData[i].dec)+'</span></div>';
+  }
+  document.getElementById('micro-grid').innerHTML = mikroHtml;
+
+  // Gesamtmenge
+  document.getElementById('total-title').textContent = 'GESAMTMENGE FUR ' + volume + 'L';
+  var totalHtml = '';
+  for (var i=0; i<SALTS.length; i++) {
+    var s=SALTS[i];
+    totalHtml += '<div class="total-item"><span class="total-label">'+s.label+'</span>';
+    totalHtml += '<span class="total-val">'+(doses[s.key]*volume).toFixed(2)+' '+s.unit.replace('/L','')+'</span></div>';
+  }
+  document.getElementById('total-grid').innerHTML = totalHtml;
+
+  // Kosten
+  var costPerL=0, breakdown=[];
+  for (var i=0; i<SALTS.length; i++) {
+    var s=SALTS[i];
+    if (!s.preis||doses[s.key]===0) continue;
+    var k=doses[s.key]*(s.preis/s.menge);
+    costPerL+=k;
+    breakdown.push({label:s.label,k:k});
+  }
+  breakdown.sort(function(a,b){return b.k-a.k;});
+  document.getElementById('cost-per-l').textContent = fmt(costPerL*100,2);
+  document.getElementById('cost-per-res').textContent = fmt(costPerL*volume,2) + ' EUR';
+  document.getElementById('cost-res-label').textContent = 'EUR / '+volume+'L';
+  var costHtml='';
+  for (var i=0; i<breakdown.length; i++) {
+    costHtml += '<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #1a2a0a;">';
+    costHtml += '<span style="color:#6b7280;">'+breakdown[i].label+'</span>';
+    costHtml += '<span style="color:#fbbf24;">'+fmt(breakdown[i].k*100,3)+' ct/L</span></div>';
+  }
+  document.getElementById('cost-breakdown').innerHTML = costHtml;
+
+  // Anruehr
+  var kwgMl=(doses.kwg||0)*volume, siMg=kwgMl*96.72;
+  var safeL=Math.ceil(Math.max(1.0,(siMg/100)*1.5)*10)/10;
+  var mixHtml='';
+  for (var i=0; i<MIXING.length; i++) {
+    var st=MIXING[i];
+    var desc = st.key==='kwg' ? 'In '+safeL+'L Leitungswasser vorverdunnen -> pH auf 6,5-7,0 -> ins Reservoir' : st.desc;
+    mixHtml += '<div class="step-row">';
+    mixHtml += '<div class="step-num" style="background:'+st.color+'">'+st.nr+'</div>';
+    mixHtml += '<div style="flex:1"><div class="step-label">'+st.label+'</div>';
+    mixHtml += '<div class="step-desc">'+desc+'</div>';
+    if (st.tip) mixHtml += '<div class="step-tip" style="color:'+st.color+'">-> '+st.tip+'</div>';
+    mixHtml += '</div></div>';
+  }
+  document.getElementById('mixing-steps').innerHTML = mixHtml;
+
+  // Loslichkeit
+  var solHtml='';
+  for (var key in SOLUBILITY) {
+    var dose=doses[key]||0;
+    if (dose===0) continue;
+    var info=SOLUBILITY[key];
+    var maxIn200=info.losl/100*200, maxReser=maxIn200/dose;
+    var pct=Math.min(100,(volume/maxReser)*100);
+    var color=pct<50?'#4ade80':pct<80?'#facc15':'#f87171';
+    solHtml += '<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;margin-bottom:6px;">';
+    solHtml += '<div><div style="font-size:10px;color:#a7f3d0;">'+info.label+'</div>';
+    solHtml += '<div class="bar-bg" style="margin-top:3px;"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
+    solHtml += '<div style="font-size:9px;color:#6b7280;text-align:right;">max '+maxIn200.toFixed(0)+'</div>';
+    solHtml += '<div style="font-size:11px;font-weight:700;color:'+color+';text-align:right;">bis '+maxReser.toFixed(0)+'L</div></div>';
+  }
+  document.getElementById('solubility-table').innerHTML = solHtml||'<div style="font-size:10px;color:#374151;">Alle Dosierungen auf 0</div>';
+
+  renderDil();
+  renderRef();
+}
+
+function buildSliders() {
+  var html='';
+  for (var i=0; i<SALTS.length; i++) {
+    var s=SALTS[i];
+    html += '<div class="slider-row">';
+    html += '<div class="slider-header">';
+    html += '<span class="slider-label">'+s.label+'</span>';
+    html += '<span class="slider-value" id="sv-'+s.key+'">'+fmt(s.val,3)+' '+s.unit+'</span>';
+    html += '</div>';
+    html += '<input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+s.val+'"';
+    html += ' oninput="onDose(\''+s.key+'\',this.value)" onchange="expandSlider(\''+s.key+'\',this)">';
+    html += '<div class="slider-minmax"><span>'+s.min+'</span><span>'+s.max+' '+s.unit+'</span></div>';
+    html += '</div>';
+  }
+  document.getElementById('sliders').innerHTML = html;
+}
+
+function buildWaterInputs() {
+  var html='';
+  for (var i=0; i<WATER_FIELDS.length; i++) {
+    var f=WATER_FIELDS[i];
+    html += '<div><div class="water-label">'+f.label+'</div>';
+    html += '<input class="water-input" type="number" id="w-'+f.key+'" value="'+WATER_DEFAULTS[f.key]+'" step="0.01" min="0" oninput="onWater()"></div>';
+  }
+  document.getElementById('water-inputs').innerHTML = html;
+}
+
+function expandSlider(key, input) {
+  var salt=null;
+  for (var i=0;i<SALTS.length;i++) if(SALTS[i].key===key){salt=SALTS[i];break;}
+  if (!salt) return;
+  if (parseFloat(input.value)>=salt.max) {
+    salt.max=Math.round(salt.max*1.3*1000)/1000;
+    input.max=salt.max;
+  }
+}
+
+function expandVol(input) {
+  if (parseInt(input.value)>=parseInt(input.max)) {
+    input.max=Math.round(parseInt(input.max)*1.3);
+  }
+}
+
+function onDose(key,val) {
+  doses[key]=parseFloat(val);
+  var salt=null;
+  for(var i=0;i<SALTS.length;i++) if(SALTS[i].key===key){salt=SALTS[i];break;}
+  document.getElementById('sv-'+key).textContent=fmt(parseFloat(val),3)+' '+salt.unit;
+  var btns=document.querySelectorAll('.btn-preset');
+  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
+  render();
+}
+
+function onVol(val) {
+  volume=parseInt(val);
+  document.getElementById('vol-label').textContent=volume+' L';
+  render();
+}
+
+function onTap(val) {
+  tapPct=parseInt(val)/100;
+  var t=Math.round(tapPct*100);
+  document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';
+  render();
+}
+
+function loadPreset(name) {
+  var p=PRESETS[name]; if(!p) return;
+  for(var i=0;i<SALTS.length;i++) {
+    var s=SALTS[i];
+    if(p[s.key]===undefined) continue;
+    doses[s.key]=p[s.key];
+    var el=document.getElementById('slider-'+s.key);
+    if(el) el.value=p[s.key];
+    var lbl=document.getElementById('sv-'+s.key);
+    if(lbl) lbl.textContent=fmt(p[s.key],3)+' '+s.unit;
+  }
+  var btns=document.querySelectorAll('.btn-preset');
+  for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===name);
+  render();
+}
+
+function scaleEC(delta) {
+  var r=calc(), saltEC=r.ec-tap.EC*tapPct, newSaltEC=Math.max(0.01,saltEC+delta);
+  if(saltEC<=0) return;
+  var factor=newSaltEC/saltEC;
+  for(var i=0;i<SALTS.length;i++) {
+    var s=SALTS[i], newVal=doses[s.key]*factor;
+    if(newVal>s.max){s.max=Math.ceil(newVal*10)/10;}
+    doses[s.key]=Math.max(0,newVal);
+    var el=document.getElementById('slider-'+s.key);
+    if(el){el.value=doses[s.key];el.max=s.max;}
+    var lbl=document.getElementById('sv-'+s.key);
+    if(lbl) lbl.textContent=fmt(doses[s.key],3)+' '+s.unit;
+  }
+  var btns=document.querySelectorAll('.btn-preset');
+  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
+  render();
+}
+
+function onWater() {
+  for(var i=0;i<WATER_FIELDS.length;i++) {
+    tap[WATER_FIELDS[i].key]=parseFloat(document.getElementById('w-'+WATER_FIELDS[i].key).value)||0;
+  }
+  render();
+}
+function resetWater() {
+  for(var i=0;i<WATER_FIELDS.length;i++) {
+    tap[WATER_FIELDS[i].key]=WATER_DEFAULTS[WATER_FIELDS[i].key];
+    document.getElementById('w-'+WATER_FIELDS[i].key).value=WATER_DEFAULTS[WATER_FIELDS[i].key];
+  }
+  render();
+}
+function clearWater() {
+  for(var i=0;i<WATER_FIELDS.length;i++) {
+    tap[WATER_FIELDS[i].key]=0;
+    document.getElementById('w-'+WATER_FIELDS[i].key).value=0;
+  }
+  render();
+}
+
+function doExport() {
+  var name=document.getElementById('recipe-name').value.trim()||'DWC_Rezept';
+  var data={name:name,datum:new Date().toLocaleDateString('de-DE'),version:1,doses:{},volume:volume,tapPct:tapPct,tap:{}};
+  for(var k in doses) data.doses[k]=doses[k];
+  for(var k in tap) data.tap[k]=tap[k];
+  var json=JSON.stringify(data,null,2);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download=name.replace(/\s+/g,'_')+'.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showFeedback(name+' gespeichert','#4ade80');
+}
+function doImport(input) {
+  var file=input.files[0];
+  if(!file){showFeedback('Keine Datei gewaehlt','#f87171');return;}
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try { applySnapshot(JSON.parse(e.target.result)); }
+    catch(err) { showFeedback('Ungultiges Format','#f87171'); }
+  };
+  reader.readAsText(file);
+  input.value='';
+}
+function applySnapshot(data) {
+  if(!data||!data.doses) throw new Error('invalid');
+  for(var k in data.doses) {
+    if(!doses.hasOwnProperty(k)) continue;
+    doses[k]=data.doses[k];
+    var salt=null; for(var i=0;i<SALTS.length;i++) if(SALTS[i].key===k){salt=SALTS[i];break;}
+    var el=document.getElementById('slider-'+k);
+    if(el){if(data.doses[k]>salt.max){salt.max=Math.ceil(data.doses[k]*10)/10;el.max=salt.max;}el.value=data.doses[k];}
+    var lbl=document.getElementById('sv-'+k);
+    if(lbl&&salt) lbl.textContent=fmt(data.doses[k],3)+' '+salt.unit;
+  }
+  if(data.volume){volume=data.volume;document.getElementById('vol-label').textContent=volume+' L';document.getElementById('vol-slider').value=volume;}
+  if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';document.getElementById('tap-slider').value=t;}
+  if(data.tap){for(var i=0;i<WATER_FIELDS.length;i++){var f=WATER_FIELDS[i];if(data.tap[f.key]===undefined)continue;tap[f.key]=data.tap[f.key];var el=document.getElementById('w-'+f.key);if(el)el.value=data.tap[f.key];}}
+  var btns=document.querySelectorAll('.btn-preset');
+  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
+  if(data.name) document.getElementById('recipe-name').value=data.name;
+  showFeedback((data.name||'Rezept')+' geladen ('+(data.datum||'')+')', '#4ade80');
+  render();
+}
+function showFeedback(msg,color) {
+  var fb=document.getElementById('io-feedback');
+  fb.style.display='block'; fb.style.color=color; fb.textContent=msg;
+  setTimeout(function(){fb.style.display='none';},3000);
+}
+
+function onDilInput(key,val) {
+  var v=parseFloat(val);
+  if(key==='ec-cur'){dilState.ecCur=v;document.getElementById('dil-ec-cur-label').textContent=fmt(v,2)+' mS/cm';}
+  if(key==='ec-tgt'){dilState.ecTgt=v;document.getElementById('dil-ec-tgt-label').textContent=fmt(v,2)+' mS/cm';}
+  if(key==='vol'){dilState.vol=v;document.getElementById('dil-vol-label').textContent=v+' L';}
+  if(key==='water'){
+    dilState.fillPct=v/100;
+    var lbl=v==0?'100% Osmose':v==100?'100% Leitung':v+'% Leitung - '+(100-v)+'% Osmose';
+    document.getElementById('dil-water-label').textContent=lbl;
+  }
+  renderDil();
+}
+function renderDil() {
+  var ecCur=dilState.ecCur, ecTgt=dilState.ecTgt, vol=dilState.vol, fillPct=dilState.fillPct;
+  var fillEC=tap.EC*fillPct;
+  var res=document.getElementById('dil-result');
+  var resVol=document.getElementById('dil-result-vol');
+  if(ecTgt<=fillEC){res.textContent='-';res.style.color='#f87171';resVol.textContent='Ziel-EC <= Wasser-EC - nicht erreichbar';return;}
+  if(ecTgt>=ecCur){res.textContent='-';res.style.color='#6b7280';resVol.textContent='Ziel-EC muss kleiner als aktueller EC sein';return;}
+  var water=vol*(ecCur-ecTgt)/(ecTgt-fillEC);
+  var newVol=vol+water;
+  var fillLabel=fillPct===0?'Osmose':fillPct===1?'Leitung':Math.round(fillPct*100)+'% Leitung';
+  res.textContent=fmt(water,1);
+  res.style.color='#60a5fa';
+  resVol.textContent=fillLabel+' (EC '+fmt(fillEC,2)+') -> Neues Volumen: '+fmt(newVol,1)+' L';
+}
+
+function onRefInput(key,val) {
+  var v=parseFloat(val);
+  if(key==='soll'){refState.soll=v;document.getElementById('ref-vol-soll-label').textContent=v+' L';}
+  if(key==='ist'){refState.ist=v;document.getElementById('ref-vol-ist-label').textContent=v+' L';}
+  if(key==='ec'){refState.ecIst=v;document.getElementById('ref-ec-ist-label').textContent=fmt(v,2)+' mS/cm';}
+  renderRef();
+}
+function onRefWater(val) {
+  var pct=parseInt(val);
+  refState.fillPct=pct/100;
+  var lbl=pct===0?'100% Osmose':pct===100?'100% Leitung':pct+'% Leitung - '+(100-pct)+'% Osmose';
+  document.getElementById('ref-water-label').textContent=lbl;
+  renderRef();
+}
+function renderRef() {
+  var soll=refState.soll, ist=refState.ist, ecIst=refState.ecIst, fillPct=refState.fillPct;
+  var res=document.getElementById('ref-result');
+  var water=document.getElementById('ref-water');
+  if(ist>=soll){res.innerHTML='<div style="font-size:10px;color:#6b7280;">Ist-Volumen >= Soll-Volumen</div>';water.textContent='';return;}
+  var fillEC=tap.EC*fillPct;
+  var rezeptEC=calc().ec;
+  var diff=soll-ist;
+  var ecNachFuellen=(ecIst*ist+fillEC*diff)/soll;
+  var ecFehlend=Math.max(0,rezeptEC-ecNachFuellen);
+  var saltEC_rez=Math.max(0,rezeptEC-tap.EC*tapPct);
+  var saltFactor=saltEC_rez>0?ecFehlend/saltEC_rez:0;
+  var rowsHtml='';
+  for(var i=0;i<SALTS.length;i++) {
+    var s=SALTS[i];
+    if(!doses[s.key]) continue;
+    var nachfuell=doses[s.key]*soll*saltFactor;
+    if(nachfuell<0.001) continue;
+    rowsHtml+='<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #1a2a0a;">';
+    rowsHtml+='<span style="color:#a7f3d0;font-size:10px;">'+s.label+'</span>';
+    rowsHtml+='<span style="color:#4ade80;font-size:11px;font-weight:700;">'+nachfuell.toFixed(2)+' '+s.unit.replace('/L','')+'</span></div>';
+  }
+  res.innerHTML=rowsHtml||'<div style="font-size:10px;color:#4ade80;">Nur Wasser nachfullen</div>';
+  var fillLabel=fillPct===0?'Osmosewasser':fillPct===1?'Leitungswasser':Math.round(fillPct*100)+'% Leitung';
+  water.textContent='+ '+fmt(diff,1)+' L '+fillLabel+' (EC '+fmt(fillEC,2)+') -> Ziel-EC: '+fmt(rezeptEC,2)+' mS/cm';
+}
+
+buildSliders();
+buildWaterInputs();
+loadPreset('VEG');
+renderDil();
+renderRef();
+</script>
+</body>
+</html>
