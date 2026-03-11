@@ -317,7 +317,7 @@ var SALTS = [
   { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.200, preis:19.33, menge:25000 },
   { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.150, preis:59.88, menge:25000 },
   { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.125, preis:37.49, menge:25000 },
-  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.000, preis:0,     menge:25000 },
+  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.000, preis:15.99, menge:3000  },
   { key:'kwg',        label:'Kaliwasserglas',        unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.073, preis:16.31, menge:2500  },
   { key:'h3po4',      label:'Phosphorsaeure 85%',   unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.060, preis:18.90, menge:1000  },
   { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  origMax:5.0,  step:0.05,  val:0.050, preis:22.97, menge:2500  },
@@ -348,7 +348,7 @@ var SOLUBILITY = {
 var MIXING = [
   {nr:1,color:'#374151',label:'Reservoir fullen',desc:'Pumpe & Luftsteine einschalten',tip:''},
   {nr:2,color:'#f472b6',label:'Calciumnitrat',desc:'Alleine in 200ml - ZUERST!',tip:'Ca2+ fallt sonst mit Phosphat aus'},
-  {nr:3,color:'#a78bfa',label:'Magnesiumnitrat + Bittersalz',desc:'Zusammen in 200ml',tip:''},
+  {nr:3,color:'#a78bfa',label:'Magnesiumnitrat + Bittersalz + Kaliumnitrat',desc:'Zusammen in 200ml',tip:''},
   {nr:4,color:'#fb923c',label:'MKP + SOP',desc:'Zusammen in 200ml',tip:'SOP in warmem Wasser (30-40 Grad) vorloesen'},
   {nr:5,color:'#4ade80',label:'Wall Up S',desc:'Alleine in 200ml',tip:'Si nach MKP - bei sinkendem pH stabiler'},
   {nr:6,color:'#86efac',label:'Fetrilon Combi 1',desc:'Alleine in 200ml',tip:'Chelate bei niedrigerem pH stabiler'},
@@ -512,20 +512,42 @@ function render() {
   }
   document.getElementById('mixing-steps').innerHTML = mixHtml;
 
-  // Loslichkeit
+  // Loslichkeit - nach Flaschen gruppiert
+  var bottles = [
+    { label:'Fl. 1: Calciumnitrat', keys:['caNO3'], color:'#f472b6' },
+    { label:'Fl. 2: MgNO3 + Bittersalz + KNO3', keys:['mgNO3','bittersalz','kno3'], color:'#a78bfa' },
+    { label:'Fl. 3: MKP + SOP', keys:['mkp','sop'], color:'#fb923c' },
+    { label:'Fl. 4: Wall Up S', keys:['wallup'], color:'#4ade80' },
+    { label:'Fl. 5: Fetrilon Combi 1', keys:['fetrilon'], color:'#86efac' },
+    { label:'Fl. 6: Kaliwasserglas', keys:['kwg'], color:'#60a5fa' }
+  ];
   var solHtml='';
-  for (var key in SOLUBILITY) {
-    var dose=doses[key]||0;
-    if (dose===0) continue;
-    var info=SOLUBILITY[key];
-    var maxIn200=info.losl/100*200, maxReser=maxIn200/dose;
+  for (var b=0; b<bottles.length; b++) {
+    var bottle=bottles[b];
+    var anyUsed=false;
+    for (var k=0; k<bottle.keys.length; k++) if(doses[bottle.keys[k]]>0) anyUsed=true;
+    if (!anyUsed) continue;
+    // For each reservoir volume, check if all salts fit in 200ml together
+    // maxReser = how many liters until the 200ml glass is full
+    // sum(dose_per_L * reser_vol / losl_per_ml) <= 1  =>  reser_vol <= 1 / sum(dose/losl_per_ml)
+    var sumRatio=0;
+    for (var k=0; k<bottle.keys.length; k++) {
+      var key=bottle.keys[k];
+      var dose=doses[key]||0;
+      if (dose===0) continue;
+      var info=SOLUBILITY[key];
+      if (!info) continue;
+      // fraction of 200ml used per liter of reservoir
+      sumRatio += dose / (info.losl/100*200);
+    }
+    var maxReser = sumRatio>0 ? 1/sumRatio : 999999;
     var pct=Math.min(100,(volume/maxReser)*100);
     var color=pct<50?'#4ade80':pct<80?'#facc15':'#f87171';
     solHtml += '<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;margin-bottom:6px;">';
-    solHtml += '<div><div style="font-size:10px;color:#a7f3d0;">'+info.label+'</div>';
+    solHtml += '<div><div style="font-size:10px;color:'+bottle.color+';">'+bottle.label+'</div>';
     solHtml += '<div class="bar-bg" style="margin-top:3px;"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
-    solHtml += '<div style="font-size:9px;color:#6b7280;text-align:right;">max '+maxIn200.toFixed(0)+'</div>';
-    solHtml += '<div style="font-size:11px;font-weight:700;color:'+color+';text-align:right;">bis '+maxReser.toFixed(0)+'L</div></div>';
+    solHtml += '<div style="font-size:9px;color:#6b7280;text-align:right;">Limit bei</div>';
+    solHtml += '<div style="font-size:11px;font-weight:700;color:'+color+';text-align:right;">'+maxReser.toFixed(0)+'L</div></div>';
   }
   document.getElementById('solubility-table').innerHTML = solHtml||'<div style="font-size:10px;color:#374151;">Alle Dosierungen auf 0</div>';
 
