@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>DWC Nahrstoffrechner</title>
+<title>DWC Rechner</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DWC Rechner">
 <meta name="theme-color" content="#0a0f0a">
 <style>
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:16px; padding-top:max(16px,env(safe-area-inset-top)); padding-bottom:max(16px,env(safe-area-inset-bottom)); min-height:100vh; }
 .page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
@@ -68,18 +69,124 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
 .feedback { font-size:10px; margin-top:8px; display:none; }
 .section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#6ee7b7; margin:24px 0 8px; }
 .footer { text-align:center; margin-top:24px; margin-bottom:8px; font-size:9px; color:#1f4d2e; letter-spacing:2px; }
+
+/* Guide styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:16px; padding-top:max(16px,env(safe-area-inset-top)); padding-bottom:max(32px,env(safe-area-inset-bottom)); min-height:100vh; }
+.page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
+.page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#6ee7b7; margin-bottom:8px; }
+.divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,#4ade80,transparent); margin:8px auto 20px; }
+.max-w { max-width:700px; margin:0 auto; }
+
+/* Filter tabs */
+.filters { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+.filter-btn { padding:6px 14px; border-radius:4px; border:1px solid #1a3d26; background:transparent; color:#6b7280; cursor:pointer; font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px; }
+.filter-btn.active { border-color:#4ade80; color:#4ade80; background:rgba(74,222,128,0.1); }
+
+/* Steckbrief card */
+.card { border-radius:8px; margin-bottom:16px; overflow:hidden; border:1px solid #1a3d26; }
+.card-header { padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer; }
+.card-symbol { font-size:22px; font-weight:900; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Courier New',monospace; }
+.card-header-info { flex:1; }
+.card-name { font-size:13px; font-weight:700; letter-spacing:2px; }
+.card-sub { font-size:9px; color:#6b7280; margin-top:2px; letter-spacing:1px; }
+.card-tags { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
+.tag { font-size:8px; padding:1px 6px; border-radius:3px; letter-spacing:1px; }
+.tag-makro { background:rgba(74,222,128,0.1); color:#4ade80; border:1px solid rgba(74,222,128,0.2); }
+.tag-mikro { background:rgba(96,165,250,0.1); color:#60a5fa; border:1px solid rgba(96,165,250,0.2); }
+.tag-ph { background:rgba(167,139,250,0.1); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
+.tag-mobil { background:rgba(250,204,21,0.1); color:#facc15; border:1px solid rgba(250,204,21,0.2); }
+.tag-immobil { background:rgba(251,146,60,0.1); color:#fb923c; border:1px solid rgba(251,146,60,0.2); }
+.chevron { color:#374151; font-size:12px; transition:transform 0.2s; }
+.chevron.open { transform:rotate(180deg); }
+
+.card-body { display:none; border-top:1px solid #1a3d26; }
+.card-body.open { display:block; }
+
+/* Optimal range bar */
+.optimal-section { padding:12px 16px; background:rgba(0,0,0,0.2); }
+.optimal-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:6px; }
+.optimal-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.optimal-key { font-size:9px; color:#6b7280; }
+.optimal-val { font-size:11px; font-weight:700; color:#4ade80; }
+
+/* Mangel / Uberschuss sections */
+.sym-section { padding:12px 16px; }
+.sym-title { font-size:9px; letter-spacing:3px; margin-bottom:8px; font-weight:700; }
+.sym-title.mangel { color:#60a5fa; }
+.sym-title.ueber { color:#fb923c; }
+.sym-list { list-style:none; }
+.sym-list li { font-size:10px; color:#9ca3af; padding:3px 0; padding-left:12px; position:relative; line-height:1.5; }
+.sym-list li::before { content:''; position:absolute; left:0; top:8px; width:5px; height:1px; }
+.sym-list.mangel li::before { background:#60a5fa; }
+.sym-list.ueber li::before { background:#fb923c; }
+.sym-highlight { color:#d1fae5; font-weight:700; }
+
+/* Salz section */
+.salz-section { padding:12px 16px; background:rgba(74,222,128,0.02); border-top:1px solid #1a3d26; }
+.salz-title { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:8px; }
+.salz-item { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid #0f2919; }
+.salz-item:last-child { border-bottom:none; }
+.salz-name { font-size:10px; color:#a7f3d0; }
+.salz-detail { font-size:9px; color:#6b7280; text-align:right; }
+.salz-pct { font-size:11px; font-weight:700; color:#4ade80; }
+
+/* Fix section */
+.fix-section { padding:12px 16px; border-top:1px solid #1a3d26; }
+.fix-title { font-size:9px; letter-spacing:3px; color:#facc15; margin-bottom:8px; }
+.fix-mangel { font-size:10px; color:#9ca3af; margin-bottom:6px; line-height:1.5; }
+.fix-mangel span { color:#60a5fa; }
+.fix-ueber { font-size:10px; color:#9ca3af; line-height:1.5; }
+.fix-ueber span { color:#fb923c; }
+
+.section-divider { height:1px; background:#1a3d26; margin:0 16px; }
+
+.section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#6ee7b7; margin:24px 0 12px; }
+.footer { text-align:center; margin-top:24px; font-size:9px; color:#1f4d2e; letter-spacing:2px; }
+
+/* Page switching */
+.page { display:none; }
+.page.active { display:block; }
+.main-nav { display:flex; justify-content:center; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.main-nav-btn { padding:8px 20px; border-radius:4px; border:1px solid #1a3d26; background:transparent; color:#6b7280; cursor:pointer; font-family:'Courier New',monospace; font-size:10px; letter-spacing:3px; }
+.main-nav-btn.active { border-color:#4ade80; background:rgba(74,222,128,0.15); color:#4ade80; }
+
+/* Auswertung */
+.aw-nutrient { margin-bottom:20px; }
+.aw-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:8px; }
+.aw-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.aw-col { }
+.aw-ppm { font-size:11px; font-weight:700; margin-bottom:3px; }
+.aw-delta { font-size:9px; margin-bottom:4px; }
+.aw-bar-bg { background:#0f2919; border-radius:2px; height:8px; position:relative; overflow:visible; margin-bottom:2px; }
+.aw-bar-ist { height:100%; border-radius:2px; position:absolute; top:0; left:0; transition:width 0.3s; }
+.aw-bar-soll { position:absolute; top:-3px; height:14px; border-radius:1px; opacity:0.3; pointer-events:none; }
+.aw-range { font-size:8px; color:#374151; }
 </style>
 </head>
 <body>
 
-<h1 class="page-title">NAHRSTOFFRECHNER</h1>
-<div class="page-subtitle">DWC &middot; Haifa Mineralsalze</div>
+<h1 class="page-title">DWC RECHNER</h1>
+<div class="page-subtitle">Haifa Mineralsalze</div>
 <div class="divider"></div>
+
+<div class="main-nav">
+  <button class="main-nav-btn active" onclick="showPage('rechner',this)">RECHNER</button>
+  <button class="main-nav-btn" onclick="showPage('guide',this)">NAHRSTOFF-GUIDE</button>
+  <button class="main-nav-btn" onclick="showPage('auswertung',this)">AUSWERTUNG</button>
+</div>
+<div style="height:16px;border-bottom:1px solid #1a3d26;margin-bottom:20px;"></div>
+
+<!-- RECHNER PAGE -->
+<div id="page-rechner" class="page active">
+
 
 <div class="presets">
   <button class="btn-preset active" onclick="loadPreset('VEG')">VEG</button>
   <button class="btn-preset" onclick="loadPreset('BLOOM')">BLOOM</button>
   <button class="btn-preset" onclick="loadPreset('EXPERIMENT')">EXPERIMENT</button>
+  <button class="btn-preset" onclick="resetPreset()" style="border-color:#374151;color:#6b7280;font-size:9px;">&#8635; RESET</button>
 </div>
 
 <div class="max-w grid-2">
@@ -308,9 +415,79 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
   </div>
 </div>
 
+
 <div class="footer">DWC NAHRSTOFFRECHNER 2026</div>
+</div>
+
+<!-- GUIDE PAGE -->
+<div id="page-guide" class="page">
+
+<div class="max-w">
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterGuide('alle',this)">ALLE</button>
+    <button class="filter-btn" onclick="filterGuide('makro',this)">MAKRO</button>
+    <button class="filter-btn" onclick="filterGuide('mikro',this)">MIKRO</button>
+    <button class="filter-btn" onclick="filterGuide('mobil',this)">MOBIL</button>
+    <button class="filter-btn" onclick="filterGuide('immobil',this)">IMMOBIL</button>
+  </div>
+
+  <div id="cards"></div>
+</div>
+
+
+<div class="footer">DWC NAHRSTOFF-GUIDE 2026</div>
+</div>
+
+<!-- AUSWERTUNG PAGE -->
+<div id="page-auswertung" class="page">
+<div class="max-w">
+
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">REFERENZ-STUDIE</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="filter-btn active" id="study-btn-general" onclick="setStudy('general',this)">ALLGEMEIN</button>
+      <button class="filter-btn" id="study-btn-saloner2021" onclick="setStudy('saloner2021',this)">SALONER 2021</button>
+      <button class="filter-btn" id="study-btn-bevan2021" onclick="setStudy('bevan2021',this)">BEVAN 2021</button>
+      <button class="filter-btn" id="study-btn-moher2024" onclick="setStudy('moher2024',this)">MOHER 2024</button>
+      <button class="filter-btn" id="study-btn-cockson2019" onclick="setStudy('cockson2019',this)">COCKSON 2019</button>
+      <button class="filter-btn" id="study-btn-bugbee" onclick="setStudy('bugbee',this)">BUGBEE/UTAH</button>
+    </div>
+    <div style="font-size:9px;color:#6b7280;margin-top:8px;" id="study-desc">Allgemeine DWC-Empfehlungen aus der Praxis</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
+    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#4ade80;padding:6px;border-bottom:2px solid #4ade80;">VEG</div>
+    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#fb923c;padding:6px;border-bottom:2px solid #fb923c;">BLOOM</div>
+    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#a78bfa;padding:6px;border-bottom:2px solid #a78bfa;">EXPERIMENT</div>
+  </div>
+
+  <div id="auswertung-content"></div>
+
+</div>
+<div class="footer">DWC AUSWERTUNG 2026</div>
+</div>
 
 <script>
+function showPage(name, btn) {
+  var pages = document.querySelectorAll('.page');
+  for (var i=0; i<pages.length; i++) pages[i].classList.remove('active');
+  document.getElementById('page-'+name).classList.add('active');
+  var btns = document.querySelectorAll('.main-nav-btn');
+  for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+  if (name === 'rechner') {
+    if (!window.rechnerReady) { initRechner(); }
+    // Reset any cards that may have been hidden by guide filter
+    var rechnerCards = document.querySelectorAll('#page-rechner .card');
+    for (var i=0; i<rechnerCards.length; i++) rechnerCards[i].style.display = '';
+  }
+  if (name === 'guide' && !window.guideReady) { buildCards(); window.guideReady = true; }
+  if (name === 'auswertung') { savePresetState(currentPreset); renderAuswertung(); }
+}
+
+// RECHNER SCRIPT
+
 var SALTS = [
   { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  origMax:1.5,  step:0.005, val:0.500, preis:23.07, menge:25000 },
   { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.250, preis:29.67, menge:25000 },
@@ -612,8 +789,6 @@ function onDose(key,val) {
   var salt=null;
   for(var i=0;i<SALTS.length;i++) if(SALTS[i].key===key){salt=SALTS[i];break;}
   document.getElementById('sv-'+key).textContent=fmt(parseFloat(val),3)+' '+salt.unit;
-  var btns=document.querySelectorAll('.btn-preset');
-  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
   render();
 }
 
@@ -630,8 +805,57 @@ function onTap(val) {
   render();
 }
 
+// Per-preset state storage
+var presetStates = {
+  VEG: null,
+  BLOOM: null,
+  EXPERIMENT: null
+};
+var currentPreset = 'VEG';
+
+function savePresetState(name) {
+  var state = { doses:{}, maxes:{} };
+  for(var i=0;i<SALTS.length;i++) {
+    state.doses[SALTS[i].key] = doses[SALTS[i].key];
+    state.maxes[SALTS[i].key] = SALTS[i].max;
+  }
+  presetStates[name] = state;
+}
+
 function loadPreset(name) {
-  var p=PRESETS[name]; if(!p) return;
+  // Save current state before switching
+  if (window.presetsLoaded && currentPreset !== name) {
+    savePresetState(currentPreset);
+  }
+  currentPreset = name;
+
+  // Load saved state or fall back to default preset
+  var state = presetStates[name];
+  var p = state ? state.doses : PRESETS[name];
+  if (!p) return;
+
+  for(var i=0;i<SALTS.length;i++) {
+    var s=SALTS[i];
+    if(p[s.key]===undefined) continue;
+    doses[s.key]=p[s.key];
+    s.max = state ? state.maxes[s.key] : s.origMax;
+    var el=document.getElementById('slider-'+s.key);
+    if(el){el.value=p[s.key];el.max=s.max;}
+    var lbl=document.getElementById('sv-'+s.key);
+    if(lbl) lbl.textContent=fmt(p[s.key],3)+' '+s.unit;
+    var minmax=el?el.parentNode.querySelector('.slider-minmax'):null;
+    if(minmax) minmax.lastElementChild.textContent=s.max+' '+s.unit;
+  }
+  var btns=document.querySelectorAll('.btn-preset');
+  for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===name);
+  render();
+}
+
+function resetPreset() {
+  // Clear saved state for current preset and reload defaults
+  presetStates[currentPreset] = null;
+  var p = PRESETS[currentPreset];
+  if (!p) return;
   for(var i=0;i<SALTS.length;i++) {
     var s=SALTS[i];
     if(p[s.key]===undefined) continue;
@@ -644,8 +868,6 @@ function loadPreset(name) {
     var minmax=el?el.parentNode.querySelector('.slider-minmax'):null;
     if(minmax) minmax.lastElementChild.textContent=s.origMax+' '+s.unit;
   }
-  var btns=document.querySelectorAll('.btn-preset');
-  for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===name);
   render();
 }
 
@@ -689,22 +911,53 @@ function clearWater() {
 }
 
 function doExport() {
-  var name=document.getElementById('recipe-name').value.trim()||'DWC_Rezept';
-  var data={name:name,datum:new Date().toLocaleDateString('de-DE'),version:1,doses:{},volume:volume,tapPct:tapPct,tap:{}};
-  for(var k in doses) data.doses[k]=doses[k];
+  // Save current preset state before exporting
+  savePresetState(currentPreset);
+  var sessionName=document.getElementById('recipe-name').value.trim()||'DWC_Session';
+  var data={
+    name:sessionName,
+    datum:new Date().toLocaleDateString('de-DE'),
+    version:2,
+    currentPreset:currentPreset,
+    presetStates:{},
+    volume:volume,
+    tapPct:tapPct,
+    tap:{}
+  };
+  // Save all 3 preset states
+  for(var pname in presetStates) {
+    if(presetStates[pname]) {
+      data.presetStates[pname]=presetStates[pname];
+    } else {
+      // Save default preset values
+      data.presetStates[pname]={doses:{},maxes:{}};
+      var p=PRESETS[pname];
+      for(var i=0;i<SALTS.length;i++) {
+        data.presetStates[pname].doses[SALTS[i].key]=p[SALTS[i].key]||0;
+        data.presetStates[pname].maxes[SALTS[i].key]=SALTS[i].origMax;
+      }
+    }
+  }
+  // Save current preset doses (might be unsaved)
+  data.presetStates[currentPreset]={doses:{},maxes:{}};
+  for(var i=0;i<SALTS.length;i++) {
+    data.presetStates[currentPreset].doses[SALTS[i].key]=doses[SALTS[i].key];
+    data.presetStates[currentPreset].maxes[SALTS[i].key]=SALTS[i].max;
+  }
   for(var k in tap) data.tap[k]=tap[k];
   var json=JSON.stringify(data,null,2);
   var blob=new Blob([json],{type:'application/json'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
   a.href=url;
-  a.download=name.replace(/\s+/g,'_')+'.json';
+  a.download=sessionName.replace(/\s+/g,'_')+'.json';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showFeedback(name+' gespeichert','#4ade80');
+  showFeedback(sessionName+' gespeichert (VEG + BLOOM + EXPERIMENT)','#4ade80');
 }
+
 function doImport(input) {
   var file=input.files[0];
   if(!file){showFeedback('Keine Datei gewaehlt','#f87171');return;}
@@ -716,8 +969,56 @@ function doImport(input) {
   reader.readAsText(file);
   input.value='';
 }
+
 function applySnapshot(data) {
-  if(!data||!data.doses) throw new Error('invalid');
+  if(!data) throw new Error('invalid');
+
+  // New format v2 - full session
+  if(data.version===2 && data.presetStates) {
+    // Load all preset states
+    for(var pname in data.presetStates) {
+      presetStates[pname]=data.presetStates[pname];
+    }
+    // Restore water
+    if(data.tap){
+      for(var i=0;i<WATER_FIELDS.length;i++){
+        var f=WATER_FIELDS[i];
+        if(data.tap[f.key]===undefined) continue;
+        tap[f.key]=data.tap[f.key];
+        var wel=document.getElementById('w-'+f.key);
+        if(wel) wel.value=data.tap[f.key];
+      }
+    }
+    if(data.volume){volume=data.volume;document.getElementById('vol-label').textContent=volume+' L';document.getElementById('vol-slider').value=volume;}
+    if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';document.getElementById('tap-slider').value=t;}
+    // Load current preset
+    var toLoad=data.currentPreset||'VEG';
+    presetStates[toLoad]=null; // force reload from state
+    currentPreset=toLoad;
+    presetStates[toLoad]=data.presetStates[toLoad];
+    var p=data.presetStates[toLoad].doses;
+    for(var i=0;i<SALTS.length;i++){
+      var s=SALTS[i];
+      if(p[s.key]===undefined) continue;
+      doses[s.key]=p[s.key];
+      s.max=data.presetStates[toLoad].maxes[s.key]||s.origMax;
+      var el=document.getElementById('slider-'+s.key);
+      if(el){el.value=p[s.key];el.max=s.max;}
+      var lbl=document.getElementById('sv-'+s.key);
+      if(lbl) lbl.textContent=fmt(p[s.key],3)+' '+s.unit;
+      var minmax=el?el.parentNode.querySelector('.slider-minmax'):null;
+      if(minmax) minmax.lastElementChild.textContent=s.max+' '+s.unit;
+    }
+    var btns=document.querySelectorAll('.btn-preset');
+    for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===toLoad);
+    if(data.name) document.getElementById('recipe-name').value=data.name;
+    showFeedback((data.name||'Session')+' geladen - VEG, BLOOM & EXPERIMENT wiederhergestellt','#4ade80');
+    render();
+    return;
+  }
+
+  // Legacy format v1
+  if(!data.doses) throw new Error('invalid');
   for(var k in data.doses) {
     if(!doses.hasOwnProperty(k)) continue;
     doses[k]=data.doses[k];
@@ -733,7 +1034,7 @@ function applySnapshot(data) {
   var btns=document.querySelectorAll('.btn-preset');
   for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
   if(data.name) document.getElementById('recipe-name').value=data.name;
-  showFeedback((data.name||'Rezept')+' geladen ('+(data.datum||'')+')', '#4ade80');
+  showFeedback((data.name||'Rezept')+' geladen','#4ade80');
   render();
 }
 function showFeedback(msg,color) {
@@ -810,11 +1111,653 @@ function renderRef() {
   water.textContent='+ '+fmt(diff,1)+' L '+fillLabel+' (EC '+fmt(fillEC,2)+') -> Ziel-EC: '+fmt(rezeptEC,2)+' mS/cm';
 }
 
-buildSliders();
-buildWaterInputs();
-loadPreset('VEG');
-renderDil();
-renderRef();
+function initRechner() {
+  buildSliders();
+  buildWaterInputs();
+  loadPreset('VEG');
+  window.presetsLoaded = true;
+  renderDil();
+  renderRef();
+  window.rechnerReady = true;
+}
+
+// Init on load
+initRechner();
+
+
+// GUIDE SCRIPT
+
+var NUTRIENTS = [
+  {
+    symbol:'N', name:'STICKSTOFF', sub:'Nitrogen', color:'#4ade80', bg:'rgba(74,222,128,0.15)',
+    kategorie:'makro', mobil:true,
+    optimal:{ ppm:'150-250 ppm', ratio:'VEG hoch, BLOOM niedrig', ph:'5,5-7,0' },
+    mangel:[
+      'Altere Blatter vergilben <span class="sym-highlight">zuerst</span> (N ist mobil)',
+      'Pflanze wirkt insgesamt blass und hellgrun',
+      'Stangel konnen rotlich/lila werden',
+      'Verlangsamtes Wachstum, kleine Blatter',
+      'In Blute: fruhzeitiges Ausreifen'
+    ],
+    ueber:[
+      'Dunkelgruene, fast blaugruene Blatter',
+      'Blatter rollen sich nach <span class="sym-highlight">unten</span> ein (Claw)',
+      'Zu viel vegetatives Wachstum in Blute',
+      'Sehr lange Internodien, Streckung',
+      'Bluten bleiben klein trotz gutem Licht'
+    ],
+    salze:[
+      { name:'Calciumnitrat (CaNO3)', pct:'15% N', detail:'Wichtigste N-Quelle, immer zuerst einfullen' },
+      { name:'Magnesiumnitrat (MgNO3)', pct:'11% N', detail:'Liefert N + Mg gleichzeitig' },
+      { name:'Kaliumnitrat (KNO3)', pct:'13,9% N', detail:'K und N zusammen' },
+      { name:'Salpetersaeure 0,5M', pct:'pH + N', detail:'pH senken und N leicht anpassen' }
+    ],
+    fix_mangel:'CaNO3 oder KNO3 erhohen. EC prufen - oft einfach zu niedrig. In Blute: N:K Verhaltnis 1:2 anstreben.',
+    fix_ueber:'CaNO3 und KNO3 reduzieren. In Blute N bewusst niedrig halten. EC senken, mehr P und K relativ zu N.'
+  },
+  {
+    symbol:'P', name:'PHOSPHOR', sub:'Phosphorus', color:'#fb923c', bg:'rgba(251,146,60,0.15)',
+    kategorie:'makro', mobil:true,
+    optimal:{ ppm:'50-100 ppm', ratio:'BLOOM hoch', ph:'5,5-6,2 (pH-sensitiv!)' },
+    mangel:[
+      'Lila/violette Verfarbung an <span class="sym-highlight">Stangeln und Blattunterseiten</span>',
+      'Altere Blatter dunkel, dann gelblich',
+      'Wurzelwachstum schwach und wenig',
+      'Verlangsamte Entwicklung',
+      'Oft pH-bedingt trotz ausreichend P im Wasser'
+    ],
+    ueber:[
+      'Blockiert Zn, Fe und Mn (Ionenkonkurrenz)',
+      'Symptome wie Mikronahr-Mangel',
+      'Intervenale Chlorose an neuen Blattern',
+      'Zink-Mangel-Symptome: kleine missgebildete Blatter',
+      'Selten echter P-Uberschuss bei normalen Dosierungen'
+    ],
+    salze:[
+      { name:'MKP (KH2PO4)', pct:'22,8% P', detail:'Hauptquelle, liefert auch K' },
+      { name:'Phosphorsaeure 85%', pct:'pH + P', detail:'pH senken, geringe P-Menge' }
+    ],
+    fix_mangel:'MKP erhohen (0,15-&gt;0,2 g/L). pH prufen - P Aufnahme bricht bei pH &gt;6,5 ein. Wassertemp max 22 Grad.',
+    fix_ueber:'MKP reduzieren. Weniger ist bei P oft mehr. Zn und Fe im Fetrilon prufen und ggf. erhohen.'
+  },
+  {
+    symbol:'K', name:'KALIUM', sub:'Potassium', color:'#60a5fa', bg:'rgba(96,165,250,0.15)',
+    kategorie:'makro', mobil:true,
+    optimal:{ ppm:'150-300 ppm', ratio:'BLOOM sehr hoch (2x N)', ph:'5,5-6,5' },
+    mangel:[
+      'Blattrand- und Spitzennekrosen an <span class="sym-highlight">alteren</span> Blattern',
+      'Rander verbrennen braun, dann trocken/knusprig',
+      'Blatter konnen sich nach <span class="sym-highlight">oben</span> rollen',
+      'Unregelmasige braune Flecken',
+      'Schwache Bluten, schlechter Ertrag'
+    ],
+    ueber:[
+      'Blockiert Ca und Mg (Ionenkonkurrenz)',
+      'Symptome wie Ca- oder Mg-Mangel',
+      'Intervenale Chlorose an neuen Blattern',
+      'Verlangsamtes Wachstum',
+      'K:Ca in ppm nicht uber 1:1 gehen'
+    ],
+    salze:[
+      { name:'SOP (K2SO4)', pct:'44,9% K', detail:'Chloridfreie K-Quelle, liefert auch S' },
+      { name:'MKP (KH2PO4)', pct:'28,7% K', detail:'K + P, hauptsachlich fur P-Anteil' },
+      { name:'Kaliumnitrat (KNO3)', pct:'38,7% K', detail:'K + N, gut fur Blute' },
+      { name:'Kaliwasserglas 28Be', pct:'6,7% K', detail:'K + Si, immer vorverdunnen!' }
+    ],
+    fix_mangel:'SOP erhohen (0,125-&gt;0,2 g/L). KNO3 hinzufugen. K:N auf 2:1 in Blute anstreben.',
+    fix_ueber:'SOP und KNO3 reduzieren. K:Ca Verhaltnis prufen. Ca erhohen oder K senken.'
+  },
+  {
+    symbol:'Ca', name:'CALCIUM', sub:'Calcium', color:'#f472b6', bg:'rgba(244,114,182,0.15)',
+    kategorie:'makro', mobil:false,
+    optimal:{ ppm:'150-250 ppm', ratio:'Ca:Mg = 2:1 bis 3:1', ph:'6,2-7,0 (beste Aufnahme)' },
+    mangel:[
+      '<span class="sym-highlight">Neue Blatter</span> und Wachstumspunkte betroffen (immobil!)',
+      'Blattspitzen und -rander braun/nekrotisch',
+      'Junge Blatter deformiert, gewellt',
+      'Bluten konnen absterben (Blossom End Rot)',
+      'Stangel hohl bei Schnitt (Hohlstangel)'
+    ],
+    ueber:[
+      'Verdrangt Mg, K und Fe (Ionenkonkurrenz)',
+      'Intervenale Chlorose durch Mg-Mangel als Folge',
+      'Neue Blatter rollen sich nach unten ein',
+      'Verlangsamtes Wachstum',
+      'Ca:Mg uber 4:1 wird problematisch'
+    ],
+    salze:[
+      { name:'Calciumnitrat (CaNO3)', pct:'18,6% Ca', detail:'Einzige Ca-Quelle im Rezept, ZUERST einfullen' }
+    ],
+    fix_mangel:'CaNO3 erhohen (0,5-&gt;0,65 g/L). Ca:Mg prufen (Ziel 2:1-3:1). Luftsteine prufen - Ca braucht Transpiration.',
+    fix_ueber:'CaNO3 reduzieren. Bittersalz/MgNO3 erhohen um Ca:Mg auszugleichen. Ziel 2:1-3:1.'
+  },
+  {
+    symbol:'Mg', name:'MAGNESIUM', sub:'Magnesium', color:'#a78bfa', bg:'rgba(167,139,250,0.15)',
+    kategorie:'makro', mobil:true,
+    optimal:{ ppm:'50-100 ppm', ratio:'Ca:Mg = 2:1 bis 3:1', ph:'6,0-7,0' },
+    mangel:[
+      '<span class="sym-highlight">Intervenale Chlorose</span> - Adern grun, Flachen gelb',
+      'Beginnt an <span class="sym-highlight">alteren</span> Blattern (Mg ist mobil)',
+      'Klassischstes und haufigtes Symptom uberhaupt',
+      'Blatter konnen sich nach oben rollen',
+      'Oft bedingt durch Ca-Uberschuss (Verdrankung)'
+    ],
+    ueber:[
+      'Blockiert Ca und K',
+      'Ca:Mg unter 1,5:1 wird problematisch',
+      'Blatter dunkel oder ungleichmassig',
+      'Blattspitzen konnen verbrennen',
+      'Selten echter Uberschuss bei normalen Dosierungen'
+    ],
+    salze:[
+      { name:'Bittersalz (MgSO4)', pct:'9,9% Mg', detail:'Hauptquelle, liefert auch S' },
+      { name:'Magnesiumnitrat (MgNO3)', pct:'9,5% Mg', detail:'Mg + N, besser loslich als Bittersalz' }
+    ],
+    fix_mangel:'Bittersalz erhohen (0,2-&gt;0,35 g/L). Ca:Mg prufen - Verdrankung durch Ca haufige Ursache.',
+    fix_ueber:'Bittersalz und MgNO3 reduzieren. CaNO3 leicht erhohen. Ziel Ca:Mg 2:1-3:1.'
+  },
+  {
+    symbol:'S', name:'SCHWEFEL', sub:'Sulfur', color:'#facc15', bg:'rgba(250,204,21,0.15)',
+    kategorie:'makro', mobil:false,
+    optimal:{ ppm:'50-150 ppm', ratio:'Meist ausreichend im Rezept', ph:'5,5-7,0' },
+    mangel:[
+      '<span class="sym-highlight">Junge Blatter</span> vergilben gleichmasig (immobil)',
+      'Ahnelt N-Mangel aber an neuen Blattern',
+      'Pflanze wachst langsam',
+      'Selten bei Mineral-Rezepten mit SOP und Bittersalz',
+      'Erst andere Ursachen ausschliessen'
+    ],
+    ueber:[
+      'Sehr selten bei normalen Dosierungen',
+      'Blattrandnekrosen ahnlich K-Mangel',
+      'Bei extremem Uberschuss: Wurzelschaden',
+      'Im DWC kaum relevant'
+    ],
+    salze:[
+      { name:'Bittersalz (MgSO4)', pct:'13,0% S', detail:'Hauptquelle' },
+      { name:'SOP (K2SO4)', pct:'18,4% S', detail:'Nebenquelle neben K' }
+    ],
+    fix_mangel:'Bittersalz oder SOP erhohen. Rezept prufen - S meist automatisch ausreichend vorhanden.',
+    fix_ueber:'Bittersalz und SOP reduzieren. Im DWC selten notwendig.'
+  },
+  {
+    symbol:'Fe', name:'EISEN', sub:'Iron', color:'#f87171', bg:'rgba(248,113,113,0.15)',
+    kategorie:'mikro', mobil:false,
+    optimal:{ ppm:'2-5 ppm', ratio:'pH-sensitiv!', ph:'5,5-6,2 (kritisch)' },
+    mangel:[
+      'Intervenale Chlorose an <span class="sym-highlight">jungen</span> Blattern (immobil!)',
+      'Unterschied zu Mg: betrifft NEUE nicht alte Blatter',
+      'Adern bleiben grun, Flachen gelb bis weisslich',
+      'Wird bei pH &gt;6,5 fast vollstandig blockiert',
+      'Wassertemperatur &gt;22 Grad stark eingeschrankt'
+    ],
+    ueber:[
+      'Selten bei chelatierten Quellen',
+      'Braune Flecken, Nekrosen',
+      'Kann Mn und Zn verdringen',
+      'Bei pH &lt;5,0 moglich (Fe-Toxizitat)'
+    ],
+    salze:[
+      { name:'Fetrilon Combi 1', pct:'4% Fe', detail:'EDTA-Chelat, pH-stabil bis 6,5' },
+      { name:'Wall Up S', pct:'5% Fe', detail:'Fe als Chelat' }
+    ],
+    fix_mangel:'pH senken auf 5,5-6,0. Fetrilon erhohen. Wassertemp prufen (max 22 Grad). EDTA stabiler als DTPA.',
+    fix_ueber:'Fetrilon reduzieren. pH prufen - unter 5,0 Fe-Toxizitat moglich.'
+  },
+  {
+    symbol:'Mn', name:'MANGAN', sub:'Manganese', color:'#34d399', bg:'rgba(52,211,153,0.15)',
+    kategorie:'mikro', mobil:false,
+    optimal:{ ppm:'0,5-2 ppm', ratio:'Fetrilon ausreichend', ph:'5,5-6,5' },
+    mangel:[
+      'Intervenale Chlorose an jungen Blattern (ahnlich Fe)',
+      'Zusatzlich <span class="sym-highlight">braune Nekroseflecken</span> zwischen Adern',
+      'Adern dunkel, Flachen hell mit Flecken',
+      'Wird bei pH &gt;6,5 blockiert',
+      'Seltener als Fe-Mangel'
+    ],
+    ueber:[
+      'Braune Punkte und Flecken auf Blattern',
+      'Verdrangt Fe und Zn',
+      'Bei pH &lt;5,0 moglich (Mn-Toxizitat)',
+      'Selten bei normalem pH und Fetrilon-Dosierung'
+    ],
+    salze:[
+      { name:'Fetrilon Combi 1', pct:'4% Mn', detail:'Chelatiert, gut verfugbar' }
+    ],
+    fix_mangel:'pH senken (5,5-6,5). Fetrilon leicht erhohen auf 0,025 g/L.',
+    fix_ueber:'Fetrilon reduzieren. pH prufen - unter 5,0 steigt Mn-Verfugbarkeit stark.'
+  },
+  {
+    symbol:'Zn', name:'ZINK', sub:'Zinc', color:'#818cf8', bg:'rgba(129,140,248,0.15)',
+    kategorie:'mikro', mobil:false,
+    optimal:{ ppm:'0,5-1 ppm', ratio:'Fetrilon ausreichend', ph:'5,5-6,5' },
+    mangel:[
+      'Kleine, <span class="sym-highlight">missgebildete</span> neue Blatter',
+      'Sehr kurze Internodien',
+      'Blatter gefleckt oder gestreift',
+      'Wird durch zu viel P blockiert',
+      'pH &gt;6,5 reduziert Aufnahme stark'
+    ],
+    ueber:[
+      'Sehr selten bei normalen Fetrilon-Dosierungen',
+      'Toxizitat moglich bei extremen Mengen',
+      'Braune Flecken, Wachstumsstop',
+      'Verdrangt Fe und Mn'
+    ],
+    salze:[
+      { name:'Fetrilon Combi 1', pct:'1,5% Zn', detail:'Chelatiert' }
+    ],
+    fix_mangel:'pH prufen (5,5-6,5). MKP-Menge prufen - P blockiert Zn. Fetrilon leicht erhohen.',
+    fix_ueber:'Fetrilon reduzieren. Selten notig.'
+  },
+  {
+    symbol:'Cu', name:'KUPFER', sub:'Copper', color:'#fb923c', bg:'rgba(251,146,60,0.15)',
+    kategorie:'mikro', mobil:false,
+    optimal:{ ppm:'0,05-0,2 ppm', ratio:'Sehr geringe Menge', ph:'5,5-7,0' },
+    mangel:[
+      'Junge Blatter hell, blaulich-grun',
+      'Blattspitzen wirken abgestorben',
+      'Blatter konnen sich drehen oder verdrehen',
+      'Selten bei normalem Fetrilon-Einsatz',
+      'pH spielt geringere Rolle als bei Fe'
+    ],
+    ueber:[
+      'Cu-Toxizitat moglich bei Uberdosierung',
+      'Wurzelwachstum stark eingeschrankt',
+      'Braune/schwarze Wurzeln',
+      'Blatter kursieren und sterben ab',
+      'Fetrilon sparsam dosieren'
+    ],
+    salze:[
+      { name:'Fetrilon Combi 1', pct:'1,5% Cu', detail:'Chelatiert, vorsichtig dosieren' }
+    ],
+    fix_mangel:'Fetrilon erhohen. Selten notwendig.',
+    fix_ueber:'Fetrilon reduzieren! Cu-Toxizitat ist ernst. Reservoir wechseln bei starken Symptomen.'
+  },
+  {
+    symbol:'B', name:'BOR', sub:'Boron', color:'#c084fc', bg:'rgba(192,132,252,0.15)',
+    kategorie:'mikro', mobil:false,
+    optimal:{ ppm:'0,5-1 ppm', ratio:'Fetrilon ausreichend', ph:'5,5-7,0' },
+    mangel:[
+      '<span class="sym-highlight">Wachstumspunkte</span> sterben ab (immobil)',
+      'Junge Blatter deformiert, dunkel oder braun',
+      'Stangel bruchig, innen hohl bei Schnitt',
+      'Bluten sterben fruehzeitig ab',
+      'Ca-Uberschuss hemmt B-Aufnahme'
+    ],
+    ueber:[
+      'B-Toxizitat bei Uberdosierung',
+      'Blattspitzen und -rander braun/nekrotisch',
+      'Ahnelt K-Mangel oder Salzstress',
+      'Selten bei normalen Fetrilon-Mengen'
+    ],
+    salze:[
+      { name:'Fetrilon Combi 1', pct:'0,5% B', detail:'Ausreichend fur DWC' }
+    ],
+    fix_mangel:'Fetrilon erhohen. Ca:B prufen - Ca-Uberschuss hemmt Aufnahme.',
+    fix_ueber:'Fetrilon reduzieren. B-Toxizitat sieht aus wie Salzstress.'
+  },
+  {
+    symbol:'Si', name:'SILIZIUM', sub:'Silicon', color:'#94a3b8', bg:'rgba(148,163,184,0.15)',
+    kategorie:'mikro', mobil:false,
+    optimal:{ ppm:'50-100 ppm', ratio:'Nicht essentiell aber nutzlich', ph:'5,5-6,5' },
+    mangel:[
+      'Kein klassischer Mangelmangel - Si ist nicht essentiell',
+      'Ohne Si: weichere Zellwande',
+      'Anfalliger fur Pilze und Schadlinge',
+      'Schlechtere Hitzestresstoleranz',
+      'Schwachere Stangel und Triebe'
+    ],
+    ueber:[
+      'Si fallt bei pH-Schwankungen als Gel aus',
+      'Kann Schlauch und Pumpe verstopfen',
+      'KWG niemals unverdunnt ins Reservoir!',
+      'Weissliche Ablagerungen in Reservoir/Schlauch'
+    ],
+    salze:[
+      { name:'Wall Up S', pct:'20% Si', detail:'Hohe Si-Konzentration' },
+      { name:'Kaliwasserglas 28Be', pct:'9,7% Si', detail:'Immer in viel Wasser vorverdunnen!' }
+    ],
+    fix_mangel:'Wall Up S oder KWG erhohen. KWG immer vorverdunnen - niemals direkt ins saure Reservoir!',
+    fix_ueber:'KWG-Menge reduzieren. Reservoir auf weissliche Ablagerungen prufen.'
+  },
+  {
+    symbol:'pH', name:'pH-WERT', sub:'Saure/Base Gleichgewicht', color:'#a78bfa', bg:'rgba(167,139,250,0.15)',
+    kategorie:'ph', mobil:null,
+    optimal:{ ppm:'5,5-6,2 DWC', ratio:'Tagliche Kontrolle', ph:'5,7-6,0 ideal' },
+    mangel:[
+      '<span class="sym-highlight">pH zu hoch (&gt;6,5)</span>: Fe, Mn, Zn, B kaum aufnehmbar',
+      'Sieht aus wie Mikronahr-Mangel obwohl Nahrstoffe vorhanden',
+      'Intervenale Chlorose an neuen Blattern',
+      'pH-Meter kalibrieren! Oft liegt Fehler am Meter',
+      'DWC: pH steigt naturlich durch Aufnahme'
+    ],
+    ueber:[
+      '<span class="sym-highlight">pH zu niedrig (&lt;5,3)</span>: Ca und Mg schlechter aufnehmbar',
+      'Mn und Fe werden ubermassig aufgenommen (Toxizitat)',
+      'Wurzeln werden bei pH &lt;5,0 beschadigt',
+      'Blattspitzen braun, Nekrosen',
+      'Zu viel H3PO4 oder HNO3'
+    ],
+    salze:[
+      { name:'Phosphorsaeure 85%', pct:'pH senken', detail:'Stark - vorsichtig dosieren' },
+      { name:'Salpetersaeure 0,5M', pct:'pH senken', detail:'Schwacher, gibt auch N' },
+      { name:'Leitungswasser', pct:'pH erhohen', detail:'HCO3- puffert pH nach oben' }
+    ],
+    fix_mangel:'H3PO4 oder HNO3 dosieren. pH-Meter kalibrieren. Ziel: 5,5-6,2.',
+    fix_ueber:'Weniger H3PO4/HNO3. Mehr Leitungswasser-Anteil (puffert). Ziel: 5,5-6,2.'
+  }
+];
+
+function buildCards() {
+  var html = '';
+  for (var i=0; i<NUTRIENTS.length; i++) {
+    var n = NUTRIENTS[i];
+    var mobilTag = n.mobil === true ? '<span class="tag tag-mobil">MOBIL</span>' :
+                   n.mobil === false ? '<span class="tag tag-immobil">IMMOBIL</span>' : '';
+    var katTag = n.kategorie === 'makro' ? '<span class="tag tag-makro">MAKRO</span>' :
+                 n.kategorie === 'mikro' ? '<span class="tag tag-mikro">MIKRO</span>' :
+                 '<span class="tag tag-ph">pH</span>';
+
+    html += '<div class="card" data-kat="'+n.kategorie+'" data-mobil="'+(n.mobil===true?'mobil':n.mobil===false?'immobil':'')+'">';
+    html += '<div class="card-header" onclick="toggleCard(this)">';
+    html += '<div class="card-symbol" style="background:'+n.bg+';color:'+n.color+'">'+n.symbol+'</div>';
+    html += '<div class="card-header-info">';
+    html += '<div class="card-name" style="color:'+n.color+'">'+n.name+'</div>';
+    html += '<div class="card-sub">'+n.sub+'</div>';
+    html += '<div class="card-tags">'+katTag+mobilTag+'</div>';
+    html += '</div>';
+    html += '<div class="chevron">&#9660;</div>';
+    html += '</div>';
+
+    html += '<div class="card-body">';
+
+    // Optimal
+    html += '<div class="optimal-section">';
+    html += '<div class="optimal-label">OPTIMALBEREICHE (DWC)</div>';
+    html += '<div class="optimal-row"><span class="optimal-key">Menge</span><span class="optimal-val">'+n.optimal.ppm+'</span></div>';
+    html += '<div class="optimal-row"><span class="optimal-key">Hinweis</span><span class="optimal-val">'+n.optimal.ratio+'</span></div>';
+    html += '<div class="optimal-row"><span class="optimal-key">pH-Fenster</span><span class="optimal-val">'+n.optimal.ph+'</span></div>';
+    html += '</div>';
+
+    // Mangel
+    html += '<div class="sym-section">';
+    html += '<div class="sym-title mangel">&#8595; MANGEL-SYMPTOME</div>';
+    html += '<ul class="sym-list mangel">';
+    for (var j=0; j<n.mangel.length; j++) html += '<li>'+n.mangel[j]+'</li>';
+    html += '</ul></div>';
+
+    html += '<div class="section-divider"></div>';
+
+    // Uberschuss
+    html += '<div class="sym-section">';
+    html += '<div class="sym-title ueber">&#8593; UBERSCHUSS-SYMPTOME</div>';
+    html += '<ul class="sym-list ueber">';
+    for (var j=0; j<n.ueber.length; j++) html += '<li>'+n.ueber[j]+'</li>';
+    html += '</ul></div>';
+
+    // Salze
+    html += '<div class="salz-section">';
+    html += '<div class="salz-title">QUELLEN IM REZEPT</div>';
+    for (var j=0; j<n.salze.length; j++) {
+      var s = n.salze[j];
+      html += '<div class="salz-item">';
+      html += '<div><div class="salz-name">'+s.name+'</div><div class="salz-detail">'+s.detail+'</div></div>';
+      html += '<div class="salz-pct">'+s.pct+'</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+
+    // Fix
+    html += '<div class="fix-section">';
+    html += '<div class="fix-title">LOSUNG</div>';
+    html += '<div class="fix-mangel"><span>Mangel:</span> '+n.fix_mangel+'</div>';
+    html += '<div style="height:6px"></div>';
+    html += '<div class="fix-ueber"><span>Uberschuss:</span> '+n.fix_ueber+'</div>';
+    html += '</div>';
+
+    html += '</div>'; // card-body
+    html += '</div>'; // card
+  }
+  document.getElementById('cards').innerHTML = html;
+}
+
+function toggleCard(header) {
+  var body = header.parentNode.querySelector('.card-body');
+  var chevron = header.querySelector('.chevron');
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+function filterGuide(type, btn) {
+  var btns = document.querySelectorAll('.filter-btn');
+  for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  var guideEl = document.getElementById('page-guide');
+  var cards = guideEl.querySelectorAll('.card');
+  for (var i=0; i<cards.length; i++) {
+    var c = cards[i];
+    var show = type === 'alle' ||
+               (type === 'makro' && c.getAttribute('data-kat') === 'makro') ||
+               (type === 'mikro' && (c.getAttribute('data-kat') === 'mikro' || c.getAttribute('data-kat') === 'ph')) ||
+               (type === 'mobil' && c.getAttribute('data-mobil') === 'mobil') ||
+               (type === 'immobil' && c.getAttribute('data-mobil') === 'immobil');
+    c.style.display = show ? 'block' : 'none';
+  }
+}
+
+// Guide wird beim ersten Klick initialisiert
+
+// =====================
+// AUSWERTUNG
+// =====================
+
+var STUDIES = {
+  general: {
+    name: 'Allgemein',
+    desc: 'Gesamtspanne aller Studien - zeigt Minimum bis Maximum uber alle Quellen',
+    veg:   null,
+    bloom: null
+  },
+  saloner2021: {
+    name: 'Saloner & Bernstein 2021',
+    desc: 'Frontiers in Plant Science - N-Einfluss auf Cannabinoide und Terpene. Optimales N ~160 ppm, darueber sinken THC-Konzentrationen.',
+    veg:   { N:[140,180], P:[20,40],  K:[100,175], Ca:[100,150], Mg:[35,60],  S:[50,70],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  },
+    bloom: { N:[80,160],  P:[20,40],  K:[100,175], Ca:[100,150], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  }
+  },
+  bevan2021: {
+    name: 'Bevan et al. 2021',
+    desc: 'Frontiers in Plant Science - NPK-Optimierung DWC Blute. Optimales N=194, P=59 ppm fuer maximalen Ertrag.',
+    veg:   { N:[160,200], P:[30,60],  K:[100,175], Ca:[100,150], Mg:[35,70],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  },
+    bloom: { N:[160,220], P:[40,80],  K:[60,200],  Ca:[100,160], Mg:[35,70],  S:[60,100], Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  }
+  },
+  moher2024: {
+    name: 'Moher et al. 2024',
+    desc: 'Frontiers in Plant Science - NPK VEG Response Surface. Optimales N=200, P=60, K=118 ppm fuer maximale Biomasse.',
+    veg:   { N:[160,240], P:[30,90],  K:[60,175],  Ca:[100,150], Mg:[35,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  },
+    bloom: { N:[100,180], P:[30,60],  K:[100,200], Ca:[100,160], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  }
+  },
+  cockson2019: {
+    name: 'Cockson et al. 2019 (NCSU)',
+    desc: 'NC State University - Mikronahr-Stoerungen und Hoagland-Loesung. Makros nach modifiziertem Hoagland, Mikros aus Gewebeanalysen.',
+    veg:   { N:[150,210], P:[15,30],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,128], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.2], Si:[30,60]  },
+    bloom: { N:[100,160], P:[20,40],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,128], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.2], Si:[30,60]  }
+  },
+  bugbee: {
+    name: 'Bugbee / Utah State (konservativ)',
+    desc: 'Cannabis Business Times & Utah State - Sehr niedriges P ausreichend. P 8-15 ppm, kein Vorteil bei hoherem P.',
+    veg:   { N:[150,200], P:[8,20],   K:[100,175], Ca:[100,160], Mg:[30,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.2,0.8],B:[0.3,0.8], Si:[30,60]  },
+    bloom: { N:[100,160], P:[15,30],  K:[100,200], Ca:[100,160], Mg:[30,60],  S:[60,100], Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.2,0.8],B:[0.3,0.8], Si:[30,60]  }
+  }
+};
+
+var NUTRIENTS_AW = [
+  { key:'N',  label:'STICKSTOFF',  dec:0, color:'#4ade80'  },
+  { key:'P',  label:'PHOSPHOR',    dec:0, color:'#fb923c'  },
+  { key:'K',  label:'KALIUM',      dec:0, color:'#60a5fa'  },
+  { key:'Ca', label:'CALCIUM',     dec:0, color:'#f472b6'  },
+  { key:'Mg', label:'MAGNESIUM',   dec:0, color:'#a78bfa'  },
+  { key:'S',  label:'SCHWEFEL',    dec:0, color:'#facc15'  },
+  { key:'Fe', label:'EISEN',       dec:2, color:'#f87171'  },
+  { key:'Mn', label:'MANGAN',      dec:2, color:'#34d399'  },
+  { key:'Zn', label:'ZINK',        dec:2, color:'#818cf8'  },
+  { key:'B',  label:'BOR',         dec:2, color:'#c084fc'  },
+  { key:'Si', label:'SILIZIUM',    dec:1, color:'#94a3b8'  }
+];
+
+var currentStudy = 'general';
+
+function setStudy(name, btn) {
+  currentStudy = name;
+  var btns = document.querySelectorAll('[id^="study-btn-"]');
+  for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  document.getElementById('study-desc').textContent = STUDIES[name].desc;
+  renderAuswertung();
+}
+
+function calcForDoses(d, t) {
+  var tapPctLocal = t;
+  var wCa=tap.Ca*tapPctLocal, wMg=tap.Mg*tapPctLocal, wK=tap.K*tapPctLocal;
+  var wN=tap.N*tapPctLocal, wS=tap.S*tapPctLocal, wSi=tap.Si*tapPctLocal;
+  return {
+    N:  d.caNO3*1000*0.15 + d.mgNO3*1000*0.11 + (d.kno3||0)*1000*(14.01/101.11) + (d.hno3||0)*0.5*14.01 + wN,
+    P:  d.mkp*1000*(30.97/136.09) + d.h3po4*1.685*0.85*1000*(30.97/97.99),
+    K:  d.mkp*1000*(39.10/136.09) + d.sop*1000*(2*39.10/174.26) + (d.kno3||0)*1000*(39.10/101.11) + d.kwg*67.24 + wK,
+    Ca: d.caNO3*1000*0.26*(40.08/56.08) + wCa,
+    Mg: d.mgNO3*1000*0.16*(24.31/40.30) + d.bittersalz*1000*(24.31/246.48) + wMg + d.fetrilon*1000*0.033*(24.31/40.30),
+    S:  d.bittersalz*1000*(32.06/246.48) + d.sop*1000*(32.06/174.26) + wS,
+    Si: d.kwg*96.72 + d.wallup*1000*0.20 + wSi,
+    Fe: d.wallup*1000*0.05 + d.fetrilon*1000*0.04,
+    Mn: d.fetrilon*1000*0.04,
+    Zn: d.fetrilon*1000*0.015,
+    B:  d.fetrilon*1000*0.005
+  };
+}
+
+function getDosesForPreset(name) {
+  // Get saved state or default preset
+  var state = presetStates[name];
+  if (state && state.doses) return state.doses;
+  return PRESETS[name] || {};
+}
+
+function getStudyRef(studyName, phase) {
+  var study = STUDIES[studyName];
+  if (studyName === 'general') {
+    // Calculate min/max across all other studies
+    var keys = ['N','P','K','Ca','Mg','S','Fe','Mn','Zn','B','Si'];
+    var result = {};
+    for (var k=0; k<keys.length; k++) {
+      var key = keys[k];
+      var minVal = 999999, maxVal = 0;
+      for (var sname in STUDIES) {
+        if (sname === 'general') continue;
+        var ref = STUDIES[sname][phase];
+        if (ref && ref[key]) {
+          minVal = Math.min(minVal, ref[key][0]);
+          maxVal = Math.max(maxVal, ref[key][1]);
+        }
+      }
+      result[key] = [minVal === 999999 ? 0 : minVal, maxVal];
+    }
+    return result;
+  }
+  return study[phase];
+}
+
+function renderAuswertung() {
+  var presetList = [
+    { name:'VEG',        ref:'veg',   color:'#4ade80' },
+    { name:'BLOOM',      ref:'bloom', color:'#fb923c' },
+    { name:'EXPERIMENT', ref:'bloom', color:'#a78bfa' }
+  ];
+
+  // Calculate ppm for each preset
+  var results = [];
+  for (var p=0; p<presetList.length; p++) {
+    var pr = presetList[p];
+    var d = getDosesForPreset(pr.name);
+    // Use current tapPct for all
+    results.push({ pr:pr, ppm:calcForDoses(d, tapPct) });
+  }
+
+  // Find max value per nutrient across all presets + soll for scaling
+  var html = '';
+  for (var n=0; n<NUTRIENTS_AW.length; n++) {
+    var nut = NUTRIENTS_AW[n];
+    var maxVal = 0.01;
+    for (var p=0; p<results.length; p++) {
+      var ist = results[p].ppm[nut.key] || 0;
+      maxVal = Math.max(maxVal, ist);
+    }
+    // Also consider soll max
+    var sollVeg = study.veg[nut.key] || [0,0];
+    var sollBloom = study.bloom[nut.key] || [0,0];
+    maxVal = Math.max(maxVal, sollVeg[1]*1.3, sollBloom[1]*1.3);
+
+    html += '<div class="aw-nutrient">';
+    html += '<div class="aw-label">'+nut.label+' (ppm)</div>';
+    html += '<div class="aw-cols">';
+
+    for (var p=0; p<results.length; p++) {
+      var r = results[p];
+      var ist = r.ppm[nut.key] || 0;
+      var soll = p===0 ? getStudyRef(currentStudy,'veg')[nut.key] : getStudyRef(currentStudy,'bloom')[nut.key];
+      var sollMin = soll ? soll[0] : 0;
+      var sollMax = soll ? soll[1] : 0;
+      var istPct = Math.min(100, (ist/maxVal)*100);
+      var sollMinPct = Math.min(100, (sollMin/maxVal)*100);
+      var sollMaxPct = Math.min(100, (sollMax/maxVal)*100);
+
+      // Delta
+      var delta = '';
+      var deltaColor = '#6b7280';
+      if (sollMax > 0) {
+        if (ist < sollMin) {
+          var d2 = Math.round((sollMin-ist)/sollMin*100);
+          delta = '-'+d2+'%';
+          deltaColor = '#60a5fa';
+        } else if (ist > sollMax) {
+          var d2 = Math.round((ist-sollMax)/sollMax*100);
+          delta = '+'+d2+'%';
+          deltaColor = '#fb923c';
+        } else {
+          delta = 'OK';
+          deltaColor = '#4ade80';
+        }
+      }
+
+      // Bar color
+      var barColor = r.pr.color;
+      if (delta === 'OK') barColor = '#4ade80';
+      else if (deltaColor === '#60a5fa') barColor = '#60a5fa';
+      else if (deltaColor === '#fb923c') barColor = '#fb923c';
+
+      html += '<div class="aw-col">';
+      html += '<div class="aw-ppm" style="color:'+barColor+'">'+ist.toFixed(nut.dec)+'</div>';
+      html += '<div class="aw-delta" style="color:'+deltaColor+'">'+delta+'</div>';
+      html += '<div class="aw-bar-bg">';
+      html += '<div class="aw-bar-ist" style="width:'+istPct+'%;background:'+barColor+'"></div>';
+      if (sollMax > 0) {
+        html += '<div class="aw-bar-soll" style="left:'+sollMinPct+'%;width:'+(sollMaxPct-sollMinPct)+'%;background:#ffffff"></div>';
+      }
+      html += '</div>';
+      html += '<div class="aw-range">'+sollMin+' - '+sollMax+'</div>';
+      html += '</div>';
+    }
+
+    html += '</div></div>';
+    html += '<div style="height:1px;background:#0f2919;margin-bottom:4px;"></div>';
+  }
+
+  document.getElementById('auswertung-content').innerHTML = html;
+}
+
+// Init auswertung when tab is shown
+var auswertungReady = false;
+
 </script>
 </body>
 </html>
