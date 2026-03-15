@@ -15,9 +15,13 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
 .page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
 .page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#6ee7b7; margin-bottom:8px; }
 .divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,#4ade80,transparent); margin:8px auto 20px; }
-.max-w { max-width:900px; margin:0 auto; }
+.max-w { max-width:1200px; margin:0 auto; }
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-@media(max-width:600px) { .grid-2 { grid-template-columns:1fr; } }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+@media(max-width:900px) { .grid-3 { grid-template-columns:1fr 1fr; } }
+@media(max-width:600px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:24px; padding-top:max(24px,env(safe-area-inset-top)); padding-bottom:max(24px,env(safe-area-inset-bottom)); min-height:100vh; }
+@media(min-width:900px) { body { padding:32px; } }
 .card { background:rgba(255,255,255,0.02); border:1px solid #1a3d26; border-radius:8px; padding:16px; margin-bottom:16px; }
 .card-title { font-size:9px; letter-spacing:4px; color:#6ee7b7; margin-bottom:12px; }
 .card-note { font-size:9px; color:#6b7280; }
@@ -60,7 +64,8 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
 .step-label { font-size:11px; color:#a7f3d0; font-weight:700; }
 .step-desc { font-size:10px; color:#6b7280; }
 .step-tip { font-size:9px; margin-top:2px; }
-.water-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.water-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+@media(min-width:900px) { .water-grid { grid-template-columns:repeat(4,1fr); } }
 @media(max-width:500px) { .water-grid { grid-template-columns:repeat(2,1fr); } }
 .water-label { font-size:9px; color:#6ee7b7; letter-spacing:2px; margin-bottom:4px; }
 .water-input { width:100%; background:#0f2919; border:1px solid #1a3d26; border-radius:4px; color:#4ade80; font-family:'Courier New',monospace; font-size:12px; padding:6px 8px; outline:none; }
@@ -80,7 +85,6 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
 .page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
 .page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#6ee7b7; margin-bottom:8px; }
 .divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,#4ade80,transparent); margin:8px auto 20px; }
-.max-w { max-width:700px; margin:0 auto; }
 
 /* Filter tabs */
 .filters { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
@@ -285,42 +289,40 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
 <div class="max-w">
   <div class="section-title">ANRUHR-ANLEITUNG</div>
   <div class="divider"></div>
-  <div class="card">
-    <div class="card-title">REIHENFOLGE DER ZUGABE</div>
-    <div class="card-note" style="margin-bottom:12px;">Jeden Nahrstoff separat in ~200ml Wasser vorlosen, dann ins Reservoir</div>
-    <div id="mixing-steps"></div>
-  </div>
-  <div class="card">
-    <div class="card-title">MAX. LOSLICHKEIT IN 200ML</div>
-    <div id="solubility-table"></div>
-    <div class="card-note" style="color:#facc15;margin-top:8px;">SOP am schlechtesten loslich - warmes Wasser (30-40 Grad C) verwenden</div>
-  </div>
-</div>
-
-<div class="max-w">
-  <div class="section-title">LEITUNGSWASSER 100%</div>
-  <div class="divider"></div>
-  <div class="card">
-    <div class="card-title">WASSERWERTE ANPASSEN</div>
-    <div class="water-grid" id="water-inputs"></div>
-  
-  </div>
-</div>
-
-<div class="max-w">
-  <div class="section-title">REZEPT SPEICHERN & LADEN</div>
-  <div class="divider"></div>
-  <div class="card">
-    <div class="card-title">EXPORT / IMPORT</div>
-    <input type="text" id="recipe-name" placeholder="Rezeptname z.B. BLOOM Woche 3"
-      style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Courier New',monospace;font-size:12px;padding:6px 10px;outline:none;margin-bottom:10px;">
-    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn-action" onclick="doExport()" style="border:1px solid #2D6A2D;color:#6ee7b7;">SPEICHERN</button>
-      <label class="btn-action" style="border:1px solid #374151;color:#6b7280;cursor:pointer;">
-        LADEN <input type="file" accept=".json" onchange="doImport(this)" style="display:none;">
-      </label>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">REIHENFOLGE DER ZUGABE</div>
+      <div class="card-note" style="margin-bottom:12px;">Jeden Nahrstoff separat in ~200ml Wasser vorlosen, dann ins Reservoir</div>
+      <div id="mixing-steps"></div>
     </div>
-    <div id="io-feedback" class="feedback"></div>
+    <div class="card">
+      <div class="card-title">MAX. LOSLICHKEIT IN 200ML</div>
+      <div id="solubility-table"></div>
+      <div class="card-note" style="color:#facc15;margin-top:8px;">SOP am schlechtesten loslich - warmes Wasser (30-40 Grad C) verwenden</div>
+    </div>
+  </div>
+</div>
+
+<div class="max-w">
+  <div class="section-title">WASSER & SPEICHERN</div>
+  <div class="divider"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">WASSERWERTE ANPASSEN</div>
+      <div class="water-grid" id="water-inputs"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">EXPORT / IMPORT</div>
+      <input type="text" id="recipe-name" placeholder="Rezeptname z.B. BLOOM Woche 3"
+        style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Courier New',monospace;font-size:12px;padding:6px 10px;outline:none;margin-bottom:10px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-action" onclick="doExport()" style="border:1px solid #2D6A2D;color:#6ee7b7;">SPEICHERN</button>
+        <label class="btn-action" style="border:1px solid #374151;color:#6b7280;cursor:pointer;">
+          LADEN <input type="file" accept=".json" onchange="doImport(this)" style="display:none;">
+        </label>
+      </div>
+      <div id="io-feedback" class="feedback"></div>
+    </div>
   </div>
 </div>
 
