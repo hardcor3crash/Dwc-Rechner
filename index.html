@@ -30,7 +30,7 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
 .slider-value { font-size:12px; color:#4ade80; font-weight:700; }
 .slider-minmax { display:flex; justify-content:space-between; font-size:9px; color:#374151; margin-top:2px; }
 input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer; }
-.stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.stat-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
 .stat { text-align:center; }
 .stat-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:4px; }
 .stat-value { font-size:26px; font-weight:700; }
@@ -46,7 +46,7 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
 .npk { display:flex; align-items:center; justify-content:center; gap:16px; }
 .npk-item { text-align:center; }
 .npk-letter { font-size:10px; letter-spacing:2px; margin-bottom:2px; }
-.npk-val { font-size:22px; font-weight:700; }
+.npk-val { font-size:18px; font-weight:700; }
 .micro-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
 .micro-item { display:flex; justify-content:space-between; padding:4px 8px; background:#0f2919; border-radius:4px; }
 .micro-label { font-size:10px; color:#6ee7b7; }
@@ -68,7 +68,10 @@ input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer
 .io-textarea { width:100%; height:110px; background:#0a1a0a; border:1px solid #1a3d26; border-radius:4px; color:#4ade80; font-family:'Courier New',monospace; font-size:10px; padding:8px; outline:none; resize:none; margin-top:10px; }
 .feedback { font-size:10px; margin-top:8px; display:none; }
 .section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#6ee7b7; margin:24px 0 8px; }
-.footer { text-align:center; margin-top:24px; margin-bottom:8px; font-size:9px; color:#1f4d2e; letter-spacing:2px; }
+.ratio-item { text-align:center; padding:10px 6px; background:#0f2919; border-radius:6px; }
+.ratio-val { font-size:22px; font-weight:700; }
+.ratio-label { font-size:9px; letter-spacing:2px; color:#6ee7b7; margin-top:3px; }
+.ratio-info { font-size:9px; color:#6b7280; margin-top:2px; }
 
 /* Guide styles */
 
@@ -198,16 +201,16 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
         <div class="slider-row">
           <div class="slider-header">
             <span class="slider-label">Reservoir Volumen</span>
-            <span class="slider-value" id="vol-label">42 L</span>
+            <span class="slider-value" id="vol-label">50 L</span>
           </div>
-          <input type="range" id="vol-slider" min="1" max="100" step="1" value="42" oninput="onVol(this.value)" onchange="expandVol(this)">
+          <input type="range" id="vol-slider" min="1" max="100" step="1" value="50" oninput="onVol(this.value)" onchange="expandVol(this)">
         </div>
         <div class="slider-row" style="margin-top:8px;">
           <div class="slider-header">
             <span class="slider-label">Leitungswasser-Anteil</span>
-            <span class="slider-value" id="tap-label">50% Leitung - 50% Osmose</span>
+            <span class="slider-value" id="tap-label">25% Leitung - 75% Osmose</span>
           </div>
-          <input type="range" id="tap-slider" min="0" max="100" step="5" value="50" oninput="onTap(this.value)">
+          <input type="range" id="tap-slider" min="0" max="100" step="5" value="25" oninput="onTap(this.value)">
           <div class="slider-minmax"><span>0% Osmose</span><span>100% Leitung</span></div>
         </div>
       </div>
@@ -216,42 +219,33 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
 
   <div>
     <div class="card">
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-label">EC GESAMT</div>
-          <div class="ec-row">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+        <div>
+          <div class="stat-label">EC</div>
+          <div class="ec-row" style="justify-content:center;gap:6px;">
             <button class="btn-ec" onclick="scaleEC(-0.05)">-</button>
-            <div class="stat-value" id="ec-val" style="color:#4ade80">-</div>
+            <div class="stat-value" id="ec-val" style="color:#4ade80;font-size:22px;">-</div>
             <button class="btn-ec" onclick="scaleEC(+0.05)">+</button>
           </div>
           <div class="stat-unit">mS/cm</div>
         </div>
-        <div class="stat">
-          <div class="stat-label">IONENBILANZ</div>
-          <div class="stat-value" id="ion-val" style="color:#4ade80">-</div>
+        <div>
+          <div class="stat-label">pH</div>
+          <div class="stat-value" id="ph-val" style="color:#4ade80;font-size:22px;">-</div>
+          <div class="stat-unit" id="ph-label">-</div>
+        </div>
+        <div>
+          <div class="stat-label">IONEN</div>
+          <div class="stat-value" id="ion-val" style="color:#4ade80;font-size:22px;">-</div>
           <div class="stat-unit" id="ion-label">-</div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="stat-grid">
-        <div class="stat">
-          <div class="stat-label">CA : MG</div>
-          <div class="stat-value" id="camg-val" style="color:#f472b6">-</div>
-          <div class="stat-unit" id="camg-label">-</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">pH SCHATZUNG</div>
-          <div class="stat-value" id="ph-val" style="color:#4ade80">-</div>
-          <div class="stat-unit" id="ph-label">-</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">N &middot; P &middot; K VERHALTNIS</div>
-      <div class="npk" id="npk-display"></div>
+      <div class="card-title">VERHALTNISSE</div>
+      <div class="npk" id="npk-display" style="margin-bottom:14px;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="ratio-display"></div>
     </div>
 
     <div class="card">
@@ -504,8 +498,8 @@ var SALTS = [
 ];
 
 var PRESETS = {
-  VEG:        { caNO3:0.500, mgNO3:0.250, bittersalz:0.200, mkp:0.150, sop:0.125, kno3:0.000, kwg:0.073, h3po4:0.060, hno3:0.050, wallup:0.050, fetrilon:0.020 },
-  BLOOM:      { caNO3:0.500, mgNO3:0.000, bittersalz:0.400, mkp:0.200, sop:0.200, kno3:0.000, kwg:0.073, h3po4:0.060, hno3:0.050, wallup:0.050, fetrilon:0.020 },
+  VEG:        { caNO3:0.650, mgNO3:0.225, bittersalz:0.300, mkp:0.100, sop:0.000, kno3:0.300, kwg:0.073, h3po4:0.060, hno3:0.050, wallup:0.040, fetrilon:0.025 },
+  BLOOM:      { caNO3:0.400, mgNO3:0.000, bittersalz:0.290, mkp:0.075, sop:0.250, kno3:0.050, kwg:0.000, h3po4:0.060, hno3:0.050, wallup:0.040, fetrilon:0.025 },
   EXPERIMENT: { caNO3:0.000, mgNO3:0.000, bittersalz:0.000, mkp:0.000, sop:0.000, kno3:0.000, kwg:0.000, h3po4:0.000, hno3:0.000, wallup:0.000, fetrilon:0.000 }
 };
 
@@ -539,8 +533,8 @@ var MIXING = [
 
 var ION_COLORS = {N:'#4ade80',P:'#fb923c',K:'#60a5fa',Ca:'#f472b6',Mg:'#a78bfa',S:'#facc15'};
 
-var volume = 42;
-var tapPct = 0.50;
+var volume = 50;
+var tapPct = 0.25;
 var tap = {Ca:64.6,Mg:19.5,K:1.3,N:1.22,S:6.54,Si:2.06,EC:0.50,pH:7.8,HCO3:180,Na:5.2,Cl:13.0};
 var doses = {};
 for (var i=0; i<SALTS.length; i++) doses[SALTS[i].key] = SALTS[i].val;
@@ -592,14 +586,6 @@ function render() {
   document.getElementById('ion-val').textContent = (r.ion>0?'+':'') + fmt(r.ion,1) + '%';
   document.getElementById('ion-label').textContent = ionText;
 
-  // Ca:Mg
-  var camg = r.Ca/(r.Mg||1);
-  var camgColor = camg<1.5?'#f87171':camg<=3.0?'#4ade80':'#facc15';
-  var camgText = camg<1.5?'Mg zu hoch':camg<=3.0?'optimal DWC':'Ca zu hoch';
-  document.getElementById('camg-val').style.color = camgColor;
-  document.getElementById('camg-val').textContent = fmt(camg,2) + ':1';
-  document.getElementById('camg-label').textContent = camgText;
-
   // pH
   // pH estimation - calibrated: VEG recipe + 0.06ml/L H3PO4 + 50% Augsburg = pH 5.8
   var tapPH = tap.pH || 7.0;
@@ -621,6 +607,48 @@ function render() {
     npkHtml += '<div class="npk-val" style="color:'+npkData[i][2]+'">'+(npkData[i][1]/minNPK).toFixed(1)+'</div></div>';
   }
   document.getElementById('npk-display').innerHTML = npkHtml;
+
+  // Additional ratios incl Ca:Mg
+  var camg = r.Ca/(r.Mg||1);
+  var camgColor = camg<1.5?'#f87171':camg<=3.0?'#4ade80':'#facc15';
+  var camgText = camg<1.5?'Mg zu hoch':camg<=3.0?'optimal DWC':'Ca zu hoch';
+
+  var ratios = [
+    {
+      label:'Ca : Mg',
+      val: fmt(camg,2)+':1',
+      color: camgColor,
+      info: camgText
+    },
+    {
+      label:'N : K',
+      val: r.K>0 ? fmt(r.N/r.K,2) : '-',
+      color: (r.N/r.K)>1.5?'#f87171':(r.N/r.K)<0.5?'#60a5fa':'#4ade80',
+      info: 'VEG ~1  BLOOM ~0,5'
+    },
+    {
+      label:'K : Ca',
+      val: r.Ca>0 ? fmt(r.K/r.Ca,2) : '-',
+      color: (r.K/r.Ca)>1.2?'#f87171':(r.K/r.Ca)<0.5?'#facc15':'#4ade80',
+      info: 'Ideal unter 1,0'
+    },
+    {
+      label:'K : P',
+      val: r.P>0 ? fmt(r.K/r.P,1) : '-',
+      color: '#60a5fa',
+      info: 'BLOOM 3-5:1'
+    }
+  ];
+  var ratioHtml = '';
+  for (var i=0; i<ratios.length; i++) {
+    var rat = ratios[i];
+    ratioHtml += '<div class="ratio-item">';
+    ratioHtml += '<div class="ratio-val" style="color:'+rat.color+'">'+rat.val+'</div>';
+    ratioHtml += '<div class="ratio-label">'+rat.label+'</div>';
+    ratioHtml += '<div class="ratio-info" style="color:#374151;">'+rat.info+'</div>';
+    ratioHtml += '</div>';
+  }
+  document.getElementById('ratio-display').innerHTML = ratioHtml;
 
   // Makros
   var macros = [
@@ -815,6 +843,12 @@ function onTap(val) {
 }
 
 // Per-preset state storage
+var PRESET_WATER = {
+  VEG:        { volume:50, tapPct:0.25 },
+  BLOOM:      { volume:50, tapPct:1.00 },
+  EXPERIMENT: { volume:50, tapPct:0.25 }
+};
+
 var presetStates = {
   VEG: null,
   BLOOM: null,
@@ -823,7 +857,7 @@ var presetStates = {
 var currentPreset = 'VEG';
 
 function savePresetState(name) {
-  var state = { doses:{}, maxes:{} };
+  var state = { doses:{}, maxes:{}, volume:volume, tapPct:tapPct };
   for(var i=0;i<SALTS.length;i++) {
     state.doses[SALTS[i].key] = doses[SALTS[i].key];
     state.maxes[SALTS[i].key] = SALTS[i].max;
@@ -855,6 +889,19 @@ function loadPreset(name) {
     var minmax=el?el.parentNode.querySelector('.slider-minmax'):null;
     if(minmax) minmax.lastElementChild.textContent=s.max+' '+s.unit;
   }
+
+  // Restore volume and tapPct - from saved state or preset defaults
+  var defaultWater = PRESET_WATER[name] || { volume:50, tapPct:0.25 };
+  var newVolume = (state && state.volume !== undefined) ? state.volume : defaultWater.volume;
+  var newTapPct = (state && state.tapPct !== undefined) ? state.tapPct : defaultWater.tapPct;
+  volume = newVolume;
+  tapPct = newTapPct;
+  document.getElementById('vol-label').textContent = volume + ' L';
+  document.getElementById('vol-slider').value = volume;
+  var t = Math.round(tapPct*100);
+  document.getElementById('tap-label').textContent = t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';
+  document.getElementById('tap-slider').value = t;
+
   var btns=document.querySelectorAll('.btn-preset');
   for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===name);
   render();
@@ -1669,6 +1716,12 @@ function calcForDoses(d, t) {
   };
 }
 
+function getTapPctForPreset(name) {
+  var state = presetStates[name];
+  if (state && state.tapPct !== undefined) return state.tapPct;
+  return PRESET_WATER[name] ? PRESET_WATER[name].tapPct : tapPct;
+}
+
 function getDosesForPreset(name) {
   // Get saved state or default preset
   var state = presetStates[name];
@@ -1707,13 +1760,13 @@ function renderAuswertung() {
     { name:'EXPERIMENT', ref:'bloom', color:'#a78bfa' }
   ];
 
-  // Calculate ppm for each preset
+  // Calculate ppm for each preset using their own tapPct
   var results = [];
   for (var p=0; p<presetList.length; p++) {
     var pr = presetList[p];
     var d = getDosesForPreset(pr.name);
-    // Use current tapPct for all
-    results.push({ pr:pr, ppm:calcForDoses(d, tapPct) });
+    var t = getTapPctForPreset(pr.name);
+    results.push({ pr:pr, ppm:calcForDoses(d, t) });
   }
 
   // Find max value per nutrient across all presets + soll for scaling
