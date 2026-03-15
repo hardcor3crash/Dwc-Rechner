@@ -453,6 +453,7 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
       <button class="filter-btn" id="study-btn-bugbee" onclick="setStudy('bugbee',this)">BUGBEE/UTAH</button>
     </div>
     <div style="font-size:9px;color:#6b7280;margin-top:8px;" id="study-desc">Allgemeine DWC-Empfehlungen aus der Praxis</div>
+    <div id="study-summary" style="margin-top:8px;"></div>
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
@@ -508,10 +509,12 @@ var PRESETS = {
   EXPERIMENT: { caNO3:0.000, mgNO3:0.000, bittersalz:0.000, mkp:0.000, sop:0.000, kno3:0.000, kwg:0.000, h3po4:0.000, hno3:0.000, wallup:0.000, fetrilon:0.000 }
 };
 
-var WATER_DEFAULTS = { Ca:64.6, Mg:19.5, K:1.3, N:1.22, S:6.54, Si:2.06, EC:0.50 };
+var WATER_DEFAULTS = { Ca:64.6, Mg:19.5, K:1.3, N:1.22, S:6.54, Si:2.06, EC:0.50, pH:7.8, HCO3:180, Na:5.2, Cl:13.0 };
 var WATER_FIELDS = [
   {key:'Ca',label:'Calcium (ppm)'},{key:'Mg',label:'Magnesium (ppm)'},{key:'K',label:'Kalium (ppm)'},
-  {key:'N',label:'Stickstoff (ppm)'},{key:'S',label:'Schwefel (ppm)'},{key:'Si',label:'Silizium (ppm)'},{key:'EC',label:'EC (mS/cm)'}
+  {key:'N',label:'Stickstoff (ppm)'},{key:'S',label:'Schwefel (ppm)'},{key:'Si',label:'Silizium (ppm)'},
+  {key:'EC',label:'EC (mS/cm)'},{key:'pH',label:'pH Leitungswasser'},
+  {key:'HCO3',label:'HCO3- (mg/L)'},{key:'Na',label:'Natrium (ppm)'},{key:'Cl',label:'Chlorid (ppm)'}
 ];
 
 var SOLUBILITY = {
@@ -538,7 +541,7 @@ var ION_COLORS = {N:'#4ade80',P:'#fb923c',K:'#60a5fa',Ca:'#f472b6',Mg:'#a78bfa',
 
 var volume = 42;
 var tapPct = 0.50;
-var tap = {Ca:64.6,Mg:19.5,K:1.3,N:1.22,S:6.54,Si:2.06,EC:0.50};
+var tap = {Ca:64.6,Mg:19.5,K:1.3,N:1.22,S:6.54,Si:2.06,EC:0.50,pH:7.8,HCO3:180,Na:5.2,Cl:13.0};
 var doses = {};
 for (var i=0; i<SALTS.length; i++) doses[SALTS[i].key] = SALTS[i].val;
 
@@ -550,6 +553,7 @@ function fmt(v,d) { return parseFloat(v).toFixed(d===undefined?1:d).replace('.',
 function calc() {
   var d=doses, t=tapPct;
   var wCa=tap.Ca*t, wMg=tap.Mg*t, wK=tap.K*t, wN=tap.N*t, wS=tap.S*t, wSi=tap.Si*t, wEC=tap.EC*t;
+  var wNa=(tap.Na||0)*t, wCl=(tap.Cl||0)*t, wHCO3=(tap.HCO3||0)*t;
   var N  = d.caNO3*1000*0.15 + d.mgNO3*1000*0.11 + (d.kno3||0)*1000*(14.01/101.11) + (d.hno3||0)*0.5*14.01 + wN;
   var Ca = d.caNO3*1000*0.26*(40.08/56.08) + wCa;
   var Mg = d.mgNO3*1000*0.16*(24.31/40.30) + d.bittersalz*1000*(24.31/246.48) + wMg + d.fetrilon*1000*0.033*(24.31/40.30);
@@ -562,11 +566,14 @@ function calc() {
   var Zn = d.fetrilon*1000*0.015;
   var Cu = d.fetrilon*1000*0.015;
   var B  = d.fetrilon*1000*0.005;
-  var ec = (N-wN+P+K-wK+Ca-wCa+Mg-wMg+S-wS)/500 + wEC;
-  var kat = (Ca/40.08)*2+(Mg/24.31)*2+(K/39.10)+(Fe/55.85)*2+(Mn/54.94)*2+(Zn/65.38)*2+(Cu/63.55)*2;
-  var ani = (N/14.01)+(P/30.97)+(S/32.06)*2;
+  var Na = wNa;
+  var Cl = wCl;
+  var ec = (N-wN+P+K-wK+Ca-wCa+Mg-wMg+S-wS+Na+Cl)/500 + wEC;
+  // Ion balance including Na+ and Cl- and HCO3-
+  var kat = (Ca/40.08)*2+(Mg/24.31)*2+(K/39.10)+(Fe/55.85)*2+(Mn/54.94)*2+(Zn/65.38)*2+(Cu/63.55)*2+(Na/22.99);
+  var ani = (N/14.01)+(P/30.97)+(S/32.06)*2+(Cl/35.45)+(wHCO3/61.02);
   var ion = (kat+ani)>0?(kat-ani)/(kat+ani)*100:0;
-  return {N:N,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,ec:ec,ion:ion};
+  return {N:N,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,Na:Na,Cl:Cl,ec:ec,ion:ion};
 }
 
 function render() {
@@ -594,8 +601,10 @@ function render() {
   document.getElementById('camg-label').textContent = camgText;
 
   // pH
-  var phHCO3 = (tapPct-0.5)*0.8;
-  var phEst = Math.min(7.8, Math.max(4.5, 7.5 - 28.33*doses.h3po4 - 1.5*(doses.hno3||0) + phHCO3));
+  // pH estimation - calibrated: VEG recipe + 0.06ml/L H3PO4 + 50% Augsburg = pH 5.8
+  var tapPH = tap.pH || 7.0;
+  var hco3Pct = tapPct * ((tap.HCO3||0) / 180.0); // relative HCO3 buffer (Augsburg=1.0)
+  var phEst = Math.min(7.8, Math.max(4.5, tapPH - 28.33*doses.h3po4 - 1.5*(doses.hno3||0) - (1.0 - hco3Pct) * 0.3));
   var phColor = phEst<5.5?'#f87171':phEst<=6.2?'#4ade80':phEst<=6.8?'#facc15':'#f87171';
   var phText = phEst<5.5?'zu sauer':phEst<=6.2?'optimal':phEst<=6.8?'leicht hoch':'zu hoch';
   document.getElementById('ph-val').style.color = phColor;
@@ -891,7 +900,12 @@ function scaleEC(delta) {
 
 function onWater() {
   for(var i=0;i<WATER_FIELDS.length;i++) {
-    tap[WATER_FIELDS[i].key]=parseFloat(document.getElementById('w-'+WATER_FIELDS[i].key).value)||0;
+    var key = WATER_FIELDS[i].key;
+    var raw = document.getElementById('w-'+key).value;
+    var val = parseFloat(raw.replace(',','.'));
+    if (isNaN(val)) val = 0;
+    if (key==='pH' && val < 1) val = 7.0;
+    tap[key] = val;
   }
   render();
 }
@@ -904,8 +918,10 @@ function resetWater() {
 }
 function clearWater() {
   for(var i=0;i<WATER_FIELDS.length;i++) {
-    tap[WATER_FIELDS[i].key]=0;
-    document.getElementById('w-'+WATER_FIELDS[i].key).value=0;
+    var key = WATER_FIELDS[i].key;
+    var val = key==='pH' ? 7.0 : 0;
+    tap[key]=val;
+    document.getElementById('w-'+key).value=val;
   }
   render();
 }
@@ -1556,39 +1572,45 @@ function filterGuide(type, btn) {
 var STUDIES = {
   general: {
     name: 'Allgemein',
-    desc: 'Gesamtspanne aller Studien - zeigt Minimum bis Maximum uber alle Quellen',
+    desc: 'Gesamtspanne aller 5 Studien.',
+    summary: ['Zeigt Minimum bis Maximum uber alle Quellen','Breite Spanne = Studien uneinig (z.B. P, K)','Enge Spanne = Konsens (z.B. Mg, Fe, Mn)','Nutze andere Studien fur spezifischere Werte'],
     veg:   null,
     bloom: null
   },
   saloner2021: {
     name: 'Saloner & Bernstein 2021',
-    desc: 'Frontiers in Plant Science - N-Einfluss auf Cannabinoide und Terpene. Optimales N ~160 ppm, darueber sinken THC-Konzentrationen.',
-    veg:   { N:[140,180], P:[20,40],  K:[100,175], Ca:[100,150], Mg:[35,60],  S:[50,70],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  },
-    bloom: { N:[80,160],  P:[20,40],  K:[100,175], Ca:[100,150], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  }
+    desc: 'Frontiers in Plant Science - N und Cannabinoide.',
+    summary: ['N uber 160 ppm reduziert THC bis zu 69%','Zu viel N in Blute = mehr Biomasse, weniger Wirkstoff','P 30 ppm Minimum fur optimales Wachstum','Mg 35 ppm reicht fur maximale Cannabinoid-Konzentration','Empfehlung: N in Blute bewusst unter 160 ppm halten'],
+    veg:   { N:[140,180], P:[20,40],  K:[80,175],  Ca:[100,150], Mg:[35,60],  S:[50,70],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   },
+    bloom: { N:[80,160],  P:[20,40],  K:[80,175],  Ca:[100,150], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   }
   },
   bevan2021: {
     name: 'Bevan et al. 2021',
-    desc: 'Frontiers in Plant Science - NPK-Optimierung DWC Blute. Optimales N=194, P=59 ppm fuer maximalen Ertrag.',
-    veg:   { N:[160,200], P:[30,60],  K:[100,175], Ca:[100,150], Mg:[35,70],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  },
-    bloom: { N:[160,220], P:[40,80],  K:[60,200],  Ca:[100,160], Mg:[35,70],  S:[60,100], Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  }
+    desc: 'Frontiers in Plant Science - DWC BLOOM Response Surface.',
+    summary: ['Optimaler Ertrag bei N=194, P=59 ppm','K zwischen 60-340 ppm: kein Unterschied im Ertrag','P uber 80 ppm bringt keinen weiteren Vorteil','DWC mit LED verwendet - sehr praxisnah','N steigert Biomasse aber senkt Qualitat bei Uberdosierung'],
+    veg:   { N:[160,200], P:[30,60],  K:[60,200],  Ca:[100,150], Mg:[35,70],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   },
+    bloom: { N:[160,220], P:[40,80],  K:[60,200],  Ca:[100,160], Mg:[35,70],  S:[60,100], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   }
   },
   moher2024: {
     name: 'Moher et al. 2024',
-    desc: 'Frontiers in Plant Science - NPK VEG Response Surface. Optimales N=200, P=60, K=118 ppm fuer maximale Biomasse.',
-    veg:   { N:[160,240], P:[30,90],  K:[60,175],  Ca:[100,150], Mg:[35,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  },
-    bloom: { N:[100,180], P:[30,60],  K:[100,200], Ca:[100,160], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.3,0.8],B:[0.3,0.6], Si:[40,80]  }
+    desc: 'Frontiers in Plant Science - DWC VEG Response Surface.',
+    summary: ['Optimales N=200, P=60, K=117 ppm fur VEG Biomasse','Verwendete Haifa Salze - direkt vergleichbar','P uber 90 ppm zeigte negative Effekte','N und P haben starksten Einfluss auf VEG Biomasse','K-Einfluss war gering - breiter Toleranzbereich'],
+    veg:   { N:[160,240], P:[30,90],  K:[60,175],  Ca:[100,150], Mg:[35,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   },
+    bloom: { N:[100,180], P:[30,60],  K:[80,175],  Ca:[100,160], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   }
   },
   cockson2019: {
     name: 'Cockson et al. 2019 (NCSU)',
-    desc: 'NC State University - Mikronahr-Stoerungen und Hoagland-Loesung. Makros nach modifiziertem Hoagland, Mikros aus Gewebeanalysen.',
-    veg:   { N:[150,210], P:[15,30],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,128], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.2], Si:[30,60]  },
-    bloom: { N:[100,160], P:[20,40],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,128], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.2], Si:[30,60]  }
+    desc: 'NC State University - Mikronaehrstoff-Studie.',
+    summary: ['Bor optimal bei 0,875-1,0 ppm - viele Rezepte zu niedrig','Mangan optimal bei 0,88 ppm','Zink: sehr kleine Mengen ausreichend (0,1-0,3 ppm)','Basiert auf modifizierter Hoagland-Loesung','Wichtigste Referenz fur Mikronaehrstoff-Empfehlungen'],
+    veg:   { N:[150,210], P:[15,30],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,96],  Fe:[2,4],    Mn:[0.6,1],  Zn:[0.1,0.3],B:[0.7,1.0], Si:[5,15]   },
+    bloom: { N:[100,160], P:[20,40],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,96],  Fe:[2,4],    Mn:[0.6,1],  Zn:[0.1,0.3],B:[0.7,1.0], Si:[5,15]   }
   },
   bugbee: {
     name: 'Bugbee / Utah State (konservativ)',
-    desc: 'Cannabis Business Times & Utah State - Sehr niedriges P ausreichend. P 8-15 ppm, kein Vorteil bei hoherem P.',
-    veg:   { N:[150,200], P:[8,20],   K:[100,175], Ca:[100,160], Mg:[30,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.2,0.8],B:[0.3,0.8], Si:[30,60]  },
-    bloom: { N:[100,160], P:[15,30],  K:[100,200], Ca:[100,160], Mg:[30,60],  S:[60,100], Fe:[2,4],    Mn:[0.5,1.5],Zn:[0.2,0.8],B:[0.3,0.8], Si:[30,60]  }
+    desc: 'Utah State University - Minimale Nahrstoffmengen.',
+    summary: ['P 8-25 ppm ausreichend - weit weniger als ublich dosiert','Theoretischer P-Bedarf nur 12-24 ppm bei normalem CO2','Si empfohlen: starkt Zellwande, reduziert Mehltau fast vollst.','Ca 100 ppm adequate - mehr bringt wenig','Konservativstes Rezept - weniger Salzstress, stabilerer pH'],
+    veg:   { N:[150,200], P:[8,25],   K:[80,175],  Ca:[100,160], Mg:[30,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.5],B:[0.7,1.0], Si:[5,15]  },
+    bloom: { N:[100,160], P:[15,30],  K:[80,200],  Ca:[100,160], Mg:[30,60],  S:[60,100], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.5],B:[0.7,1.0], Si:[5,15]  }
   }
 };
 
@@ -1613,7 +1635,18 @@ function setStudy(name, btn) {
   var btns = document.querySelectorAll('[id^="study-btn-"]');
   for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
   btn.classList.add('active');
-  document.getElementById('study-desc').textContent = STUDIES[name].desc;
+  var study = STUDIES[name];
+  document.getElementById('study-desc').textContent = study.desc;
+  var summaryEl = document.getElementById('study-summary');
+  if (study.summary && study.summary.length) {
+    var html = '';
+    for (var i=0; i<study.summary.length; i++) {
+      html += '<div style="font-size:9px;color:#6b7280;padding:2px 0 2px 10px;border-left:2px solid #1a3d26;margin-bottom:3px;">'+study.summary[i]+'</div>';
+    }
+    summaryEl.innerHTML = html;
+  } else {
+    summaryEl.innerHTML = '';
+  }
   renderAuswertung();
 }
 
@@ -1693,8 +1726,8 @@ function renderAuswertung() {
       maxVal = Math.max(maxVal, ist);
     }
     // Also consider soll max
-    var sollVeg = study.veg[nut.key] || [0,0];
-    var sollBloom = study.bloom[nut.key] || [0,0];
+    var sollVeg = getStudyRef(currentStudy,'veg')[nut.key] || [0,0];
+    var sollBloom = getStudyRef(currentStudy,'bloom')[nut.key] || [0,0];
     maxVal = Math.max(maxVal, sollVeg[1]*1.3, sollBloom[1]*1.3);
 
     html += '<div class="aw-nutrient">';
