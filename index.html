@@ -676,24 +676,20 @@ function render() {
   document.getElementById('ion-label').textContent = ionText;
 
   // pH
-  // pH estimation using ion balance + acids
-  var tapPH = tap.pH || 7.0;
-  var hco3Pct = tapPct * ((tap.HCO3||0) / 180.0);
-  // Direct acids (calibrated)
-  var acidEffect = 0;
-  for (var pi=0; pi<SALTS.length; pi++) {
-    var ps = SALTS[pi];
-    if (!ps.active) continue;
-    var pd = doses[ps.key]||0;
-    if (pd===0) continue;
-    if (ps.key==='h3po4') { acidEffect += 28.33 * pd; continue; }
-    if (ps.key==='hno3')  { acidEffect += 1.5   * pd; continue; }
-    // NH4 lowers pH slightly
-    acidEffect += (ps.NH4||0) * pd * 1000 * 0.03;
+  // pH Schaetzung - kalibriert auf echte Messwerte (VEG 5.7, BLOOM 6.0)
+  var tapPH2 = tap.pH || 7.8;
+  var hco3Pct = tapPct * ((tap.HCO3||0) / 180.0); // HCO3 Puffer relativ zu Augsburg
+  var acidEffect = (doses.h3po4||0) * 28.33        // H3PO4 kalibriert
+                 + (doses.hno3||0)  * 1.5;          // HNO3 kalibriert
+  // NH4 aus anderen Salzen senkt pH leicht
+  for (var pi2=0; pi2<SALTS.length; pi2++) {
+    var ps2=SALTS[pi2];
+    if (!ps2.active || ps2.key==='h3po4' || ps2.key==='hno3') continue;
+    var pd2=doses[ps2.key]||0;
+    if (pd2===0) continue;
+    acidEffect += (ps2.NH4||0) * pd2 * 1000 * 0.02;
   }
-  // Ion balance shifts pH: negative ion = anion excess = lower pH, positive = cation excess = higher pH
-  var ionShift = r.ion * 0.015; // gentle correction
-  var phEst = Math.min(7.8, Math.max(4.5, tapPH - acidEffect + ionShift - (1.0 - hco3Pct) * 0.3));
+  var phEst = Math.min(7.8, Math.max(4.0, tapPH2 - acidEffect - (1.0 - hco3Pct) * 0.3));
   var phColor = phEst<5.5?'#f87171':phEst<=6.2?'#4ade80':phEst<=6.8?'#facc15':'#f87171';
   var phText = phEst<5.5?'zu sauer':phEst<=6.2?'optimal':phEst<=6.8?'leicht hoch':'zu hoch';
   document.getElementById('ph-val').style.color = phColor;
@@ -1203,7 +1199,7 @@ function onWater() {
     var raw = document.getElementById('w-'+key).value;
     var val = parseFloat(raw.replace(',','.'));
     if (isNaN(val)) val = 0;
-    if (key==='pH' && val < 1) val = 7.0;
+    if (key==='pH' && val < 1) val = 6.0;
     tap[key] = val;
   }
   render();
@@ -1218,7 +1214,7 @@ function resetWater() {
 function clearWater() {
   for(var i=0;i<WATER_FIELDS.length;i++) {
     var key = WATER_FIELDS[i].key;
-    var val = key==='pH' ? 7.0 : 0;
+    var val = key==='pH' ? 6.0 : 0;
     tap[key]=val;
     document.getElementById('w-'+key).value=val;
   }
@@ -1239,7 +1235,8 @@ function doExport() {
     tapPct:tapPct,
     tap:{},
     customSalts:[],
-    saltActive:{}
+    saltActive:{},
+    saltKeys:[]
   };
   // Save all 3 preset states
   for(var pname in presetStates) {
@@ -1262,8 +1259,9 @@ function doExport() {
     data.presetStates[currentPreset].maxes[SALTS[i].key]=SALTS[i].max;
   }
   for(var k in tap) data.tap[k]=tap[k];
-  // Save custom salts and active states
+  // Save custom salts, active states and which standard salts still exist
   for(var i=0;i<SALTS.length;i++) {
+    data.saltKeys.push(SALTS[i].key);
     if(SALTS[i].custom) data.customSalts.push(SALTS[i]);
     data.saltActive[SALTS[i].key] = SALTS[i].active;
   }
@@ -1298,16 +1296,24 @@ function applySnapshot(data) {
   // New format v2/v3 - full session
   if((data.version===2||data.version===3) && data.presetStates) {
     // Restore custom salts (v3)
-    if(data.version===3 && data.customSalts && data.customSalts.length>0) {
+    if(data.version===3) {
       // Remove existing custom salts
       SALTS = SALTS.filter(function(s){return !s.custom;});
+      // Remove standard salts that were deleted (not in saved saltKeys)
+      if(data.saltKeys && data.saltKeys.length>0) {
+        SALTS = SALTS.filter(function(s){
+          return data.saltKeys.indexOf(s.key) > -1;
+        });
+      }
       // Add saved custom salts
-      for(var i=0;i<data.customSalts.length;i++) {
-        SALTS.push(data.customSalts[i]);
-        doses[data.customSalts[i].key] = 0;
-        if(data.customSalts[i].key.indexOf('custom_')===0) {
-          var num=parseInt(data.customSalts[i].key.replace('custom_',''))||0;
-          if(num>customSaltCounter) customSaltCounter=num;
+      if(data.customSalts && data.customSalts.length>0) {
+        for(var i=0;i<data.customSalts.length;i++) {
+          SALTS.push(data.customSalts[i]);
+          doses[data.customSalts[i].key] = 0;
+          if(data.customSalts[i].key.indexOf('custom_')===0) {
+            var num=parseInt(data.customSalts[i].key.replace('custom_',''))||0;
+            if(num>customSaltCounter) customSaltCounter=num;
+          }
         }
       }
     }
