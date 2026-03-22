@@ -717,7 +717,7 @@ var MIXING = [
   {nr:4,color:'#fb923c',label:'MKP + SOP',desc:'Zusammen in 200ml',tip:'SOP in warmem Wasser (30-40 Grad) vorloesen'},
   {nr:5,color:'#4ade80',label:'Wall Up S',desc:'Alleine in 200ml',tip:'Si nach MKP - bei sinkendem pH stabiler'},
   {nr:6,color:'#86efac',label:'Fetrilon Combi 1',desc:'Alleine in 200ml',tip:'Chelate bei niedrigerem pH stabiler'},
-  {nr:7,color:'#60a5fa',key:'kwg',label:'Kaliwasserglas 28Be',desc:'kwg',tip:'Niemals unverdunnt ins saure Reservoir! Si fallt sonst als Gel aus.'},
+  {nr:7,color:'#60a5fa',key:'kwg',label:'Kaliwasserglas 28Be',desc:'kwg',tip:'Niemals unverdunnt ins Reservoir! Ca fallt bei hohem pH aus.'},
   {nr:8,color:'#fbbf24',label:'Phosphorsaeure 85%',desc:'In 200ml - pH auf 5,8-6,0 einstellen',tip:''},
   {nr:9,color:'#f87171',label:'Salpetersaeure 0,5M (optional)',desc:'Nur wenn pH noch zu hoch',tip:'Vorsicht: stark verduennt zugeben'}
 ];
@@ -1002,8 +1002,16 @@ function render() {
   }
   document.getElementById('cost-breakdown').innerHTML = costHtml;
 
-  // Anruehr
-  var kwgMl=(doses.kwg||0)*volume, siMg=kwgMl*96.72;
+  // Anruehr - KWG Menge aus aktiven Salzen suchen (key kann custom_X sein)
+  var kwgDose = 0;
+  for(var ki=0;ki<SALTS.length;ki++){
+    var ks=SALTS[ki];
+    if(!ks.active) continue;
+    if(ks.key==='kwg' || ks.label.toLowerCase().indexOf('kaliwasserglas')>-1){
+      kwgDose += doses[ks.key]||0;
+    }
+  }
+  var kwgMl=kwgDose*volume, siMg=kwgMl*96.72;
   var safeL=Math.ceil(Math.max(1.0,(siMg/100)*1.5)*10)/10;
   var mixHtml='';
   for (var i=0; i<MIXING.length; i++) {
@@ -1651,21 +1659,34 @@ function renderRef() {
   var fillEC=tap.EC*fillPct;
   var rezeptEC=calc().ec;
   var diff=soll-ist;
-  var ecNachFuellen=(ecIst*ist+fillEC*diff)/soll;
-  var ecFehlend=Math.max(0,rezeptEC-ecNachFuellen);
-  var saltEC_rez=Math.max(0,rezeptEC-tap.EC*tapPct);
-  var saltFactor=saltEC_rez>0?ecFehlend/saltEC_rez:0;
+
+  // Nährstoffe im Ist-Reservoir + Auffüllwasser
+  var ecHat = ecIst*ist + fillEC*diff;
+  var ecZiel = rezeptEC*soll;
+  var ecFehlend = Math.max(0, ecZiel - ecHat);
+
+  // Salzanteil pro Liter im Rezept
+  var saltEC_perL = Math.max(0, rezeptEC - tap.EC*tapPct);
+  // Wieviele Liter-Äquivalente Salz fehlen
+  var saltLiter = saltEC_perL>0 ? ecFehlend/saltEC_perL : 0;
+
   var rowsHtml='';
   for(var i=0;i<SALTS.length;i++) {
     var s=SALTS[i];
     if(!doses[s.key]) continue;
-    var nachfuell=doses[s.key]*soll*saltFactor;
+    var nachfuell=doses[s.key]*saltLiter;
     if(nachfuell<0.001) continue;
     rowsHtml+='<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #1a2a0a;">';
     rowsHtml+='<span style="color:#a7f3d0;font-size:10px;">'+s.label+'</span>';
     rowsHtml+='<span style="color:#4ade80;font-size:11px;font-weight:700;">'+nachfuell.toFixed(2)+' '+s.unit.replace('/L','')+'</span></div>';
   }
-  res.innerHTML=rowsHtml||'<div style="font-size:10px;color:#4ade80;">Nur Wasser nachfullen</div>';
+  res.innerHTML=rowsHtml||'<div style="font-size:11px;color:#4ade80;">Nur Wasser nachfullen</div>';
+
+  // Warnung wenn Ist-EC höher als Rezept-EC
+  var ecNachFuellen=(ecIst*ist+fillEC*diff)/soll;
+  if(ecNachFuellen>rezeptEC*1.02) {
+    res.innerHTML+='<div style="margin-top:8px;padding:8px;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.2);border-radius:8px;font-size:10px;color:#fb923c;">&#9888; EC nach Nachfullen ('+fmt(ecNachFuellen,2)+') noch uber Ziel-EC ('+fmt(rezeptEC,2)+'). Mehr Wasser nachfullen oder <span style="text-decoration:underline;cursor:pointer;" onclick="document.getElementById(\'dil-ec-cur-label\').scrollIntoView();showPage(\'rechner\',document.querySelector(\'.main-nav-btn\'))">Verdunnungsrechner</span> verwenden.</div>';
+  }
   var fillLabel=fillPct===0?'Osmosewasser':fillPct===1?'Leitungswasser':Math.round(fillPct*100)+'% Leitung';
   water.textContent='+ '+fmt(diff,1)+' L '+fillLabel+' (EC '+fmt(fillEC,2)+') -> Ziel-EC: '+fmt(rezeptEC,2)+' mS/cm';
 }
