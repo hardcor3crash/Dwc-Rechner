@@ -190,6 +190,13 @@ input[type=range]:disabled { opacity:0.35; }
 }
 .filter-btn:hover { border-color:#2d6a3d; color:#6ee7b7; }
 .filter-btn.active { background:rgba(74,222,128,0.1); border-color:#4ade80; color:#4ade80; }
+.opt-tap-btn {
+  font-family:'Courier New',monospace; font-size:9px; letter-spacing:1px;
+  padding:7px 12px; border-radius:100px;
+  border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
+  cursor:pointer; transition:all 0.15s; text-transform:uppercase;
+}
+.opt-tap-btn.active { background:rgba(74,222,128,0.15); border-color:#4ade80; color:#4ade80; }
 
 .guide-card { background:#131a15; border:1px solid rgba(74,222,128,0.08); border-radius:16px; margin-bottom:10px; overflow:hidden; }
 .card-header { padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer; }
@@ -297,10 +304,11 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 
 <div class="main-nav">
   <button class="main-nav-btn active" onclick="showPage('rechner',this)">RECHNER</button>
-  <button class="main-nav-btn" onclick="showPage('guide',this)">NAHRSTOFF-GUIDE</button>
+  <button class="main-nav-btn" onclick="showPage('optimierer',this)">OPTIMIERER</button>
   <button class="main-nav-btn" onclick="showPage('auswertung',this)">AUSWERTUNG</button>
-  <button class="main-nav-btn" onclick="showPage('einstellungen',this)">EINSTELLUNGEN</button>
   <button class="main-nav-btn" onclick="showPage('anleitung',this)">ANLEITUNG</button>
+  <button class="main-nav-btn" onclick="showPage('einstellungen',this)">EINSTELLUNGEN</button>
+  <button class="main-nav-btn" onclick="showPage('guide',this)">NAHRSTOFF-GUIDE</button>
 </div>
 <div style="height:16px;border-bottom:1px solid #1a3d26;margin-bottom:20px;"></div>
 
@@ -313,6 +321,10 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   <button class="btn-preset" onclick="loadPreset('BLOOM')">BLOOM</button>
   <button class="btn-preset" onclick="loadPreset('EXPERIMENT')">EXPERIMENT</button>
   <button class="btn-preset" onclick="resetPreset()" style="border-color:#374151;color:#6b7280;font-size:9px;">&#8635; RESET</button>
+  <div style="width:1px;height:20px;background:#1a3d26;margin:0 4px;"></div>
+  <input type="text" id="recipe-name-top" placeholder="Rezeptname..." style="background:#111916;border:1px solid #1a3d26;border-radius:100px;color:#4ade80;font-family:'Courier New',monospace;font-size:9px;padding:7px 12px;outline:none;width:130px;">
+  <button class="btn-preset" onclick="doExportTop()" style="border-color:#2d6a3d;color:#6ee7b7;">💾</button>
+  <label class="btn-preset" style="cursor:pointer;color:#6b9e7a;">📂 <input type="file" accept=".json" onchange="doImport(this)" style="display:none;"></label>
 </div>
 
 <div class="max-w grid-2">
@@ -584,14 +596,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     </div>
     <div class="card">
       <div class="card-title">EXPORT / IMPORT</div>
-      <input type="text" id="recipe-name" placeholder="Rezeptname z.B. BLOOM Woche 3"
-        style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Courier New',monospace;font-size:12px;padding:6px 10px;outline:none;margin-bottom:10px;">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn-action" onclick="doExport()" style="border:1px solid #2D6A2D;color:#6ee7b7;">SPEICHERN</button>
-        <label class="btn-action" style="border:1px solid #374151;color:#6b7280;cursor:pointer;">
-          LADEN <input type="file" accept=".json" onchange="doImport(this)" style="display:none;">
-        </label>
-      </div>
+      <div class="card-note">Speichern und Laden direkt oben im Rechner-Tab möglich.</div>
       <div id="io-feedback" class="feedback"></div>
     </div>
   </div>
@@ -618,6 +623,76 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 
 
 <div class="footer">DWC NAHRSTOFF-GUIDE 2026</div>
+</div>
+
+<!-- OPTIMIERER PAGE -->
+<div id="page-optimierer" class="page">
+<div class="max-w">
+
+<div class="section-title">REZEPT-OPTIMIERER</div>
+<div class="divider"></div>
+<div class="card-note" style="text-align:center;margin-bottom:20px;font-size:12px;color:#6b9e7a;">Ziel-PPMs mit Slidern einstellen → optimale Salzmischung wird berechnet</div>
+
+<!-- Preset load buttons -->
+<div style="margin-bottom:8px;text-align:center;font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;">ZIELWERTE LADEN AUS AKTUELLEM PRESET</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:6px;">
+  <button class="filter-btn" id="opt-btn-VEG" onclick="loadOptPreset('VEG',this)">VEG</button>
+  <button class="filter-btn" id="opt-btn-BLOOM" onclick="loadOptPreset('BLOOM',this)">BLOOM</button>
+  <button class="filter-btn" id="opt-btn-EXPERIMENT" onclick="loadOptPreset('EXPERIMENT',this)">EXPERIMENT</button>
+</div>
+<div style="text-align:center;font-size:10px;color:#3d5c47;margin-bottom:20px;">Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset</div>
+
+<!-- Water slider -->
+<div class="card" style="margin-bottom:12px;">
+  <div class="card-title">WASSERMIX</div>
+  <div class="slider-row">
+    <div class="slider-header">
+      <span class="slider-label">Leitungswasser-Anteil</span>
+      <span class="slider-value" id="opt-tap-label">100% Osmose</span>
+    </div>
+    <input type="range" id="opt-tap-slider" min="0" max="100" step="5" value="0" oninput="onOptTap(this.value)">
+    <div class="slider-minmax"><span>0% Osmose</span><span>100% Leitung</span></div>
+  </div>
+  <div style="font-size:10px;color:#3d5c47;font-family:'Courier New',monospace;margin-top:4px;" id="opt-tap-info">Reines Osmosewasser – keine Mineralien</div>
+</div>
+
+<!-- Slider targets -->
+<div class="card" style="margin-bottom:12px;">
+  <div class="card-title">MAKRONÄHRSTOFFE — ZIELWERTE</div>
+  <div id="opt-sliders-macro"></div>
+</div>
+
+<div class="card" style="margin-bottom:12px;">
+  <div class="card-title">MIKRONÄHRSTOFFE — ZIELWERTE</div>
+  <div id="opt-sliders-micro"></div>
+</div>
+
+<!-- Results -->
+<div class="card" style="background:rgba(74,222,128,0.03);margin-bottom:20px;">
+  <div class="card-title">OPTIMIERTES REZEPT</div>
+  <div id="opt-result">
+    <div style="font-size:11px;color:#3d5c47;text-align:center;padding:20px;">Preset laden um zu starten...</div>
+  </div>
+</div>
+
+<!-- Gewichtung -->
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-title">PRIORITÄTEN</div>
+  <div class="card-note" style="margin-bottom:14px;">Wie stark soll der Optimierer auf Abweichungen vom Zielwert reagieren? <strong style="color:#b8d4c0;">3 = muss stimmen</strong>, <strong style="color:#4a7a5a;">1 = egal</strong>. Alle Nährstoffe werden prozentual gewichtet – ein 10% Fehler bei N und Fe wird gleich stark bestraft.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;" id="opt-weight-sliders"></div>
+</div>
+
+<!-- Transfer buttons -->
+<div style="text-align:center;margin:20px 0;" id="opt-transfer-wrap">
+  <div style="font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;margin-bottom:12px;">REZEPT ÜBERTRAGEN IN</div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <button onclick="transferToRechner('VEG')" style="padding:10px 24px;border-radius:100px;border:1px solid #4ade80;background:rgba(74,222,128,0.1);color:#4ade80;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ VEG</button>
+    <button onclick="transferToRechner('BLOOM')" style="padding:10px 24px;border-radius:100px;border:1px solid #fb923c;background:rgba(251,146,60,0.1);color:#fb923c;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ BLOOM</button>
+    <button onclick="transferToRechner('EXPERIMENT')" style="padding:10px 24px;border-radius:100px;border:1px solid #a78bfa;background:rgba(167,139,250,0.1);color:#a78bfa;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ EXPERIMENT</button>
+  </div>
+</div>
+
+</div>
 </div>
 
 <!-- ANLEITUNG PAGE -->
@@ -835,9 +910,43 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <!-- Kapitel 9 -->
 <div class="card" style="margin-bottom:12px;">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">🎯</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">9. Rezept-Optimierer</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">NNLS ALGORITHMUS</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Der Optimierer berechnet automatisch die <strong style="color:#b8d4c0;">optimale Salzmischung</strong> für beliebige Ziel-PPM-Werte – mit demselben NNLS-Algorithmus wie HydroBuddy.</p>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 1 – WASSERMIX EINSTELLEN</div>
+      <p>Zuerst den <strong style="color:#b8d4c0;">Leitungswasser-Anteil</strong> einstellen. Der Optimierer zieht die Mineralien des Leitungswassers automatisch vom Zielwert ab – so werden nur die fehlenden Nährstoffe durch Salze ergänzt.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 2 – PRESET LADEN ODER MANUELL EINSTELLEN</div>
+      <p>Klicke auf <strong style="color:#b8d4c0;">VEG, BLOOM oder EXPERIMENT</strong> um die aktuellen PPM-Werte + Wassermix aus dem jeweiligen Preset zu laden. Oder stelle die Ziel-Slider manuell ein.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 3 – ERGEBNIS LESEN</div>
+      <p>Das <strong style="color:#b8d4c0;">optimierte Rezept</strong> zeigt die Dosierungen in g/L oder ml/L. Die Balken darunter zeigen <strong style="color:#4ade80;">Erreicht / Ziel</strong> – grün = im Zielbereich, rot = Ziel nicht erreichbar mit den vorhandenen Salzen.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 4 – ÜBERTRAGEN</div>
+      <p>Mit <strong style="color:#b8d4c0;">→ VEG, → BLOOM oder → EXPERIMENT</strong> wird das optimierte Rezept direkt ins gewünschte Preset übertragen. Der Rechner-Tab öffnet sich automatisch.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #facc15;">
+      <div style="font-size:9px;color:#facc15;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – MIKRONÄHRSTOFFE</div>
+      <p>Fetrilon Combi 1 und Wall Up S müssen im Rechner-Tab <strong style="color:#b8d4c0;">aktiv</strong> sein damit der Optimierer sie verwenden kann. Ziel-Slider für Fe, Mn, Zn, Cu, B auf realistische Werte setzen (Fe: 2–4 ppm, Mn: 0,5–1 ppm).</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 10 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
     <div style="font-size:20px;">⚡</div>
     <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">9. Tipps & Tricks</div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">10. Tipps & Tricks</div>
       <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">PRO TIPPS</div>
     </div>
   </div>
@@ -902,6 +1011,7 @@ function showPage(name, btn) {
   }
   if (name === 'guide' && !window.guideReady) { buildCards(); window.guideReady = true; }
   if (name === 'auswertung') { savePresetState(currentPreset); renderAuswertung(); }
+  if (name === 'optimierer') { savePresetState(currentPreset); if(!optBuilt) buildOptSliders(); }
   if (name === 'einstellungen') { buildWaterInputs(); initDB(); }
 }
 
@@ -1087,8 +1197,16 @@ function render() {
   document.getElementById('ion-val').textContent = hasCustomActive?'~':(r.ion>0?'+':'') + fmt(r.ion,1) + '%';
   document.getElementById('ion-label').textContent = ionText;
 
-  // pH
-  // pH Schaetzung - kalibriert auf echte Messwerte (VEG 5.7, BLOOM 6.0)
+  // pH - deaktiviert wenn DB/Custom Dünger aktiv
+  var hasLiquidActive = false;
+  for(var pi=0;pi<SALTS.length;pi++){
+    if(SALTS[pi].custom && SALTS[pi].active && (doses[SALTS[pi].key]||0)>0){hasLiquidActive=true;break;}
+  }
+  if (hasLiquidActive) {
+    document.getElementById('ph-val').style.color = '#6b7280';
+    document.getElementById('ph-val').textContent = 'n/a';
+    document.getElementById('ph-label').textContent = 'Mischd. aktiv';
+  } else {
   var tapPH2 = tap.pH || 7.8;
   var hco3Pct = tapPct * ((tap.HCO3||0) / 180.0); // HCO3 Puffer relativ zu mittelharten Standardwerten
   var acidEffect = (doses.h3po4||0) * 28.33        // H3PO4 kalibriert
@@ -1107,6 +1225,7 @@ function render() {
   document.getElementById('ph-val').style.color = phColor;
   document.getElementById('ph-val').textContent = fmt(phEst,1);
   document.getElementById('ph-label').textContent = phText;
+  } // end pH else
 
   // NPK
   var minNPK = Math.min(r.N,r.P,r.K)||1;
@@ -1354,7 +1473,7 @@ function buildWaterInputs() {
   for (var i=0; i<WATER_FIELDS.length; i++) {
     var f=WATER_FIELDS[i];
     html += '<div><div class="water-label">'+f.label+'</div>';
-    html += '<input class="water-input" type="number" id="w-'+f.key+'" value="'+WATER_DEFAULTS[f.key]+'" step="0.01" min="0" oninput="onWater()"></div>';
+    html += '<input class="water-input" type="number" id="w-'+f.key+'" value="'+(tap[f.key]!==undefined?tap[f.key]:WATER_DEFAULTS[f.key])+'" step="0.01" min="0" oninput="onWater()"></div>';
   }
   document.getElementById('water-inputs').innerHTML = html;
 }
@@ -1673,10 +1792,20 @@ function clearWater() {
   render();
 }
 
+function doExportTop() {
+  var nameTop = document.getElementById('recipe-name-top');
+  var nameBot = document.getElementById('recipe-name');
+  if (nameTop && nameTop.value.trim()) {
+    if (nameBot) nameBot.value = nameTop.value.trim();
+  }
+  doExport();
+}
+
 function doExport() {
-  // Save current preset state before exporting
   savePresetState(currentPreset);
-  var sessionName=document.getElementById('recipe-name').value.trim()||'DWC_Session';
+  var sessionName = (document.getElementById('recipe-name-top')||{}).value;
+  if (!sessionName || !sessionName.trim()) sessionName = 'DWC_Session';
+  else sessionName = sessionName.trim();
   var data={
     name:sessionName,
     datum:new Date().toLocaleDateString('de-DE'),
@@ -1790,6 +1919,8 @@ function applySnapshot(data) {
         var wel=document.getElementById('w-'+f.key);
         if(wel) wel.value=data.tap[f.key];
       }
+      // Update displayed values if water inputs already built
+      WATER_DEFAULTS = Object.assign({}, tap);
     }
     if(data.volume){volume=data.volume;document.getElementById('vol-label').textContent=volume+' L';document.getElementById('vol-slider').value=volume;}
     if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';document.getElementById('tap-slider').value=t;}
@@ -1813,7 +1944,7 @@ function applySnapshot(data) {
     }
     var btns=document.querySelectorAll('.btn-preset');
     for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===toLoad);
-    if(data.name) document.getElementById('recipe-name').value=data.name;
+    if(data.name) { var el=document.getElementById('recipe-name-top'); if(el) el.value=data.name; }
     showFeedback((data.name||'Session')+' geladen - VEG, BLOOM & EXPERIMENT wiederhergestellt','#4ade80');
     buildSliders();
     render();
@@ -1836,7 +1967,7 @@ function applySnapshot(data) {
   if(data.tap){for(var i=0;i<WATER_FIELDS.length;i++){var f=WATER_FIELDS[i];if(data.tap[f.key]===undefined)continue;tap[f.key]=data.tap[f.key];var el=document.getElementById('w-'+f.key);if(el)el.value=data.tap[f.key];}}
   var btns=document.querySelectorAll('.btn-preset');
   for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
-  if(data.name) document.getElementById('recipe-name').value=data.name;
+  if(data.name) { var el=document.getElementById('recipe-name-top'); if(el) el.value=data.name; }
   showFeedback((data.name||'Rezept')+' geladen','#4ade80');
   render();
 }
@@ -1939,6 +2070,568 @@ function initRechner() {
 
 // Init on load
 initRechner();
+
+// =====================
+// OPTIMIERER
+// =====================
+
+var OPT_NUTRIENTS = [
+  // Makro
+  { key:'N',  label:'Stickstoff', color:'#4ade80', min:0, max:300, step:1,   dec:0, val:0, w:3   },
+  { key:'P',  label:'Phosphor',   color:'#fb923c', min:0, max:150, step:1,   dec:0, val:0,  w:2   },
+  { key:'K',  label:'Kalium',     color:'#60a5fa', min:0, max:400, step:1,   dec:0, val:0, w:2   },
+  { key:'Ca', label:'Calcium',    color:'#f472b6', min:0, max:300, step:1,   dec:0, val:0, w:2   },
+  { key:'Mg', label:'Magnesium',  color:'#a78bfa', min:0, max:150, step:1,   dec:0, val:0,  w:1   },
+  { key:'S',  label:'Schwefel',   color:'#facc15', min:0, max:200, step:1,   dec:0, val:0,  w:1   },
+  // Mikro
+  { key:'Si', label:'Silizium',   color:'#94a3b8', min:0, max:150, step:1,   dec:0, val:0,  w:1.5 },
+  { key:'Fe', label:'Eisen',      color:'#f87171', min:0, max:20,  step:0.1, dec:1, val:0,   w:1.5 },
+  { key:'Mn', label:'Mangan',     color:'#34d399', min:0, max:5,   step:0.1, dec:1, val:0, w:1   },
+  { key:'Zn', label:'Zink',       color:'#818cf8', min:0, max:3,   step:0.1, dec:1, val:0, w:1   },
+  { key:'Cu', label:'Kupfer',     color:'#fb923c', min:0, max:2,   step:0.05,dec:2, val:0, w:1   },
+  { key:'B',  label:'Bor',        color:'#c084fc', min:0, max:3,   step:0.1, dec:1, val:0, w:1   }
+];
+
+var optVol = 50;
+var _optTapPct = 0;
+Object.defineProperty(window, 'optTapPct', {
+  get: function() { return _optTapPct; },
+  set: function(v) {
+    _optTapPct = v; 
+  }
+});
+var optLastResult = null;
+var optBuilt = false;
+
+function onOptWeight(key, val) {
+  for (var i=0; i<OPT_NUTRIENTS.length; i++) {
+    if (OPT_NUTRIENTS[i].key === key) {
+      OPT_NUTRIENTS[i].w = parseFloat(val);
+      var lbl = document.getElementById('opt-wlbl-'+key);
+      if (lbl) lbl.textContent = parseFloat(val).toFixed(1);
+      break;
+    }
+  }
+  runOptimizer();
+}
+
+function onOptTap(val) {
+  optTapPct = parseInt(val) / 100;
+  var tp = Math.round(optTapPct*100);
+  var lbl = document.getElementById('opt-tap-label');
+  if (lbl) lbl.textContent = tp===0?'100% Osmose':tp===100?'100% Leitung':tp+'% Leitung – '+(100-tp)+'% Osmose';
+  var info = document.getElementById('opt-tap-info');
+  if (info && optTapPct > 0) {
+    var parts = [];
+    if (tap.Ca*optTapPct > 0.1) parts.push('Ca: +'+( tap.Ca*optTapPct).toFixed(1));
+    if (tap.Mg*optTapPct > 0.1) parts.push('Mg: +'+( tap.Mg*optTapPct).toFixed(1));
+    if (tap.K *optTapPct > 0.1) parts.push('K: '+( tap.K *optTapPct).toFixed(1));
+    if (tap.N *optTapPct > 0.1) parts.push('N: '+( tap.N *optTapPct).toFixed(1));
+    if (tap.S *optTapPct > 0.1) parts.push('S: '+( tap.S *optTapPct).toFixed(1));
+    info.textContent = parts.join(' · ') + ' ppm';
+  } else if (info) {
+    info.textContent = 'Reines Osmosewasser – keine Mineralien';
+  }
+  runOptimizer();
+}
+
+function buildOptSliders() {
+  var macroHtml = '', microHtml = '';
+  for (var i=0; i<OPT_NUTRIENTS.length; i++) {
+    var n = OPT_NUTRIENTS[i];
+    var html = '<div class="slider-row" style="margin-bottom:18px;">';
+    html += '<div class="slider-header">';
+    html += '<span class="slider-label" style="color:'+n.color+';">'+n.label+'</span>';
+    html += '<span class="slider-value" id="opt-lbl-'+n.key+'">'+n.val.toFixed(n.dec)+' ppm</span>';
+    html += '</div>';
+    html += '<input type="range" id="opt-'+n.key+'" min="'+n.min+'" max="'+n.max+'" step="'+n.step+'" value="'+n.val+'"';
+    html += ' oninput="if(!optSliderLock){onOptSlider(\''+n.key+'\',this.value)}">';
+    html += '<div class="slider-minmax"><span>'+n.min+'</span><span>'+n.max+' ppm</span></div>';
+    html += '</div>';
+    if (i < 6) macroHtml += html;
+    else microHtml += html;
+  }
+  document.getElementById('opt-sliders-macro').innerHTML = macroHtml;
+  document.getElementById('opt-sliders-micro').innerHTML = microHtml;
+
+  // Build weight sliders
+  var wHtml = '';
+  for (var i=0; i<OPT_NUTRIENTS.length; i++) {
+    var n = OPT_NUTRIENTS[i];
+    wHtml += '<div style="margin-bottom:8px;">';
+    wHtml += '<div style="display:flex;justify-content:space-between;margin-bottom:2px;">';
+    wHtml += '<span style="font-size:11px;color:'+n.color+';">'+n.label+'</span>';
+    wHtml += '<span style="font-family:\'Courier New\',monospace;font-size:11px;color:#4ade80;" id="opt-wlbl-'+n.key+'">'+n.w.toFixed(1)+'</span>';
+    wHtml += '</div>';
+    wHtml += '<input type="range" id="opt-w-'+n.key+'" min="0" max="3" step="0.5" value="'+n.w+'"';
+    wHtml += ' oninput="onOptWeight(\''+n.key+'\',this.value)">';
+    wHtml += '<div class="slider-minmax"><span>0 aus</span><span>3 muss</span></div>';
+    wHtml += '</div>';
+  }
+  document.getElementById('opt-weight-sliders').innerHTML = wHtml;
+  optBuilt = true;
+  // Initialize from slider (but don't run optimizer yet)
+  var ts = document.getElementById('opt-tap-slider');
+  if (ts) {
+    optTapPct = parseInt(ts.value)/100;
+    var tp = Math.round(optTapPct*100);
+    var lbl = document.getElementById('opt-tap-label');
+    if (lbl) lbl.textContent = tp===0?'100% Osmose':tp===100?'100% Leitung':tp+'% Leitung – '+(100-tp)+'% Osmose';
+  }
+  document.getElementById('opt-result').innerHTML = '<div style="font-size:11px;color:#3d5c47;text-align:center;padding:20px;">Preset laden um zu starten...</div>';
+}
+
+function onOptSlider(key, val) {
+  if (optSliderLock) return;
+  for (var i=0; i<OPT_NUTRIENTS.length; i++) {
+    if (OPT_NUTRIENTS[i].key === key) {
+      OPT_NUTRIENTS[i].val = parseFloat(val);
+      var lbl = document.getElementById('opt-lbl-'+key);
+      if (lbl) lbl.textContent = parseFloat(val).toFixed(OPT_NUTRIENTS[i].dec)+' ppm';
+      break;
+    }
+  }
+  runOptimizer();
+}
+
+function onOptVol(val) {
+  optVol = parseInt(val);
+  var lbl = document.getElementById('opt-vol-label');
+  if (lbl) lbl.textContent = optVol + ' L';
+  runOptimizer();
+}
+
+function getOptVal(key) {
+  for (var i=0; i<OPT_NUTRIENTS.length; i++)
+    if (OPT_NUTRIENTS[i].key===key) return OPT_NUTRIENTS[i].val;
+  return 0;
+}
+
+var optSliderLock = false;
+
+function setOptSlider(key, val) {
+  for (var i=0; i<OPT_NUTRIENTS.length; i++) {
+    if (OPT_NUTRIENTS[i].key===key) {
+      OPT_NUTRIENTS[i].val = val;
+      optSliderLock = true;
+      var el = document.getElementById('opt-'+key);
+      if (el) el.value = val;
+      optSliderLock = false;
+      var lbl = document.getElementById('opt-lbl-'+key);
+      if (lbl) lbl.textContent = val.toFixed(OPT_NUTRIENTS[i].dec)+' ppm';
+      break;
+    }
+  }
+}
+
+function loadOptPreset(presetName, btn) {
+  if (!optBuilt) buildOptSliders();
+  var state = presetStates[presetName];
+  var d = state ? state.doses : (PRESETS[presetName]||{});
+  var t = state ? (state.tapPct||tapPct) : (PRESET_WATER[presetName]||{tapPct:tapPct}).tapPct;
+
+  // Always read current tap from the DOM source of truth
+  var ct = optTapPct;
+  var wCa=tap.Ca*ct, wMg=tap.Mg*ct, wK=tap.K*ct, wN=tap.N*ct, wS=tap.S*ct, wSi=tap.Si*ct;
+  var N=wN, P=0, K=wK, Ca=wCa, Mg=wMg, S=wS, Si=wSi, Fe=0, Mn=0, Zn=0, Cu=0, B=0;
+  for (var i=0;i<SALTS.length;i++) {
+    var s=SALTS[i]; var dose=d[s.key]||0; if(!dose) continue;
+    var factor = dose*(s.unit==='ml/L'&&s.density>1.001?s.density:1)*1000;
+    if(s.key==='kwg'){K+=dose*67.24;Si+=dose*96.72;continue;}
+    if(s.key==='h3po4'){P+=dose*1.685*0.85*1000*(30.97/97.99);continue;}
+    if(s.key==='hno3'){N+=dose*0.5*14.01;continue;}
+    N+=factor*((s.NO3||0)+(s.NH4||0));
+    P+=factor*(s.P||0); K+=factor*(s.K||0); Ca+=factor*(s.Ca||0);
+    Mg+=factor*(s.Mg||0); S+=factor*(s.S||0); Si+=factor*(s.Si||0);
+    Fe+=factor*(s.Fe||0); Mn+=factor*(s.Mn||0); Zn+=factor*(s.Zn||0);
+    Cu+=factor*(s.Cu||0); B+=factor*(s.B||0);
+  }
+
+  var vals = {N:N,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B};
+  for (var key in vals) setOptSlider(key, Math.round(vals[key]*100)/100);
+
+  // Also sync volume
+  var presetVol = state ? (state.volume||volume) : (PRESET_WATER[presetName]||{volume:50}).volume;
+  optVol = presetVol;
+  var vs = document.getElementById('opt-vol-slider');
+  if (vs) vs.value = optVol;
+  var vl = document.getElementById('opt-vol-label');
+  if (vl) vl.textContent = optVol+' L';
+
+  var btns = document.querySelectorAll('#page-optimierer .filter-btn');
+  for (var i=0;i<btns.length;i++) btns[i].classList.remove('active');
+  if (btn) btn.classList.add('active');
+
+  // Sync water slider to preset's tapPct
+  var presetTap = state ? (state.tapPct||tapPct) : (PRESET_WATER[presetName]||{tapPct:tapPct}).tapPct;
+  var ts = document.getElementById('opt-tap-slider');
+  if (ts) { ts.value = Math.round(presetTap*100); onOptTap(ts.value); }
+  else runOptimizer();
+}
+
+function getOptActiveSalts() {
+  // Get active salts that have at least one nutrient contribution
+  var result = [];
+  for (var i=0;i<SALTS.length;i++) {
+    var s = SALTS[i];
+    if (!s.active) continue;
+    // Skip pure acid/base pH adjusters for primary optimization
+    if (s.key==='h3po4' || s.key==='hno3') continue;
+    // Must contribute something meaningful (inkl. Mikros)
+    var hasNutrient = (s.NO3||0)+(s.P||0)+(s.K||0)+(s.Ca||0)+(s.Mg||0)+(s.S||0)
+                    + (s.Si||0)+(s.Fe||0)+(s.Mn||0)+(s.Zn||0)+(s.Cu||0)+(s.B||0) > 0;
+    if (s.key==='kwg') hasNutrient = true;
+    if (hasNutrient) result.push(s);
+  }
+  return result;
+}
+
+function getSaltContrib(s, dose) {
+  var factor = dose * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * 1000;
+  if (s.key==='kwg') return { N:0, P:0, K:dose*67.24, Ca:0, Mg:0, S:0, Si:dose*96.72, Fe:0, Mn:0, Zn:0, Cu:0, B:0 };
+  if (s.key==='h3po4') return { N:0, P:dose*1.685*0.85*1000*(30.97/97.99), K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 };
+  if (s.key==='hno3') return { N:dose*0.5*14.01, P:0, K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 };
+  return {
+    N:  factor * ((s.NO3||0) + (s.NH4||0)),
+    P:  factor * (s.P||0),
+    K:  factor * (s.K||0),
+    Ca: factor * (s.Ca||0),
+    Mg: factor * (s.Mg||0),
+    S:  factor * (s.S||0),
+    Si: factor * (s.Si||0),
+    Fe: factor * (s.Fe||0),
+    Mn: factor * (s.Mn||0),
+    Zn: factor * (s.Zn||0),
+    Cu: factor * (s.Cu||0),
+    B:  factor * (s.B||0)
+  };
+}
+
+function runOptimizer() {
+  var targetN  = getOptVal('N');
+  var targetP  = getOptVal('P');
+  var targetK  = getOptVal('K');
+  var targetCa = getOptVal('Ca');
+  var targetMg = getOptVal('Mg');
+  var targetS  = getOptVal('S');
+  var targetSi = getOptVal('Si');
+  var targetFe = getOptVal('Fe');
+  var targetMn = getOptVal('Mn');
+  var targetZn = getOptVal('Zn');
+  var targetCu = getOptVal('Cu');
+  var targetB  = getOptVal('B');
+  var wN  = OPT_NUTRIENTS[0].w;
+  var wP  = OPT_NUTRIENTS[1].w;
+  var wK  = OPT_NUTRIENTS[2].w;
+  var wCa = OPT_NUTRIENTS[3].w;
+  var wMg = OPT_NUTRIENTS[4].w;
+  var wS  = OPT_NUTRIENTS[5].w;
+  var wSi = OPT_NUTRIENTS[6].w;
+  var wFe = OPT_NUTRIENTS[7].w;
+  var wMn = OPT_NUTRIENTS[8].w;
+  var wZn = OPT_NUTRIENTS[9].w;
+  var wCu = OPT_NUTRIENTS[10].w;
+  var wB  = OPT_NUTRIENTS[11].w;
+  var maxDose = 1.5;
+  var optVolLocal = optVol;
+
+  var t = optTapPct;
+  var targets = [
+    Math.max(0, targetN  - tap.N*t),
+    Math.max(0, targetP),
+    Math.max(0, targetK  - tap.K*t),
+    Math.max(0, targetCa - tap.Ca*t),
+    Math.max(0, targetMg - tap.Mg*t),
+    Math.max(0, targetS  - tap.S*t),
+    Math.max(0, targetSi - tap.Si*t),
+    Math.max(0, targetFe),
+    Math.max(0, targetMn),
+    Math.max(0, targetZn),
+    Math.max(0, targetCu),
+    Math.max(0, targetB)
+  ];
+  var weights = [wN, wP, wK, wCa, wMg, wS, wSi, wFe, wMn, wZn, wCu, wB];
+  var nkeys   = ['N','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
+
+  var salts = getOptActiveSalts();
+  if (salts.length === 0) {
+    document.getElementById('opt-result').innerHTML = '<div style="font-size:11px;color:#f87171;padding:12px;">Keine aktiven Salze. Bitte zuerst Salze im Rechner aktivieren.</div>';
+    return;
+  }
+
+  // Build contribution matrix A[nutrient][salt]
+  var A = [];
+  for (var ni=0; ni<nkeys.length; ni++) {
+    A.push([]);
+    for (var si=0; si<salts.length; si++) {
+      var c = getSaltContrib(salts[si], 1.0);
+      A[ni].push(c[nkeys[ni]] || 0);
+    }
+  }
+
+  // Relative weights: normalize by slider max so ppm-scale doesn't dominate
+  var relWeights = [];
+  for (var ni=0; ni<nkeys.length; ni++) {
+    var userW = weights[ni];
+    var sliderMax = 1;
+    for (var xi=0; xi<OPT_NUTRIENTS.length; xi++) {
+      if (OPT_NUTRIENTS[xi].key === nkeys[ni]) { sliderMax = OPT_NUTRIENTS[xi].max; break; }
+    }
+    relWeights.push(userW / sliderMax);
+  }
+  var n = salts.length, m = nkeys.length;
+  var x = new Array(n).fill(0);
+  var passive = new Array(n).fill(false);
+  var w = new Array(n).fill(0);
+
+  function computeW() {
+    for (var j=0; j<n; j++) {
+      var atb=0, atax=0;
+      for (var i=0; i<m; i++) {
+        atb += relWeights[i]*relWeights[i]*A[i][j]*targets[i];
+        var ax=0; for (var k=0; k<n; k++) ax+=A[i][k]*x[k];
+        atax += relWeights[i]*relWeights[i]*A[i][j]*ax;
+      }
+      w[j] = atb - atax;
+    }
+  }
+
+  function solvePassive() {
+    var ps=[];
+    for (var j=0;j<n;j++) if(passive[j]) ps.push(j);
+    if (ps.length===0) return x.slice();
+    var np=ps.length;
+    var AtA=[], Atb=[];
+    for (var j=0;j<np;j++) {
+      AtA.push(new Array(np).fill(0));
+      Atb.push(0);
+      for (var k=0;k<np;k++) {
+        for (var i=0;i<m;i++) AtA[j][k]+=relWeights[i]*relWeights[i]*A[i][ps[j]]*A[i][ps[k]];
+      }
+      for (var i=0;i<m;i++) Atb[j]+=relWeights[i]*relWeights[i]*A[i][ps[j]]*targets[i];
+    }
+    // Gaussian elimination
+    var aug=AtA.map(function(row,j){return row.slice().concat([Atb[j]]);});
+    for (var col=0;col<np;col++) {
+      var mr=col;
+      for (var row=col+1;row<np;row++) if(Math.abs(aug[row][col])>Math.abs(aug[mr][col])) mr=row;
+      var tmp=aug[col];aug[col]=aug[mr];aug[mr]=tmp;
+      if (Math.abs(aug[col][col])<1e-14) continue;
+      for (var row=col+1;row<np;row++) {
+        var f=aug[row][col]/aug[col][col];
+        for (var k=col;k<=np;k++) aug[row][k]-=f*aug[col][k];
+      }
+    }
+    var sol=new Array(np).fill(0);
+    for (var i=np-1;i>=0;i--) {
+      sol[i]=aug[i][np];
+      for (var j=i+1;j<np;j++) sol[i]-=aug[i][j]*sol[j];
+      sol[i]/=(aug[i][i]||1e-14);
+    }
+    var xNew=x.slice();
+    for (var j=0;j<np;j++) xNew[ps[j]]=sol[j];
+    return xNew;
+  }
+
+  computeW();
+  for (var iter=0; iter<n*30; iter++) {
+    var maxW=-Infinity, maxJ=-1;
+    for (var j=0;j<n;j++) if(!passive[j]&&w[j]>maxW){maxW=w[j];maxJ=j;}
+    if (maxJ<0||maxW<=1e-10) break;
+    passive[maxJ]=true;
+    for (var inner=0;inner<200;inner++) {
+      var z=solvePassive();
+      var ps2=[]; for(var j=0;j<n;j++) if(passive[j]) ps2.push(j);
+      if (ps2.every(function(j){return z[j]>=0;})) { x=z; break; }
+      var alpha=Infinity;
+      for (var j=0;j<ps2.length;j++) {
+        var k=ps2[j];
+        if (z[k]<0) alpha=Math.min(alpha, x[k]/(x[k]-z[k]));
+      }
+      for (var j=0;j<n;j++) x[j]+=alpha*(z[j]-x[j]);
+      for (var j=0;j<ps2.length;j++) {
+        if (Math.abs(x[ps2[j]])<1e-8){passive[ps2[j]]=false;x[ps2[j]]=0;}
+      }
+    }
+    computeW();
+  }
+
+  // Apply max dose constraint
+  for (var j=0;j<n;j++) x[j]=Math.min(maxDose,Math.max(0,x[j]));
+
+  // Build doses map and final ppm
+  var doses = {};
+  var final = {N:tap.N*t, P:0, K:tap.K*t, Ca:tap.Ca*t, Mg:tap.Mg*t, S:tap.S*t, Si:tap.Si*t, Fe:0, Mn:0, Zn:0, Cu:0, B:0};
+  for (var si=0;si<salts.length;si++) {
+    doses[salts[si].key] = x[si];
+    var c = getSaltContrib(salts[si], x[si]);
+    for (var ni=0;ni<nkeys.length;ni++) final[nkeys[ni]] += c[nkeys[ni]]||0;
+  }
+
+  optLastResult = {doses:doses, salts:salts, final:final, vol:optVolLocal};
+  renderOptimizerResult(doses, salts, final, optVolLocal,
+    targetN, targetP, targetK, targetCa, targetMg, targetS,
+    targetSi, targetFe, targetMn, targetZn, targetCu, targetB);
+}
+
+function renderOptimizerResult(doses, salts, final, vol, tN, tP, tK, tCa, tMg, tS, tSi, tFe, tMn, tZn, tCu, tB) {
+  var html = '';
+  var hasResult = false;
+
+  // Salt dosages
+  for (var i=0;i<salts.length;i++) {
+    var s=salts[i], d=doses[s.key];
+    if (d < 0.001) continue;
+    hasResult = true;
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(74,222,128,0.05);">';
+    html += '<span style="font-size:13px;color:#a7c4b0;font-weight:500;">'+s.label+'</span>';
+    html += '<span style="font-family:monospace;font-size:13px;color:#4ade80;font-weight:600;">'+fmt(d,3)+' '+s.unit+'</span>';
+    html += '</div>';
+  }
+  if (!hasResult) html += '<div style="font-size:11px;color:#facc15;padding:8px 0;">Nur Wasser – keine Salze nötig.</div>';
+
+  // EC
+  var t = optTapPct;
+  var lmc = {NO3:71.5,NH4:73.5,H2PO4:33.0,K:73.5,Ca:59.5,Mg:53.1,SO4:80.0,Fe:54.0,Mn:53.5};
+  var ecSol=0, ecLiq=0;
+  for (var i=0;i<salts.length;i++) {
+    var s=salts[i], d=doses[s.key]||0; if(!d) continue;
+    var isLiq = s.unit==='ml/L' && s.key!=='h3po4' && s.key!=='hno3' && s.key!=='kwg';
+    var ef = d*(isLiq&&s.density>1.001?s.density:1)*1000;
+    if(s.key==='kwg'){ecSol+=(d*67.24*(lmc.K/39.10))*1e-3*0.66; continue;}
+    if(s.key==='h3po4'){ecSol+=(d*1.685*0.85*1000*(30.97/97.99)*(lmc.H2PO4/30.97))*1e-3*0.66; continue;}
+    if(s.key==='hno3'){ecSol+=(d*0.5*14.01*(lmc.NO3/14.01))*1e-3*0.66; continue;}
+    var contrib=(lmc.NO3*((s.NO3||0)/14.01)+lmc.NH4*((s.NH4||0)/14.01)+
+                 lmc.H2PO4*((s.P||0)/30.97)+lmc.K*((s.K||0)/39.10)+
+                 lmc.Ca*((s.Ca||0)/40.08)*2+lmc.Mg*((s.Mg||0)/24.31)*2+
+                 lmc.SO4*((s.S||0)/32.06)*2)*ef*1e-3;
+    if(isLiq) ecLiq+=contrib; else ecSol+=contrib*0.66;
+  }
+  var ec=Math.max(0,ecSol+ecLiq)+tap.EC*t;
+  var ecColor=ec<1.2?'#60a5fa':ec<1.8?'#4ade80':'#fb923c';
+
+  // Verhältnisse
+  var N=final.N||0,P=final.P||0,K=final.K||0,Ca=final.Ca||0,Mg=final.Mg||0;
+  var tN2=OPT_NUTRIENTS[0].val,tP2=OPT_NUTRIENTS[1].val,tK2=OPT_NUTRIENTS[2].val;
+  var tCa2=OPT_NUTRIENTS[3].val,tMg2=OPT_NUTRIENTS[4].val;
+  var ratios=[
+    {label:'Ca : Mg',ist:Mg>0?Ca/Mg:0,soll:tMg2>0?tCa2/tMg2:0,ideal:'2–3 : 1',f:function(v){return v.toFixed(2)+':1';}},
+    {label:'N : K',ist:K>0?N/K:0,soll:tK2>0?tN2/tK2:0,ideal:'VEG ~1 BLOOM ~0,5',f:function(v){return v.toFixed(2);}},
+    {label:'K : Ca',ist:Ca>0?K/Ca:0,soll:tCa2>0?tK2/tCa2:0,ideal:'< 1,0',f:function(v){return v.toFixed(2);}},
+    {label:'K : P',ist:P>0?K/P:0,soll:tP2>0?tK2/tP2:0,ideal:'BLOOM 3–5',f:function(v){return v.toFixed(1);}}
+  ];
+
+  html += '<div style="margin-top:14px;padding:12px 0;border-top:1px solid rgba(74,222,128,0.1);">';
+  html += '<div style="display:flex;gap:16px;align-items:center;">';
+  html += '<div style="text-align:center;min-width:64px;">';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:monospace;">EC</div>';
+  html += '<div style="font-size:28px;font-weight:600;color:'+ecColor+';">'+ec.toFixed(2)+'</div>';
+  html += '<div style="font-size:9px;color:#3d5c47;font-family:monospace;">mS/cm</div>';
+  html += '</div>';
+  html += '<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:5px;">';
+  for (var i=0;i<ratios.length;i++) {
+    var r=ratios[i];
+    var rdiff=r.soll>0?Math.abs(r.ist-r.soll)/r.soll*100:0;
+    var rcol=r.soll===0?'#6b7280':rdiff<15?'#4ade80':rdiff<35?'#facc15':'#f87171';
+    html += '<div style="background:#0f1a12;border-radius:8px;padding:6px 8px;">';
+    html += '<div style="font-size:8px;color:#4a7a5a;font-family:monospace;letter-spacing:1px;margin-bottom:2px;">'+r.label+'</div>';
+    html += '<div style="display:flex;justify-content:space-between;align-items:baseline;">';
+    html += '<span style="font-size:13px;font-weight:600;color:'+rcol+';">'+r.f(r.ist)+'</span>';
+    if (r.soll>0) html += '<span style="font-size:9px;color:#3d5c47;font-family:monospace;">Z: '+r.f(r.soll)+'</span>';
+    html += '</div>';
+    html += '<div style="font-size:8px;color:#2d4a36;margin-top:1px;">'+r.ideal+'</div>';
+    html += '</div>';
+  }
+  html += '</div></div></div>';
+
+  // Nährstoff-Balken
+  var nkeys2=['N','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
+  var targets2=[tN,tP,tK,tCa,tMg,tS,tSi||0,tFe||0,tMn||0,tZn||0,tCu||0,tB||0];
+  for (var i=0;i<OPT_NUTRIENTS.length;i++) targets2[i]=OPT_NUTRIENTS[i].val;
+  var colors2=['#4ade80','#fb923c','#60a5fa','#f472b6','#a78bfa','#facc15','#94a3b8','#f87171','#34d399','#818cf8','#fb923c','#c084fc'];
+  var dec2=[0,0,0,0,0,0,0,2,2,2,2,2];
+
+  html += '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(74,222,128,0.1);">';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:monospace;margin-bottom:8px;">ERREICHT / ZIEL (Salze + Leitungswasser)</div>';
+  for (var i=0;i<nkeys2.length;i++) {
+    var ist=Math.round((final[nkeys2[i]]||0)*Math.pow(10,dec2[i]))/Math.pow(10,dec2[i]);
+    var soll=targets2[i];
+    if (ist<0.01 && soll<0.001) continue;
+    var max2=soll>0?Math.max(ist,soll,0.01):Math.max(ist*1.2,0.01);
+    var istW=Math.min(100,(ist/max2)*100);
+    var sollW=soll>0?Math.min(100,(soll/max2)*100):0;
+    var diff2=ist-soll;
+    var pct2=soll>0?Math.abs(diff2)/soll*100:(ist>0?100:0);
+    var diffColor=soll===0&&ist>0?'#f87171':pct2<10?'#4ade80':pct2<25?'#facc15':'#f87171';
+    var barColor=soll===0&&ist>0?'#f87171':colors2[i];
+    html += '<div style="margin-bottom:8px;">';
+    html += '<div style="display:flex;justify-content:space-between;margin-bottom:3px;">';
+    html += '<span style="font-size:11px;color:'+colors2[i]+';font-weight:500;">'+nkeys2[i]+'</span>';
+    html += '<span style="font-family:monospace;font-size:11px;color:'+diffColor+';">'+ist.toFixed(dec2[i])+' / '+soll.toFixed(dec2[i])+'</span>';
+    html += '</div>';
+    html += '<div style="height:8px;background:#111916;border-radius:4px;position:relative;overflow:hidden;">';
+    html += '<div style="position:absolute;top:0;left:0;height:100%;width:'+istW+'%;background:'+barColor+';border-radius:4px;transition:width 0.3s;"></div>';
+    if (soll>0) html += '<div style="position:absolute;top:0;left:'+sollW+'%;width:2px;height:100%;background:rgba(255,255,255,0.5);"></div>';
+    html += '</div></div>';
+  }
+  html += '</div>';
+  document.getElementById('opt-result').innerHTML = html;
+}
+
+function transferToRechner(targetPreset) {
+  if (!optLastResult) return;
+  var r = optLastResult;
+  if (!targetPreset) targetPreset = currentPreset;
+
+  // Save current preset first
+  savePresetState(currentPreset);
+
+  // Build new state for target preset
+  var newDoses = {};
+  var newMaxes = {};
+  // Copy existing doses as base (keep non-optimized salts)
+  var baseState = presetStates[targetPreset];
+  if (baseState) {
+    for (var k in baseState.doses) newDoses[k] = baseState.doses[k];
+    for (var k in baseState.maxes) newMaxes[k] = baseState.maxes[k];
+  } else {
+    var p = PRESETS[targetPreset]||{};
+    for (var i=0;i<SALTS.length;i++) {
+      newDoses[SALTS[i].key] = p[SALTS[i].key]||0;
+      newMaxes[SALTS[i].key] = SALTS[i].origMax;
+    }
+  }
+  // Override with optimized doses
+  for (var si=0;si<r.salts.length;si++) {
+    var s=r.salts[si], d=r.doses[s.key]||0;
+    newDoses[s.key] = d;
+    newMaxes[s.key] = Math.max(newMaxes[s.key]||s.origMax, Math.ceil(d*10)/10);
+  }
+  // Save to preset state
+  presetStates[targetPreset] = {
+    doses: newDoses,
+    maxes: newMaxes,
+    volume: r.vol || (presetStates[targetPreset]||{}).volume || volume,
+    tapPct: (presetStates[targetPreset]||{}).tapPct || tapPct
+  };
+
+  // Switch to rechner and load target preset
+  var btns = document.querySelectorAll('.main-nav-btn');
+  showPage('rechner', btns[0]);
+  loadPreset(targetPreset);
+
+  // Flash feedback
+  setTimeout(function() {
+    var fb = document.createElement('div');
+    fb.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#131a15;border:1px solid #4ade80;border-radius:12px;padding:16px 28px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;letter-spacing:1px;z-index:9999;text-align:center;';
+    fb.textContent = '✓ Rezept → '+targetPreset+' übertragen!';
+    document.body.appendChild(fb);
+    setTimeout(function(){document.body.removeChild(fb);}, 1800);
+  }, 100);
+}
+
+// Run optimizer on page show
+
 
 
 // GUIDE SCRIPT
