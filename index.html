@@ -300,6 +300,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   <button class="main-nav-btn" onclick="showPage('guide',this)">NAHRSTOFF-GUIDE</button>
   <button class="main-nav-btn" onclick="showPage('auswertung',this)">AUSWERTUNG</button>
   <button class="main-nav-btn" onclick="showPage('einstellungen',this)">EINSTELLUNGEN</button>
+  <button class="main-nav-btn" onclick="showPage('anleitung',this)">ANLEITUNG</button>
 </div>
 <div style="height:16px;border-bottom:1px solid #1a3d26;margin-bottom:20px;"></div>
 
@@ -619,6 +620,241 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div class="footer">DWC NAHRSTOFF-GUIDE 2026</div>
 </div>
 
+<!-- ANLEITUNG PAGE -->
+<div id="page-anleitung" class="page">
+<div class="max-w">
+
+<div class="section-title">BENUTZERHANDBUCH</div>
+<div class="divider"></div>
+
+<!-- Kapitel 1 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">🚀</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">1. Erste Schritte</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">SETUP & GRUNDLAGEN</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Der Rechner ist speziell für <strong style="color:#b8d4c0;">DWC-Systeme (Deep Water Culture)</strong> entwickelt und berechnet Nährstofflösungen aus Einzelsalzen.</p>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 1 – WASSERWERTE</div>
+      <p>Gehe zu <strong style="color:#b8d4c0;">Einstellungen → Wasserwerte</strong> und trage deine Wasseranalyse ein. Mittelharte Wasserwerte sind voreingestellt. Beim Mischen aus Leitung und Osmose kannst du den Anteil im Rechner mit dem <strong style="color:#b8d4c0;">Leitungswasser-Anteil Slider</strong> einstellen.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 2 – PRESET WÄHLEN</div>
+      <p>Wähle <strong style="color:#b8d4c0;">VEG</strong> für Wachstum oder <strong style="color:#b8d4c0;">BLOOM</strong> für Blüte. Jedes Preset hat eigene Dosierungen, Volumen und Leitungswasser-Anteil. <strong style="color:#b8d4c0;">EXPERIMENT</strong> startet komplett leer.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 3 – RESERVOIR EINSTELLEN</div>
+      <p>Stelle dein <strong style="color:#b8d4c0;">Reservoir-Volumen</strong> und den <strong style="color:#b8d4c0;">Leitungswasser-Anteil</strong> ein. Die Gesamtmenge unten zeigt dann die genaue Menge pro Salz für deinen Ansatz.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 2 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">🎚️</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">2. Slider & Dosierungen</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">SALZE EINSTELLEN</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Jeder Slider entspricht einem Salz. Die Dosierung ist in <strong style="color:#b8d4c0;">g/L</strong> (Feststoffe) oder <strong style="color:#b8d4c0;">ml/L</strong> (Flüssigkeiten) angegeben.</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-bottom:10px;">
+      <div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#4ade80;font-family:'Courier New',monospace;white-space:nowrap;align-self:center;">AN</div>
+      <div>Salz ist aktiv und wird in die Berechnung einbezogen</div>
+      <div style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#60a5fa;font-family:'Courier New',monospace;white-space:nowrap;align-self:center;">✎</div>
+      <div>Öffnet das Edit-Panel – Name, Nährstoffgehalte, Preis, Dichte anpassen</div>
+      <div style="background:rgba(107,114,128,0.1);border:1px solid #374151;border-radius:4px;padding:2px 6px;font-size:9px;color:#6b7280;font-family:'Courier New',monospace;white-space:nowrap;align-self:center;">X</div>
+      <div>Salz aus der Liste entfernen (nur für diesen Preset)</div>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #facc15;">
+      <div style="font-size:9px;color:#facc15;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – SLIDER ERWEITERN</div>
+      <p>Schiebst du einen Slider bis ganz rechts, erweitert sich der Maximalwert automatisch um 30%. So kannst du höhere Dosierungen einstellen ohne manuell einzugeben.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #facc15;">
+      <div style="font-size:9px;color:#facc15;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – EC SKALIEREN</div>
+      <p>Die <strong style="color:#b8d4c0;">– / +</strong> Buttons neben dem EC-Wert skalieren alle Salze gleichmäßig um ±0,05 mS/cm. Damit kannst du das gesamte Rezept proportional anpassen ohne einzelne Slider zu bewegen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 3 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">📊</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">3. EC, pH & Ionenbilanz</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">WASSERQUALITÄT VERSTEHEN</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-size:9px;color:#60a5fa;font-family:'Courier New',monospace;letter-spacing:1px;margin-bottom:4px;">BLAU</div>
+        <div style="font-size:11px;">EC &lt; 1,2<br>zu niedrig</div>
+      </div>
+      <div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-size:9px;color:#4ade80;font-family:'Courier New',monospace;letter-spacing:1px;margin-bottom:4px;">GRÜN</div>
+        <div style="font-size:11px;">EC 1,2–1,8<br>optimal</div>
+      </div>
+      <div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-size:9px;color:#fb923c;font-family:'Courier New',monospace;letter-spacing:1px;margin-bottom:4px;">ORANGE</div>
+        <div style="font-size:11px;">EC &gt; 1,8<br>zu hoch</div>
+      </div>
+    </div>
+    <p style="margin-bottom:10px;"><strong style="color:#b8d4c0;">pH-Schätzung:</strong> Der angezeigte pH ist eine Schätzung basierend auf deinen Säure-Dosierungen und dem Leitungswasser-pH. Er ist eine Näherung – immer mit echtem pH-Meter prüfen. Immer mit echtem pH-Meter nachprüfen – Ziel: <strong style="color:#4ade80;">5,5–6,2</strong>.</p>
+    <p style="margin-bottom:10px;"><strong style="color:#b8d4c0;">Ionenbilanz:</strong> Zeigt ob Kationen und Anionen in der Lösung ausgeglichen sind. Bei &lt;5% ist alles gut. Bei Flüssigdüngern wird <strong style="color:#6b7280;">n/a (Mischd.)</strong> angezeigt da die Gegenionen unbekannt sind.</p>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">EC-BERECHNUNG</div>
+      <p>Der EC wird mit dem LMC-Modell berechnet (limitierende molare Leitfähigkeiten, gleiche Methode wie HydroBuddy). Feststoffe und Flüssigdünger werden dabei unterschiedlich behandelt.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 4 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">🧪</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">4. Flüssigdünger hinzufügen</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">DB & CUSTOM SALZE</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Unter <strong style="color:#b8d4c0;">Einstellungen → Substanz-Datenbank</strong> findest du über 125 Produkte – Plagron, Canna, Advanced Nutrients, Haifa und mehr.</p>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #60a5fa;">
+      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">AUS DATENBANK HINZUFÜGEN</div>
+      <p>Suchbegriff eingeben → Produkt finden → <strong style="color:#b8d4c0;">+ HINZUFÜGEN</strong> klicken. Das Produkt erscheint dann als Slider im Rechner. Über den ✎ Button kannst du Nährstoffwerte und Dichte auf aktuelle Herstellerangaben korrigieren.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #60a5fa;">
+      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">DICHTE (G/ML)</div>
+      <p>Für Flüssigdünger ist die Dichte wichtig für die korrekte PPM-Berechnung. Die Dichte steht meist auf dem Etikett (z.B. 1,18 g/ml für Plagron Hydro A). Im Edit-Panel anpassen falls nötig.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #60a5fa;">
+      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">EIGENES SALZ ANLEGEN</div>
+      <p>Über <strong style="color:#b8d4c0;">Eigene Salze</strong> kannst du beliebige Produkte manuell anlegen. Nährstoffwerte in % (Gewichtsprozent) eintragen, Einheit (g/L oder ml/L) wählen, Dichte für Flüssigprodukte angeben.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 5 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">💧</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">5. Verdünnungs- & Nachfüllrechner</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">RESERVOIR MANAGEMENT</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #a78bfa;">
+      <div style="font-size:9px;color:#a78bfa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">VERDÜNNUNGSRECHNER</div>
+      <p>EC zu hoch? Gib deinen aktuellen EC, den Ziel-EC und das Volumen ein. Der Rechner zeigt wie viel Wasser hinzugefügt werden muss um den EC zu senken. Wichtig: Der Ziel-EC muss über dem EC des Verdünnungswassers liegen.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #a78bfa;">
+      <div style="font-size:9px;color:#a78bfa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">NACHFÜLLRECHNER</div>
+      <p>Reservoir abgesunken? Gib Soll-Volumen, Ist-Volumen und Ist-EC ein. Der Rechner berechnet exakt welche Salze in welcher Menge nachgekippt werden müssen. Wenn der Ist-EC höher als der Rezept-EC ist, erscheint ein Hinweis auf den Verdünnungsrechner.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 6 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">📋</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">6. Mischanleitung & Löslichkeit</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">RICHTIG ANRÜHREN</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Die Reihenfolge beim Anrühren ist entscheidend um Ausfällungen zu vermeiden:</p>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#f472b6;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">1</div><div><strong style="color:#f472b6;">Calciumnitrat ZUERST</strong> – immer alleine einrühren, nie mit Phosphat mischen!</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#a78bfa;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">2</div><div>MgNO3, Bittersalz, KNO3 zusammen</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#fb923c;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">3</div><div>MKP + SOP – SOP in warmem Wasser (30-40°C) vorauflösen</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#4ade80;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">4</div><div>Wall Up S, Fetrilon Combi 1</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#60a5fa;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">5</div><div><strong style="color:#60a5fa;">Kaliwasserglas</strong> – niemals unverdünnt! In viel Wasser vorverdünnen, Ca fällt bei hohem pH aus</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#fbbf24;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">6</div><div>Phosphorsäure / Salpetersäure – pH einstellen am Ende</div></div>
+      </div>
+    </div>
+    <p>Die <strong style="color:#b8d4c0;">Löslichkeitstabelle</strong> zeigt für jede Flasche bis zu welchem Reservoir-Volumen 200ml Anrührwasser ausreichen. Bei größeren Reservoirs in 2 Flaschenfüllungen aufteilen.</p>
+  </div>
+</div>
+
+<!-- Kapitel 7 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">💾</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">7. Speichern & Laden</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">EXPORT / IMPORT</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Unter <strong style="color:#b8d4c0;">Einstellungen → Export / Import</strong> kannst du deine komplette Session speichern:</p>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">WAS WIRD GESPEICHERT</div>
+      <p>Alle 3 Presets (VEG, BLOOM, EXPERIMENT) mit ihren Dosierungen, Slider-Maxima, Volumen und Leitungswasser-Anteil. Dazu Wasserwerte, eigene Salze, gelöschte Standardsalze und aktive/inaktive Zustände.</p>
+    </div>
+    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #4ade80;">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – MEHRERE SETUPS</div>
+      <p>Speichere verschiedene JSON-Dateien für verschiedene Grow-Phasen oder Setups. Z.B. "VEG_Woche3.json", "BLOOM_Woche6.json". Beim Laden wird alles wiederhergestellt.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Kapitel 8 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">🔬</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">8. Auswertung & Studien</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">REZEPT OPTIMIEREN</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
+    <p style="margin-bottom:10px;">Der Auswertungs-Tab vergleicht deine aktuellen VEG, BLOOM und EXPERIMENT Rezepte mit wissenschaftlichen Studien:</p>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
+      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Saloner & Bernstein 2021</strong> – N-Einfluss auf Cannabinoide</div>
+      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Bevan et al. 2021</strong> – DWC BLOOM Response Surface</div>
+      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Moher et al. 2024</strong> – DWC VEG Response Surface (Haifa Salze)</div>
+      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Cockson et al. 2019</strong> – Mikronährstoff-Optimierung (NCSU)</div>
+      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Bugbee / Utah State</strong> – Minimale Nährstoffmengen</div>
+    </div>
+    <p>Die Balken zeigen deinen Ist-Wert (farbig) und den Zielbereich der Studie (heller Bereich). <strong style="color:#4ade80;">OK</strong> = im Zielbereich, <strong style="color:#60a5fa;">-X%</strong> = zu niedrig, <strong style="color:#fb923c;">+X%</strong> = zu hoch.</p>
+  </div>
+</div>
+
+<!-- Kapitel 9 -->
+<div class="card" style="margin-bottom:12px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+    <div style="font-size:20px;">⚡</div>
+    <div>
+      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">9. Tipps & Tricks</div>
+      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">PRO TIPPS</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#7aa888;line-height:1.7;display:flex;flex-direction:column;gap:8px;">
+    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">pH immer zuletzt</strong> – Erst alle Salze einrühren, dann pH messen und mit H3PO4 oder HNO3 korrigieren.</div>
+    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">Ca:Mg im Auge behalten</strong> – Optimal 2:1 bis 3:1. Zu viel Ca verdrängt Mg → intervenale Chlorose.</div>
+    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">Wassertemperatur</strong> – Über 22°C sinkt die Fe-Aufnahme drastisch. Chiller auf 18-20°C empfohlen.</div>
+    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">N in Blüte senken</strong> – Laut Saloner 2021 reduziert N über 160ppm den THC-Gehalt um bis zu 69%.</div>
+    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">SOP schlecht löslich</strong> – Immer in 30-40°C warmem Wasser vorauflösen, sonst klumpt es.</div>
+    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">Luftsteine prüfen</strong> – Ca braucht Transpiration für die Aufnahme. Ohne ausreichend O2 im Wasser keine Ca-Aufnahme.</div>
+  </div>
+</div>
+
+<div class="footer">VINCEMAANS DWC RECHNER v1.0 · 2026</div>
+</div>
+</div>
+
 <!-- AUSWERTUNG PAGE -->
 <div id="page-auswertung" class="page">
 <div class="max-w">
@@ -854,7 +1090,7 @@ function render() {
   // pH
   // pH Schaetzung - kalibriert auf echte Messwerte (VEG 5.7, BLOOM 6.0)
   var tapPH2 = tap.pH || 7.8;
-  var hco3Pct = tapPct * ((tap.HCO3||0) / 180.0); // HCO3 Puffer relativ zu Augsburg
+  var hco3Pct = tapPct * ((tap.HCO3||0) / 180.0); // HCO3 Puffer relativ zu mittelharten Standardwerten
   var acidEffect = (doses.h3po4||0) * 28.33        // H3PO4 kalibriert
                  + (doses.hno3||0)  * 1.5;          // HNO3 kalibriert
   // NH4 aus anderen Salzen senkt pH leicht
