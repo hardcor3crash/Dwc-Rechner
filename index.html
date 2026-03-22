@@ -9,173 +9,290 @@
 <meta name="apple-mobile-web-app-title" content="DWC Rechner">
 <meta name="theme-color" content="#0a0f0a">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:16px; padding-top:max(16px,env(safe-area-inset-top)); padding-bottom:max(16px,env(safe-area-inset-bottom)); min-height:100vh; }
-.page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
-.page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#6ee7b7; margin-bottom:8px; }
-.divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,#4ade80,transparent); margin:8px auto 20px; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  background:#0d1410;
+  background-image: radial-gradient(ellipse at 15% 0%, rgba(74,222,128,0.05) 0%, transparent 55%),
+                    radial-gradient(ellipse at 85% 100%, rgba(74,222,128,0.03) 0%, transparent 50%);
+  color:#d1fae5;
+  font-family:'DM Sans', 'Courier New', monospace;
+  padding:18px;
+  padding-top:max(16px,env(safe-area-inset-top));
+  padding-bottom:max(80px,env(safe-area-inset-bottom));
+  min-height:100vh;
+}
+@media(min-width:900px) { body { padding:32px; } }
+
 .max-w { max-width:1200px; margin:0 auto; }
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
 @media(max-width:900px) { .grid-3 { grid-template-columns:1fr 1fr; } }
 @media(max-width:600px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
-body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:24px; padding-top:max(24px,env(safe-area-inset-top)); padding-bottom:max(24px,env(safe-area-inset-bottom)); min-height:100vh; }
-@media(min-width:900px) { body { padding:32px; } }
-.card { background:rgba(255,255,255,0.02); border:1px solid #1a3d26; border-radius:8px; padding:16px; margin-bottom:16px; }
-.card-title { font-size:9px; letter-spacing:4px; color:#6ee7b7; margin-bottom:12px; }
-.card-note { font-size:9px; color:#6b7280; }
-.presets { display:flex; gap:8px; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
-.btn-preset { padding:8px 18px; border-radius:4px; border:1px solid #1f4d2e; background:transparent; color:#6ee7b7; cursor:pointer; font-family:'Courier New',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; }
-.btn-preset.active { border-color:#4ade80; background:rgba(74,222,128,0.15); color:#4ade80; }
-.slider-row { margin-bottom:12px; }
-.slider-header { display:flex; justify-content:space-between; margin-bottom:3px; }
-.slider-label { font-size:11px; color:#a7f3d0; }
-.slider-value { font-size:12px; color:#4ade80; font-weight:700; }
-.slider-minmax { display:flex; justify-content:space-between; font-size:9px; color:#374151; margin-top:2px; }
-input[type=range] { width:100%; accent-color:#4ade80; height:4px; cursor:pointer; }
+
+.page-title {
+  text-align:center;
+  font-family:'DM Sans', sans-serif;
+  font-size:clamp(24px,6vw,38px);
+  font-weight:600;
+  letter-spacing:-0.5px;
+  color:#e2f5e8;
+  margin-bottom:2px;
+}
+.page-subtitle { text-align:center; font-size:9px; letter-spacing:4px; color:#6b9e7a; margin-bottom:4px; font-family:'Courier New',monospace; }
+
+/* NAV */
+.main-nav { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin:18px 0 22px; }
+.main-nav-btn {
+  font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px;
+  padding:9px 20px; border-radius:100px;
+  border:1px solid #1a3d26; background:#111916; color:#4a7a5a;
+  cursor:pointer; transition:all 0.2s; text-transform:uppercase;
+}
+.main-nav-btn:hover { border-color:#2d6a3d; color:#6ee7b7; }
+.main-nav-btn.active { background:linear-gradient(135deg,#4ade80,#22c55e); border-color:#22c55e; color:#0a100c; font-weight:700; }
+
+/* CARDS */
+.card {
+  background:#131a15;
+  border:1px solid rgba(74,222,128,0.08);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+.card-title { font-size:9px; letter-spacing:3px; color:#3d5c47; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:12px; }
+.card-note { font-size:11px; color:#4a7a5a; }
+
+.section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#5a8a6a; font-family:'Courier New',monospace; margin:28px 0 10px; text-transform:uppercase; }
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(74,222,128,0.25),transparent); margin-bottom:18px; }
+
+/* PRESETS */
+.preset-bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+.btn-preset {
+  font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px;
+  padding:7px 16px; border-radius:100px;
+  border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
+  cursor:pointer; transition:all 0.15s; text-transform:uppercase;
+}
+.btn-preset:hover { border-color:#2d6a3d; color:#6ee7b7; }
+.btn-preset.active { background:rgba(74,222,128,0.1); border-color:#4ade80; color:#4ade80; }
+.btn-reset {
+  font-family:'Courier New',monospace; font-size:9px; letter-spacing:1px;
+  padding:7px 14px; border-radius:100px;
+  border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
+  cursor:pointer; transition:all 0.15s; margin-left:auto;
+}
+.btn-reset:hover { border-color:#f87171; color:#f87171; }
+
+/* SLIDERS */
+.slider-row { margin-bottom:16px; }
+.slider-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.slider-label { font-size:14px; font-weight:500; color:#b8d4c0; }
+.slider-value { font-family:'Courier New',monospace; font-size:12px; color:#4ade80; font-weight:600; }
+.slider-minmax { display:flex; justify-content:space-between; font-size:9px; color:#2d4a36; font-family:'Courier New',monospace; margin-top:3px; }
+
+input[type=range] {
+  -webkit-appearance:none; width:100%; height:24px;
+  background:transparent; outline:none; cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  height:4px; border-radius:2px; background:#1a2d1f;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance:none; width:20px; height:20px;
+  border-radius:50%; background:linear-gradient(135deg,#4ade80,#22c55e); margin-top:-8px;
+  box-shadow:0 0 10px rgba(74,222,128,0.35); cursor:pointer;
+  transition:box-shadow 0.15s;
+}
+input[type=range]::-webkit-slider-thumb:active { box-shadow:0 0 18px rgba(74,222,128,0.6); }
+input[type=range]:disabled { opacity:0.35; }
+
+/* STATS */
 .stat-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
 .stat { text-align:center; }
-.stat-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:4px; }
-.stat-value { font-size:26px; font-weight:700; }
-.stat-unit { font-size:10px; color:#374151; }
+.stat-label { font-size:8px; letter-spacing:2px; color:#3d5c47; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:4px; }
+.stat-value { font-size:30px; font-weight:600; letter-spacing:-1px; line-height:1.1; }
+.stat-unit { font-size:9px; color:#3d5c47; font-family:'Courier New',monospace; margin-top:3px; }
 .ec-row { display:flex; align-items:center; justify-content:center; gap:8px; }
-.btn-ec { width:28px; height:28px; border-radius:50%; border:1px solid #1f4d2e; background:transparent; color:#4ade80; cursor:pointer; font-size:16px; line-height:1; font-family:'Courier New',monospace; }
-.bar-row { margin-bottom:8px; }
-.bar-header { display:flex; justify-content:space-between; margin-bottom:3px; }
-.bar-label { font-size:10px; color:#a7f3d0; }
-.bar-value { font-size:11px; font-weight:700; }
-.bar-bg { background:#0f2919; border-radius:2px; height:5px; overflow:hidden; }
-.bar-fill { height:100%; border-radius:2px; }
-.npk { display:flex; align-items:center; justify-content:center; gap:16px; }
+.btn-ec {
+  width:26px; height:26px; border-radius:50%;
+  border:1px solid #1a3d26; background:#111916; color:#4ade80;
+  font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.15s; line-height:1;
+}
+.btn-ec:hover { background:rgba(74,222,128,0.1); border-color:#4ade80; }
+
+/* RATIOS */
+.ratio-item { text-align:center; padding:10px 6px; background:#0f1c13; border-radius:10px; border:1px solid rgba(74,222,128,0.06); }
+.ratio-val { font-size:20px; font-weight:600; letter-spacing:-0.5px; }
+.ratio-label { font-size:8px; letter-spacing:2px; color:#4a7a5a; font-family:'Courier New',monospace; margin-top:3px; text-transform:uppercase; }
+.ratio-info { font-size:9px; color:#2d4a36; margin-top:2px; }
+
+/* NPK */
+.npk { display:flex; align-items:center; justify-content:center; gap:8px; }
 .npk-item { text-align:center; }
-.npk-letter { font-size:10px; letter-spacing:2px; margin-bottom:2px; }
-.npk-val { font-size:18px; font-weight:700; }
+.npk-letter { font-size:9px; letter-spacing:2px; font-family:'Courier New',monospace; margin-bottom:2px; }
+.npk-val { font-size:20px; font-weight:600; }
+
+/* BARS */
+.bar-row { margin-bottom:10px; }
+.bar-header { display:flex; justify-content:space-between; margin-bottom:4px; }
+.bar-label { font-size:13px; font-weight:500; color:#a7c4b0; }
+.bar-value { font-family:'Courier New',monospace; font-size:11px; }
+.bar-bg { height:6px; background:#1a2d1f; border-radius:3px; position:relative; overflow:visible; }
+.bar-fill { height:100%; border-radius:3px; min-width:2px; }
+
+/* MICRO */
 .micro-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
-.micro-item { display:flex; justify-content:space-between; padding:4px 8px; background:#0f2919; border-radius:4px; }
-.micro-label { font-size:10px; color:#6ee7b7; }
-.micro-val { font-size:10px; font-weight:700; }
+.micro-item { display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:#0f1c13; border-radius:10px; border:1px solid rgba(74,222,128,0.05); }
+.micro-label { font-size:12px; color:#7aa888; font-weight:500; }
+.micro-val { font-family:'Courier New',monospace; font-size:11px; color:#86efac; }
+
+/* TOTAL */
 .total-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-.total-item { display:flex; justify-content:space-between; padding:3px 6px; }
-.total-label { font-size:9px; color:#6b7280; }
-.total-val { font-size:10px; color:#4ade80; font-weight:700; }
-.step-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
-.step-num { min-width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#000; flex-shrink:0; }
-.step-label { font-size:11px; color:#a7f3d0; font-weight:700; }
-.step-desc { font-size:10px; color:#6b7280; }
-.step-tip { font-size:9px; margin-top:2px; }
+.total-item { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
+.total-label { font-size:11px; color:#3d5c47; }
+.total-val { font-family:'Courier New',monospace; font-size:11px; color:#fbbf24; font-weight:600; }
+
+/* WATER */
 .water-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
 @media(min-width:900px) { .water-grid { grid-template-columns:repeat(4,1fr); } }
 @media(max-width:500px) { .water-grid { grid-template-columns:repeat(2,1fr); } }
-.water-label { font-size:9px; color:#6ee7b7; letter-spacing:2px; margin-bottom:4px; }
-.water-input { width:100%; background:#0f2919; border:1px solid #1a3d26; border-radius:4px; color:#4ade80; font-family:'Courier New',monospace; font-size:12px; padding:6px 8px; outline:none; }
-.btn-action { padding:6px 14px; border-radius:4px; cursor:pointer; font-family:'Courier New',monospace; font-size:10px; letter-spacing:2px; background:transparent; }
-.io-textarea { width:100%; height:110px; background:#0a1a0a; border:1px solid #1a3d26; border-radius:4px; color:#4ade80; font-family:'Courier New',monospace; font-size:10px; padding:8px; outline:none; resize:none; margin-top:10px; }
-.feedback { font-size:10px; margin-top:8px; display:none; }
-.section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#6ee7b7; margin:24px 0 8px; }
-.ratio-item { text-align:center; padding:10px 6px; background:#0f2919; border-radius:6px; }
-.ratio-val { font-size:22px; font-weight:700; }
-.ratio-label { font-size:9px; letter-spacing:2px; color:#6ee7b7; margin-top:3px; }
-.ratio-info { font-size:9px; color:#6b7280; margin-top:2px; }
+.water-label { font-size:8px; letter-spacing:1px; color:#3d5c47; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:4px; }
+.water-input {
+  width:100%; background:#111916; border:1px solid #1a3d26; border-radius:10px;
+  color:#4ade80; font-family:'Courier New',monospace; font-size:12px; padding:7px 10px; outline:none;
+  transition:border-color 0.15s;
+}
+.water-input:focus { border-color:rgba(74,222,128,0.35); }
 
-/* Guide styles */
+/* BUTTONS */
+.btn-action {
+  font-family:'Courier New',monospace; font-size:9px; letter-spacing:1px;
+  padding:8px 14px; border-radius:10px;
+  border:1px solid #1a3d26; background:transparent; color:#6b9e7a;
+  cursor:pointer; transition:all 0.15s; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.btn-action:hover { border-color:#2d6a3d; color:#6ee7b7; background:rgba(74,222,128,0.04); }
+.feedback { font-family:'Courier New',monospace; font-size:10px; margin-top:8px; display:none; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; padding:16px; padding-top:max(16px,env(safe-area-inset-top)); padding-bottom:max(32px,env(safe-area-inset-bottom)); min-height:100vh; }
-.page-title { text-align:center; font-size:22px; letter-spacing:3px; color:#ecfdf5; margin-bottom:4px; }
-.page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#6ee7b7; margin-bottom:8px; }
-.divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,#4ade80,transparent); margin:8px auto 20px; }
+/* GUIDE */
+.filters { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:16px; }
+.filter-btn {
+  font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px;
+  padding:6px 14px; border-radius:100px;
+  border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
+  cursor:pointer; transition:all 0.15s; text-transform:uppercase;
+}
+.filter-btn:hover { border-color:#2d6a3d; color:#6ee7b7; }
+.filter-btn.active { background:rgba(74,222,128,0.1); border-color:#4ade80; color:#4ade80; }
 
-/* Filter tabs */
-.filters { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
-.filter-btn { padding:6px 14px; border-radius:4px; border:1px solid #1a3d26; background:transparent; color:#6b7280; cursor:pointer; font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px; }
-.filter-btn.active { border-color:#4ade80; color:#4ade80; background:rgba(74,222,128,0.1); }
-
-/* Steckbrief card */
-.card { border-radius:8px; margin-bottom:16px; overflow:hidden; border:1px solid #1a3d26; }
+.guide-card { background:#131a15; border:1px solid rgba(74,222,128,0.08); border-radius:16px; margin-bottom:10px; overflow:hidden; }
 .card-header { padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer; }
-.card-symbol { font-size:22px; font-weight:900; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Courier New',monospace; }
+.card-icon { font-size:18px; }
 .card-header-info { flex:1; }
+.card-header-title { font-size:14px; font-weight:500; color:#d1fae5; }
+.card-header-sub { font-size:9px; color:#3d5c47; font-family:'Courier New',monospace; margin-top:2px; letter-spacing:1px; }
+.card-header-arrow { font-size:10px; color:#3d5c47; transition:transform 0.2s; }
+.chevron { font-size:10px; color:#3d5c47; transition:transform 0.2s; }
+.chevron.open { transform:rotate(180deg); }
+.card-body { padding:0 16px 14px; display:none; border-top:1px solid rgba(74,222,128,0.06); }
+.card-body.open { display:block; }
+.card-section { margin-top:12px; }
+.card-section-title { font-size:8px; letter-spacing:2px; color:#4a7a5a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:5px; }
+.card-section-body { font-size:12px; color:#7aa888; line-height:1.6; }
+.card-tag { display:inline-block; font-family:'Courier New',monospace; font-size:8px; letter-spacing:1px; padding:3px 7px; border-radius:4px; margin:2px; text-transform:uppercase; }
+
+/* AUSWERTUNG */
+.aw-nutrient { margin-bottom:20px; }
+.aw-label { font-size:9px; letter-spacing:3px; color:#4a7a5a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
+.aw-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.aw-col { }
+.aw-ppm { font-size:14px; font-weight:700; margin-bottom:2px; }
+.aw-delta { font-family:'Courier New',monospace; font-size:9px; margin-bottom:4px; }
+.aw-bar-bg { height:10px; background:#1a2d1f; border-radius:4px; position:relative; overflow:hidden; margin-bottom:3px; }
+.aw-bar-ist { height:100%; border-radius:0; position:absolute; top:0; left:0; transition:width 0.4s; z-index:1; }
+.aw-bar-soll { position:absolute; top:0; height:100%; background:rgba(255,255,255,0.15); pointer-events:none; z-index:2; }
+.aw-range { font-size:8px; color:#3d5c47; font-family:'Courier New',monospace; }
+
+/* MIX STEPS */
+.mix-step { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
+.mix-step:last-child { border-bottom:none; }
+.mix-num { width:22px; height:22px; border-radius:50%; background:rgba(74,222,128,0.08); border:1px solid rgba(74,222,128,0.15); display:flex; align-items:center; justify-content:center; font-family:'Courier New',monospace; font-size:9px; color:#4ade80; flex-shrink:0; }
+.step-row { display:flex; gap:12px; align-items:flex-start; padding:8px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
+.step-row:last-child { border-bottom:none; }
+.step-num { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#000; flex-shrink:0; }
+.step-label { font-size:12px; color:#b8d4c0; font-weight:600; margin-bottom:2px; }
+.step-desc { font-size:11px; color:#5a7a62; }
+.step-tip { font-size:10px; margin-top:2px; }
+
+/* ── GUIDE CARD INTERNALS ── */
+.card-symbol { font-size:16px; font-weight:900; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Courier New',monospace; }
 .card-name { font-size:13px; font-weight:700; letter-spacing:2px; }
-.card-sub { font-size:9px; color:#6b7280; margin-top:2px; letter-spacing:1px; }
+.card-sub { font-size:9px; color:#4a7a5a; margin-top:2px; letter-spacing:1px; }
 .card-tags { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
-.tag { font-size:8px; padding:1px 6px; border-radius:3px; letter-spacing:1px; }
+.tag { font-size:8px; padding:2px 7px; border-radius:4px; letter-spacing:1px; text-transform:uppercase; }
 .tag-makro { background:rgba(74,222,128,0.1); color:#4ade80; border:1px solid rgba(74,222,128,0.2); }
 .tag-mikro { background:rgba(96,165,250,0.1); color:#60a5fa; border:1px solid rgba(96,165,250,0.2); }
 .tag-ph { background:rgba(167,139,250,0.1); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
 .tag-mobil { background:rgba(250,204,21,0.1); color:#facc15; border:1px solid rgba(250,204,21,0.2); }
 .tag-immobil { background:rgba(251,146,60,0.1); color:#fb923c; border:1px solid rgba(251,146,60,0.2); }
-.chevron { color:#374151; font-size:12px; transition:transform 0.2s; }
-.chevron.open { transform:rotate(180deg); }
 
-.card-body { display:none; border-top:1px solid #1a3d26; }
-.card-body.open { display:block; }
-
-/* Optimal range bar */
 .optimal-section { padding:12px 16px; background:rgba(0,0,0,0.2); }
-.optimal-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:6px; }
+.optimal-label { font-size:9px; letter-spacing:3px; color:#4a7a5a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
 .optimal-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
-.optimal-key { font-size:9px; color:#6b7280; }
+.optimal-key { font-size:9px; color:#4a7a5a; }
 .optimal-val { font-size:11px; font-weight:700; color:#4ade80; }
 
-/* Mangel / Uberschuss sections */
 .sym-section { padding:12px 16px; }
-.sym-title { font-size:9px; letter-spacing:3px; margin-bottom:8px; font-weight:700; }
+.sym-title { font-size:9px; letter-spacing:3px; margin-bottom:8px; font-weight:700; font-family:'Courier New',monospace; text-transform:uppercase; }
 .sym-title.mangel { color:#60a5fa; }
 .sym-title.ueber { color:#fb923c; }
 .sym-list { list-style:none; }
-.sym-list li { font-size:10px; color:#9ca3af; padding:3px 0; padding-left:12px; position:relative; line-height:1.5; }
-.sym-list li::before { content:''; position:absolute; left:0; top:8px; width:5px; height:1px; }
+.sym-list li { font-size:11px; color:#7aa888; padding:3px 0 3px 14px; position:relative; line-height:1.5; }
+.sym-list li::before { content:''; position:absolute; left:0; top:9px; width:6px; height:1px; }
 .sym-list.mangel li::before { background:#60a5fa; }
 .sym-list.ueber li::before { background:#fb923c; }
-.sym-highlight { color:#d1fae5; font-weight:700; }
+.sym-highlight { color:#d1fae5; font-weight:600; }
 
-/* Salz section */
-.salz-section { padding:12px 16px; background:rgba(74,222,128,0.02); border-top:1px solid #1a3d26; }
-.salz-title { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:8px; }
-.salz-item { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid #0f2919; }
+.salz-section { padding:12px 16px; background:rgba(74,222,128,0.02); border-top:1px solid rgba(74,222,128,0.06); }
+.salz-title { font-size:9px; letter-spacing:3px; color:#4a7a5a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
+.salz-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
 .salz-item:last-child { border-bottom:none; }
-.salz-name { font-size:10px; color:#a7f3d0; }
-.salz-detail { font-size:9px; color:#6b7280; text-align:right; }
-.salz-pct { font-size:11px; font-weight:700; color:#4ade80; }
+.salz-name { font-size:11px; color:#86efac; }
+.salz-detail { font-size:9px; color:#4a7a5a; }
+.salz-pct { font-size:12px; font-weight:700; color:#4ade80; white-space:nowrap; margin-left:8px; }
 
-/* Fix section */
-.fix-section { padding:12px 16px; border-top:1px solid #1a3d26; }
-.fix-title { font-size:9px; letter-spacing:3px; color:#facc15; margin-bottom:8px; }
-.fix-mangel { font-size:10px; color:#9ca3af; margin-bottom:6px; line-height:1.5; }
-.fix-mangel span { color:#60a5fa; }
-.fix-ueber { font-size:10px; color:#9ca3af; line-height:1.5; }
-.fix-ueber span { color:#fb923c; }
+.fix-section { padding:12px 16px; border-top:1px solid rgba(74,222,128,0.06); }
+.fix-title { font-size:9px; letter-spacing:3px; color:#fbbf24; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
+.fix-mangel { font-size:11px; color:#7aa888; margin-bottom:6px; line-height:1.6; }
+.fix-mangel span { color:#60a5fa; font-weight:600; }
+.fix-ueber { font-size:11px; color:#7aa888; line-height:1.6; }
+.fix-ueber span { color:#fb923c; font-weight:600; }
+.section-divider { height:1px; background:rgba(74,222,128,0.06); margin:0 16px; }
+.mix-text { font-size:12px; color:#7aa888; line-height:1.5; }
 
-.section-divider { height:1px; background:#1a3d26; margin:0 16px; }
+/* SELECT */
+select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color:#4ade80; font-family:'Courier New',monospace; font-size:11px; padding:6px 8px; outline:none; cursor:pointer; }
+.study-select { width:100%; margin-bottom:14px; }
 
-.section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#6ee7b7; margin:24px 0 12px; }
-.footer { text-align:center; margin-top:24px; font-size:9px; color:#1f4d2e; letter-spacing:2px; }
-
-/* Page switching */
+.footer { text-align:center; margin-top:28px; font-size:9px; color:#1a3d26; font-family:'Courier New',monospace; letter-spacing:2px; }
 .page { display:none; }
 .page.active { display:block; }
-.main-nav { display:flex; justify-content:center; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
-.main-nav-btn { padding:8px 20px; border-radius:4px; border:1px solid #1a3d26; background:transparent; color:#6b7280; cursor:pointer; font-family:'Courier New',monospace; font-size:10px; letter-spacing:3px; }
-.main-nav-btn.active { border-color:#4ade80; background:rgba(74,222,128,0.15); color:#4ade80; }
 
-/* Auswertung */
-.aw-nutrient { margin-bottom:20px; }
-.aw-label { font-size:9px; letter-spacing:3px; color:#6ee7b7; margin-bottom:8px; }
-.aw-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
-.aw-col { }
-.aw-ppm { font-size:11px; font-weight:700; margin-bottom:3px; }
-.aw-delta { font-size:9px; margin-bottom:4px; }
-.aw-bar-bg { background:#0f2919; border-radius:2px; height:8px; position:relative; overflow:visible; margin-bottom:2px; }
-.aw-bar-ist { height:100%; border-radius:2px; position:absolute; top:0; left:0; transition:width 0.3s; }
-.aw-bar-soll { position:absolute; top:-3px; height:14px; border-radius:1px; opacity:0.3; pointer-events:none; }
-.aw-range { font-size:8px; color:#374151; }
+/* TOAST */
+.toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(100px); background:#131a15; border:1px solid #4ade80; border-radius:10px; padding:10px 22px; color:#4ade80; font-family:'Courier New',monospace; font-size:11px; letter-spacing:1px; z-index:9999; transition:transform 0.25s ease,opacity 0.25s ease; pointer-events:none; white-space:nowrap; opacity:0; }
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
 </style>
 </head>
 <body>
 
-<h1 class="page-title">DWC RECHNER</h1>
-<div class="page-subtitle">Haifa Mineralsalze</div>
+<h1 class="page-title">🌱 VINCEMAANS DWC</h1>
+<div class="page-subtitle">NAHRSTOFFRECHNER · v1.0</div>
 <div class="divider"></div>
 
 <div class="main-nav">
@@ -424,7 +541,7 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
       </div>
       <div>
         <div class="water-label">Einheit</div>
-        <select id="new-salt-unit" style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Courier New',monospace;font-size:12px;padding:6px 8px;outline:none;">
+        <select id="new-salt-unit" style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Space Mono',monospace;font-size:11px;padding:7px 8px;outline:none;">
           <option value="g/L">g/L</option>
           <option value="ml/L">ml/L</option>
         </select>
@@ -446,9 +563,10 @@ body { background:#0a0f0a; color:#d1fae5; font-family:'Courier New',monospace; p
       <div><div class="water-label">Cu %</div><input class="water-input" id="new-salt-Cu" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
       <div><div class="water-label">B %</div><input class="water-input" id="new-salt-B" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
       <div><div class="water-label">Preis (EUR)</div><input class="water-input" id="new-salt-preis" type="number" min="0" step="0.01" placeholder="0.00"></div>
       <div><div class="water-label">Gebinde (g oder ml)</div><input class="water-input" id="new-salt-menge" type="number" min="1" step="1" value="1000"></div>
+      <div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
     </div>
     <button class="btn-action" onclick="addCustomSalt()" style="border:1px solid #2D6A2D;color:#6ee7b7;">+ SALZ HINZUFUGEN</button>
     <button class="btn-action" onclick="resetStandardSalts()" style="border:1px solid #374151;color:#6b7280;margin-left:8px;">&#8635; STANDARD WIEDERHERSTELLEN</button>
@@ -629,8 +747,7 @@ function calc() {
     if (!s.active) continue;
     var d=doses[s.key]||0;
     if (d===0) continue;
-    // For liquids: factor = ml/L * density(g/ml) * 1000(mg/g)
-    // For solids: factor = g/L * 1000(mg/g)
+    // Apply density for liquid salts (DB values are %W/W, density converts to %W/V)
     var factor = d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * 1000;
     if (s.key==='kwg') { K+=d*67.24; Si+=d*96.72; continue; }
     if (s.key==='h3po4') { P+=d*1.685*0.85*1000*(30.97/97.99); continue; }
@@ -654,7 +771,52 @@ function calc() {
     B  += factor * (s.B  || 0);
   }
 
-  var ec = (N-wN+P+K-wK+Ca-wCa+Mg-wMg+S-wS+Na+Cl)/500 + wEC;
+  // EC - LMC Modell wie HydroBuddy (currentseparations.com/issues/18-3/cs18-3c.pdf)
+  // Per-equivalent Werte. Feststoffe: Faktor 0.66 (empirisch), Flüssigdünger: kein Faktor
+  var lmc = {NO3:71.5, NH4:73.5, H2PO4:33.0, K:73.5, Ca:59.5, Mg:53.1,
+             Na:50.1, SO4:80.0, Cl:76.4, HCO3:44.5, Fe:54.0, Mn:53.5};
+
+  // Separate solid and liquid EC contributions
+  var ecSolNO3=0,ecSolNH4=0,ecSolP=0,ecSolK=0,ecSolCa=0,ecSolMg=0,ecSolS=0,ecSolFe=0,ecSolMn=0;
+  var ecLiqNO3=0,ecLiqNH4=0,ecLiqP=0,ecLiqK=0,ecLiqCa=0,ecLiqMg=0,ecLiqS=0,ecLiqFe=0,ecLiqMn=0;
+
+  for(var eci=0;eci<SALTS.length;eci++){
+    var es=SALTS[eci];
+    if(!es.active) continue;
+    var ed=doses[es.key]||0;
+    if(ed===0) continue;
+    var isLiq = es.unit==='ml/L' && es.key!=='h3po4' && es.key!=='hno3' && es.key!=='kwg';
+    if(es.key==='kwg'){ecSolK+=ed*67.24; continue;}
+    if(es.key==='h3po4'){ecSolP+=ed*1.685*0.85*1000*(30.97/97.99); continue;}
+    if(es.key==='hno3'){ecSolNO3+=ed*0.5*14.01; continue;}
+    var ef = ed * (isLiq && es.density>1.001 ? es.density : 1) * 1000;
+    if(isLiq){
+      ecLiqNO3+=ef*(es.NO3||0); ecLiqNH4+=ef*(es.NH4||0);
+      ecLiqP+=ef*(es.P||0);     ecLiqK+=ef*(es.K||0);
+      ecLiqCa+=ef*(es.Ca||0);   ecLiqMg+=ef*(es.Mg||0);
+      ecLiqS+=ef*(es.S||0);     ecLiqFe+=ef*(es.Fe||0);
+      ecLiqMn+=ef*(es.Mn||0);
+    } else {
+      ecSolNO3+=ef*(es.NO3||0); ecSolNH4+=ef*(es.NH4||0);
+      ecSolP+=ef*(es.P||0);     ecSolK+=ef*(es.K||0);
+      ecSolCa+=ef*(es.Ca||0);   ecSolMg+=ef*(es.Mg||0);
+      ecSolS+=ef*(es.S||0);     ecSolFe+=ef*(es.Fe||0);
+      ecSolMn+=ef*(es.Mn||0);
+    }
+  }
+
+  var ec_solid = (lmc.NO3*(ecSolNO3/14.01)+lmc.NH4*(ecSolNH4/14.01)+
+                  lmc.H2PO4*(ecSolP/30.97)+lmc.K*(ecSolK/39.10)+
+                  lmc.Ca*(ecSolCa/40.08)*2+lmc.Mg*(ecSolMg/24.31)*2+
+                  lmc.SO4*(ecSolS/32.06)*2+lmc.Fe*(ecSolFe/55.85)*2+
+                  lmc.Mn*(ecSolMn/54.94)*2)*1e-3 * 0.66;
+  var ec_liquid = (lmc.NO3*(ecLiqNO3/14.01)+lmc.NH4*(ecLiqNH4/14.01)+
+                   lmc.H2PO4*(ecLiqP/30.97)+lmc.K*(ecLiqK/39.10)+
+                   lmc.Ca*(ecLiqCa/40.08)*2+lmc.Mg*(ecLiqMg/24.31)*2+
+                   lmc.SO4*(ecLiqS/32.06)*2+lmc.Fe*(ecLiqFe/55.85)*2+
+                   lmc.Mn*(ecLiqMn/54.94)*2)*1e-3;
+  var ec_lmc = Math.max(0, ec_solid + ec_liquid);
+  var ec = ec_lmc + wEC;
   var kat = (Ca/40.08)*2+(Mg/24.31)*2+(K/39.10)+(Fe/55.85)*2+(Mn/54.94)*2+(Zn/65.38)*2+(Cu/63.55)*2+(Na/22.99);
   var ani = (NO3/14.01)+(P/30.97)+(S/32.06)*2+(Cl/35.45)+(wHCO3/61.02);
   // NH4 only from standard salts (custom/DB products have unlisted counter-ions)
@@ -813,6 +975,7 @@ function render() {
   var totalHtml = '';
   for (var i=0; i<SALTS.length; i++) {
     var s=SALTS[i];
+    if (!s.active || !doses[s.key] || doses[s.key]===0) continue;
     totalHtml += '<div class="total-item"><span class="total-label">'+s.label+'</span>';
     totalHtml += '<span class="total-val">'+(doses[s.key]*volume).toFixed(2)+' '+s.unit.replace('/L','')+'</span></div>';
   }
@@ -822,7 +985,7 @@ function render() {
   var costPerL=0, breakdown=[];
   for (var i=0; i<SALTS.length; i++) {
     var s=SALTS[i];
-    if (!s.preis||doses[s.key]===0) continue;
+    if (!s.active || !s.preis || !doses[s.key] || doses[s.key]===0) continue;
     var k=doses[s.key]*(s.preis/s.menge);
     costPerL+=k;
     breakdown.push({label:s.label,k:k});
@@ -907,12 +1070,12 @@ function buildSliders() {
     html += '<div class="slider-header">';
     html += '<span class="slider-label">'+s.label+'</span>';
     html += '<div style="display:flex;align-items:center;gap:6px;">';
-    html += '<span class="slider-value" id="sv-'+s.key+'">'+fmt(s.val,3)+' '+s.unit+'</span>';
+    html += '<span class="slider-value" id="sv-'+s.key+'">'+(doses[s.key]!==undefined?fmt(doses[s.key],3):fmt(s.val,3))+' '+s.unit+'</span>';
     html += '<button onclick="toggleSalt(\''+s.key+'\')" style="background:none;border:1px solid '+(s.active?'#4ade80':'#374151')+';border-radius:3px;color:'+(s.active?'#4ade80':'#6b7280')+';font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">'+(s.active?'AN':'AUS')+'</button>';
     html += '<button onclick="toggleEdit(\''+s.key+'\')" style="background:none;border:1px solid #60a5fa;border-radius:3px;color:#60a5fa;font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">&#9998;</button>';
     html += '<button onclick="deleteSalt(\''+s.key+'\')" style="background:none;border:1px solid #374151;border-radius:3px;color:#6b7280;font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">X</button>';
     html += '</div></div>';
-    html += '<input id="slider-'+s.key+'" type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+s.val+'"';
+    html += '<input id="slider-'+s.key+'" type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+(doses[s.key]!==undefined?doses[s.key]:s.val)+'"';
     html += ' oninput="onDose(\''+s.key+'\',this.value)" onchange="expandSlider(\''+s.key+'\',this)"'+(s.active?'':' disabled')+' style="opacity:1">';
     html += '<div class="slider-minmax"><span>'+s.min+'</span><span id="maxlabel-'+s.key+'">'+s.max+' '+s.unit+'</span></div>';
     // Edit panel (hidden by default)
@@ -929,9 +1092,10 @@ function buildSliders() {
       html += '<div><div class="water-label">'+n+' %</div><input class="water-input" id="edit-'+n+'-'+s.key+'" type="number" min="0" max="100" step="0.01" value="'+pct+'"></div>';
     }
     html += '</div>';
-    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">';
     html += '<div><div class="water-label">Preis (EUR)</div><input class="water-input" id="edit-preis-'+s.key+'" type="number" min="0" step="0.01" value="'+(s.preis||0)+'"></div>';
     html += '<div><div class="water-label">Gebinde (g/ml)</div><input class="water-input" id="edit-menge-'+s.key+'" type="number" min="1" step="1" value="'+(s.menge||1000)+'"></div>';
+    html += '<div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
     html += '</div>';
     html += '<button onclick="saveSaltEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #2D6A2D;background:transparent;color:#4ade80;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;">SPEICHERN</button>';
     html += '<button onclick="toggleEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #374151;background:transparent;color:#6b7280;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;margin-left:6px;">ABBRECHEN</button>';
@@ -1095,12 +1259,16 @@ function saveSaltEdit(key) {
   salt.unit  = document.getElementById('edit-unit-'+key).value;
   salt.preis = parseFloat(document.getElementById('edit-preis-'+key).value)||0;
   salt.menge = parseFloat(document.getElementById('edit-menge-'+key).value)||1000;
+  salt.density = parseFloat(document.getElementById('edit-density-'+key).value)||1.0;
   var nuts=['NO3','NH4','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
   for(var j=0;j<nuts.length;j++) {
     var n=nuts[j];
     salt[n] = (parseFloat(document.getElementById('edit-'+n+'-'+key).value)||0)/100;
   }
   salt.N = salt.NO3 + salt.NH4;
+  // Make sure dose is synced from slider value
+  var sliderEl = document.getElementById('slider-'+key);
+  if(sliderEl) doses[key] = parseFloat(sliderEl.value)||0;
   buildSliders();
   render();
 }
@@ -1184,6 +1352,7 @@ function addCustomSalt() {
     min:0, max:maxDefault, origMax:maxDefault, step:stepDefault, val:0,
     preis: parseFloat(document.getElementById('new-salt-preis').value)||0,
     menge: parseFloat(document.getElementById('new-salt-menge').value)||1000,
+    density: parseFloat(document.getElementById('new-salt-density').value)||1.0,
     active:true, custom:true,
     N:pct('new-salt-NO3')+pct('new-salt-NH4'), NO3:pct('new-salt-NO3'), NH4:pct('new-salt-NH4'), P:pct('new-salt-P'), K:pct('new-salt-K'),
     Ca:pct('new-salt-Ca'), Mg:pct('new-salt-Mg'), S:pct('new-salt-S'),
@@ -1193,9 +1362,16 @@ function addCustomSalt() {
 
   SALTS.push(newSalt);
   doses[key] = 0;
+  // Init dose=0 in all saved preset states so each preset tracks it independently
+  for(var pn in presetStates) {
+    if(presetStates[pn] && presetStates[pn].doses) {
+      presetStates[pn].doses[key] = 0;
+      presetStates[pn].maxes[key] = newSalt.origMax;
+    }
+  }
 
   // Reset form
-  var fields = ['label','NO3','NH4','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B','preis','menge'];
+  var fields = ['label','NO3','NH4','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B','preis','menge','density'];
   for(var i=0;i<fields.length;i++) {
     var el = document.getElementById('new-salt-'+fields[i]);
     if(el) el.value = fields[i]==='menge'?'1000':'';
@@ -2110,6 +2286,13 @@ function addFromDB(idx) {
   };
   SALTS.push(newSalt);
   doses[key] = 0;
+  // Init dose=0 in all saved preset states so each preset tracks it independently
+  for(var pn in presetStates) {
+    if(presetStates[pn] && presetStates[pn].doses) {
+      presetStates[pn].doses[key] = 0;
+      presetStates[pn].maxes[key] = newSalt.origMax;
+    }
+  }
   var cf=document.getElementById('db-feedback');if(cf){cf.textContent=s.label+' hinzugefugt!';setTimeout(function(){cf.textContent='';},2500);}
   buildSliders();
   render();
@@ -2338,7 +2521,7 @@ function renderAuswertung() {
       html += '<div class="aw-bar-bg">';
       html += '<div class="aw-bar-ist" style="width:'+istPct+'%;background:'+barColor+'"></div>';
       if (sollMax > 0) {
-        html += '<div class="aw-bar-soll" style="left:'+sollMinPct+'%;width:'+(sollMaxPct-sollMinPct)+'%;background:#ffffff"></div>';
+        html += '<div class="aw-bar-soll" style="left:'+sollMinPct+'%;width:'+(sollMaxPct-sollMinPct)+'%;"></div>';
       }
       html += '</div>';
       html += '<div class="aw-range">'+sollMin+' - '+sollMax+'</div>';
