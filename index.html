@@ -70,7 +70,7 @@ body {
 .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(74,222,128,0.25),transparent); margin-bottom:18px; }
 
 /* PRESETS */
-.preset-bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+.preset-bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:20px; justify-content:center; }
 .btn-preset {
   font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px;
   padding:7px 16px; border-radius:100px;
@@ -83,7 +83,7 @@ body {
   font-family:'Courier New',monospace; font-size:9px; letter-spacing:1px;
   padding:7px 14px; border-radius:100px;
   border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
-  cursor:pointer; transition:all 0.15s; margin-left:auto;
+  cursor:pointer; transition:all 0.15s;
 }
 .btn-reset:hover { border-color:#f87171; color:#f87171; }
 
@@ -307,7 +307,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div id="page-rechner" class="page active">
 
 
-<div class="presets">
+<div class="preset-bar">
   <button class="btn-preset active" onclick="loadPreset('VEG')">VEG</button>
   <button class="btn-preset" onclick="loadPreset('BLOOM')">BLOOM</button>
   <button class="btn-preset" onclick="loadPreset('EXPERIMENT')">EXPERIMENT</button>
