@@ -3187,7 +3187,7 @@ var SUBSTANCE_DB = [
   {label:"Canna PH - Minus",formula:"0-59-0",unit:"ml/L",density:1.46,NO3:0.0,NH4:0.0,N:0.0,P:0.226492,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Terra Aquatica PH + Plus",formula:"0-0-10",unit:"ml/L",density:1.16,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.08301,Ca:0.0,Mg:0.0,S:0.0,Si:0.002342,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Terra Aquatica PH - Minus",formula:"3-10-0",unit:"ml/L",density:1.1,NO3:0.03,NH4:0.0,N:0.03,P:0.067206,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Canna CalMag Agent",formula:"6-0-0",unit:"ml/L",density:1.25,NO3:0.05,NH4:0.009,N:0.059,P:0.0,K:0.0,Ca:0.04862,Mg:0.014472,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},,
+  {label:"Canna CalMag Agent",formula:"6-0-0",unit:"ml/L",density:1.25,NO3:0.05,NH4:0.009,N:0.059,P:0.0,K:0.0,Ca:0.04862,Mg:0.014472,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients pH Perfect Sensi Coco Bloom A",formula:"",unit:"ml/L",density:1.0,NO3:0.04012,NH4:0,N:0.04012,P:0,K:0,Ca:0.041341,Mg:0.010673,S:0,Si:0,Fe:0.002006,Mn:0.00059,Zn:0,Cu:0,B:0},
   {label:"Advanced Nutrients pH Perfect Sensi Coco Bloom B",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.019446,K:0.046242,Ca:0,Mg:0,S:0.010249,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Advanced Nutrients pH Perfect Sensi Coco Grow A",formula:"",unit:"ml/L",density:1.0,NO3:0.0354,NH4:0,N:0.0354,P:0,K:0,Ca:0.035435,Mg:0.005692,S:0,Si:0,Fe:0.002006,Mn:0.00059,Zn:0,Cu:0,B:0},
@@ -3529,22 +3529,30 @@ function setStudy(name, btn) {
 }
 
 function calcForDoses(d, t) {
-  var tapPctLocal = t;
-  var wCa=tap.Ca*tapPctLocal, wMg=tap.Mg*tapPctLocal, wK=tap.K*tapPctLocal;
-  var wN=tap.N*tapPctLocal, wS=tap.S*tapPctLocal, wSi=tap.Si*tapPctLocal;
-  return {
-    N:  d.caNO3*1000*0.15 + d.mgNO3*1000*0.11 + (d.kno3||0)*1000*(14.01/101.11) + (d.hno3||0)*0.5*14.01 + wN,
-    P:  d.mkp*1000*(30.97/136.09) + d.h3po4*1.685*0.85*1000*(30.97/97.99),
-    K:  d.mkp*1000*(39.10/136.09) + d.sop*1000*(2*39.10/174.26) + (d.kno3||0)*1000*(39.10/101.11) + d.kwg*67.24 + wK,
-    Ca: d.caNO3*1000*0.26*(40.08/56.08) + wCa,
-    Mg: d.mgNO3*1000*0.16*(24.31/40.30) + d.bittersalz*1000*(24.31/246.48) + wMg + d.fetrilon*1000*0.033*(24.31/40.30),
-    S:  d.bittersalz*1000*(32.06/246.48) + d.sop*1000*(32.06/174.26) + wS,
-    Si: d.kwg*96.72 + d.wallup*1000*0.20 + wSi,
-    Fe: d.wallup*1000*0.05 + d.fetrilon*1000*0.04,
-    Mn: d.fetrilon*1000*0.04,
-    Zn: d.fetrilon*1000*0.015,
-    B:  d.fetrilon*1000*0.005
-  };
+  var wCa=tap.Ca*t, wMg=tap.Mg*t, wK=tap.K*t, wN=tap.N*t, wS=tap.S*t, wSi=tap.Si*t;
+  var N=wN, P=0, K=wK, Ca=wCa, Mg=wMg, S=wS, Si=wSi, Fe=0, Mn=0, Zn=0, B=0;
+  for (var i=0; i<SALTS.length; i++) {
+    var s=SALTS[i];
+    if (!s.active) continue;
+    var dose = d[s.key]||0;
+    if (!dose) continue;
+    var factor = dose * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * 1000;
+    if (s.key==='kwg') { K+=dose*67.24; Si+=dose*96.72; continue; }
+    if (s.key==='h3po4') { P+=dose*1.685*0.85*1000*(30.97/97.99); continue; }
+    if (s.key==='hno3') { N+=dose*0.5*14.01; continue; }
+    N  += factor * ((s.NO3||0)+(s.NH4||0)+(s.Norg||0));
+    P  += factor * (s.P||0);
+    K  += factor * (s.K||0);
+    Ca += factor * (s.Ca||0);
+    Mg += factor * (s.Mg||0);
+    S  += factor * (s.S||0);
+    Si += factor * (s.Si||0);
+    Fe += factor * (s.Fe||0);
+    Mn += factor * (s.Mn||0);
+    Zn += factor * (s.Zn||0);
+    B  += factor * (s.B||0);
+  }
+  return {N:N,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,B:B};
 }
 
 function getTapPctForPreset(name) {
@@ -3554,7 +3562,9 @@ function getTapPctForPreset(name) {
 }
 
 function getDosesForPreset(name) {
-  // Get saved state or default preset
+  // For current active preset, use live doses
+  if (name === currentPreset) return doses;
+  // For other presets, use saved state or default
   var state = presetStates[name];
   if (state && state.doses) return state.doses;
   return PRESETS[name] || {};
