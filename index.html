@@ -529,7 +529,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   <div class="divider"></div>
   <div class="card">
     <div class="card-title">AUS DATENBANK HINZUFUGEN</div>
-    <div class="card-note" style="margin-bottom:10px;">307 Substanzen aus der Datenbank - Suchen und direkt hinzufugen</div>
+    <div class="card-note" style="margin-bottom:10px;">317 Substanzen aus der Datenbank - Suchen und direkt hinzufugen</div>
     <input type="text" id="db-search" placeholder="Suchen z.B. Calcium, Nitrate, Haifa..."
       oninput="filterDB(this.value)"
       style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Courier New',monospace;font-size:12px;padding:8px 10px;outline:none;margin-bottom:10px;">
@@ -3407,7 +3407,16 @@ var SUBSTANCE_DB = [
   {label:"YaraTera Krista Mag",formula:"",unit:"g/L",density:1.0,NO3:0.11,NH4:0,N:0.11,P:0,K:0,Ca:0,Mg:0.09045,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"YaraTera Kristalon Azur Spezial",formula:"",unit:"g/L",density:1.0,NO3:0.091,NH4:0.069,N:0.16,P:0.048004,K:0.132832,Ca:0,Mg:0.02412,S:0.05,Si:0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
   {label:"YaraTera Kristalon Blaumarke",formula:"",unit:"g/L",density:1.0,NO3:0.119,NH4:0.071,N:0.19,P:0.026184,K:0.16604,Ca:0,Mg:0.01809,S:0.03,Si:0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"YaraTera Kristalon Rot",formula:"",unit:"g/L",density:1.0,NO3:0.101,NH4:0.019,N:0.12,P:0.052368,K:0.298872,Ca:0,Mg:0.00603,S:0.01,Si:0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025}
+  {label:"YaraTera Kristalon Rot",formula:"",unit:"g/L",density:1.0,NO3:0.101,NH4:0.019,N:0.12,P:0.052368,K:0.298872,Ca:0,Mg:0.00603,S:0.01,Si:0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
+  {label:"Sequestrene NK 138 Fe (Syngenta)",formula:"3-0-15+6Fe EDDHA",unit:"g/L",density:1.0,NO3:0,NH4:0.03,N:0.03,P:0,K:0.125,Ca:0,Mg:0,S:0,Si:0,Fe:0.06,Mn:0,Zn:0,Cu:0,B:0},
+  {label:"GH FloraMicro 5-0-1",formula:"5-0-1",unit:"ml/L",density:1.1,NO3:0.047,NH4:0.003,N:0.05,P:0,K:0.0083,Ca:0.05,Mg:0,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.00015,Cu:0.0001,B:0.0001},
+  {label:"GH FloraGro 2-1-6",formula:"2-1-6",unit:"ml/L",density:1.1,NO3:0.0175,NH4:0.0025,N:0.02,P:0.00436,K:0.0498,Ca:0,Mg:0.005,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
+  {label:"GH FloraBloom 0-5-4",formula:"0-5-4",unit:"ml/L",density:1.1,NO3:0,NH4:0,N:0,P:0.0218,K:0.0332,Ca:0,Mg:0.015,S:0.01,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
+  {label:"Green House Powder Feeding Grow",formula:"24-6-12",unit:"g/L",density:1.0,NO3:0.13,NH4:0.11,N:0.24,P:0.026184,K:0.099612,Ca:0,Mg:0.02,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0001,Cu:0.0004,B:0.0002},
+  {label:"Green House Powder Feeding Short Flowering",formula:"16-6-26",unit:"g/L",density:1.0,NO3:0.11,NH4:0.05,N:0.16,P:0.026184,K:0.215826,Ca:0,Mg:0.012,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0001,Cu:0.0004,B:0.0002},
+  {label:"Green House Powder Feeding Hybrids",formula:"15-7-22",unit:"g/L",density:1.0,NO3:0.10,NH4:0.05,N:0.15,P:0.030548,K:0.182622,Ca:0,Mg:0.03,S:0.04,Si:0,Fe:0.0012,Mn:0.0005,Zn:0.0001,Cu:0.00002,B:0.0003},
+  {label:"Green House Powder Feeding Long Flowering",formula:"18-12-18",unit:"g/L",density:1.0,NO3:0.10,NH4:0.08,N:0.18,P:0.052368,K:0.149418,Ca:0,Mg:0.012,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0001,Cu:0.0004,B:0.0002},
+  {label:"Green House Powder Feeding Booster PK+",formula:"0-30-27",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.130920,K:0.224127,Ca:0,Mg:0.05,S:0.09,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0001,Cu:0.00002,B:0.0003}
 ];
 
 function filterDB(query) {
