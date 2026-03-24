@@ -578,7 +578,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
       <div><div class="water-label">Preis (EUR)</div><input class="water-input" id="new-salt-preis" type="number" min="0" step="0.01" placeholder="0.00"></div>
       <div><div class="water-label">Gebinde (g oder ml)</div><input class="water-input" id="new-salt-menge" type="number" min="1" step="1" value="1000"></div>
       <div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
-      <div><div class="water-label">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="0.001" placeholder="auto"></div>
+      <div><div class="water-label">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="any" placeholder="auto"></div>
     </div>
     <button class="btn-action" onclick="addCustomSalt()" style="border:1px solid #2D6A2D;color:#6ee7b7;">+ SALZ HINZUFUGEN</button>
     <button class="btn-action" onclick="resetStandardSalts()" style="border:1px solid #374151;color:#6b7280;margin-left:8px;">&#8635; STANDARD WIEDERHERSTELLEN</button>
@@ -1017,15 +1017,15 @@ function showPage(name, btn) {
 // RECHNER SCRIPT
 
 var SALTS = [
-  { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  origMax:1.5,  step:0.005, val:0.500, preis:23.07, menge:25000, active:true, custom:false, NO3:0.15, NH4:0, Norg:0, P:0, K:0, Ca:0.26*(40.08/56.08), Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-  { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.250, preis:29.67, menge:25000, active:true, custom:false, NO3:0.11, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:0.16*(24.31/40.30), S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-  { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.200, preis:19.33, menge:25000, active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:(24.31/246.48), S:(32.06/246.48), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-  { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.150, preis:59.88, menge:25000, active:true, custom:false, NO3:0, NH4:0, Norg:0, P:(30.97/136.09), K:(39.10/136.09), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-  { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.125, preis:37.49, menge:25000, active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:(2*39.10/174.26), Ca:0, Mg:0, S:(32.06/174.26), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.000, preis:15.99, menge:3000,  active:true, custom:false, NO3:(14.01/101.11), NH4:0, Norg:0, P:0, K:(39.10/101.11), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  origMax:1.5,  step:0.001, val:0.500, preis:23.07, menge:25000, active:true, custom:false, NO3:0.15, NH4:0, Norg:0, P:0, K:0, Ca:0.26*(40.08/56.08), Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.001, val:0.250, preis:29.67, menge:25000, active:true, custom:false, NO3:0.11, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:0.16*(24.31/40.30), S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.001, val:0.200, preis:19.33, menge:25000, active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:(24.31/246.48), S:(32.06/246.48), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.001, val:0.150, preis:59.88, menge:25000, active:true, custom:false, NO3:0, NH4:0, Norg:0, P:(30.97/136.09), K:(39.10/136.09), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.001, val:0.125, preis:37.49, menge:25000, active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:(2*39.10/174.26), Ca:0, Mg:0, S:(32.06/174.26), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.001, val:0.000, preis:15.99, menge:3000,  active:true, custom:false, NO3:(14.01/101.11), NH4:0, Norg:0, P:0, K:(39.10/101.11), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
   { key:'kwg',        label:'Kaliwasserglas',        unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.073, preis:16.31, menge:2500,  active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:0.06724, Ca:0, Mg:0, S:0, Si:0.09672, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
   { key:'h3po4',      label:'Phosphorsaeure 85%',   unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.060, preis:18.90, menge:1000,  active:true, custom:false, NO3:0, NH4:0, Norg:0, P:1.685*0.85*(30.97/97.99), K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-  { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  origMax:5.0,  step:0.05,  val:0.050, preis:22.97, menge:2500,  active:true, custom:false, NO3:0.5*14.01/1000, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+  { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  origMax:5.0,  step:0.001,  val:0.050, preis:22.97, menge:2500,  active:true, custom:false, NO3:0.5*14.01/1000, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
   { key:'wallup',     label:'Wall Up S',             unit:'g/L',  min:0, max:0.15, origMax:0.15, step:0.001, val:0.050, preis:51.05, menge:1000,  active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:0, S:0, Si:0.20, Fe:0.05, Mn:0, Zn:0, Cu:0, B:0 },
   { key:'fetrilon',   label:'Fetrilon Combi 1',      unit:'g/L',  min:0, max:0.06, origMax:0.06, step:0.001, val:0.020, preis:29.26, menge:1000,  active:true, custom:false, NO3:0, NH4:0, Norg:0, P:0, K:0, Ca:0, Mg:0.033*(24.31/40.30), S:0, Si:0, Fe:0.04, Mn:0.04, Zn:0.015, Cu:0.015, B:0.005 }
 ];
@@ -1469,11 +1469,11 @@ function buildSliders() {
       html += '<div><div class="water-label">'+n+' %</div><input class="water-input" id="edit-'+n+'-'+s.key+'" type="number" min="0" max="100" step="0.01" value="'+pct+'"></div>';
     }
     html += '</div>';
-    html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:8px;">';
     html += '<div><div class="water-label">Preis (EUR)</div><input class="water-input" id="edit-preis-'+s.key+'" type="number" min="0" step="0.01" value="'+(s.preis||0)+'"></div>';
     html += '<div><div class="water-label">Gebinde (g/ml)</div><input class="water-input" id="edit-menge-'+s.key+'" type="number" min="1" step="1" value="'+(s.menge||1000)+'"></div>';
     html += '<div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
-    html += '<div><div class="water-label">Slider Max ('+s.unit+')</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="'+s.step+'" value="'+s.max+'"></div>';
+    html += '<div><div class="water-label">Slider Max ('+s.unit+')</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="any" value="'+s.max+'"></div>';
     html += '</div>';
     html += '<button onclick="saveSaltEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #2D6A2D;background:transparent;color:#4ade80;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;">SPEICHERN</button>';
     html += '<button onclick="toggleEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #374151;background:transparent;color:#6b7280;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;margin-left:6px;">ABBRECHEN</button>';
@@ -1663,6 +1663,9 @@ function saveSaltEdit(key) {
     var slEl = document.getElementById('slider-'+key);
     if (slEl) { slEl.max = newMax; if (doses[key] > newMax) { doses[key] = newMax; slEl.value = newMax; } }
   }
+  salt.step = 0.001;
+  var slEl2 = document.getElementById('slider-'+key);
+  if (slEl2) slEl2.step = 0.001;
   var nuts=['NO3','NH4','Norg','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
   for(var j=0;j<nuts.length;j++) {
     var n=nuts[j];
@@ -1709,15 +1712,15 @@ function resetStandardSalts() {
   // Keep custom salts, restore all standard salts
   var customSalts = SALTS.filter(function(s){return s.custom;});
   SALTS = [
-    { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  origMax:1.5,  step:0.005, val:0.500, preis:23.07, menge:25000, active:true, custom:false, N:0.15, P:0, K:0, Ca:0.26*(40.08/56.08), Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-    { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.250, preis:29.67, menge:25000, active:true, custom:false, N:0.11, P:0, K:0, Ca:0, Mg:0.16*(24.31/40.30), S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-    { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.200, preis:19.33, menge:25000, active:true, custom:false, N:0, P:0, K:0, Ca:0, Mg:(24.31/246.48), S:(32.06/246.48), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-    { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.005, val:0.150, preis:59.88, menge:25000, active:true, custom:false, N:0, P:(30.97/136.09), K:(39.10/136.09), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-    { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.125, preis:37.49, menge:25000, active:true, custom:false, N:0, P:0, K:(2*39.10/174.26), Ca:0, Mg:0, S:(32.06/174.26), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-    { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.005, val:0.000, preis:15.99, menge:3000,  active:true, custom:false, N:(14.01/101.11), P:0, K:(39.10/101.11), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'caNO3',      label:'Calciumnitrat',       unit:'g/L',  min:0, max:1.5,  origMax:1.5,  step:0.001, val:0.500, preis:23.07, menge:25000, active:true, custom:false, N:0.15, P:0, K:0, Ca:0.26*(40.08/56.08), Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'mgNO3',      label:'Magnesiumnitrat',      unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.001, val:0.250, preis:29.67, menge:25000, active:true, custom:false, N:0.11, P:0, K:0, Ca:0, Mg:0.16*(24.31/40.30), S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'bittersalz', label:'Bittersalz',           unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.001, val:0.200, preis:19.33, menge:25000, active:true, custom:false, N:0, P:0, K:0, Ca:0, Mg:(24.31/246.48), S:(32.06/246.48), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'mkp',        label:'MKP',                  unit:'g/L',  min:0, max:0.6,  origMax:0.6,  step:0.001, val:0.150, preis:59.88, menge:25000, active:true, custom:false, N:0, P:(30.97/136.09), K:(39.10/136.09), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'sop',        label:'SOP',                  unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.001, val:0.125, preis:37.49, menge:25000, active:true, custom:false, N:0, P:0, K:(2*39.10/174.26), Ca:0, Mg:0, S:(32.06/174.26), Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'kno3',       label:'Kaliumnitrat',          unit:'g/L',  min:0, max:0.8,  origMax:0.8,  step:0.001, val:0.000, preis:15.99, menge:3000,  active:true, custom:false, N:(14.01/101.11), P:0, K:(39.10/101.11), Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
     { key:'kwg',        label:'Kaliwasserglas',        unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.073, preis:16.31, menge:2500,  active:true, custom:false, N:0, P:0, K:0.06724, Ca:0, Mg:0, S:0, Si:0.09672, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
     { key:'h3po4',      label:'Phosphorsaeure 85%',   unit:'ml/L', min:0, max:0.3,  origMax:0.3,  step:0.001, val:0.060, preis:18.90, menge:1000,  active:true, custom:false, N:0, P:1.685*0.85*(30.97/97.99), K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
-    { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  origMax:5.0,  step:0.05,  val:0.050, preis:22.97, menge:2500,  active:true, custom:false, N:0.5*14.01/1000, P:0, K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
+    { key:'hno3',       label:'Salpetersaeure 0,5M',  unit:'ml/L', min:0, max:5.0,  origMax:5.0,  step:0.001,  val:0.050, preis:22.97, menge:2500,  active:true, custom:false, N:0.5*14.01/1000, P:0, K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 },
     { key:'wallup',     label:'Wall Up S',             unit:'g/L',  min:0, max:0.15, origMax:0.15, step:0.001, val:0.050, preis:51.05, menge:1000,  active:true, custom:false, N:0, P:0, K:0, Ca:0, Mg:0, S:0, Si:0.20, Fe:0.05, Mn:0, Zn:0, Cu:0, B:0 },
     { key:'fetrilon',   label:'Fetrilon Combi 1',      unit:'g/L',  min:0, max:0.06, origMax:0.06, step:0.001, val:0.020, preis:29.26, menge:1000,  active:true, custom:false, N:0, P:0, K:0, Ca:0, Mg:0.033*(24.31/40.30), S:0, Si:0, Fe:0.04, Mn:0.04, Zn:0.015, Cu:0.015, B:0.005 }
   ];
@@ -1746,7 +1749,7 @@ function addCustomSalt() {
   var key = 'custom_'+customSaltCounter;
   var unit = document.getElementById('new-salt-unit').value;
   var maxDefault = unit==='ml/L' ? 5.0 : 2.0;
-  var stepDefault = unit==='ml/L' ? 0.01 : 0.005;
+  var stepDefault = 0.001;
   var customMax = parseFloat(document.getElementById('new-salt-max').value);
   if (customMax > 0) maxDefault = customMax;
 
@@ -2130,7 +2133,7 @@ var OPT_NUTRIENTS = [
   { key:'Fe', label:'Eisen',      color:'#f87171', min:0, max:20,  step:0.1, dec:1, val:0,   w:1.5 },
   { key:'Mn', label:'Mangan',     color:'#34d399', min:0, max:5,   step:0.1, dec:1, val:0, w:1   },
   { key:'Zn', label:'Zink',       color:'#818cf8', min:0, max:3,   step:0.1, dec:1, val:0, w:1   },
-  { key:'Cu', label:'Kupfer',     color:'#fb923c', min:0, max:2,   step:0.05,dec:2, val:0, w:1   },
+  { key:'Cu', label:'Kupfer',     color:'#fb923c', min:0, max:2,   step:0.001,dec:2, val:0, w:1   },
   { key:'B',  label:'Bor',        color:'#c084fc', min:0, max:3,   step:0.1, dec:1, val:0, w:1   }
 ];
 
