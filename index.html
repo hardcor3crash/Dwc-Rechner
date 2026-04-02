@@ -7,17 +7,17 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DWC Rechner">
-<meta name="theme-color" content="#0a0f0a">
+<meta name="theme-color" content="#1e2328">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 
 body {
-  background:#0d1410;
-  background-image: radial-gradient(ellipse at 15% 0%, rgba(74,222,128,0.05) 0%, transparent 55%),
-                    radial-gradient(ellipse at 85% 100%, rgba(74,222,128,0.03) 0%, transparent 50%);
-  color:#d1fae5;
+  background:#1e2328;
+  background-image: radial-gradient(ellipse at 15% 0%, rgba(74,222,128,0.07) 0%, transparent 55%),
+                    radial-gradient(ellipse at 85% 100%, rgba(74,222,128,0.04) 0%, transparent 50%);
+  color:#e2f5e8;
   font-family:'DM Sans', 'Courier New', monospace;
   padding:18px;
   padding-top:max(16px,env(safe-area-inset-top));
@@ -35,71 +35,71 @@ body {
 .page-title {
   text-align:center;
   font-family:'DM Sans', sans-serif;
-  font-size:clamp(24px,6vw,38px);
+  font-size:clamp(26px,6vw,42px);
   font-weight:600;
   letter-spacing:-0.5px;
-  color:#e2f5e8;
+  color:#f0fdf4;
   margin-bottom:2px;
 }
-.page-subtitle { text-align:center; font-size:9px; letter-spacing:4px; color:#6b9e7a; margin-bottom:4px; font-family:'Courier New',monospace; }
+.page-subtitle { text-align:center; font-size:10px; letter-spacing:4px; color:#86efac; margin-bottom:4px; font-family:'Courier New',monospace; }
 
 /* NAV */
 .main-nav { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin:18px 0 22px; }
 .main-nav-btn {
   font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px;
-  padding:9px 20px; border-radius:100px;
+  padding:10px 22px; border-radius:100px;
   border:1px solid #1a3d26; background:#111916; color:#4a7a5a;
   cursor:pointer; transition:all 0.2s; text-transform:uppercase;
 }
-.main-nav-btn:hover { border-color:#2d6a3d; color:#6ee7b7; }
+.main-nav-btn:hover { border-color:#2d6a3d; color:#6ee7b7; background:#111916; }
 .main-nav-btn.active { background:linear-gradient(135deg,#4ade80,#22c55e); border-color:#22c55e; color:#0a100c; font-weight:700; }
 
 /* CARDS */
 .card {
-  background:#131a15;
-  border:1px solid rgba(74,222,128,0.08);
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:12px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  background:#161d18;
+  border:1px solid rgba(74,222,128,0.12);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:14px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.25);
 }
-.card-title { font-size:9px; letter-spacing:3px; color:#3d5c47; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:12px; }
-.card-note { font-size:11px; color:#4a7a5a; }
+.card-title { font-size:10px; letter-spacing:3px; color:#6b9e7a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:14px; }
+.card-note { font-size:12px; color:#6b9e7a; }
 
-.section-title { text-align:center; font-size:9px; letter-spacing:4px; color:#5a8a6a; font-family:'Courier New',monospace; margin:28px 0 10px; text-transform:uppercase; }
-.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(74,222,128,0.25),transparent); margin-bottom:18px; }
+.section-title { text-align:center; font-size:10px; letter-spacing:4px; color:#6b9e7a; font-family:'Courier New',monospace; margin:28px 0 10px; text-transform:uppercase; }
+.divider { height:1px; background:linear-gradient(90deg,transparent,rgba(74,222,128,0.3),transparent); margin-bottom:18px; }
 
 /* PRESETS */
 .preset-bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:20px; justify-content:center; }
 .btn-preset {
   font-family:'Courier New',monospace; font-size:9px; letter-spacing:2px;
-  padding:7px 16px; border-radius:100px;
+  padding:8px 18px; border-radius:100px;
   border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
   cursor:pointer; transition:all 0.15s; text-transform:uppercase;
 }
 .btn-preset:hover { border-color:#2d6a3d; color:#6ee7b7; }
-.btn-preset.active { background:rgba(74,222,128,0.1); border-color:#4ade80; color:#4ade80; }
+.btn-preset.active { background:rgba(74,222,128,0.15); border-color:#4ade80; color:#4ade80; }
 .btn-reset {
   font-family:'Courier New',monospace; font-size:9px; letter-spacing:1px;
   padding:7px 14px; border-radius:100px;
-  border:1px solid #1a3d26; background:transparent; color:#4a7a5a;
+  border:1px solid #374151; background:transparent; color:#6b7280;
   cursor:pointer; transition:all 0.15s;
 }
 .btn-reset:hover { border-color:#f87171; color:#f87171; }
 
 /* SLIDERS */
-.slider-row { margin-bottom:16px; }
+.slider-row { margin-bottom:18px; }
 .slider-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
-.slider-label { font-size:14px; font-weight:500; color:#b8d4c0; }
-.slider-value { font-family:'Courier New',monospace; font-size:12px; color:#4ade80; font-weight:600; }
-.slider-minmax { display:flex; justify-content:space-between; font-size:9px; color:#2d4a36; font-family:'Courier New',monospace; margin-top:3px; }
+.slider-label { font-size:15px; font-weight:500; color:#d1fae5; }
+.slider-value { font-family:'Courier New',monospace; font-size:13px; color:#4ade80; font-weight:600; }
+.slider-minmax { display:flex; justify-content:space-between; font-size:9px; color:#4b5563; font-family:'Courier New',monospace; margin-top:3px; }
 
 input[type=range] {
   -webkit-appearance:none; width:100%; height:24px;
   background:transparent; outline:none; cursor:pointer;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  height:4px; border-radius:2px; background:#1a2d1f;
+  height:4px; border-radius:2px; background:#374151;
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance:none; width:20px; height:20px;
@@ -142,12 +142,12 @@ input[type=range]:disabled { opacity:0.35; }
 .bar-header { display:flex; justify-content:space-between; margin-bottom:4px; }
 .bar-label { font-size:13px; font-weight:500; color:#a7c4b0; }
 .bar-value { font-family:'Courier New',monospace; font-size:11px; }
-.bar-bg { height:6px; background:#1a2d1f; border-radius:3px; position:relative; overflow:visible; }
+.bar-bg { height:6px; background:#374151; border-radius:3px; position:relative; overflow:visible; }
 .bar-fill { height:100%; border-radius:3px; min-width:2px; }
 
 /* MICRO */
 .micro-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
-.micro-item { display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:#0f1c13; border-radius:10px; border:1px solid rgba(74,222,128,0.05); }
+.micro-item { display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:#1e2328; border-radius:12px; border:1px solid rgba(74,222,128,0.07); }
 .micro-label { font-size:12px; color:#7aa888; font-weight:500; }
 .micro-val { font-family:'Courier New',monospace; font-size:11px; color:#86efac; }
 
@@ -163,11 +163,11 @@ input[type=range]:disabled { opacity:0.35; }
 @media(max-width:500px) { .water-grid { grid-template-columns:repeat(2,1fr); } }
 .water-label { font-size:8px; letter-spacing:1px; color:#3d5c47; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:4px; }
 .water-input {
-  width:100%; background:#111916; border:1px solid #1a3d26; border-radius:10px;
-  color:#4ade80; font-family:'Courier New',monospace; font-size:12px; padding:7px 10px; outline:none;
+  width:100%; background:#1e2328; border:1px solid #374151; border-radius:12px;
+  color:#4ade80; font-family:'Courier New',monospace; font-size:12px; padding:8px 12px; outline:none;
   transition:border-color 0.15s;
 }
-.water-input:focus { border-color:rgba(74,222,128,0.35); }
+.water-input:focus { border-color:rgba(74,222,128,0.5); }
 
 /* BUTTONS */
 .btn-action {
@@ -198,7 +198,7 @@ input[type=range]:disabled { opacity:0.35; }
 }
 .opt-tap-btn.active { background:rgba(74,222,128,0.15); border-color:#4ade80; color:#4ade80; }
 
-.guide-card { background:#131a15; border:1px solid rgba(74,222,128,0.08); border-radius:16px; margin-bottom:10px; overflow:hidden; }
+.guide-card { background:#161d18; border:1px solid rgba(74,222,128,0.12); border-radius:20px; margin-bottom:10px; overflow:hidden; }
 .card-header { padding:14px 16px; display:flex; align-items:center; gap:12px; cursor:pointer; }
 .card-icon { font-size:18px; }
 .card-header-info { flex:1; }
@@ -596,6 +596,16 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     <div class="card">
       <div class="card-title">EXPORT / IMPORT</div>
       <div class="card-note">Speichern und Laden direkt oben im Rechner-Tab möglich.</div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(74,222,128,0.08);display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <a href="https://raw.githubusercontent.com/hardcor3crash/Dwc-Rechner/main/index.html" download="index.html"
+           style="display:inline-flex;align-items:center;gap:6px;padding:9px 22px;border-radius:100px;border:1px solid #2d6a3d;background:rgba(74,222,128,0.08);color:#6ee7b7;font-family:'Courier New',monospace;font-size:9px;letter-spacing:2px;text-decoration:none;text-transform:uppercase;">
+          ⬇ AKTUELLE VERSION HERUNTERLADEN
+        </a>
+        <a href="https://github.com/hardcor3crash/Dwc-Rechner" target="_blank"
+           style="font-family:'Courier New',monospace;font-size:9px;color:#3d5c47;letter-spacing:1px;text-decoration:none;">
+          github.com/hardcor3crash/Dwc-Rechner ↗
+        </a>
+      </div>
       <div id="io-feedback" class="feedback"></div>
     </div>
   </div>
@@ -3334,7 +3344,7 @@ var SUBSTANCE_DB = [
   {label:"Humintech FULVITAL Plus WSP",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.04,Mn:0.025,Zn:0.025,Cu:0.01,B:0},
   {label:"Hy-Pro Hydro A",formula:"",unit:"ml/L",density:1.0,NO3:0.03045,NH4:0.00105,N:0.0315,P:0,K:0.017434,Ca:0.021021,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Hy-Pro Hydro B",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0.0077,N:0.0077,P:0.012001,K:0.034702,Ca:0,Mg:0.005505,S:0.012045,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Italpollina Hühnermistpellets",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.04,P:0.017456,K:0.033208,Ca:0,Mg:0.003015,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04},
+  {label:"Italpollina Hühnermistpellets",formula:"4-4-4+0.5Mg",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.04,P:0.017456,K:0.033208,Ca:0,Mg:0.003015,S:0,Si:0,Fe:0.008,Mn:0,Zn:0,Cu:0,B:0.002,Norg:0.04},
   {label:"Jost Excello Kupfer Spezial",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0.17875,Mg:0.059094,S:0.0096,Si:0,Fe:0.026,Mn:0,Zn:0.025,Cu:0.05,B:0},
   {label:"Kaliumchlorid KCl",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0.524686,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Knochenmehl-Pellets",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.07,P:0.06546,K:0,Ca:0.15015,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.07},
