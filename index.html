@@ -284,7 +284,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   <h1 class="page-title" style="margin:0;">🌱 VINCEMAANS DWC</h1>
   <button onclick="toggleLang()" id="lang-btn" style="background:none;border:1px solid #4ade80;border-radius:100px;color:#4ade80;font-family:'Courier New',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;cursor:pointer;flex-shrink:0;">🌐 DE</button>
 </div>
-<div class="page-subtitle" id="subtitle-text">NAHRSTOFFRECHNER · v1.0</div>
+<div class="page-subtitle" id="subtitle-text">NAHRSTOFFRECHNER · v1.1</div>
 <div class="divider"></div>
 
 <div class="main-nav">
@@ -1921,7 +1921,7 @@ function applySnapshot(data) {
   if(!data) throw new Error('invalid');
 
   // New format v2/v3 - full session
-  if((data.version===2||data.version===3) && data.presetStates) {
+  if((data.version===2||data.version===3||data.version===4) && data.presetStates) {
     // Restore preset names if saved
     if(data.presetNames) {
       // Restore dynamic preset list
@@ -1956,7 +1956,7 @@ function applySnapshot(data) {
       currentAwPreset = PRESET_LIST[0];
     }
     // Restore custom salts (v3)
-    if(data.version===3) {
+    if(data.version===3||data.version===4) {
       // Remove existing custom salts
       SALTS = SALTS.filter(function(s){return !s.custom;});
       // Remove standard salts that were deleted (not in saved saltKeys)
@@ -3845,7 +3845,7 @@ var currentLang = 'de';
 
 var LANG = {
   de: {
-    subtitle: 'NAHRSTOFFRECHNER · v1.0',
+    subtitle: 'NAHRSTOFFRECHNER · v1.1',
     nav: { rechner:'RECHNER', optimierer:'OPTIMIERER', auswertung:'AUSWERTUNG', anleitung:'ANLEITUNG', einstellungen:'EINSTELLUNGEN', guide:'NAHRSTOFF-GUIDE' },
     langBtn: '🌐 DE',
     // Rechner
@@ -3936,7 +3936,7 @@ var LANG = {
     auswertungFooter: 'DWC AUSWERTUNG 2026',
   },
   en: {
-    subtitle: 'NUTRIENT CALCULATOR · v1.0',
+    subtitle: 'NUTRIENT CALCULATOR · v1.1',
     nav: { rechner:'CALCULATOR', optimierer:'OPTIMIZER', auswertung:'ANALYSIS', anleitung:'GUIDE', einstellungen:'SETTINGS', guide:'NUTRIENT GUIDE' },
     langBtn: '🌐 EN',
     // Rechner
