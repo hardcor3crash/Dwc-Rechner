@@ -301,10 +301,8 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div id="page-rechner" class="page active">
 
 
-<div class="preset-bar">
-  <button class="btn-preset active" onclick="loadPreset('VEG')">VEG</button>
-  <button class="btn-preset" onclick="loadPreset('BLOOM')">BLOOM</button>
-  <button class="btn-preset" onclick="loadPreset('EXPERIMENT')">EXPERIMENT</button>
+<div class="preset-bar" id="preset-bar-btns">
+  <!-- built by buildPresetBar() -->
   <div style="width:1px;height:20px;background:#1a3d26;margin:0 4px;"></div>
   <input type="text" id="recipe-name-top" placeholder="Rezeptname..." style="background:#111916;border:1px solid #1a3d26;border-radius:100px;color:#4ade80;font-family:'Courier New',monospace;font-size:9px;padding:7px 12px;outline:none;width:130px;">
   <button class="btn-preset" onclick="doExportTop()" style="border-color:#2d6a3d;color:#6ee7b7;">💾</button>
@@ -443,7 +441,6 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 
 
-<div class="footer">DWC NAHRSTOFFRECHNER 2026</div>
 </div>
 
 
@@ -561,7 +558,6 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 
 </div>
-<div class="footer" id="einstellungen-footer">DWC EINSTELLUNGEN 2026</div>
 </div>
 
 <!-- GUIDE PAGE -->
@@ -580,7 +576,6 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 
 
-<div class="footer">DWC NAHRSTOFF-GUIDE 2026</div>
 </div>
 
 <!-- OPTIMIERER PAGE -->
@@ -589,16 +584,16 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 
 <div class="section-title">REZEPT-OPTIMIERER</div>
 <div class="divider"></div>
-<div class="card-note" id="opt-main-note" style="text-align:center;margin-bottom:20px;font-size:12px;color:#6b9e7a;">Ziel-PPMs mit Slidern einstellen → optimale Salzmischung wird berechnet</div>
 
-<!-- Preset load buttons -->
-<div id="opt-preset-label" style="margin-bottom:8px;text-align:center;font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;">ZIELWERTE LADEN AUS AKTUELLEM PRESET</div>
-<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:6px;">
-  <button class="filter-btn" id="opt-btn-VEG" onclick="loadOptPreset('VEG',this)">VEG</button>
-  <button class="filter-btn" id="opt-btn-BLOOM" onclick="loadOptPreset('BLOOM',this)">BLOOM</button>
-  <button class="filter-btn" id="opt-btn-EXPERIMENT" onclick="loadOptPreset('EXPERIMENT',this)">EXPERIMENT</button>
+<!-- Preset load card -->
+<div class="card" style="margin-bottom:12px;text-align:center;">
+  <div class="card-title" id="opt-preset-label">ZIELWERTE LADEN AUS AKTUELLEM PRESET</div>
+  <div class="card-note" id="opt-main-note" style="margin-bottom:16px;">Ziel-PPMs mit Slidern einstellen → optimale Salzmischung wird berechnet</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;" id="opt-preset-btn-wrap">
+    <!-- built by buildOptPresetBtns() -->
+  </div>
+  <div id="opt-preset-hint" style="font-size:10px;color:#3d5c47;">Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset</div>
 </div>
-<div id="opt-preset-hint" style="text-align:center;font-size:10px;color:#3d5c47;margin-bottom:20px;">Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset</div>
 
 <!-- Water slider -->
 <div class="card" style="margin-bottom:12px;">
@@ -626,11 +621,20 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 
 <!-- Results -->
-<div class="card" style="background:rgba(74,222,128,0.03);margin-bottom:20px;">
+<div class="card" style="background:rgba(74,222,128,0.03);margin-bottom:12px;">
   <div class="card-title" data-lang="optimiertesRezept">OPTIMIERTES REZEPT</div>
   <div id="opt-result">
     <div style="font-size:11px;color:#3d5c47;text-align:center;padding:20px;" id="opt-result-placeholder">Preset laden um zu starten...</div>
   </div>
+</div>
+
+<!-- Transfer buttons card -->
+<div class="card" style="margin-bottom:12px;text-align:center;" id="opt-transfer-wrap">
+  <div class="card-title" id="opt-transfer-label">REZEPT ÜBERTRAGEN IN</div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;" id="opt-transfer-btn-wrap">
+    <!-- built by buildTransferBtns() -->
+  </div>
+  <div id="opt-transfer-feedback" style="font-size:10px;color:#4ade80;margin-top:10px;min-height:16px;"></div>
 </div>
 
 <!-- Gewichtung -->
@@ -638,16 +642,6 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   <div class="card-title" data-lang="prioritaeten">PRIORITÄTEN</div>
   <div class="card-note" style="margin-bottom:14px;" id="opt-prio-note">Wie stark soll der Optimierer auf Abweichungen vom Zielwert reagieren? <strong style="color:#b8d4c0;">3 = muss stimmen</strong>, <strong style="color:#4a7a5a;">1 = egal</strong>. Alle Nährstoffe werden prozentual gewichtet.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;" id="opt-weight-sliders"></div>
-</div>
-
-<!-- Transfer buttons -->
-<div style="text-align:center;margin:20px 0;" id="opt-transfer-wrap">
-  <div id="opt-transfer-label" style="font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;margin-bottom:12px;">REZEPT ÜBERTRAGEN IN</div>
-  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-    <button onclick="transferToRechner('VEG')" style="padding:10px 24px;border-radius:100px;border:1px solid #4ade80;background:rgba(74,222,128,0.1);color:#4ade80;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ VEG</button>
-    <button onclick="transferToRechner('BLOOM')" style="padding:10px 24px;border-radius:100px;border:1px solid #fb923c;background:rgba(251,146,60,0.1);color:#fb923c;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ BLOOM</button>
-    <button onclick="transferToRechner('EXPERIMENT')" style="padding:10px 24px;border-radius:100px;border:1px solid #a78bfa;background:rgba(167,139,250,0.1);color:#a78bfa;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ EXPERIMENT</button>
-  </div>
 </div>
 
 </div>
@@ -663,6 +657,22 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div id="page-auswertung" class="page">
 <div class="max-w">
 
+  <!-- Rezept-Auswahl -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title" id="auswertung-recipe-title">REZEPT AUSWÄHLEN</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;" id="aw-preset-btns">
+      <button class="filter-btn active" id="aw-btn-VEG" onclick="setAwPreset('VEG',this)">VEG</button>
+      <button class="filter-btn" id="aw-btn-BLOOM" onclick="setAwPreset('BLOOM',this)">BLOOM</button>
+      <button class="filter-btn" id="aw-btn-EXPERIMENT" onclick="setAwPreset('EXPERIMENT',this)">EXPERIMENT</button>
+    </div>
+    <div class="card-title" id="aw-phase-title" style="margin-bottom:8px;">WACHSTUMSPHASE</div>
+    <div style="display:flex;gap:8px;">
+      <button class="filter-btn active" id="aw-phase-veg" onclick="setAwPhase('veg',this)" style="border-color:#4ade80;color:#4ade80;">🌿 VEG</button>
+      <button class="filter-btn" id="aw-phase-bloom" onclick="setAwPhase('bloom',this)" style="border-color:#fb923c;color:#fb923c;">🌸 BLOOM</button>
+    </div>
+  </div>
+
+  <!-- Studie-Auswahl -->
   <div class="card" style="margin-bottom:12px;">
     <div class="card-title" id="auswertung-title" data-lang="auswertungTitle">REFERENZ-STUDIE</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -677,20 +687,383 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     <div id="study-summary" style="margin-top:8px;"></div>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
-    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#4ade80;padding:6px;border-bottom:2px solid #4ade80;" id="aw-col-veg">VEG</div>
-    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#fb923c;padding:6px;border-bottom:2px solid #fb923c;" id="aw-col-bloom">BLOOM</div>
-    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#a78bfa;padding:6px;border-bottom:2px solid #a78bfa;" id="aw-col-experiment">EXPERIMENT</div>
+  <!-- Vergleich -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title" id="aw-compare-title">VERGLEICH</div>
+    <div id="auswertung-content"></div>
   </div>
 
-  <div id="auswertung-content"></div>
-
 </div>
-<div class="footer" id="auswertung-footer" data-lang="auswertungFooter">DWC AUSWERTUNG 2026</div>
 </div>
 
 <script>
 var currentLang = 'de';
+
+// =====================
+// PRESET NAMES
+// =====================
+var PRESET_NAMES = { VEG:'VEG', BLOOM:'BLOOM', EXPERIMENT:'EXPERIMENT' };
+
+function renamePreset(key) {
+  var isEN = currentLang === 'en';
+  var current = PRESET_NAMES[key];
+
+  // Build modal overlay
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;';
+
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:#161d18;border:1px solid rgba(74,222,128,0.3);border-radius:20px;padding:24px;width:280px;max-width:90vw;';
+
+  var title = document.createElement('div');
+  title.style.cssText = 'font-size:9px;letter-spacing:2px;color:#4ade80;font-family:\'Courier New\',monospace;margin-bottom:16px;';
+  title.textContent = isEN ? 'RENAME RECIPE' : 'REZEPT UMBENENNEN';
+
+  var inp = document.createElement('input');
+  inp.type = 'text';
+  inp.value = current;
+  inp.maxLength = 16;
+  inp.style.cssText = 'width:100%;background:#0f2919;border:1px solid #4ade80;border-radius:10px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:16px;padding:10px 14px;outline:none;box-sizing:border-box;text-transform:uppercase;margin-bottom:16px;';
+
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:10px;';
+
+  var saveBtn = document.createElement('button');
+  saveBtn.style.cssText = 'flex:1;padding:10px;border-radius:10px;border:1px solid #4ade80;background:rgba(74,222,128,0.15);color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;cursor:pointer;';
+  saveBtn.textContent = isEN ? 'SAVE' : 'SPEICHERN';
+
+  var cancelBtn = document.createElement('button');
+  cancelBtn.style.cssText = 'flex:1;padding:10px;border-radius:10px;border:1px solid #374151;background:transparent;color:#6b7280;font-family:\'Courier New\',monospace;font-size:12px;cursor:pointer;';
+  cancelBtn.textContent = isEN ? 'CANCEL' : 'ABBRECHEN';
+
+  var delBtn = null;
+  if (PRESET_LIST.length > 1) {
+    delBtn = document.createElement('button');
+    delBtn.style.cssText = 'padding:10px 14px;border-radius:10px;border:1px solid #f87171;background:transparent;color:#f87171;font-family:\'Courier New\',monospace;font-size:14px;cursor:pointer;';
+    delBtn.textContent = '🗑';
+    btnRow.appendChild(delBtn);
+  }
+
+  btnRow.appendChild(cancelBtn);
+  btnRow.appendChild(saveBtn);
+  modal.appendChild(title);
+  modal.appendChild(inp);
+  modal.appendChild(btnRow);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Auto-focus
+  setTimeout(function(){ inp.focus(); inp.select(); }, 50);
+
+  function doSave() {
+    var val = inp.value.trim().toUpperCase().substring(0, 16) || current;
+    PRESET_NAMES[key] = val;
+    document.body.removeChild(overlay);
+    buildPresetBar();
+    buildOptPresetBtns();
+    buildAwPresetBtns();
+    buildTransferBtns();
+    updatePresetButtons();
+  }
+
+  function doCancel() {
+    document.body.removeChild(overlay);
+  }
+
+  function doDelete() {
+    document.body.removeChild(overlay);
+    deletePreset(key);
+  }
+
+  saveBtn.onclick = doSave;
+  cancelBtn.onclick = doCancel;
+  if (delBtn) delBtn.onclick = doDelete;
+  overlay.onclick = function(e){ if(e.target===overlay) doCancel(); };
+  inp.onkeydown = function(e){ if(e.key==='Enter') doSave(); if(e.key==='Escape') doCancel(); };
+}
+
+var _presetPressTimer = null;
+function presetPressStart(key) {
+  _presetPressTimer = setTimeout(function(){ renamePreset(key); }, 600);
+}
+function presetPressEnd() {
+  clearTimeout(_presetPressTimer);
+}
+
+function buildPresetBar() {
+  var bar = document.getElementById('preset-bar-btns');
+  if (!bar) return;
+  // Remove existing preset buttons (keep divider, input, save/load)
+  var toRemove = bar.querySelectorAll('.preset-dynamic');
+  for (var i=0; i<toRemove.length; i++) toRemove[i].remove();
+  // Insert buttons before the divider
+  var divider = bar.querySelector('div[style*="1px"]');
+  PRESET_LIST.forEach(function(key) {
+    var btn = document.createElement('button');
+    btn.className = 'btn-preset preset-dynamic' + (key === currentPreset ? ' active' : '');
+    btn.id = 'preset-btn-'+key;
+    btn.textContent = PRESET_NAMES[key] || key;
+    btn.onclick = function(){ loadPreset(key); };
+    btn.ondblclick = function(){ renamePreset(key); };
+    btn.ontouchstart = function(){ presetPressStart(key); };
+    btn.ontouchend = presetPressEnd;
+    btn.title = currentLang==='en' ? 'Double-click to rename' : 'Doppelklick zum Umbenennen';
+    bar.insertBefore(btn, divider);
+  });
+  // Add new preset button
+  var addBtn = document.createElement('button');
+  addBtn.className = 'btn-preset preset-dynamic';
+  addBtn.textContent = '+';
+  addBtn.title = currentLang==='en' ? 'New recipe' : 'Neues Rezept';
+  addBtn.style.cssText = 'border-color:#2d6a3d;color:#4ade80;font-weight:700;padding:6px 10px;';
+  addBtn.onclick = addPreset;
+  bar.insertBefore(addBtn, divider);
+}
+
+function addPreset() {
+  var isEN = currentLang === 'en';
+
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;';
+
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:#161d18;border:1px solid rgba(74,222,128,0.3);border-radius:20px;padding:24px;width:300px;max-width:90vw;';
+
+  var title = document.createElement('div');
+  title.style.cssText = 'font-size:9px;letter-spacing:2px;color:#4ade80;font-family:\'Courier New\',monospace;margin-bottom:16px;';
+  title.textContent = isEN ? 'NEW RECIPE' : 'NEUES REZEPT';
+
+  var nameLabel = document.createElement('div');
+  nameLabel.style.cssText = 'font-size:10px;color:#6b9e7a;margin-bottom:6px;';
+  nameLabel.textContent = isEN ? 'Name:' : 'Name:';
+
+  var nameInp = document.createElement('input');
+  nameInp.type = 'text';
+  nameInp.placeholder = isEN ? 'RECIPE NAME' : 'REZEPTNAME';
+  nameInp.maxLength = 16;
+  nameInp.style.cssText = 'width:100%;background:#0f2919;border:1px solid #4ade80;border-radius:10px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:16px;padding:10px 14px;outline:none;box-sizing:border-box;text-transform:uppercase;margin-bottom:16px;';
+
+  var copyLabel = document.createElement('div');
+  copyLabel.style.cssText = 'font-size:10px;color:#6b9e7a;margin-bottom:8px;';
+  copyLabel.textContent = isEN ? 'Copy from:' : 'Kopieren von:';
+
+  var copyWrap = document.createElement('div');
+  copyWrap.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;';
+
+  var selectedSource = null;
+
+  // Empty option
+  var emptyBtn = document.createElement('button');
+  emptyBtn.style.cssText = 'padding:7px 14px;border-radius:100px;border:1px solid #374151;background:transparent;color:#6b7280;font-family:\'Courier New\',monospace;font-size:10px;cursor:pointer;';
+  emptyBtn.textContent = isEN ? 'EMPTY' : 'LEER';
+  emptyBtn.onclick = function() {
+    selectedSource = null;
+    copyWrap.querySelectorAll('button').forEach(function(b){ b.style.borderColor='#374151'; b.style.color='#6b7280'; b.style.background='transparent'; });
+    emptyBtn.style.borderColor = '#4ade80';
+    emptyBtn.style.color = '#4ade80';
+    emptyBtn.style.background = 'rgba(74,222,128,0.1)';
+  };
+  copyWrap.appendChild(emptyBtn);
+
+  // One button per existing preset
+  PRESET_LIST.forEach(function(key) {
+    var btn = document.createElement('button');
+    btn.style.cssText = 'padding:7px 14px;border-radius:100px;border:1px solid #374151;background:transparent;color:#6b7280;font-family:\'Courier New\',monospace;font-size:10px;cursor:pointer;';
+    btn.textContent = PRESET_NAMES[key] || key;
+    btn.onclick = function() {
+      selectedSource = key;
+      copyWrap.querySelectorAll('button').forEach(function(b){ b.style.borderColor='#374151'; b.style.color='#6b7280'; b.style.background='transparent'; });
+      btn.style.borderColor = '#4ade80';
+      btn.style.color = '#4ade80';
+      btn.style.background = 'rgba(74,222,128,0.1)';
+    };
+    copyWrap.appendChild(btn);
+  });
+
+  // Pre-select current preset
+  copyWrap.querySelectorAll('button')[PRESET_LIST.indexOf(currentPreset)+1].click();
+
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:10px;';
+
+  var cancelBtn = document.createElement('button');
+  cancelBtn.style.cssText = 'flex:1;padding:10px;border-radius:10px;border:1px solid #374151;background:transparent;color:#6b7280;font-family:\'Courier New\',monospace;font-size:12px;cursor:pointer;';
+  cancelBtn.textContent = isEN ? 'CANCEL' : 'ABBRECHEN';
+
+  var createBtn = document.createElement('button');
+  createBtn.style.cssText = 'flex:1;padding:10px;border-radius:10px;border:1px solid #4ade80;background:rgba(74,222,128,0.15);color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;cursor:pointer;font-weight:700;';
+  createBtn.textContent = isEN ? 'CREATE' : 'ERSTELLEN';
+
+  btnRow.appendChild(cancelBtn);
+  btnRow.appendChild(createBtn);
+
+  modal.appendChild(title);
+  modal.appendChild(nameLabel);
+  modal.appendChild(nameInp);
+  modal.appendChild(copyLabel);
+  modal.appendChild(copyWrap);
+  modal.appendChild(btnRow);
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  setTimeout(function(){ nameInp.focus(); }, 50);
+
+  cancelBtn.onclick = function() { document.body.removeChild(overlay); };
+  overlay.onclick = function(e){ if(e.target===overlay) document.body.removeChild(overlay); };
+
+  createBtn.onclick = function() {
+    var name = nameInp.value.trim().toUpperCase().substring(0, 16);
+    if (!name) { nameInp.style.borderColor='#f87171'; nameInp.focus(); return; }
+    document.body.removeChild(overlay);
+
+    presetIdCounter++;
+    var key = 'PRESET_' + presetIdCounter;
+    PRESET_NAMES[key] = name;
+    PRESET_LIST.push(key);
+
+    // Copy source state or create empty
+    savePresetState(currentPreset);
+    if (selectedSource && presetStates[selectedSource]) {
+      // Deep copy
+      var src = presetStates[selectedSource];
+      var newDoses = {}, newMaxes = {};
+      for (var k in src.doses) newDoses[k] = src.doses[k];
+      for (var k in src.maxes) newMaxes[k] = src.maxes[k];
+      presetStates[key] = { doses:newDoses, maxes:newMaxes, volume:src.volume, tapPct:src.tapPct };
+      PRESET_WATER[key] = { volume:src.volume, tapPct:src.tapPct };
+    } else if (selectedSource) {
+      // Source not yet saved – copy current live doses if it's the active preset
+      var liveDoses = {}, liveMaxes = {};
+      for (var i=0; i<SALTS.length; i++) {
+        liveDoses[SALTS[i].key] = selectedSource===currentPreset ? doses[SALTS[i].key] : (PRESETS[selectedSource]||{})[SALTS[i].key]||0;
+        liveMaxes[SALTS[i].key] = SALTS[i].origMax;
+      }
+      presetStates[key] = { doses:liveDoses, maxes:liveMaxes, volume:volume, tapPct:tapPct };
+      PRESET_WATER[key] = { volume:volume, tapPct:tapPct };
+    } else {
+      // Empty
+      var emptyDoses = {}, emptyMaxes = {};
+      for (var i=0; i<SALTS.length; i++) {
+        emptyDoses[SALTS[i].key] = 0;
+        emptyMaxes[SALTS[i].key] = SALTS[i].origMax;
+      }
+      presetStates[key] = { doses:emptyDoses, maxes:emptyMaxes, volume:50, tapPct:0.25 };
+      PRESET_WATER[key] = { volume:50, tapPct:0.25 };
+    }
+
+    buildPresetBar();
+    buildOptPresetBtns();
+    buildAwPresetBtns();
+    buildTransferBtns();
+    loadPreset(key);
+  };
+
+  nameInp.onkeydown = function(e){ if(e.key==='Enter') createBtn.click(); if(e.key==='Escape') cancelBtn.click(); };
+}
+
+function deletePreset(key) {
+  if (PRESET_LIST.length <= 1) return;
+  var isEN = currentLang === 'en';
+  var name = PRESET_NAMES[key] || key;
+
+  // Confirmation modal
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;';
+
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:#161d18;border:1px solid rgba(248,113,113,0.3);border-radius:20px;padding:24px;width:280px;max-width:90vw;text-align:center;';
+  modal.innerHTML = '<div style="font-size:9px;letter-spacing:2px;color:#f87171;font-family:\'Courier New\',monospace;margin-bottom:12px;">'+(isEN?'DELETE RECIPE':'REZEPT LÖSCHEN')+'</div>'+
+    '<div style="font-size:13px;color:#b8d4c0;margin-bottom:20px;">"'+name+'" '+(isEN?'permanently delete?':'wirklich löschen?')+'</div>'+
+    '<div style="display:flex;gap:10px;">'+
+    '<button id="del-cancel" style="flex:1;padding:10px;border-radius:10px;border:1px solid #374151;background:transparent;color:#6b7280;font-family:\'Courier New\',monospace;font-size:12px;cursor:pointer;">'+(isEN?'CANCEL':'ABBRECHEN')+'</button>'+
+    '<button id="del-confirm" style="flex:1;padding:10px;border-radius:10px;border:1px solid #f87171;background:rgba(248,113,113,0.15);color:#f87171;font-family:\'Courier New\',monospace;font-size:12px;cursor:pointer;font-weight:700;">'+(isEN?'DELETE':'LÖSCHEN')+'</button>'+
+    '</div>';
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  document.getElementById('del-cancel').onclick = function() {
+    document.body.removeChild(overlay);
+  };
+  document.getElementById('del-confirm').onclick = function() {
+    document.body.removeChild(overlay);
+    var idx = PRESET_LIST.indexOf(key);
+    PRESET_LIST.splice(idx, 1);
+    delete PRESET_NAMES[key];
+    delete PRESET_WATER[key];
+    delete presetStates[key];
+    var newKey = PRESET_LIST[Math.max(0, idx-1)];
+    buildPresetBar();
+    buildOptPresetBtns();
+    buildAwPresetBtns();
+    buildTransferBtns();
+    loadPreset(newKey);
+  };
+}
+
+function updatePresetButtons() {
+  PRESET_LIST.forEach(function(key) {
+    var btn = document.getElementById('preset-btn-'+key);
+    if (btn) {
+      btn.textContent = PRESET_NAMES[key] || key;
+      btn.classList.toggle('active', key === currentPreset);
+    }
+    var optBtn = document.getElementById('opt-btn-'+key);
+    if (optBtn) optBtn.textContent = PRESET_NAMES[key] || key;
+    var awBtn = document.getElementById('aw-btn-'+key);
+    if (awBtn) awBtn.textContent = PRESET_NAMES[key] || key;
+  });
+  // Transfer buttons
+  var tfBtns = document.querySelectorAll('#opt-transfer-btn-wrap button[data-preset]');
+  for (var i=0; i<tfBtns.length; i++) {
+    var k = tfBtns[i].getAttribute('data-preset');
+    if (PRESET_NAMES[k]) tfBtns[i].textContent = '→ '+(PRESET_NAMES[k]||k);
+  }
+}
+
+function buildOptPresetBtns() {
+  var wrap = document.getElementById('opt-preset-btn-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  PRESET_LIST.forEach(function(key) {
+    var btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.id = 'opt-btn-'+key;
+    btn.textContent = PRESET_NAMES[key] || key;
+    btn.onclick = function(){ loadOptPreset(key, btn); };
+    wrap.appendChild(btn);
+  });
+}
+
+function buildAwPresetBtns() {
+  var wrap = document.getElementById('aw-preset-btns');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  PRESET_LIST.forEach(function(key) {
+    var btn = document.createElement('button');
+    btn.className = 'filter-btn' + (key === currentAwPreset ? ' active' : '');
+    btn.id = 'aw-btn-'+key;
+    btn.textContent = PRESET_NAMES[key] || key;
+    btn.onclick = (function(k, b){ return function(){ setAwPreset(k, b); }; })(key, btn);
+    wrap.appendChild(btn);
+  });
+}
+
+function buildTransferBtns() {
+  var wrap = document.getElementById('opt-transfer-btn-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  var colors = { VEG:'#4ade80', BLOOM:'#fb923c', EXPERIMENT:'#a78bfa' };
+  PRESET_LIST.forEach(function(key) {
+    var color = colors[key] || '#6ee7b7';
+    var btn = document.createElement('button');
+    btn.setAttribute('data-preset', key);
+    btn.style.cssText = 'padding:12px 22px;border-radius:100px;border:2px solid '+color+';background:rgba(0,0,0,0.2);color:'+color+';cursor:pointer;font-family:\'Courier New\',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;';
+    btn.textContent = '→ '+(PRESET_NAMES[key]||key);
+    btn.onclick = (function(k){ return function(){ transferToRechner(k); }; })(key);
+    wrap.appendChild(btn);
+  });
+}
 function showPage(name, btn) {
   var pages = document.querySelectorAll('.page');
   for (var i=0; i<pages.length; i++) pages[i].classList.remove('active');
@@ -730,6 +1103,10 @@ var SALTS = [
 
 // Custom salts counter for unique keys
 var customSaltCounter = 0;
+
+// Dynamic preset list
+var PRESET_LIST = ['VEG', 'BLOOM', 'EXPERIMENT'];
+var presetIdCounter = 3;
 
 var PRESETS = {
   VEG:        { caNO3:0.650, mgNO3:0.225, bittersalz:0.300, mkp:0.100, sop:0.000, kno3:0.300, kwg:0.073, h3po4:0.060, hno3:0.050, wallup:0.040, fetrilon:0.025 },
@@ -1471,8 +1848,11 @@ function doExport() {
   var data={
     name:sessionName,
     datum:new Date().toLocaleDateString('de-DE'),
-    version:3,
+    version:4,
     currentPreset:currentPreset,
+    presetNames: JSON.parse(JSON.stringify(PRESET_NAMES)),
+    presetList: PRESET_LIST.slice(),
+    presetIdCounter: presetIdCounter,
     presetStates:{},
     volume:volume,
     tapPct:tapPct,
@@ -1481,14 +1861,14 @@ function doExport() {
     saltActive:{},
     saltKeys:[]
   };
-  // Save all 3 preset states
-  for(var pname in presetStates) {
+  // Save all preset states
+  for(var pi=0; pi<PRESET_LIST.length; pi++) {
+    var pname = PRESET_LIST[pi];
     if(presetStates[pname]) {
       data.presetStates[pname]=presetStates[pname];
     } else {
-      // Save default preset values
       data.presetStates[pname]={doses:{},maxes:{}};
-      var p=PRESETS[pname];
+      var p=PRESETS[pname]||{};
       for(var i=0;i<SALTS.length;i++) {
         data.presetStates[pname].doses[SALTS[i].key]=p[SALTS[i].key]||0;
         data.presetStates[pname].maxes[SALTS[i].key]=SALTS[i].origMax;
@@ -1538,6 +1918,35 @@ function applySnapshot(data) {
 
   // New format v2/v3 - full session
   if((data.version===2||data.version===3) && data.presetStates) {
+    // Restore preset names if saved
+    if(data.presetNames) {
+      // Restore dynamic preset list
+      if(data.presetList && data.presetList.length) {
+        PRESET_LIST = data.presetList.slice();
+        presetIdCounter = data.presetIdCounter || PRESET_LIST.length;
+        // Reset structures
+        PRESET_WATER = {};
+        presetStates = {};
+        PRESET_NAMES = {};
+        PRESET_LIST.forEach(function(k) {
+          PRESET_NAMES[k] = data.presetNames[k] || k;
+          PRESET_WATER[k] = { volume:50, tapPct:0.25 };
+          presetStates[k] = null;
+        });
+      } else {
+        // Old format – just restore names
+        PRESET_NAMES.VEG = data.presetNames.VEG || 'VEG';
+        PRESET_NAMES.BLOOM = data.presetNames.BLOOM || 'BLOOM';
+        PRESET_NAMES.EXPERIMENT = data.presetNames.EXPERIMENT || 'EXPERIMENT';
+      }
+      buildPresetBar();
+      buildOptPresetBtns();
+      buildAwPresetBtns();
+      buildTransferBtns();
+      updatePresetButtons();
+      // Reset auswertung preset to first in list
+      currentAwPreset = PRESET_LIST[0];
+    }
     // Restore custom salts (v3)
     if(data.version===3) {
       // Remove existing custom salts
@@ -1700,6 +2109,11 @@ function initRechner() {
   loadPreset('VEG');
   window.presetsLoaded = true;
   renderRef();
+  buildPresetBar();
+  buildOptPresetBtns();
+  buildAwPresetBtns();
+  buildTransferBtns();
+  updatePresetButtons();
   window.rechnerReady = true;
 }
 
@@ -2100,22 +2514,29 @@ function runOptimizer() {
 }
 
 function renderOptimizerResult(doses, salts, final, vol, tN, tP, tK, tCa, tMg, tS, tSi, tFe, tMn, tZn, tCu, tB) {
+  var isEN = currentLang === 'en';
   var html = '';
   var hasResult = false;
 
-  // Salt dosages
+  // ── SALT DOSAGES CARD ──
+  var saltRows = '';
   for (var i=0;i<salts.length;i++) {
     var s=salts[i], d=doses[s.key];
     if (d < 0.001) continue;
     hasResult = true;
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(74,222,128,0.05);">';
-    html += '<span style="font-size:13px;color:#a7c4b0;font-weight:500;">'+s.label+'</span>';
-    html += '<span style="font-family:monospace;font-size:13px;color:#4ade80;font-weight:600;">'+fmt(d,3)+' '+s.unit+'</span>';
-    html += '</div>';
+    saltRows += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(74,222,128,0.06);">';
+    saltRows += '<span style="font-size:12px;color:#b8d4c0;">'+s.label+'</span>';
+    saltRows += '<span style="font-family:\'Courier New\',monospace;font-size:14px;color:#4ade80;font-weight:700;">'+fmt(d,3)+'<span style="font-size:10px;color:#4a7a5a;margin-left:4px;">'+s.unit+'</span></span>';
+    saltRows += '</div>';
   }
-  if (!hasResult) html += '<div style="font-size:11px;color:#facc15;padding:8px 0;">Nur Wasser – keine Salze nötig.</div>';
+  if (!saltRows) saltRows = '<div style="font-size:11px;color:#facc15;padding:8px 0;">'+(isEN?'Water only – no salts needed.':'Nur Wasser – keine Salze nötig.')+'</div>';
 
-  // EC
+  html += '<div style="background:#0f1a12;border-radius:14px;padding:14px 16px;margin-bottom:12px;">';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:#4ade80;font-family:\'Courier New\',monospace;margin-bottom:10px;">'+(isEN?'DOSAGES / LITER':'DOSIERUNGEN / LITER')+'</div>';
+  html += saltRows;
+  html += '</div>';
+
+  // ── EC CARD ──
   var t = optTapPct;
   var lmc = {NO3:71.5,NH4:73.5,H2PO4:33.0,K:73.5,Ca:59.5,Mg:53.1,SO4:80.0,Fe:54.0,Mn:53.5};
   var ecSol=0, ecLiq=0;
@@ -2134,50 +2555,56 @@ function renderOptimizerResult(doses, salts, final, vol, tN, tP, tK, tCa, tMg, t
   }
   var ec=Math.max(0,ecSol+ecLiq)+tap.EC*t;
   var ecColor=ec<1.2?'#60a5fa':ec<1.8?'#4ade80':'#fb923c';
+  var ecLabel=ec<1.2?(isEN?'too low':'zu niedrig'):ec<1.8?'optimal':(isEN?'too high':'zu hoch');
 
-  // Verhältnisse
+  // Ratios
   var N=final.N||0,P=final.P||0,K=final.K||0,Ca=final.Ca||0,Mg=final.Mg||0;
   var tN2=OPT_NUTRIENTS[0].val,tP2=OPT_NUTRIENTS[1].val,tK2=OPT_NUTRIENTS[2].val;
   var tCa2=OPT_NUTRIENTS[3].val,tMg2=OPT_NUTRIENTS[4].val;
   var ratios=[
     {label:'Ca : Mg',ist:Mg>0?Ca/Mg:0,soll:tMg2>0?tCa2/tMg2:0,ideal:'2–3 : 1',f:function(v){return v.toFixed(2)+':1';}},
-    {label:'N : K',ist:K>0?N/K:0,soll:tK2>0?tN2/tK2:0,ideal:'VEG ~1 BLOOM ~0,5',f:function(v){return v.toFixed(2);}},
-    {label:'K : Ca',ist:Ca>0?K/Ca:0,soll:tCa2>0?tK2/tCa2:0,ideal:'< 1,0',f:function(v){return v.toFixed(2);}},
+    {label:'N : K',ist:K>0?N/K:0,soll:tK2>0?tN2/tK2:0,ideal:'VEG ~1 / BLOOM ~0.5',f:function(v){return v.toFixed(2);}},
+    {label:'K : Ca',ist:Ca>0?K/Ca:0,soll:tCa2>0?tK2/tCa2:0,ideal:'< 1.0',f:function(v){return v.toFixed(2);}},
     {label:'K : P',ist:P>0?K/P:0,soll:tP2>0?tK2/tP2:0,ideal:'BLOOM 3–5',f:function(v){return v.toFixed(1);}}
   ];
 
-  html += '<div style="margin-top:14px;padding:12px 0;border-top:1px solid rgba(74,222,128,0.1);">';
-  html += '<div style="display:flex;gap:16px;align-items:center;">';
-  html += '<div style="text-align:center;min-width:64px;">';
-  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:monospace;">EC</div>';
-  html += '<div style="font-size:28px;font-weight:600;color:'+ecColor+';">'+ec.toFixed(2)+'</div>';
-  html += '<div style="font-size:9px;color:#3d5c47;font-family:monospace;">mS/cm</div>';
+  html += '<div style="display:grid;grid-template-columns:auto 1fr;gap:10px;margin-bottom:12px;">';
+  // EC box
+  html += '<div style="background:#0f1a12;border-radius:14px;padding:14px 16px;text-align:center;min-width:80px;">';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:\'Courier New\',monospace;margin-bottom:4px;">EC</div>';
+  html += '<div style="font-size:30px;font-weight:700;color:'+ecColor+';line-height:1;">'+ec.toFixed(2)+'</div>';
+  html += '<div style="font-size:9px;color:#3d5c47;font-family:\'Courier New\',monospace;margin-top:2px;">mS/cm</div>';
+  html += '<div style="font-size:9px;color:'+ecColor+';margin-top:4px;">'+ecLabel+'</div>';
   html += '</div>';
-  html += '<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:5px;">';
+  // Ratios grid
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">';
   for (var i=0;i<ratios.length;i++) {
     var r=ratios[i];
     var rdiff=r.soll>0?Math.abs(r.ist-r.soll)/r.soll*100:0;
     var rcol=r.soll===0?'#6b7280':rdiff<15?'#4ade80':rdiff<35?'#facc15':'#f87171';
-    html += '<div style="background:#0f1a12;border-radius:8px;padding:6px 8px;">';
-    html += '<div style="font-size:8px;color:#4a7a5a;font-family:monospace;letter-spacing:1px;margin-bottom:2px;">'+r.label+'</div>';
+    html += '<div style="background:#0f1a12;border-radius:10px;padding:8px 10px;">';
+    html += '<div style="font-size:8px;color:#4a7a5a;font-family:\'Courier New\',monospace;letter-spacing:1px;margin-bottom:3px;">'+r.label+'</div>';
     html += '<div style="display:flex;justify-content:space-between;align-items:baseline;">';
-    html += '<span style="font-size:13px;font-weight:600;color:'+rcol+';">'+r.f(r.ist)+'</span>';
-    if (r.soll>0) html += '<span style="font-size:9px;color:#3d5c47;font-family:monospace;">Z: '+r.f(r.soll)+'</span>';
+    html += '<span style="font-size:14px;font-weight:700;color:'+rcol+';">'+r.f(r.ist)+'</span>';
+    if (r.soll>0) html += '<span style="font-size:9px;color:#3d5c47;font-family:\'Courier New\',monospace;">→'+r.f(r.soll)+'</span>';
     html += '</div>';
-    html += '<div style="font-size:8px;color:#2d4a36;margin-top:1px;">'+r.ideal+'</div>';
+    html += '<div style="font-size:8px;color:#2d4a36;margin-top:2px;">'+r.ideal+'</div>';
     html += '</div>';
   }
-  html += '</div></div></div>';
+  html += '</div></div>';
 
-  // Nährstoff-Balken
+  // ── PPM BARS CARD ──
   var nkeys2=['N','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
+  var nlabels = isEN
+    ? ['Nitrogen','Phosphorus','Potassium','Calcium','Magnesium','Sulfur','Silicon','Iron','Manganese','Zinc','Copper','Boron']
+    : ['Stickstoff','Phosphor','Kalium','Calcium','Magnesium','Schwefel','Silizium','Eisen','Mangan','Zink','Kupfer','Bor'];
   var targets2=[tN,tP,tK,tCa,tMg,tS,tSi||0,tFe||0,tMn||0,tZn||0,tCu||0,tB||0];
   for (var i=0;i<OPT_NUTRIENTS.length;i++) targets2[i]=OPT_NUTRIENTS[i].val;
   var colors2=['#4ade80','#fb923c','#60a5fa','#f472b6','#a78bfa','#facc15','#94a3b8','#f87171','#34d399','#818cf8','#fb923c','#c084fc'];
   var dec2=[0,0,0,0,0,0,0,2,2,2,2,2];
 
-  html += '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(74,222,128,0.1);">';
-  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:monospace;margin-bottom:8px;">'+(currentLang==='en'?'ACHIEVED / TARGET (Salts + Tap water)':'ERREICHT / ZIEL (Salze + Leitungswasser)')+'</div>';
+  html += '<div style="background:#0f1a12;border-radius:14px;padding:14px 16px;margin-bottom:12px;">';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:#4ade80;font-family:\'Courier New\',monospace;margin-bottom:12px;">'+(isEN?'ACHIEVED / TARGET (ppm)':'ERREICHT / ZIEL (ppm)')+'</div>';
   for (var i=0;i<nkeys2.length;i++) {
     var ist=Math.round((final[nkeys2[i]]||0)*Math.pow(10,dec2[i]))/Math.pow(10,dec2[i]);
     var soll=targets2[i];
@@ -2189,17 +2616,18 @@ function renderOptimizerResult(doses, salts, final, vol, tN, tP, tK, tCa, tMg, t
     var pct2=soll>0?Math.abs(diff2)/soll*100:(ist>0?100:0);
     var diffColor=soll===0&&ist>0?'#f87171':pct2<10?'#4ade80':pct2<25?'#facc15':'#f87171';
     var barColor=soll===0&&ist>0?'#f87171':colors2[i];
-    html += '<div style="margin-bottom:8px;">';
-    html += '<div style="display:flex;justify-content:space-between;margin-bottom:3px;">';
-    html += '<span style="font-size:11px;color:'+colors2[i]+';font-weight:500;">'+nkeys2[i]+'</span>';
-    html += '<span style="font-family:monospace;font-size:11px;color:'+diffColor+';">'+ist.toFixed(dec2[i])+' / '+soll.toFixed(dec2[i])+'</span>';
+    html += '<div style="margin-bottom:10px;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">';
+    html += '<span style="font-size:11px;color:'+colors2[i]+';font-weight:600;">'+nlabels[i]+'</span>';
+    html += '<span style="font-family:\'Courier New\',monospace;font-size:11px;color:'+diffColor+';">'+ist.toFixed(dec2[i])+' / '+soll.toFixed(dec2[i])+' ppm</span>';
     html += '</div>';
-    html += '<div style="height:8px;background:#111916;border-radius:4px;position:relative;overflow:hidden;">';
-    html += '<div style="position:absolute;top:0;left:0;height:100%;width:'+istW+'%;background:'+barColor+';border-radius:4px;transition:width 0.3s;"></div>';
-    if (soll>0) html += '<div style="position:absolute;top:0;left:'+sollW+'%;width:2px;height:100%;background:rgba(255,255,255,0.5);"></div>';
+    html += '<div style="height:7px;background:#161d18;border-radius:4px;position:relative;overflow:hidden;">';
+    html += '<div style="position:absolute;top:0;left:0;height:100%;width:'+istW+'%;background:'+barColor+';border-radius:4px;transition:width 0.3s;opacity:0.85;"></div>';
+    if (soll>0) html += '<div style="position:absolute;top:0;left:'+sollW+'%;width:2px;height:100%;background:rgba(255,255,255,0.4);"></div>';
     html += '</div></div>';
   }
   html += '</div>';
+
   document.getElementById('opt-result').innerHTML = html;
 }
 
@@ -2246,6 +2674,11 @@ function transferToRechner(targetPreset) {
   loadPreset(targetPreset);
 
   // Flash feedback
+  var fbDiv = document.getElementById('opt-transfer-feedback');
+  if (fbDiv) {
+    fbDiv.textContent = currentLang==='en' ? '✓ Transferred to '+targetPreset+'!' : '✓ Übertragen nach '+targetPreset+'!';
+    setTimeout(function(){ if(fbDiv) fbDiv.textContent=''; }, 2000);
+  }
   setTimeout(function() {
     var fb = document.createElement('div');
     fb.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#131a15;border:1px solid #4ade80;border-radius:12px;padding:16px 28px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;letter-spacing:1px;z-index:9999;text-align:center;';
@@ -3126,6 +3559,24 @@ var NUTRIENTS_AW = [
 ];
 
 var currentStudy = 'general';
+var currentAwPreset = 'VEG';
+var currentAwPhase = 'veg';
+
+function setAwPhase(phase, btn) {
+  currentAwPhase = phase;
+  var btns = document.querySelectorAll('#aw-phase-veg, #aw-phase-bloom');
+  for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  if (btn) btn.classList.add('active');
+  renderAuswertung();
+}
+
+function setAwPreset(key, btn) {
+  currentAwPreset = key;
+  var btns = document.querySelectorAll('#aw-preset-btns .filter-btn');
+  for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+  if (btn) btn.classList.add('active');
+  renderAuswertung();
+}
 
 function setStudy(name, btn) {
   currentStudy = name;
@@ -3217,93 +3668,93 @@ function getStudyRef(studyName, phase) {
 
 function renderAuswertung() {
   var isEN = currentLang === 'en';
-  var presetList = [
-    { name:'VEG',        ref:'veg',   color:'#4ade80' },
-    { name:'BLOOM',      ref:'bloom', color:'#fb923c' },
-    { name:'EXPERIMENT', ref:'bloom', color:'#a78bfa' }
-  ];
+  var key = currentAwPreset;
+  var presetColors = { VEG:'#4ade80', BLOOM:'#fb923c', EXPERIMENT:'#a78bfa' };
+  var color = presetColors[key] || '#4ade80';
+  var presetName = PRESET_NAMES[key] || key;
 
-  var results = [];
-  for (var p=0; p<presetList.length; p++) {
-    var pr = presetList[p];
-    var d = getDosesForPreset(pr.name);
-    var t = getTapPctForPreset(pr.name);
-    results.push({ pr:pr, ppm:calcForDoses(d, t) });
-  }
+  // Use selected phase
+  var phase = currentAwPhase;
+  var d = getDosesForPreset(key);
+  var t = getTapPctForPreset(key);
+  var ppm = calcForDoses(d, t);
+
+  // Update compare title
+  var ct = document.getElementById('aw-compare-title');
+  if (ct) ct.textContent = (isEN ? 'COMPARISON: ' : 'VERGLEICH: ') + presetName;
+
+  // Update preset buttons text
+  PRESET_LIST.forEach(function(k) {
+    var b = document.getElementById('aw-btn-'+k);
+    if (b) b.textContent = PRESET_NAMES[k] || k;
+  });
 
   var html = '';
   for (var n=0; n<NUTRIENTS_AW.length; n++) {
     var nut = NUTRIENTS_AW[n];
     var nutLabel = isEN ? (nut.label_en || nut.label) : nut.label;
-    var maxVal = 0.01;
-    for (var p=0; p<results.length; p++) {
-      var ist = results[p].ppm[nut.key] || 0;
-      maxVal = Math.max(maxVal, ist);
-    }
-    var sollVeg = getStudyRef(currentStudy,'veg')[nut.key] || [0,0];
-    var sollBloom = getStudyRef(currentStudy,'bloom')[nut.key] || [0,0];
-    maxVal = Math.max(maxVal, sollVeg[1]*1.3, sollBloom[1]*1.3);
+    var ist = ppm[nut.key] || 0;
+    var sollRef = getStudyRef(currentStudy, phase)[nut.key];
+    var sollMin = sollRef ? sollRef[0] : 0;
+    var sollMax = sollRef ? sollRef[1] : 0;
 
-    html += '<div class="aw-nutrient">';
-    html += '<div class="aw-label">'+nutLabel+' (ppm)</div>';
-    html += '<div class="aw-cols">';
+    // Skip if both zero
+    if (ist < 0.01 && sollMax < 0.01) continue;
 
-    for (var p=0; p<results.length; p++) {
-      var r = results[p];
-      var ist = r.ppm[nut.key] || 0;
-      var soll = p===0 ? getStudyRef(currentStudy,'veg')[nut.key] : getStudyRef(currentStudy,'bloom')[nut.key];
-      var sollMin = soll ? soll[0] : 0;
-      var sollMax = soll ? soll[1] : 0;
-      var istPct = Math.min(100, (ist/maxVal)*100);
-      var sollMinPct = Math.min(100, (sollMin/maxVal)*100);
-      var sollMaxPct = Math.min(100, (sollMax/maxVal)*100);
+    var maxVal = Math.max(ist, sollMax * 1.2, 0.01);
+    var istPct = Math.min(100, (ist/maxVal)*100);
+    var sollMinPct = Math.min(100, (sollMin/maxVal)*100);
+    var sollMaxPct = Math.min(100, (sollMax/maxVal)*100);
 
-      // Delta
-      var delta = '';
-      var deltaColor = '#6b7280';
-      if (sollMax > 0) {
-        if (ist < sollMin) {
-          var d2 = Math.round((sollMin-ist)/sollMin*100);
-          delta = '-'+d2+'%';
-          deltaColor = '#60a5fa';
-        } else if (ist > sollMax) {
-          var d2 = Math.round((ist-sollMax)/sollMax*100);
-          delta = '+'+d2+'%';
-          deltaColor = '#fb923c';
-        } else {
-          delta = 'OK';
-          deltaColor = '#4ade80';
-        }
+    // Delta
+    var delta = '–';
+    var deltaColor = '#6b7280';
+    var barColor = color;
+    if (sollMax > 0) {
+      if (ist < sollMin) {
+        delta = '-'+Math.round((sollMin-ist)/sollMin*100)+'%';
+        deltaColor = '#60a5fa';
+        barColor = '#60a5fa';
+      } else if (ist > sollMax) {
+        delta = '+'+Math.round((ist-sollMax)/sollMax*100)+'%';
+        deltaColor = '#fb923c';
+        barColor = '#fb923c';
+      } else {
+        delta = 'OK';
+        deltaColor = '#4ade80';
+        barColor = '#4ade80';
       }
-
-      // Bar color
-      var barColor = r.pr.color;
-      if (delta === 'OK') barColor = '#4ade80';
-      else if (deltaColor === '#60a5fa') barColor = '#60a5fa';
-      else if (deltaColor === '#fb923c') barColor = '#fb923c';
-
-      html += '<div class="aw-col">';
-      html += '<div class="aw-ppm" style="color:'+barColor+'">'+ist.toFixed(nut.dec)+'</div>';
-      html += '<div class="aw-delta" style="color:'+deltaColor+'">'+delta+'</div>';
-      html += '<div class="aw-bar-bg">';
-      html += '<div class="aw-bar-ist" style="width:'+istPct+'%;background:'+barColor+'"></div>';
-      if (sollMax > 0) {
-        html += '<div class="aw-bar-soll" style="left:'+sollMinPct+'%;width:'+(sollMaxPct-sollMinPct)+'%;"></div>';
-      }
-      html += '</div>';
-      html += '<div class="aw-range">'+sollMin+' - '+sollMax+'</div>';
-      html += '</div>';
     }
 
+    html += '<div style="margin-bottom:14px;">';
+    // Header row
+    html += '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">';
+    html += '<span style="font-size:12px;font-weight:600;color:'+color+';">'+nutLabel+'</span>';
+    html += '<div style="display:flex;align-items:baseline;gap:8px;">';
+    html += '<span style="font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;color:'+barColor+';">'+ist.toFixed(nut.dec)+' ppm</span>';
+    if (sollMax > 0) html += '<span style="font-size:11px;font-weight:700;color:'+deltaColor+';">'+delta+'</span>';
     html += '</div></div>';
-    html += '<div style="height:1px;background:#0f2919;margin-bottom:4px;"></div>';
+    // Bar
+    html += '<div style="height:10px;background:#111916;border-radius:6px;position:relative;overflow:visible;margin-bottom:4px;">';
+    html += '<div style="position:absolute;top:0;left:0;height:100%;width:'+istPct+'%;background:'+barColor+';border-radius:6px;transition:width 0.3s;opacity:0.9;"></div>';
+    if (sollMax > 0) {
+      // Target range overlay
+      html += '<div style="position:absolute;top:-2px;left:'+sollMinPct+'%;width:'+(sollMaxPct-sollMinPct)+'%;height:calc(100% + 4px);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:4px;"></div>';
+    }
+    html += '</div>';
+    // Range label
+    if (sollMax > 0) {
+      html += '<div style="display:flex;justify-content:space-between;">';
+      html += '<span style="font-size:9px;color:#3d5c47;">'+(isEN?'Target: ':'Ziel: ')+sollMin+'–'+sollMax+' ppm</span>';
+      html += '<span style="font-size:9px;color:#3d5c47;">'+(isEN?'Tap + Salts':'Leitung + Salze')+'</span>';
+      html += '</div>';
+    }
+    html += '</div>';
   }
 
-  document.getElementById('auswertung-content').innerHTML = html;
+  document.getElementById('auswertung-content').innerHTML = html || '<div style="font-size:11px;color:#3d5c47;padding:12px 0;">'+(isEN?'No data available.':'Keine Daten vorhanden.')+'</div>';
 }
 
-// =====================
-// NÄHRSTOFF-UMRECHNER
 // =====================
 var CONV_FACTORS = [
   { from:'CaO',   to:'Ca',  factor:0.7147, color:'#f472b6' },
@@ -3764,7 +4215,6 @@ function buildAnleitung() {
     '</div>'
   );
 
-  html += '<div class="footer">'+(isEN?'DWC NUTRIENT CALCULATOR 2026':'VINCEMAANS DWC RECHNER v1.0 · 2026')+'</div>';
   el.innerHTML = html;
 }
 
@@ -3789,8 +4239,14 @@ function buildAuswertungTexts() {
   var isEN = currentLang === 'en';
   var title = document.getElementById('auswertung-title');
   if (title) title.textContent = isEN ? 'REFERENCE STUDY' : 'REFERENZ-STUDIE';
-  var footer = document.getElementById('auswertung-footer');
-  if (footer) footer.textContent = isEN ? 'DWC ANALYSIS 2026' : 'DWC AUSWERTUNG 2026';
+  var rTitle = document.getElementById('auswertung-recipe-title');
+  if (rTitle) rTitle.textContent = isEN ? 'SELECT RECIPE' : 'REZEPT AUSWÄHLEN';
+  var pTitle = document.getElementById('aw-phase-title');
+  if (pTitle) pTitle.textContent = isEN ? 'GROWTH PHASE' : 'WACHSTUMSPHASE';
+  var pVeg = document.getElementById('aw-phase-veg');
+  if (pVeg) pVeg.textContent = isEN ? '🌿 VEG' : '🌿 VEG';
+  var pBloom = document.getElementById('aw-phase-bloom');
+  if (pBloom) pBloom.textContent = isEN ? '🌸 BLOOM' : '🌸 BLOOM';
   // Re-render study desc in correct language
   var study = STUDIES[currentStudy];
   if (study) {
