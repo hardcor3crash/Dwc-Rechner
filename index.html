@@ -273,7 +273,10 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </head>
 <body>
 
-<h1 class="page-title">🌱 VINCEMAANS DWC</h1>
+<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:4px;">
+  <h1 class="page-title" style="margin:0;">🌱 VINCEMAANS DWC</h1>
+  <button onclick="toggleLang()" id="lang-btn" style="background:none;border:1px solid #4ade80;border-radius:100px;color:#4ade80;font-family:'Courier New',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;cursor:pointer;flex-shrink:0;">🌐 DE</button>
+</div>
 <div class="page-subtitle" id="subtitle-text">NAHRSTOFFRECHNER · v1.0</div>
 <div class="divider"></div>
 
@@ -284,7 +287,6 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   <button class="main-nav-btn" onclick="showPage('anleitung',this)" id="nav-anleitung">ANLEITUNG</button>
   <button class="main-nav-btn" onclick="showPage('einstellungen',this)" id="nav-einstellungen">EINSTELLUNGEN</button>
   <button class="main-nav-btn" onclick="showPage('guide',this)" id="nav-guide">NAHRSTOFF-GUIDE</button>
-  <button class="main-nav-btn" onclick="toggleLang()" id="lang-btn" style="border-color:#4ade80;color:#4ade80;">🌐 EN</button>
 </div>
 <div style="height:16px;border-bottom:1px solid #1a3d26;margin-bottom:20px;"></div>
 
@@ -3379,7 +3381,7 @@ var LANG = {
   de: {
     subtitle: 'NAHRSTOFFRECHNER · v1.0',
     nav: { rechner:'RECHNER', optimierer:'OPTIMIERER', auswertung:'AUSWERTUNG', anleitung:'ANLEITUNG', einstellungen:'EINSTELLUNGEN', guide:'NAHRSTOFF-GUIDE' },
-    langBtn: '🌐 EN',
+    langBtn: '🌐 DE',
     // Rechner
     dosierungen: 'DOSIERUNGEN / LITER',
     reservoirVolumen: 'Reservoir Volumen',
@@ -3470,7 +3472,7 @@ var LANG = {
   en: {
     subtitle: 'NUTRIENT CALCULATOR · v1.0',
     nav: { rechner:'CALCULATOR', optimierer:'OPTIMIZER', auswertung:'ANALYSIS', anleitung:'GUIDE', einstellungen:'SETTINGS', guide:'NUTRIENT GUIDE' },
-    langBtn: '🌐 DE',
+    langBtn: '🌐 EN',
     // Rechner
     dosierungen: 'DOSAGES / LITER',
     reservoirVolumen: 'Reservoir Volume',
