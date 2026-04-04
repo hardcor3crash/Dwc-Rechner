@@ -232,10 +232,6 @@ input[type=range]:disabled { opacity:0.35; }
 .mix-num { width:22px; height:22px; border-radius:50%; background:rgba(74,222,128,0.08); border:1px solid rgba(74,222,128,0.15); display:flex; align-items:center; justify-content:center; font-family:'Courier New',monospace; font-size:9px; color:#4ade80; flex-shrink:0; }
 .step-row { display:flex; gap:12px; align-items:flex-start; padding:8px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
 .step-row:last-child { border-bottom:none; }
-.step-num { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#000; flex-shrink:0; }
-.step-label { font-size:12px; color:#b8d4c0; font-weight:600; margin-bottom:2px; }
-.step-desc { font-size:11px; color:#5a7a62; }
-.step-tip { font-size:10px; margin-top:2px; }
 
 /* ── GUIDE CARD INTERNALS ── */
 .card-symbol { font-size:16px; font-weight:900; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Courier New',monospace; }
@@ -249,12 +245,6 @@ input[type=range]:disabled { opacity:0.35; }
 .tag-mobil { background:rgba(250,204,21,0.1); color:#facc15; border:1px solid rgba(250,204,21,0.2); }
 .tag-immobil { background:rgba(251,146,60,0.1); color:#fb923c; border:1px solid rgba(251,146,60,0.2); }
 
-.optimal-section { padding:12px 16px; background:rgba(0,0,0,0.2); }
-.optimal-label { font-size:9px; letter-spacing:3px; color:#4a7a5a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
-.optimal-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
-.optimal-key { font-size:9px; color:#4a7a5a; }
-.optimal-val { font-size:11px; font-weight:700; color:#4ade80; }
-
 .sym-section { padding:12px 16px; }
 .sym-title { font-size:9px; letter-spacing:3px; margin-bottom:8px; font-weight:700; font-family:'Courier New',monospace; text-transform:uppercase; }
 .sym-title.mangel { color:#60a5fa; }
@@ -266,21 +256,6 @@ input[type=range]:disabled { opacity:0.35; }
 .sym-list.ueber li::before { background:#fb923c; }
 .sym-highlight { color:#d1fae5; font-weight:600; }
 
-.salz-section { padding:12px 16px; background:rgba(74,222,128,0.02); border-top:1px solid rgba(74,222,128,0.06); }
-.salz-title { font-size:9px; letter-spacing:3px; color:#4a7a5a; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
-.salz-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
-.salz-item:last-child { border-bottom:none; }
-.salz-name { font-size:11px; color:#86efac; }
-.salz-detail { font-size:9px; color:#4a7a5a; }
-.salz-pct { font-size:12px; font-weight:700; color:#4ade80; white-space:nowrap; margin-left:8px; }
-
-.fix-section { padding:12px 16px; border-top:1px solid rgba(74,222,128,0.06); }
-.fix-title { font-size:9px; letter-spacing:3px; color:#fbbf24; font-family:'Courier New',monospace; text-transform:uppercase; margin-bottom:8px; }
-.fix-mangel { font-size:11px; color:#7aa888; margin-bottom:6px; line-height:1.6; }
-.fix-mangel span { color:#60a5fa; font-weight:600; }
-.fix-ueber { font-size:11px; color:#7aa888; line-height:1.6; }
-.fix-ueber span { color:#fb923c; font-weight:600; }
-.section-divider { height:1px; background:rgba(74,222,128,0.06); margin:0 16px; }
 .mix-text { font-size:12px; color:#7aa888; line-height:1.5; }
 
 /* SELECT */
@@ -299,16 +274,17 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <body>
 
 <h1 class="page-title">🌱 VINCEMAANS DWC</h1>
-<div class="page-subtitle">NAHRSTOFFRECHNER · v1.0</div>
+<div class="page-subtitle" id="subtitle-text">NAHRSTOFFRECHNER · v1.0</div>
 <div class="divider"></div>
 
 <div class="main-nav">
-  <button class="main-nav-btn active" onclick="showPage('rechner',this)">RECHNER</button>
-  <button class="main-nav-btn" onclick="showPage('optimierer',this)">OPTIMIERER</button>
-  <button class="main-nav-btn" onclick="showPage('auswertung',this)">AUSWERTUNG</button>
-  <button class="main-nav-btn" onclick="showPage('anleitung',this)">ANLEITUNG</button>
-  <button class="main-nav-btn" onclick="showPage('einstellungen',this)">EINSTELLUNGEN</button>
-  <button class="main-nav-btn" onclick="showPage('guide',this)">NAHRSTOFF-GUIDE</button>
+  <button class="main-nav-btn active" onclick="showPage('rechner',this)" id="nav-rechner">RECHNER</button>
+  <button class="main-nav-btn" onclick="showPage('optimierer',this)" id="nav-optimierer">OPTIMIERER</button>
+  <button class="main-nav-btn" onclick="showPage('auswertung',this)" id="nav-auswertung">AUSWERTUNG</button>
+  <button class="main-nav-btn" onclick="showPage('anleitung',this)" id="nav-anleitung">ANLEITUNG</button>
+  <button class="main-nav-btn" onclick="showPage('einstellungen',this)" id="nav-einstellungen">EINSTELLUNGEN</button>
+  <button class="main-nav-btn" onclick="showPage('guide',this)" id="nav-guide">NAHRSTOFF-GUIDE</button>
+  <button class="main-nav-btn" onclick="toggleLang()" id="lang-btn" style="border-color:#4ade80;color:#4ade80;">🌐 EN</button>
 </div>
 <div style="height:16px;border-bottom:1px solid #1a3d26;margin-bottom:20px;"></div>
 
@@ -329,23 +305,23 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div class="max-w grid-2">
   <div>
     <div class="card">
-      <div class="card-title">DOSIERUNGEN / LITER</div>
+      <div class="card-title" data-lang="dosierungen">DOSIERUNGEN / LITER</div>
       <div id="sliders"></div>
       <div style="border-top:1px solid #1a3d26;padding-top:12px;margin-top:4px;">
         <div class="slider-row">
           <div class="slider-header">
-            <span class="slider-label">Reservoir Volumen</span>
+            <span class="slider-label" data-lang="reservoirVolumen">Reservoir Volumen</span>
             <span class="slider-value" id="vol-label">50 L</span>
           </div>
           <input type="range" id="vol-slider" min="1" max="100" step="1" value="50" oninput="onVol(this.value)" onchange="expandVol(this)">
         </div>
         <div class="slider-row" style="margin-top:8px;">
           <div class="slider-header">
-            <span class="slider-label">Leitungswasser-Anteil</span>
+            <span class="slider-label" data-lang="leitungswasserAnteil">Leitungswasser-Anteil</span>
             <span class="slider-value" id="tap-label">25% Leitung - 75% Osmose</span>
           </div>
           <input type="range" id="tap-slider" min="0" max="100" step="5" value="25" oninput="onTap(this.value)">
-          <div class="slider-minmax"><span>0% Osmose</span><span>100% Leitung</span></div>
+          <div class="slider-minmax"><span id="tap-minmax-l">0% Osmose</span><span id="tap-minmax-r">100% Leitung</span></div>
         </div>
       </div>
     </div>
@@ -377,16 +353,16 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     </div>
 
     <div class="card">
-      <div class="card-title">VERHALTNISSE</div>
+      <div class="card-title" data-lang="verhaltnisse">VERHALTNISSE</div>
       <div class="npk" id="npk-display" style="margin-bottom:14px;"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="ratio-display"></div>
     </div>
 
     <div class="card">
-      <div class="card-title">MAKRONAHRSTOFFE (ppm)</div>
+      <div class="card-title" data-lang="makronahrstoffe">MAKRONAHRSTOFFE (ppm)</div>
       <div id="macro-bars"></div>
       <div style="height:1px;background:rgba(74,222,128,0.06);margin:10px 0 10px;"></div>
-      <div class="card-title" style="margin-bottom:8px;">MIKRONAHRSTOFFE (ppm)</div>
+      <div class="card-title" style="margin-bottom:8px;" data-lang="mikronahrstoffe">MIKRONAHRSTOFFE (ppm)</div>
       <div id="micro-grid"></div>
     </div>
 
@@ -396,15 +372,15 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     </div>
 
     <div class="card" style="background:rgba(251,191,36,0.03);border-color:#2a2a1a;">
-      <div class="card-title" style="color:#fbbf24;">KOSTEN PRO ANSATZ</div>
+      <div class="card-title" style="color:#fbbf24;" data-lang="kostenProAnsatz">KOSTEN PRO ANSATZ</div>
       <div class="stat-grid" style="margin-bottom:12px;">
         <div class="stat">
-          <div class="stat-label" style="color:#fbbf24;">PRO LITER</div>
+          <div class="stat-label" style="color:#fbbf24;" data-lang="proLiter">PRO LITER</div>
           <div class="stat-value" id="cost-per-l" style="color:#fbbf24;font-size:20px;">-</div>
           <div class="stat-unit">ct / L</div>
         </div>
         <div class="stat">
-          <div class="stat-label" style="color:#fbbf24;">PRO RESERVOIR</div>
+          <div class="stat-label" style="color:#fbbf24;" data-lang="proReservoir">PRO RESERVOIR</div>
           <div class="stat-value" id="cost-per-res" style="color:#fbbf24;font-size:22px;">-</div>
           <div class="stat-unit" id="cost-res-label">EUR</div>
         </div>
@@ -415,105 +391,46 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 
 <div class="max-w">
-  <div class="section-title">ANRUHR-ANLEITUNG</div>
+  <div class="section-title" data-lang="verdunnung">VERDUNNUNG &amp; NACHFULLEN</div>
   <div class="divider"></div>
-  <div class="grid-2">
     <div class="card">
-      <div class="card-title">REIHENFOLGE DER ZUGABE</div>
-      <div class="card-note" style="margin-bottom:12px;">Jeden Nahrstoff separat in ~200ml Wasser vorlosen, dann ins Reservoir</div>
-      <div id="mixing-steps"></div>
-    </div>
-    <div class="card">
-      <div class="card-title">MAX. LOSLICHKEIT IN 200ML</div>
-      <div id="solubility-table"></div>
-      <div class="card-note" style="color:#facc15;margin-top:8px;">SOP am schlechtesten loslich - warmes Wasser (30-40 Grad C) verwenden</div>
-    </div>
-  </div>
-</div>
-
-<div class="max-w">
-  <div class="section-title">VERDUNNUNG & NACHFULLEN</div>
-  <div class="divider"></div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">VERDUNNUNGSRECHNER</div>
-      <div class="card-note" style="margin-bottom:12px;">Wie viel Wasser um EC zu senken?</div>
+      <div class="card-title" data-lang="nachfullrechner">NACHFULLRECHNER</div>
+      <div class="card-note" style="margin-bottom:12px;" data-lang="reservoirAbgesunken">Reservoir abgesunken - was nachkippen?</div>
       <div class="slider-row">
         <div class="slider-header">
-          <span class="slider-label">Aktueller EC</span>
-          <span class="slider-value" id="dil-ec-cur-label">1,50 mS/cm</span>
-        </div>
-        <input type="range" min="0.1" max="4.0" step="0.05" value="1.5" oninput="onDilInput('ec-cur',this.value)">
-      </div>
-      <div class="slider-row">
-        <div class="slider-header">
-          <span class="slider-label">Ziel EC</span>
-          <span class="slider-value" id="dil-ec-tgt-label">1,20 mS/cm</span>
-        </div>
-        <input type="range" min="0.1" max="4.0" step="0.05" value="1.2" oninput="onDilInput('ec-tgt',this.value)">
-      </div>
-      <div class="slider-row">
-        <div class="slider-header">
-          <span class="slider-label">Aktuelles Volumen</span>
-          <span class="slider-value" id="dil-vol-label">42 L</span>
-        </div>
-        <input type="range" min="1" max="200" step="1" value="42" oninput="onDilInput('vol',this.value)">
-      </div>
-      <div class="slider-row" style="margin-top:8px;">
-        <div class="slider-header">
-          <span class="slider-label">Verdunnungswasser</span>
-          <span class="slider-value" id="dil-water-label">100% Leitung</span>
-        </div>
-        <input type="range" min="0" max="100" step="5" value="100" oninput="onDilInput('water',this.value)">
-        <div class="slider-minmax"><span>100% Osmose</span><span>100% Leitung</span></div>
-      </div>
-      <div style="margin-top:12px;padding:12px;background:#0f2919;border-radius:6px;text-align:center;">
-        <div style="font-size:9px;letter-spacing:3px;color:#6ee7b7;margin-bottom:6px;">WASSER HINZUFUGEN</div>
-        <div style="font-size:28px;font-weight:700;color:#60a5fa;" id="dil-result">-</div>
-        <div style="font-size:10px;color:#374151;">Liter</div>
-        <div style="font-size:9px;color:#6b7280;margin-top:4px;" id="dil-result-vol">-</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">NACHFULLRECHNER</div>
-      <div class="card-note" style="margin-bottom:12px;">Reservoir abgesunken - was nachkippen?</div>
-      <div class="slider-row">
-        <div class="slider-header">
-          <span class="slider-label">Soll-Volumen</span>
+          <span class="slider-label" data-lang="sollVolumen">Soll-Volumen</span>
           <span class="slider-value" id="ref-vol-soll-label">42 L</span>
         </div>
         <input type="range" min="1" max="200" step="1" value="42" oninput="onRefInput('soll',this.value)">
       </div>
       <div class="slider-row">
         <div class="slider-header">
-          <span class="slider-label">Ist-Volumen</span>
+          <span class="slider-label" data-lang="istVolumen">Ist-Volumen</span>
           <span class="slider-value" id="ref-vol-ist-label">35 L</span>
         </div>
         <input type="range" min="1" max="200" step="1" value="35" oninput="onRefInput('ist',this.value)">
       </div>
       <div class="slider-row">
         <div class="slider-header">
-          <span class="slider-label">Ist-EC</span>
+          <span class="slider-label" data-lang="istEC">Ist-EC</span>
           <span class="slider-value" id="ref-ec-ist-label">1,00 mS/cm</span>
         </div>
         <input type="range" min="0.1" max="4.0" step="0.05" value="1.0" oninput="onRefInput('ec',this.value)">
       </div>
       <div class="slider-row" style="margin-top:8px;">
         <div class="slider-header">
-          <span class="slider-label">Auffullwasser</span>
+          <span class="slider-label" data-lang="auffullwasser">Auffullwasser</span>
           <span class="slider-value" id="ref-water-label">100% Leitung</span>
         </div>
         <input type="range" min="0" max="100" step="5" value="100" oninput="onRefWater(this.value)">
-        <div class="slider-minmax"><span>100% Osmose</span><span>100% Leitung</span></div>
+        <div class="slider-minmax"><span id="ref-minmax-l">100% Osmose</span><span id="ref-minmax-r">100% Leitung</span></div>
       </div>
       <div style="margin-top:12px;padding:12px;background:#0f2919;border-radius:6px;">
-        <div style="font-size:9px;letter-spacing:3px;color:#6ee7b7;margin-bottom:8px;text-align:center;">NACHFULLPLAN</div>
+        <div style="font-size:9px;letter-spacing:3px;color:#6ee7b7;margin-bottom:8px;text-align:center;" data-lang="nachfullplan">NACHFULLPLAN</div>
         <div id="ref-result"></div>
         <div style="margin-top:8px;padding-top:8px;border-top:1px solid #1a3d26;font-size:10px;color:#60a5fa;font-weight:700;" id="ref-water"></div>
       </div>
     </div>
-  </div>
 </div>
 
 
@@ -525,10 +442,10 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div id="page-einstellungen" class="page">
 
 <div class="max-w">
-  <div class="section-title">SUBSTANZ-DATENBANK</div>
+  <div class="section-title" data-lang="substanzDatenbank">SUBSTANZ-DATENBANK</div>
   <div class="divider"></div>
   <div class="card">
-    <div class="card-title">AUS DATENBANK HINZUFUGEN</div>
+    <div class="card-title" data-lang="ausDbHinzufugen">AUS DATENBANK HINZUFUGEN</div>
     <div class="card-note" style="margin-bottom:10px;">317 Substanzen aus der Datenbank - Suchen und direkt hinzufugen</div>
     <input type="text" id="db-search" placeholder="Suchen z.B. Calcium, Nitrate, Haifa..."
       oninput="filterDB(this.value)"
@@ -540,10 +457,10 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 
 <div class="max-w">
 <div class="max-w">
-  <div class="section-title">EIGENE SALZE</div>
+  <div class="section-title" data-lang="eigeneSalze">EIGENE SALZE</div>
   <div class="divider"></div>
   <div class="card">
-    <div class="card-title">SALZ HINZUFUGEN</div>
+    <div class="card-title" data-lang="salzHinzufugen">SALZ HINZUFUGEN</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
       <div>
         <div class="water-label">Name</div>
@@ -557,7 +474,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
         </select>
       </div>
     </div>
-    <div class="card-note" style="margin-bottom:8px;">Nahrstoffgehalt in % (z.B. 13 fur 13% N)</div>
+    <div class="card-note" style="margin-bottom:8px;" id="nutrient-pct-note">Nahrstoffgehalt in % (z.B. 13 fur 13% N)</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
       <div><div class="water-label">NO3 %</div><input class="water-input" id="new-salt-NO3" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
       <div><div class="water-label">NH4 %</div><input class="water-input" id="new-salt-NH4" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
@@ -580,26 +497,26 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
       <div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
       <div><div class="water-label">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="any" placeholder="auto"></div>
     </div>
-    <button class="btn-action" onclick="addCustomSalt()" style="border:1px solid #2D6A2D;color:#6ee7b7;">+ SALZ HINZUFUGEN</button>
-    <button class="btn-action" onclick="resetStandardSalts()" style="border:1px solid #374151;color:#6b7280;margin-left:8px;">&#8635; STANDARD WIEDERHERSTELLEN</button>
+    <button class="btn-action" onclick="addCustomSalt()" style="border:1px solid #2D6A2D;color:#6ee7b7;" data-lang="salzHinzufugenBtn">+ SALZ HINZUFUGEN</button>
+    <button class="btn-action" onclick="resetStandardSalts()" style="border:1px solid #374151;color:#6b7280;margin-left:8px;" data-lang="standardWiederherstellen">&#8635; STANDARD WIEDERHERSTELLEN</button>
     <span id="custom-feedback" style="font-size:10px;color:#4ade80;margin-left:10px;"></span>
   </div>
 </div>
 <div class="max-w">
-  <div class="section-title">WASSER & SPEICHERN</div>
+  <div class="section-title" data-lang="wasserSpeichern">WASSER &amp; SPEICHERN</div>
   <div class="divider"></div>
   <div class="grid-2">
     <div class="card">
-      <div class="card-title">WASSERWERTE ANPASSEN</div>
+      <div class="card-title" data-lang="wasserwerte">WASSERWERTE ANPASSEN</div>
       <div class="water-grid" id="water-inputs"></div>
     </div>
     <div class="card">
-      <div class="card-title">EXPORT / IMPORT</div>
-      <div class="card-note">Speichern und Laden direkt oben im Rechner-Tab möglich.</div>
+      <div class="card-title" data-lang="exportImport">EXPORT / IMPORT</div>
+      <div class="card-note" data-lang="exportImportHinweis">Speichern und Laden direkt oben im Rechner-Tab möglich.</div>
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(74,222,128,0.08);display:flex;flex-direction:column;align-items:center;gap:8px;">
         <a href="https://raw.githubusercontent.com/hardcor3crash/Dwc-Rechner/main/index.html" download="index.html"
            style="display:inline-flex;align-items:center;gap:6px;padding:9px 22px;border-radius:100px;border:1px solid #2d6a3d;background:rgba(74,222,128,0.08);color:#6ee7b7;font-family:'Courier New',monospace;font-size:9px;letter-spacing:2px;text-decoration:none;text-transform:uppercase;">
-          ⬇ AKTUELLE VERSION HERUNTERLADEN
+          ⬇ <span id="download-btn-text">AKTUELLE VERSION HERUNTERLADEN</span>
         </a>
         <a href="https://github.com/hardcor3crash/Dwc-Rechner" target="_blank"
            style="font-family:'Courier New',monospace;font-size:9px;color:#3d5c47;letter-spacing:1px;text-decoration:none;">
@@ -612,7 +529,30 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 
 </div>
-<div class="footer">DWC EINSTELLUNGEN 2026</div>
+
+<div class="max-w">
+  <div class="section-title" id="conv-title">NÄHRSTOFF-UMRECHNER</div>
+  <div class="divider"></div>
+  <div class="card">
+    <div class="card-title" id="conv-card-title">OXID → ELEMENT UMRECHNER</div>
+    <div class="card-note" style="margin-bottom:14px;" id="conv-note">Herstellerangaben (z.B. CaO, P₂O₅, K₂O) in elementare Nährstoffe umrechnen</div>
+
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:10px;" id="conv-header">
+      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;text-align:center;" id="conv-col-input">EINGABE (%)</div>
+      <div></div>
+      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;text-align:center;" id="conv-col-result">ERGEBNIS (%)</div>
+    </div>
+
+    <div id="conv-rows"></div>
+
+    <div style="margin-top:12px;padding:10px;background:#0f2919;border-radius:8px;font-size:9px;color:#4a7a5a;line-height:1.8;" id="conv-factors-note">
+      Faktoren: CaO×0.715=Ca · MgO×0.603=Mg · P₂O₅×0.436=P · K₂O×0.830=K · SO₃×0.400=S · Fe-EDDHA=Fe (1:1)
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="footer" id="einstellungen-footer">DWC EINSTELLUNGEN 2026</div>
 </div>
 
 <!-- GUIDE PAGE -->
@@ -620,11 +560,11 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 
 <div class="max-w">
   <div class="filters">
-    <button class="filter-btn active" onclick="filterGuide('alle',this)">ALLE</button>
-    <button class="filter-btn" onclick="filterGuide('makro',this)">MAKRO</button>
-    <button class="filter-btn" onclick="filterGuide('mikro',this)">MIKRO</button>
-    <button class="filter-btn" onclick="filterGuide('mobil',this)">MOBIL</button>
-    <button class="filter-btn" onclick="filterGuide('immobil',this)">IMMOBIL</button>
+    <button class="filter-btn active" onclick="filterGuide('alle',this)" id="guide-btn-alle" data-lang="guideAll">ALLE</button>
+    <button class="filter-btn" onclick="filterGuide('makro',this)" id="guide-btn-makro">MAKRO</button>
+    <button class="filter-btn" onclick="filterGuide('mikro',this)" id="guide-btn-mikro">MIKRO</button>
+    <button class="filter-btn" onclick="filterGuide('mobil',this)" id="guide-btn-mobil" data-lang="guideMobil">MOBIL</button>
+    <button class="filter-btn" onclick="filterGuide('immobil',this)" id="guide-btn-immobil" data-lang="guideImmobil">IMMOBIL</button>
   </div>
 
   <div id="cards"></div>
@@ -640,60 +580,60 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 
 <div class="section-title">REZEPT-OPTIMIERER</div>
 <div class="divider"></div>
-<div class="card-note" style="text-align:center;margin-bottom:20px;font-size:12px;color:#6b9e7a;">Ziel-PPMs mit Slidern einstellen → optimale Salzmischung wird berechnet</div>
+<div class="card-note" id="opt-main-note" style="text-align:center;margin-bottom:20px;font-size:12px;color:#6b9e7a;">Ziel-PPMs mit Slidern einstellen → optimale Salzmischung wird berechnet</div>
 
 <!-- Preset load buttons -->
-<div style="margin-bottom:8px;text-align:center;font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;">ZIELWERTE LADEN AUS AKTUELLEM PRESET</div>
+<div id="opt-preset-label" style="margin-bottom:8px;text-align:center;font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;">ZIELWERTE LADEN AUS AKTUELLEM PRESET</div>
 <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:6px;">
   <button class="filter-btn" id="opt-btn-VEG" onclick="loadOptPreset('VEG',this)">VEG</button>
   <button class="filter-btn" id="opt-btn-BLOOM" onclick="loadOptPreset('BLOOM',this)">BLOOM</button>
   <button class="filter-btn" id="opt-btn-EXPERIMENT" onclick="loadOptPreset('EXPERIMENT',this)">EXPERIMENT</button>
 </div>
-<div style="text-align:center;font-size:10px;color:#3d5c47;margin-bottom:20px;">Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset</div>
+<div id="opt-preset-hint" style="text-align:center;font-size:10px;color:#3d5c47;margin-bottom:20px;">Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset</div>
 
 <!-- Water slider -->
 <div class="card" style="margin-bottom:12px;">
-  <div class="card-title">WASSERMIX</div>
+  <div class="card-title" data-lang="wassermix">WASSERMIX</div>
   <div class="slider-row">
     <div class="slider-header">
-      <span class="slider-label">Leitungswasser-Anteil</span>
+      <span class="slider-label" data-lang="leitungswasserAnteil">Leitungswasser-Anteil</span>
       <span class="slider-value" id="opt-tap-label">100% Osmose</span>
     </div>
     <input type="range" id="opt-tap-slider" min="0" max="100" step="5" value="0" oninput="onOptTap(this.value)">
-    <div class="slider-minmax"><span>0% Osmose</span><span>100% Leitung</span></div>
+    <div class="slider-minmax"><span id="opt-minmax-l">0% Osmose</span><span id="opt-minmax-r">100% Leitung</span></div>
   </div>
   <div style="font-size:10px;color:#3d5c47;font-family:'Courier New',monospace;margin-top:4px;" id="opt-tap-info">Reines Osmosewasser – keine Mineralien</div>
 </div>
 
 <!-- Slider targets -->
 <div class="card" style="margin-bottom:12px;">
-  <div class="card-title">MAKRONÄHRSTOFFE — ZIELWERTE</div>
+  <div class="card-title" data-lang="makroZielwerte">MAKRONÄHRSTOFFE — ZIELWERTE</div>
   <div id="opt-sliders-macro"></div>
 </div>
 
 <div class="card" style="margin-bottom:12px;">
-  <div class="card-title">MIKRONÄHRSTOFFE — ZIELWERTE</div>
+  <div class="card-title" data-lang="mikroZielwerte">MIKRONÄHRSTOFFE — ZIELWERTE</div>
   <div id="opt-sliders-micro"></div>
 </div>
 
 <!-- Results -->
 <div class="card" style="background:rgba(74,222,128,0.03);margin-bottom:20px;">
-  <div class="card-title">OPTIMIERTES REZEPT</div>
+  <div class="card-title" data-lang="optimiertesRezept">OPTIMIERTES REZEPT</div>
   <div id="opt-result">
-    <div style="font-size:11px;color:#3d5c47;text-align:center;padding:20px;">Preset laden um zu starten...</div>
+    <div style="font-size:11px;color:#3d5c47;text-align:center;padding:20px;" id="opt-result-placeholder">Preset laden um zu starten...</div>
   </div>
 </div>
 
 <!-- Gewichtung -->
 <div class="card" style="margin-bottom:20px;">
-  <div class="card-title">PRIORITÄTEN</div>
-  <div class="card-note" style="margin-bottom:14px;">Wie stark soll der Optimierer auf Abweichungen vom Zielwert reagieren? <strong style="color:#b8d4c0;">3 = muss stimmen</strong>, <strong style="color:#4a7a5a;">1 = egal</strong>. Alle Nährstoffe werden prozentual gewichtet – ein 10% Fehler bei N und Fe wird gleich stark bestraft.</div>
+  <div class="card-title" data-lang="prioritaeten">PRIORITÄTEN</div>
+  <div class="card-note" style="margin-bottom:14px;" id="opt-prio-note">Wie stark soll der Optimierer auf Abweichungen vom Zielwert reagieren? <strong style="color:#b8d4c0;">3 = muss stimmen</strong>, <strong style="color:#4a7a5a;">1 = egal</strong>. Alle Nährstoffe werden prozentual gewichtet.</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;" id="opt-weight-sliders"></div>
 </div>
 
 <!-- Transfer buttons -->
 <div style="text-align:center;margin:20px 0;" id="opt-transfer-wrap">
-  <div style="font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;margin-bottom:12px;">REZEPT ÜBERTRAGEN IN</div>
+  <div id="opt-transfer-label" style="font-size:9px;color:#3d5c47;font-family:'Courier New',monospace;letter-spacing:2px;margin-bottom:12px;">REZEPT ÜBERTRAGEN IN</div>
   <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
     <button onclick="transferToRechner('VEG')" style="padding:10px 24px;border-radius:100px;border:1px solid #4ade80;background:rgba(74,222,128,0.1);color:#4ade80;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ VEG</button>
     <button onclick="transferToRechner('BLOOM')" style="padding:10px 24px;border-radius:100px;border:1px solid #fb923c;background:rgba(251,146,60,0.1);color:#fb923c;cursor:pointer;font-family:'Courier New',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;">→ BLOOM</button>
@@ -704,273 +644,10 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 </div>
 </div>
 
+
 <!-- ANLEITUNG PAGE -->
 <div id="page-anleitung" class="page">
-<div class="max-w">
-
-<div class="section-title">BENUTZERHANDBUCH</div>
-<div class="divider"></div>
-
-<!-- Kapitel 1 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">🚀</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">1. Erste Schritte</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">SETUP & GRUNDLAGEN</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Der Rechner ist speziell für <strong style="color:#b8d4c0;">DWC-Systeme (Deep Water Culture)</strong> entwickelt und berechnet Nährstofflösungen aus Einzelsalzen.</p>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 1 – WASSERWERTE</div>
-      <p>Gehe zu <strong style="color:#b8d4c0;">Einstellungen → Wasserwerte</strong> und trage deine Wasseranalyse ein. Mittelharte Wasserwerte sind voreingestellt. Beim Mischen aus Leitung und Osmose kannst du den Anteil im Rechner mit dem <strong style="color:#b8d4c0;">Leitungswasser-Anteil Slider</strong> einstellen.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 2 – PRESET WÄHLEN</div>
-      <p>Wähle <strong style="color:#b8d4c0;">VEG</strong> für Wachstum oder <strong style="color:#b8d4c0;">BLOOM</strong> für Blüte. Jedes Preset hat eigene Dosierungen, Volumen und Leitungswasser-Anteil. <strong style="color:#b8d4c0;">EXPERIMENT</strong> startet komplett leer.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 3 – RESERVOIR EINSTELLEN</div>
-      <p>Stelle dein <strong style="color:#b8d4c0;">Reservoir-Volumen</strong> und den <strong style="color:#b8d4c0;">Leitungswasser-Anteil</strong> ein. Die Gesamtmenge unten zeigt dann die genaue Menge pro Salz für deinen Ansatz.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 2 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">🎚️</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">2. Slider & Dosierungen</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">SALZE EINSTELLEN</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Jeder Slider entspricht einem Salz. Die Dosierung ist in <strong style="color:#b8d4c0;">g/L</strong> (Feststoffe) oder <strong style="color:#b8d4c0;">ml/L</strong> (Flüssigkeiten) angegeben.</p>
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-bottom:10px;">
-      <div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#4ade80;font-family:'Courier New',monospace;white-space:nowrap;align-self:center;">AN</div>
-      <div>Salz ist aktiv und wird in die Berechnung einbezogen</div>
-      <div style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#60a5fa;font-family:'Courier New',monospace;white-space:nowrap;align-self:center;">✎</div>
-      <div>Öffnet das Edit-Panel – Name, Nährstoffgehalte, Preis, Dichte anpassen</div>
-      <div style="background:rgba(107,114,128,0.1);border:1px solid #374151;border-radius:4px;padding:2px 6px;font-size:9px;color:#6b7280;font-family:'Courier New',monospace;white-space:nowrap;align-self:center;">X</div>
-      <div>Salz aus der Liste entfernen (nur für diesen Preset)</div>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #facc15;">
-      <div style="font-size:9px;color:#facc15;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – SLIDER ERWEITERN</div>
-      <p>Schiebst du einen Slider bis ganz rechts, erweitert sich der Maximalwert automatisch um 30%. So kannst du höhere Dosierungen einstellen ohne manuell einzugeben.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #facc15;">
-      <div style="font-size:9px;color:#facc15;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – EC SKALIEREN</div>
-      <p>Die <strong style="color:#b8d4c0;">– / +</strong> Buttons neben dem EC-Wert skalieren alle Salze gleichmäßig um ±0,05 mS/cm. Damit kannst du das gesamte Rezept proportional anpassen ohne einzelne Slider zu bewegen.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 3 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">📊</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">3. EC, pH & Ionenbilanz</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">WASSERQUALITÄT VERSTEHEN</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
-      <div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;">
-        <div style="font-size:9px;color:#60a5fa;font-family:'Courier New',monospace;letter-spacing:1px;margin-bottom:4px;">BLAU</div>
-        <div style="font-size:11px;">EC &lt; 1,2<br>zu niedrig</div>
-      </div>
-      <div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;">
-        <div style="font-size:9px;color:#4ade80;font-family:'Courier New',monospace;letter-spacing:1px;margin-bottom:4px;">GRÜN</div>
-        <div style="font-size:11px;">EC 1,2–1,8<br>optimal</div>
-      </div>
-      <div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;">
-        <div style="font-size:9px;color:#fb923c;font-family:'Courier New',monospace;letter-spacing:1px;margin-bottom:4px;">ORANGE</div>
-        <div style="font-size:11px;">EC &gt; 1,8<br>zu hoch</div>
-      </div>
-    </div>
-    <p style="margin-bottom:10px;"><strong style="color:#b8d4c0;">pH-Schätzung:</strong> Der angezeigte pH ist eine Schätzung basierend auf deinen Säure-Dosierungen und dem Leitungswasser-pH. Er ist eine Näherung – immer mit echtem pH-Meter prüfen. Immer mit echtem pH-Meter nachprüfen – Ziel: <strong style="color:#4ade80;">5,5–6,2</strong>.</p>
-    <p style="margin-bottom:10px;"><strong style="color:#b8d4c0;">Ionenbilanz:</strong> Zeigt ob Kationen und Anionen in der Lösung ausgeglichen sind. Bei &lt;5% ist alles gut. Bei Flüssigdüngern wird <strong style="color:#6b7280;">n/a (Mischd.)</strong> angezeigt da die Gegenionen unbekannt sind.</p>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">EC-BERECHNUNG</div>
-      <p>Der EC wird mit dem LMC-Modell berechnet (limitierende molare Leitfähigkeiten, gleiche Methode wie HydroBuddy). Feststoffe und Flüssigdünger werden dabei unterschiedlich behandelt.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 4 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">🧪</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">4. Flüssigdünger hinzufügen</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">DB & CUSTOM SALZE</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Unter <strong style="color:#b8d4c0;">Einstellungen → Substanz-Datenbank</strong> findest du über 125 Produkte – Plagron, Canna, Advanced Nutrients, Haifa und mehr.</p>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #60a5fa;">
-      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">AUS DATENBANK HINZUFÜGEN</div>
-      <p>Suchbegriff eingeben → Produkt finden → <strong style="color:#b8d4c0;">+ HINZUFÜGEN</strong> klicken. Das Produkt erscheint dann als Slider im Rechner. Über den ✎ Button kannst du Nährstoffwerte und Dichte auf aktuelle Herstellerangaben korrigieren.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #60a5fa;">
-      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">DICHTE (G/ML)</div>
-      <p>Für Flüssigdünger ist die Dichte wichtig für die korrekte PPM-Berechnung. Die Dichte steht meist auf dem Etikett (z.B. 1,18 g/ml für Plagron Hydro A). Im Edit-Panel anpassen falls nötig.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #60a5fa;">
-      <div style="font-size:9px;color:#60a5fa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">EIGENES SALZ ANLEGEN</div>
-      <p>Über <strong style="color:#b8d4c0;">Eigene Salze</strong> kannst du beliebige Produkte manuell anlegen. Nährstoffwerte in % (Gewichtsprozent) eintragen, Einheit (g/L oder ml/L) wählen, Dichte für Flüssigprodukte angeben.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 5 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">💧</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">5. Verdünnungs- & Nachfüllrechner</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">RESERVOIR MANAGEMENT</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #a78bfa;">
-      <div style="font-size:9px;color:#a78bfa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">VERDÜNNUNGSRECHNER</div>
-      <p>EC zu hoch? Gib deinen aktuellen EC, den Ziel-EC und das Volumen ein. Der Rechner zeigt wie viel Wasser hinzugefügt werden muss um den EC zu senken. Wichtig: Der Ziel-EC muss über dem EC des Verdünnungswassers liegen.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #a78bfa;">
-      <div style="font-size:9px;color:#a78bfa;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">NACHFÜLLRECHNER</div>
-      <p>Reservoir abgesunken? Gib Soll-Volumen, Ist-Volumen und Ist-EC ein. Der Rechner berechnet exakt welche Salze in welcher Menge nachgekippt werden müssen. Wenn der Ist-EC höher als der Rezept-EC ist, erscheint ein Hinweis auf den Verdünnungsrechner.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 6 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">📋</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">6. Mischanleitung & Löslichkeit</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">RICHTIG ANRÜHREN</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Die Reihenfolge beim Anrühren ist entscheidend um Ausfällungen zu vermeiden:</p>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;">
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#f472b6;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">1</div><div><strong style="color:#f472b6;">Calciumnitrat ZUERST</strong> – immer alleine einrühren, nie mit Phosphat mischen!</div></div>
-        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#a78bfa;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">2</div><div>MgNO3, Bittersalz, KNO3 zusammen</div></div>
-        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#fb923c;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">3</div><div>MKP + SOP – SOP in warmem Wasser (30-40°C) vorauflösen</div></div>
-        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#4ade80;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">4</div><div>Wall Up S, Fetrilon Combi 1</div></div>
-        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#60a5fa;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">5</div><div><strong style="color:#60a5fa;">Kaliwasserglas</strong> – niemals unverdünnt! In viel Wasser vorverdünnen, Ca fällt bei hohem pH aus</div></div>
-        <div style="display:flex;gap:8px;align-items:flex-start;"><div style="background:#fbbf24;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:700;flex-shrink:0;">6</div><div>Phosphorsäure / Salpetersäure – pH einstellen am Ende</div></div>
-      </div>
-    </div>
-    <p>Die <strong style="color:#b8d4c0;">Löslichkeitstabelle</strong> zeigt für jede Flasche bis zu welchem Reservoir-Volumen 200ml Anrührwasser ausreichen. Bei größeren Reservoirs in 2 Flaschenfüllungen aufteilen.</p>
-  </div>
-</div>
-
-<!-- Kapitel 7 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">💾</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">7. Speichern & Laden</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">EXPORT / IMPORT</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Unter <strong style="color:#b8d4c0;">Einstellungen → Export / Import</strong> kannst du deine komplette Session speichern:</p>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">WAS WIRD GESPEICHERT</div>
-      <p>Alle 3 Presets (VEG, BLOOM, EXPERIMENT) mit ihren Dosierungen, Slider-Maxima, Volumen und Leitungswasser-Anteil. Dazu Wasserwerte, eigene Salze, gelöschte Standardsalze und aktive/inaktive Zustände.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – MEHRERE SETUPS</div>
-      <p>Speichere verschiedene JSON-Dateien für verschiedene Grow-Phasen oder Setups. Z.B. "VEG_Woche3.json", "BLOOM_Woche6.json". Beim Laden wird alles wiederhergestellt.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 8 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">🔬</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">8. Auswertung & Studien</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">REZEPT OPTIMIEREN</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Der Auswertungs-Tab vergleicht deine aktuellen VEG, BLOOM und EXPERIMENT Rezepte mit wissenschaftlichen Studien:</p>
-    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
-      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Saloner & Bernstein 2021</strong> – N-Einfluss auf Cannabinoide</div>
-      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Bevan et al. 2021</strong> – DWC BLOOM Response Surface</div>
-      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Moher et al. 2024</strong> – DWC VEG Response Surface (Haifa Salze)</div>
-      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Cockson et al. 2019</strong> – Mikronährstoff-Optimierung (NCSU)</div>
-      <div style="background:#0f1a12;border-radius:8px;padding:8px 12px;"><strong style="color:#b8d4c0;">Bugbee / Utah State</strong> – Minimale Nährstoffmengen</div>
-    </div>
-    <p>Die Balken zeigen deinen Ist-Wert (farbig) und den Zielbereich der Studie (heller Bereich). <strong style="color:#4ade80;">OK</strong> = im Zielbereich, <strong style="color:#60a5fa;">-X%</strong> = zu niedrig, <strong style="color:#fb923c;">+X%</strong> = zu hoch.</p>
-  </div>
-</div>
-
-<!-- Kapitel 9 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">🎯</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">9. Rezept-Optimierer</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">NNLS ALGORITHMUS</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;">
-    <p style="margin-bottom:10px;">Der Optimierer berechnet automatisch die <strong style="color:#b8d4c0;">optimale Salzmischung</strong> für beliebige Ziel-PPM-Werte – mit demselben NNLS-Algorithmus wie HydroBuddy.</p>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 1 – WASSERMIX EINSTELLEN</div>
-      <p>Zuerst den <strong style="color:#b8d4c0;">Leitungswasser-Anteil</strong> einstellen. Der Optimierer zieht die Mineralien des Leitungswassers automatisch vom Zielwert ab – so werden nur die fehlenden Nährstoffe durch Salze ergänzt.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 2 – PRESET LADEN ODER MANUELL EINSTELLEN</div>
-      <p>Klicke auf <strong style="color:#b8d4c0;">VEG, BLOOM oder EXPERIMENT</strong> um die aktuellen PPM-Werte + Wassermix aus dem jeweiligen Preset zu laden. Oder stelle die Ziel-Slider manuell ein.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 3 – ERGEBNIS LESEN</div>
-      <p>Das <strong style="color:#b8d4c0;">optimierte Rezept</strong> zeigt die Dosierungen in g/L oder ml/L. Die Balken darunter zeigen <strong style="color:#4ade80;">Erreicht / Ziel</strong> – grün = im Zielbereich, rot = Ziel nicht erreichbar mit den vorhandenen Salzen.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid #4ade80;">
-      <div style="font-size:9px;color:#4ade80;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">SCHRITT 4 – ÜBERTRAGEN</div>
-      <p>Mit <strong style="color:#b8d4c0;">→ VEG, → BLOOM oder → EXPERIMENT</strong> wird das optimierte Rezept direkt ins gewünschte Preset übertragen. Der Rechner-Tab öffnet sich automatisch.</p>
-    </div>
-    <div style="background:#0f1a12;border-radius:10px;padding:12px;border-left:3px solid #facc15;">
-      <div style="font-size:9px;color:#facc15;letter-spacing:2px;font-family:'Courier New',monospace;margin-bottom:6px;">TIPP – MIKRONÄHRSTOFFE</div>
-      <p>Fetrilon Combi 1 und Wall Up S müssen im Rechner-Tab <strong style="color:#b8d4c0;">aktiv</strong> sein damit der Optimierer sie verwenden kann. Ziel-Slider für Fe, Mn, Zn, Cu, B auf realistische Werte setzen (Fe: 2–4 ppm, Mn: 0,5–1 ppm).</p>
-    </div>
-  </div>
-</div>
-
-<!-- Kapitel 10 -->
-<div class="card" style="margin-bottom:12px;">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="font-size:20px;">⚡</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:#e2f5e8;">10. Tipps & Tricks</div>
-      <div style="font-size:9px;color:#4a7a5a;font-family:'Courier New',monospace;letter-spacing:1px;">PRO TIPPS</div>
-    </div>
-  </div>
-  <div style="font-size:12px;color:#7aa888;line-height:1.7;display:flex;flex-direction:column;gap:8px;">
-    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">pH immer zuletzt</strong> – Erst alle Salze einrühren, dann pH messen und mit H3PO4 oder HNO3 korrigieren.</div>
-    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">Ca:Mg im Auge behalten</strong> – Optimal 2:1 bis 3:1. Zu viel Ca verdrängt Mg → intervenale Chlorose.</div>
-    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">Wassertemperatur</strong> – Über 22°C sinkt die Fe-Aufnahme drastisch. Chiller auf 18-20°C empfohlen.</div>
-    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">N in Blüte senken</strong> – Laut Saloner 2021 reduziert N über 160ppm den THC-Gehalt um bis zu 69%.</div>
-    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">SOP schlecht löslich</strong> – Immer in 30-40°C warmem Wasser vorauflösen, sonst klumpt es.</div>
-    <div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;">💡 <strong style="color:#b8d4c0;">Luftsteine prüfen</strong> – Ca braucht Transpiration für die Aufnahme. Ohne ausreichend O2 im Wasser keine Ca-Aufnahme.</div>
-  </div>
-</div>
-
-<div class="footer">VINCEMAANS DWC RECHNER v1.0 · 2026</div>
-</div>
+<div class="max-w" id="anleitung-content"></div>
 </div>
 
 <!-- AUSWERTUNG PAGE -->
@@ -978,7 +655,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
 <div class="max-w">
 
   <div class="card" style="margin-bottom:12px;">
-    <div class="card-title">REFERENZ-STUDIE</div>
+    <div class="card-title" id="auswertung-title" data-lang="auswertungTitle">REFERENZ-STUDIE</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="filter-btn active" id="study-btn-general" onclick="setStudy('general',this)">ALLGEMEIN</button>
       <button class="filter-btn" id="study-btn-saloner2021" onclick="setStudy('saloner2021',this)">SALONER 2021</button>
@@ -992,18 +669,19 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
   </div>
 
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
-    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#4ade80;padding:6px;border-bottom:2px solid #4ade80;">VEG</div>
-    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#fb923c;padding:6px;border-bottom:2px solid #fb923c;">BLOOM</div>
-    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#a78bfa;padding:6px;border-bottom:2px solid #a78bfa;">EXPERIMENT</div>
+    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#4ade80;padding:6px;border-bottom:2px solid #4ade80;" id="aw-col-veg">VEG</div>
+    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#fb923c;padding:6px;border-bottom:2px solid #fb923c;" id="aw-col-bloom">BLOOM</div>
+    <div style="text-align:center;font-size:9px;letter-spacing:2px;color:#a78bfa;padding:6px;border-bottom:2px solid #a78bfa;" id="aw-col-experiment">EXPERIMENT</div>
   </div>
 
   <div id="auswertung-content"></div>
 
 </div>
-<div class="footer">DWC AUSWERTUNG 2026</div>
+<div class="footer" id="auswertung-footer" data-lang="auswertungFooter">DWC AUSWERTUNG 2026</div>
 </div>
 
 <script>
+var currentLang = 'de';
 function showPage(name, btn) {
   var pages = document.querySelectorAll('.page');
   for (var i=0; i<pages.length; i++) pages[i].classList.remove('active');
@@ -1018,10 +696,11 @@ function showPage(name, btn) {
     var rechnerCards = document.querySelectorAll('#page-rechner .card');
     for (var i=0; i<rechnerCards.length; i++) rechnerCards[i].style.display = '';
   }
+  if (name === 'anleitung') { buildAnleitung(); }
   if (name === 'guide' && !window.guideReady) { buildCards(); window.guideReady = true; }
   if (name === 'auswertung') { savePresetState(currentPreset); renderAuswertung(); }
   if (name === 'optimierer') { savePresetState(currentPreset); if(!optBuilt) buildOptSliders(); }
-  if (name === 'einstellungen') { buildWaterInputs(); initDB(); }
+  if (name === 'einstellungen') { buildWaterInputs(); initDB(); buildConverter(); }
 }
 
 // RECHNER SCRIPT
@@ -1051,30 +730,17 @@ var PRESETS = {
 
 var WATER_DEFAULTS = { Ca:64.6, Mg:19.5, K:1.3, N:1.22, S:6.54, Si:2.06, EC:0.50, pH:7.8, HCO3:180, Na:5.2, Cl:13.0 };
 var WATER_FIELDS = [
-  {key:'Ca',label:'Calcium (ppm)'},{key:'Mg',label:'Magnesium (ppm)'},{key:'K',label:'Kalium (ppm)'},
-  {key:'N',label:'Stickstoff (ppm)'},{key:'S',label:'Schwefel (ppm)'},{key:'Si',label:'Silizium (ppm)'},
-  {key:'EC',label:'EC (mS/cm)'},{key:'pH',label:'pH Leitungswasser'},
-  {key:'HCO3',label:'HCO3- (mg/L)'},{key:'Na',label:'Natrium (ppm)'},{key:'Cl',label:'Chlorid (ppm)'}
-];
-
-var SOLUBILITY = {
-  caNO3:{label:'Calciumnitrat',losl:148},mgNO3:{label:'Magnesiumnitrat',losl:71},
-  bittersalz:{label:'Bittersalz',losl:71},mkp:{label:'MKP',losl:23},
-  sop:{label:'SOP',losl:9},kno3:{label:'Kaliumnitrat',losl:133},
-  h3po4:{label:'Phosphorsaeure',losl:999},hno3:{label:'Salpetersaeure',losl:999},
-  wallup:{label:'Wall Up S',losl:50},fetrilon:{label:'Fetrilon Combi 1',losl:10}
-};
-
-var MIXING = [
-  {nr:1,color:'#374151',label:'Reservoir fullen',desc:'Pumpe & Luftsteine einschalten',tip:''},
-  {nr:2,color:'#f472b6',label:'Calciumnitrat',desc:'Alleine in 200ml - ZUERST!',tip:'Ca2+ fallt sonst mit Phosphat aus'},
-  {nr:3,color:'#a78bfa',label:'Magnesiumnitrat + Bittersalz + Kaliumnitrat',desc:'Zusammen in 200ml',tip:''},
-  {nr:4,color:'#fb923c',label:'MKP + SOP',desc:'Zusammen in 200ml',tip:'SOP in warmem Wasser (30-40 Grad) vorloesen'},
-  {nr:5,color:'#4ade80',label:'Wall Up S',desc:'Alleine in 200ml',tip:'Si nach MKP - bei sinkendem pH stabiler'},
-  {nr:6,color:'#86efac',label:'Fetrilon Combi 1',desc:'Alleine in 200ml',tip:'Chelate bei niedrigerem pH stabiler'},
-  {nr:7,color:'#60a5fa',key:'kwg',label:'Kaliwasserglas 28Be',desc:'kwg',tip:'Niemals unverdunnt ins Reservoir! Ca fallt bei hohem pH aus.'},
-  {nr:8,color:'#fbbf24',label:'Phosphorsaeure 85%',desc:'In 200ml - pH auf 5,8-6,0 einstellen',tip:''},
-  {nr:9,color:'#f87171',label:'Salpetersaeure 0,5M (optional)',desc:'Nur wenn pH noch zu hoch',tip:'Vorsicht: stark verduennt zugeben'}
+  {key:'Ca', label:'Calcium (ppm)',          label_en:'Calcium (ppm)'},
+  {key:'Mg', label:'Magnesium (ppm)',        label_en:'Magnesium (ppm)'},
+  {key:'K',  label:'Kalium (ppm)',           label_en:'Potassium (ppm)'},
+  {key:'N',  label:'Stickstoff (ppm)',       label_en:'Nitrogen (ppm)'},
+  {key:'S',  label:'Schwefel (ppm)',         label_en:'Sulfur (ppm)'},
+  {key:'Si', label:'Silizium (ppm)',         label_en:'Silicon (ppm)'},
+  {key:'EC', label:'EC (mS/cm)',             label_en:'EC (mS/cm)'},
+  {key:'pH', label:'pH Leitungswasser',      label_en:'pH Tap Water'},
+  {key:'HCO3',label:'HCO3- (mg/L)',         label_en:'HCO3- (mg/L)'},
+  {key:'Na', label:'Natrium (ppm)',          label_en:'Sodium (ppm)'},
+  {key:'Cl', label:'Chlorid (ppm)',          label_en:'Chloride (ppm)'}
 ];
 
 var ION_COLORS = {N:'#4ade80',P:'#fb923c',K:'#60a5fa',Ca:'#f472b6',Mg:'#a78bfa',S:'#facc15'};
@@ -1085,7 +751,6 @@ var tap = {Ca:64.6,Mg:19.5,K:1.3,N:1.22,S:6.54,Si:2.06,EC:0.50,pH:7.8,HCO3:180,N
 var doses = {};
 for (var i=0; i<SALTS.length; i++) doses[SALTS[i].key] = SALTS[i].val;
 
-var dilState = {ecCur:1.5, ecTgt:1.2, vol:42, fillPct:1.0};
 var refState = {soll:42, ist:35, ecIst:1.0, fillPct:1.0};
 
 function fmt(v,d) { return parseFloat(v).toFixed(d===undefined?1:d).replace('.',','); }
@@ -1190,6 +855,7 @@ function calc() {
 
 function render() {
   var r = calc();
+  var isEN = currentLang === 'en';
 
   // EC
   var ecColor = r.ec<1.2?'#60a5fa':r.ec<1.8?'#4ade80':'#fb923c';
@@ -1203,7 +869,7 @@ function render() {
   }
   var abs = Math.abs(r.ion);
   var ionColor = hasCustomActive?'#6b7280':abs<5?'#4ade80':abs<10?'#facc15':'#f87171';
-  var ionText = hasCustomActive?'n/a (Mischd.)':abs<5?'sehr gut':abs<10?'gut':'pruefen';
+  var ionText = hasCustomActive?(currentLang==='en'?'n/a (blend)':'n/a (Mischd.)'):abs<5?(currentLang==='en'?'very good':'sehr gut'):abs<10?(currentLang==='en'?'good':'gut'):(currentLang==='en'?'check':'pruefen');
   document.getElementById('ion-val').style.color = ionColor;
   document.getElementById('ion-val').textContent = hasCustomActive?'~':(r.ion>0?'+':'') + fmt(r.ion,1) + '%';
   document.getElementById('ion-label').textContent = ionText;
@@ -1232,7 +898,9 @@ function render() {
   }
   var phEst = Math.min(7.8, Math.max(4.0, tapPH2 - acidEffect - (1.0 - hco3Pct) * 0.3));
   var phColor = phEst<5.5?'#f87171':phEst<=6.2?'#4ade80':phEst<=6.8?'#facc15':'#f87171';
-  var phText = phEst<5.5?'zu sauer':phEst<=6.2?'optimal':phEst<=6.8?'leicht hoch':'zu hoch';
+  var phText = currentLang==='de'
+    ? (phEst<5.5?'zu sauer':phEst<=6.2?'optimal':phEst<=6.8?'leicht hoch':'zu hoch')
+    : (phEst<5.5?'too acidic':phEst<=6.2?'optimal':phEst<=6.8?'slightly high':'too high');
   document.getElementById('ph-val').style.color = phColor;
   document.getElementById('ph-val').textContent = fmt(phEst,1);
   document.getElementById('ph-label').textContent = phText;
@@ -1252,33 +920,15 @@ function render() {
   // Additional ratios incl Ca:Mg
   var camg = r.Ca/(r.Mg||1);
   var camgColor = camg<1.5?'#f87171':camg<=3.0?'#4ade80':'#facc15';
-  var camgText = camg<1.5?'Mg zu hoch':camg<=3.0?'optimal DWC':'Ca zu hoch';
+  var camgText = isEN
+    ? (camg<1.5?'Mg too high':camg<=3.0?'optimal DWC':'Ca too high')
+    : (camg<1.5?'Mg zu hoch':camg<=3.0?'optimal DWC':'Ca zu hoch');
 
   var ratios = [
-    {
-      label:'Ca : Mg',
-      val: fmt(camg,2)+':1',
-      color: camgColor,
-      info: camgText
-    },
-    {
-      label:'N : K',
-      val: r.K>0 ? fmt(r.N/r.K,2) : '-',
-      color: (r.N/r.K)>1.5?'#f87171':(r.N/r.K)<0.5?'#60a5fa':'#4ade80',
-      info: 'VEG ~1  BLOOM ~0,5'
-    },
-    {
-      label:'K : Ca',
-      val: r.Ca>0 ? fmt(r.K/r.Ca,2) : '-',
-      color: (r.K/r.Ca)>1.2?'#f87171':(r.K/r.Ca)<0.5?'#facc15':'#4ade80',
-      info: 'Ideal unter 1,0'
-    },
-    {
-      label:'K : P',
-      val: r.P>0 ? fmt(r.K/r.P,1) : '-',
-      color: '#60a5fa',
-      info: 'BLOOM 3-5:1'
-    }
+    { label:'Ca : Mg', val:fmt(camg,2)+':1', color:camgColor, info:camgText },
+    { label:'N : K',   val:r.K>0?fmt(r.N/r.K,2):'-', color:(r.N/r.K)>1.5?'#f87171':(r.N/r.K)<0.5?'#60a5fa':'#4ade80', info:isEN?'VEG ~1  BLOOM ~0.5':'VEG ~1  BLOOM ~0,5' },
+    { label:'K : Ca',  val:r.Ca>0?fmt(r.K/r.Ca,2):'-', color:(r.K/r.Ca)>1.2?'#f87171':(r.K/r.Ca)<0.5?'#facc15':'#4ade80', info:isEN?'Ideal below 1.0':'Ideal unter 1,0' },
+    { label:'K : P',   val:r.P>0?fmt(r.K/r.P,1):'-', color:'#60a5fa', info:'BLOOM 3-5:1' }
   ];
   var ratioHtml = '';
   for (var i=0; i<ratios.length; i++) {
@@ -1293,8 +943,12 @@ function render() {
 
   // Makros
   var macros = [
-    {key:'N',label:'Stickstoff',val:r.N},{key:'P',label:'Phosphor',val:r.P},{key:'K',label:'Kalium',val:r.K},
-    {key:'Ca',label:'Calcium',val:r.Ca},{key:'Mg',label:'Magnesium',val:r.Mg},{key:'S',label:'Schwefel',val:r.S}
+    {key:'N',label:isEN?'Nitrogen':'Stickstoff',val:r.N},
+    {key:'P',label:isEN?'Phosphorus':'Phosphor',val:r.P},
+    {key:'K',label:isEN?'Potassium':'Kalium',val:r.K},
+    {key:'Ca',label:'Calcium',val:r.Ca},
+    {key:'Mg',label:'Magnesium',val:r.Mg},
+    {key:'S',label:isEN?'Sulfur':'Schwefel',val:r.S}
   ];
   var maxPPM = 1;
   for (var i=0; i<macros.length; i++) if (macros[i].val>maxPPM) maxPPM=macros[i].val;
@@ -1317,8 +971,8 @@ function render() {
       if (r.NO3 > 0)  macroHtml += '<span style="font-size:8px;color:#4ade80;">NO3: '+fmt(r.NO3)+' ppm</span>';
       if (r.NH4 > 0)  macroHtml += '<span style="font-size:8px;color:#fb923c;">NH4: '+fmt(r.NH4)+' ppm</span>';
       if (r.Norg > 0) macroHtml += '<span style="font-size:8px;color:#6b7280;">N-org: '+fmt(r.Norg)+' ppm</span>';
-      if (r.NH4 / r.N > 0.1) macroHtml += '<span style="font-size:8px;color:#f87171;">&#9888; NH4 &gt;10% - pH Abfall!</span>';
-      if (r.Norg > 0) macroHtml += '<span style="font-size:8px;color:#9ca3af;">&#9888; N-org in DWC kaum verfügbar</span>';
+      if (r.NH4 / r.N > 0.1) macroHtml += '<span style="font-size:8px;color:#f87171;">&#9888; NH4 &gt;10% - '+(isEN?'pH drop!':'pH Abfall!')+'</span>';
+      if (r.Norg > 0) macroHtml += '<span style="font-size:8px;color:#9ca3af;">&#9888; '+(isEN?'N-org barely available in DWC':'N-org in DWC kaum verfügbar')+'</span>';
       macroHtml += '</div>';
     } else {
       macroHtml += '<div class="bar-bg"><div class="bar-fill" style="width:'+((m.val/maxPPM)*100)+'%;background:'+c+'"></div></div>';
@@ -1329,12 +983,12 @@ function render() {
 
   // Mikros
   var mikroData = [
-    {label:'Silizium', val:r.Si, dec:1, color:'#94a3b8'},
-    {label:'Eisen',    val:r.Fe, dec:2, color:'#f87171'},
-    {label:'Mangan',   val:r.Mn, dec:2, color:'#34d399'},
-    {label:'Zink',     val:r.Zn, dec:2, color:'#818cf8'},
-    {label:'Kupfer',   val:r.Cu, dec:2, color:'#fb923c'},
-    {label:'Bor',      val:r.B,  dec:2, color:'#c084fc'}
+    {label:isEN?'Silicon':'Silizium',   val:r.Si, dec:1, color:'#94a3b8'},
+    {label:isEN?'Iron':'Eisen',         val:r.Fe, dec:2, color:'#f87171'},
+    {label:isEN?'Manganese':'Mangan',   val:r.Mn, dec:2, color:'#34d399'},
+    {label:isEN?'Zinc':'Zink',          val:r.Zn, dec:2, color:'#818cf8'},
+    {label:isEN?'Copper':'Kupfer',      val:r.Cu, dec:2, color:'#fb923c'},
+    {label:isEN?'Boron':'Bor',          val:r.B,  dec:2, color:'#c084fc'}
   ];
   var maxMikro = 0.01;
   for (var i=0; i<mikroData.length; i++) if (mikroData[i].val > maxMikro) maxMikro = mikroData[i].val;
@@ -1350,7 +1004,7 @@ function render() {
   document.getElementById('micro-grid').innerHTML = mikroHtml;
 
   // Gesamtmenge
-  document.getElementById('total-title').textContent = 'GESAMTMENGE FUR ' + volume + 'L';
+  document.getElementById('total-title').textContent = (typeof LANG !== 'undefined' ? LANG[currentLang].gesamtmenge : 'GESAMTMENGE FUR') + ' ' + volume + 'L';
   var totalHtml = '';
   for (var i=0; i<SALTS.length; i++) {
     var s=SALTS[i];
@@ -1381,70 +1035,6 @@ function render() {
   }
   document.getElementById('cost-breakdown').innerHTML = costHtml;
 
-  // Anruehr - KWG Menge aus aktiven Salzen suchen (key kann custom_X sein)
-  var kwgDose = 0;
-  for(var ki=0;ki<SALTS.length;ki++){
-    var ks=SALTS[ki];
-    if(!ks.active) continue;
-    if(ks.key==='kwg' || ks.label.toLowerCase().indexOf('kaliwasserglas')>-1){
-      kwgDose += doses[ks.key]||0;
-    }
-  }
-  var kwgMl=kwgDose*volume, siMg=kwgMl*96.72;
-  var safeL=Math.ceil(Math.max(1.0,(siMg/100)*1.5)*10)/10;
-  var mixHtml='';
-  for (var i=0; i<MIXING.length; i++) {
-    var st=MIXING[i];
-    var desc = st.key==='kwg' ? 'In <strong style="color:#60a5fa">'+safeL+'L</strong> Leitungswasser vorverdunnen -> pH auf 6,5-7,0 -> ins Reservoir' : st.desc;
-    mixHtml += '<div class="step-row">';
-    mixHtml += '<div class="step-num" style="background:'+st.color+'">'+st.nr+'</div>';
-    mixHtml += '<div style="flex:1"><div class="step-label">'+st.label+'</div>';
-    mixHtml += '<div class="step-desc">'+desc+'</div>';
-    if (st.tip) mixHtml += '<div class="step-tip" style="color:'+st.color+'">-> '+st.tip+'</div>';
-    mixHtml += '</div></div>';
-  }
-  document.getElementById('mixing-steps').innerHTML = mixHtml;
-
-  // Loslichkeit - nach Flaschen gruppiert
-  var bottles = [
-    { label:'Fl. 1: Calciumnitrat', keys:['caNO3'], color:'#f472b6' },
-    { label:'Fl. 2: MgNO3 + Bittersalz + KNO3', keys:['mgNO3','bittersalz','kno3'], color:'#a78bfa' },
-    { label:'Fl. 3: MKP + SOP', keys:['mkp','sop'], color:'#fb923c' },
-    { label:'Fl. 4: Wall Up S', keys:['wallup'], color:'#4ade80' },
-    { label:'Fl. 5: Fetrilon Combi 1', keys:['fetrilon'], color:'#86efac' },
-    { label:'Fl. 6: Kaliwasserglas', keys:['kwg'], color:'#60a5fa' }
-  ];
-  var solHtml='';
-  for (var b=0; b<bottles.length; b++) {
-    var bottle=bottles[b];
-    var anyUsed=false;
-    for (var k=0; k<bottle.keys.length; k++) if(doses[bottle.keys[k]]>0) anyUsed=true;
-    if (!anyUsed) continue;
-    // For each reservoir volume, check if all salts fit in 200ml together
-    // maxReser = how many liters until the 200ml glass is full
-    // sum(dose_per_L * reser_vol / losl_per_ml) <= 1  =>  reser_vol <= 1 / sum(dose/losl_per_ml)
-    var sumRatio=0;
-    for (var k=0; k<bottle.keys.length; k++) {
-      var key=bottle.keys[k];
-      var dose=doses[key]||0;
-      if (dose===0) continue;
-      var info=SOLUBILITY[key];
-      if (!info) continue;
-      // fraction of 200ml used per liter of reservoir
-      sumRatio += dose / (info.losl/100*200);
-    }
-    var maxReser = sumRatio>0 ? 1/sumRatio : 999999;
-    var pct=Math.min(100,(volume/maxReser)*100);
-    var color=pct<50?'#4ade80':pct<80?'#facc15':'#f87171';
-    solHtml += '<div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;margin-bottom:6px;">';
-    solHtml += '<div><div style="font-size:10px;color:'+bottle.color+';">'+bottle.label+'</div>';
-    solHtml += '<div class="bar-bg" style="margin-top:3px;"><div class="bar-fill" style="width:'+pct+'%;background:'+color+'"></div></div></div>';
-    solHtml += '<div style="font-size:9px;color:#6b7280;text-align:right;">Limit bei</div>';
-    solHtml += '<div style="font-size:11px;font-weight:700;color:'+color+';text-align:right;">'+maxReser.toFixed(0)+'L</div></div>';
-  }
-  document.getElementById('solubility-table').innerHTML = solHtml||'<div style="font-size:10px;color:#374151;">Alle Dosierungen auf 0</div>';
-
-  renderDil();
   renderRef();
 }
 
@@ -1458,7 +1048,7 @@ function buildSliders() {
     html += '<span class="slider-label">'+s.label+'</span>';
     html += '<div style="display:flex;align-items:center;gap:6px;">';
     html += '<span class="slider-value" id="sv-'+s.key+'">'+(doses[s.key]!==undefined?fmt(doses[s.key],3):fmt(s.val,3))+' '+s.unit+'</span>';
-    html += '<button onclick="toggleSalt(\''+s.key+'\')" style="background:none;border:1px solid '+(s.active?'#4ade80':'#374151')+';border-radius:3px;color:'+(s.active?'#4ade80':'#6b7280')+';font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">'+(s.active?'AN':'AUS')+'</button>';
+    html += '<button onclick="toggleSalt(\''+s.key+'\')" style="background:none;border:1px solid '+(s.active?'#4ade80':'#374151')+';border-radius:3px;color:'+(s.active?'#4ade80':'#6b7280')+';font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">'+(s.active?(currentLang==='en'?'ON':'AN'):(currentLang==='en'?'OFF':'AUS'))+'</button>';
     html += '<button onclick="toggleEdit(\''+s.key+'\')" style="background:none;border:1px solid #60a5fa;border-radius:3px;color:#60a5fa;font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">&#9998;</button>';
     html += '<button onclick="deleteSalt(\''+s.key+'\')" style="background:none;border:1px solid #374151;border-radius:3px;color:#6b7280;font-size:8px;padding:1px 4px;cursor:pointer;font-family:\'Courier New\',monospace;">X</button>';
     html += '</div></div>';
@@ -1485,8 +1075,8 @@ function buildSliders() {
     html += '<div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
     html += '<div><div class="water-label">Slider Max ('+s.unit+')</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="any" value="'+s.max+'"></div>';
     html += '</div>';
-    html += '<button onclick="saveSaltEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #2D6A2D;background:transparent;color:#4ade80;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;">SPEICHERN</button>';
-    html += '<button onclick="toggleEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #374151;background:transparent;color:#6b7280;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;margin-left:6px;">ABBRECHEN</button>';
+    html += '<button onclick="saveSaltEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #2D6A2D;background:transparent;color:#4ade80;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;">'+(currentLang==='en'?'SAVE':'SPEICHERN')+'</button>';
+    html += '<button onclick="toggleEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #374151;background:transparent;color:#6b7280;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;margin-left:6px;">'+(currentLang==='en'?'CANCEL':'ABBRECHEN')+'</button>';
     html += '</div>';
     html += '</div>';
   }
@@ -1494,10 +1084,12 @@ function buildSliders() {
 }
 
 function buildWaterInputs() {
+  var isEN = currentLang === 'en';
   var html='';
   for (var i=0; i<WATER_FIELDS.length; i++) {
     var f=WATER_FIELDS[i];
-    html += '<div><div class="water-label">'+f.label+'</div>';
+    var lbl = isEN ? (f.label_en || f.label) : f.label;
+    html += '<div><div class="water-label">'+lbl+'</div>';
     html += '<input class="water-input" type="number" id="w-'+f.key+'" value="'+(tap[f.key]!==undefined?tap[f.key]:WATER_DEFAULTS[f.key])+'" step="0.01" min="0" oninput="onWater()"></div>';
   }
   document.getElementById('water-inputs').innerHTML = html;
@@ -1563,7 +1155,8 @@ function onVol(val) {
 function onTap(val) {
   tapPct=parseInt(val)/100;
   var t=Math.round(tapPct*100);
-  document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';
+  var L=(typeof LANG!=='undefined')?LANG[currentLang]:{osmose100:'100% Osmose',leitung100:'100% Leitung'};
+  document.getElementById('tap-label').textContent=t===0?L.osmose100:t===100?L.leitung100:t+'% '+( currentLang==='de'?'Leitung':'Tap')+' - '+(100-t)+'% '+(currentLang==='de'?'Osmose':'RO');
   render();
 }
 
@@ -1591,9 +1184,15 @@ function savePresetState(name) {
 }
 
 function loadPreset(name) {
-  // Save current state before switching
-  if (window.presetsLoaded && currentPreset !== name) {
+  // Always save current state first
+  if (window.presetsLoaded) {
     savePresetState(currentPreset);
+  }
+  // If clicking the already active preset, just re-highlight and return
+  if (window.presetsLoaded && currentPreset === name) {
+    var btns = document.querySelectorAll('.btn-preset');
+    for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active', btns[i].textContent===name);
+    return;
   }
   currentPreset = name;
 
@@ -1709,8 +1308,8 @@ function toggleSalt(key) {
   if(row) row.style.opacity=salt.active?'1':'0.35';
   var btns=row?row.querySelectorAll('button'):[];
   for(var b=0;b<btns.length;b++){
-    if(btns[b].textContent==='AN'||btns[b].textContent==='AUS'){
-      btns[b].textContent=salt.active?'AN':'AUS';
+    if(btns[b].textContent==='AN'||btns[b].textContent==='AUS'||btns[b].textContent==='ON'||btns[b].textContent==='OFF'){
+      btns[b].textContent=salt.active?(currentLang==='en'?'ON':'AN'):(currentLang==='en'?'OFF':'AUS');
       btns[b].style.borderColor=salt.active?'#4ade80':'#374151';
       btns[b].style.color=salt.active?'#4ade80':'#6b7280';
     }
@@ -1740,7 +1339,7 @@ function resetStandardSalts() {
   for(var i=0;i<SALTS.length;i++) {
     if(!doses.hasOwnProperty(SALTS[i].key)) doses[SALTS[i].key]=0;
   }
-  var cf=document.getElementById('custom-feedback');if(cf){cf.textContent='Standard-Salze wiederhergestellt!';setTimeout(function(){cf.textContent='';},2000);}
+  var cf=document.getElementById('custom-feedback');if(cf){cf.textContent=(currentLang==='en'?'Defaults restored!':'Standard-Salze wiederhergestellt!');setTimeout(function(){cf.textContent='';},2000);}
   buildSliders();
   render();
 }
@@ -1795,7 +1394,7 @@ function addCustomSalt() {
     if(el) el.value = fields[i]==='menge'?'1000':'';
   }
   document.getElementById('new-salt-unit').value = 'g/L';
-  var cf=document.getElementById('custom-feedback');if(cf){cf.textContent=label+' hinzugefugt!';setTimeout(function(){cf.textContent='';},2000);}
+  var cf=document.getElementById('custom-feedback');if(cf){cf.textContent=label+(currentLang==='en'?' added!':' hinzugefugt!');setTimeout(function(){cf.textContent='';},2000);}
 
   buildSliders();
   render();
@@ -1849,9 +1448,8 @@ function clearWater() {
 
 function doExportTop() {
   var nameTop = document.getElementById('recipe-name-top');
-  var nameBot = document.getElementById('recipe-name');
   if (nameTop && nameTop.value.trim()) {
-    if (nameBot) nameBot.value = nameTop.value.trim();
+    // name is set in doExport via recipe-name-top
   }
   doExport();
 }
@@ -1911,16 +1509,16 @@ function doExport() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showFeedback(sessionName+' gespeichert (VEG + BLOOM + EXPERIMENT)','#4ade80');
+  showFeedback(sessionName+(currentLang==='en'?' saved (VEG + BLOOM + EXPERIMENT)':' gespeichert (VEG + BLOOM + EXPERIMENT)'),'#4ade80');
 }
 
 function doImport(input) {
   var file=input.files[0];
-  if(!file){showFeedback('Keine Datei gewaehlt','#f87171');return;}
+  if(!file){showFeedback((currentLang==='en'?'No file selected':'Keine Datei gewaehlt'),'#f87171');return;}
   var reader=new FileReader();
   reader.onload=function(e){
     try { applySnapshot(JSON.parse(e.target.result)); }
-    catch(err) { showFeedback('Ungultiges Format','#f87171'); }
+    catch(err) { showFeedback((currentLang==='en'?'Invalid format':'Ungultiges Format'),'#f87171'); }
   };
   reader.readAsText(file);
   input.value='';
@@ -1978,7 +1576,7 @@ function applySnapshot(data) {
       WATER_DEFAULTS = Object.assign({}, tap);
     }
     if(data.volume){volume=data.volume;document.getElementById('vol-label').textContent=volume+' L';document.getElementById('vol-slider').value=volume;}
-    if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';document.getElementById('tap-slider').value=t;}
+    if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?(currentLang==='en'?'100% RO water':'100% Osmose'):t===100?(currentLang==='en'?'100% Tap water':'100% Leitung'):t+'% '+(currentLang==='en'?'Tap':'Leitung')+' - '+(100-t)+'% '+(currentLang==='en'?'RO':'Osmose');document.getElementById('tap-slider').value=t;}
     // Load current preset
     var toLoad=data.currentPreset||'VEG';
     presetStates[toLoad]=null; // force reload from state
@@ -2000,7 +1598,7 @@ function applySnapshot(data) {
     var btns=document.querySelectorAll('.btn-preset');
     for(var i=0;i<btns.length;i++) btns[i].classList.toggle('active',btns[i].textContent.trim()===toLoad);
     if(data.name) { var el=document.getElementById('recipe-name-top'); if(el) el.value=data.name; }
-    showFeedback((data.name||'Session')+' geladen - VEG, BLOOM & EXPERIMENT wiederhergestellt','#4ade80');
+    showFeedback((data.name||'Session')+(currentLang==='en'?' loaded - VEG, BLOOM & EXPERIMENT restored':' geladen - VEG, BLOOM & EXPERIMENT wiederhergestellt'),'#4ade80');
     buildSliders();
     render();
     return;
@@ -2018,45 +1616,18 @@ function applySnapshot(data) {
     if(lbl&&salt) lbl.textContent=fmt(data.doses[k],3)+' '+salt.unit;
   }
   if(data.volume){volume=data.volume;document.getElementById('vol-label').textContent=volume+' L';document.getElementById('vol-slider').value=volume;}
-  if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?'100% Osmose':t===100?'100% Leitung':t+'% Leitung - '+(100-t)+'% Osmose';document.getElementById('tap-slider').value=t;}
+  if(data.tapPct!==undefined){tapPct=data.tapPct;var t=Math.round(tapPct*100);document.getElementById('tap-label').textContent=t===0?(currentLang==='en'?'100% RO water':'100% Osmose'):t===100?(currentLang==='en'?'100% Tap water':'100% Leitung'):t+'% '+(currentLang==='en'?'Tap':'Leitung')+' - '+(100-t)+'% '+(currentLang==='en'?'RO':'Osmose');document.getElementById('tap-slider').value=t;}
   if(data.tap){for(var i=0;i<WATER_FIELDS.length;i++){var f=WATER_FIELDS[i];if(data.tap[f.key]===undefined)continue;tap[f.key]=data.tap[f.key];var el=document.getElementById('w-'+f.key);if(el)el.value=data.tap[f.key];}}
   var btns=document.querySelectorAll('.btn-preset');
   for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
   if(data.name) { var el=document.getElementById('recipe-name-top'); if(el) el.value=data.name; }
-  showFeedback((data.name||'Rezept')+' geladen','#4ade80');
+  showFeedback((data.name||'Rezept')+(currentLang==='en'?' loaded':' geladen'),'#4ade80');
   render();
 }
 function showFeedback(msg,color) {
   var fb=document.getElementById('io-feedback');
   if(fb){fb.style.display='block'; fb.style.color=color||'#4ade80'; fb.textContent=msg;
   setTimeout(function(){fb.style.display='none';},3000);}
-}
-
-function onDilInput(key,val) {
-  var v=parseFloat(val);
-  if(key==='ec-cur'){dilState.ecCur=v;document.getElementById('dil-ec-cur-label').textContent=fmt(v,2)+' mS/cm';}
-  if(key==='ec-tgt'){dilState.ecTgt=v;document.getElementById('dil-ec-tgt-label').textContent=fmt(v,2)+' mS/cm';}
-  if(key==='vol'){dilState.vol=v;document.getElementById('dil-vol-label').textContent=v+' L';}
-  if(key==='water'){
-    dilState.fillPct=v/100;
-    var lbl=v==0?'100% Osmose':v==100?'100% Leitung':v+'% Leitung - '+(100-v)+'% Osmose';
-    document.getElementById('dil-water-label').textContent=lbl;
-  }
-  renderDil();
-}
-function renderDil() {
-  var ecCur=dilState.ecCur, ecTgt=dilState.ecTgt, vol=dilState.vol, fillPct=dilState.fillPct;
-  var fillEC=tap.EC*fillPct;
-  var res=document.getElementById('dil-result');
-  var resVol=document.getElementById('dil-result-vol');
-  if(ecTgt<=fillEC){res.textContent='-';res.style.color='#f87171';resVol.textContent='Ziel-EC <= Wasser-EC - nicht erreichbar';return;}
-  if(ecTgt>=ecCur){res.textContent='-';res.style.color='#6b7280';resVol.textContent='Ziel-EC muss kleiner als aktueller EC sein';return;}
-  var water=vol*(ecCur-ecTgt)/(ecTgt-fillEC);
-  var newVol=vol+water;
-  var fillLabel=fillPct===0?'Osmose':fillPct===1?'Leitung':Math.round(fillPct*100)+'% Leitung';
-  res.textContent=fmt(water,1);
-  res.style.color='#60a5fa';
-  resVol.textContent=fillLabel+' (EC '+fmt(fillEC,2)+') -> Neues Volumen: '+fmt(newVol,1)+' L';
 }
 
 function onRefInput(key,val) {
@@ -2069,11 +1640,12 @@ function onRefInput(key,val) {
 function onRefWater(val) {
   var pct=parseInt(val);
   refState.fillPct=pct/100;
-  var lbl=pct===0?'100% Osmose':pct===100?'100% Leitung':pct+'% Leitung - '+(100-pct)+'% Osmose';
+  var lbl=pct===0?(currentLang==='en'?'100% RO water':'100% Osmose'):pct===100?(currentLang==='en'?'100% Tap water':'100% Leitung'):pct+'% '+(currentLang==='en'?'Tap':'Leitung')+' - '+(100-pct)+'% '+(currentLang==='en'?'RO':'Osmose');
   document.getElementById('ref-water-label').textContent=lbl;
   renderRef();
 }
 function renderRef() {
+  var isEN = currentLang === 'en';
   var soll=refState.soll, ist=refState.ist, ecIst=refState.ecIst, fillPct=refState.fillPct;
   var res=document.getElementById('ref-result');
   var water=document.getElementById('ref-water');
@@ -2102,15 +1674,15 @@ function renderRef() {
     rowsHtml+='<span style="color:#a7f3d0;font-size:10px;">'+s.label+'</span>';
     rowsHtml+='<span style="color:#4ade80;font-size:11px;font-weight:700;">'+nachfuell.toFixed(2)+' '+s.unit.replace('/L','')+'</span></div>';
   }
-  res.innerHTML=rowsHtml||'<div style="font-size:11px;color:#4ade80;">Nur Wasser nachfullen</div>';
+  res.innerHTML=rowsHtml||'<div style="font-size:11px;color:#4ade80;">'+(isEN?'Add water only':'Nur Wasser nachfullen')+'</div>';
 
   // Warnung wenn Ist-EC höher als Rezept-EC
   var ecNachFuellen=(ecIst*ist+fillEC*diff)/soll;
   if(ecNachFuellen>rezeptEC*1.02) {
-    res.innerHTML+='<div style="margin-top:8px;padding:8px;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.2);border-radius:8px;font-size:10px;color:#fb923c;">&#9888; EC nach Nachfullen ('+fmt(ecNachFuellen,2)+') noch uber Ziel-EC ('+fmt(rezeptEC,2)+'). Mehr Wasser nachfullen oder <span style="text-decoration:underline;cursor:pointer;" onclick="document.getElementById(\'dil-ec-cur-label\').scrollIntoView();showPage(\'rechner\',document.querySelector(\'.main-nav-btn\'))">Verdunnungsrechner</span> verwenden.</div>';
+    res.innerHTML+='<div style="margin-top:8px;padding:8px;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.2);border-radius:8px;font-size:10px;color:#fb923c;">&#9888; '+(isEN?'EC after refill ('+fmt(ecNachFuellen,2)+') still above target EC ('+fmt(rezeptEC,2)+'). Add more water.':'EC nach Nachfullen ('+fmt(ecNachFuellen,2)+') noch uber Ziel-EC ('+fmt(rezeptEC,2)+'). Mehr Wasser nachfullen.')+'</div>';
   }
-  var fillLabel=fillPct===0?'Osmosewasser':fillPct===1?'Leitungswasser':Math.round(fillPct*100)+'% Leitung';
-  water.textContent='+ '+fmt(diff,1)+' L '+fillLabel+' (EC '+fmt(fillEC,2)+') -> Ziel-EC: '+fmt(rezeptEC,2)+' mS/cm';
+  var fillLabel2=fillPct===0?(isEN?'RO water':'Osmosewasser'):fillPct===1?(isEN?'Tap water':'Leitungswasser'):Math.round(fillPct*100)+'% '+(isEN?'Tap':'Leitung');
+  water.textContent='+ '+fmt(diff,1)+' L '+fillLabel2+' (EC '+fmt(fillEC,2)+') -> '+(isEN?'Target EC: ':'Ziel-EC: ')+fmt(rezeptEC,2)+' mS/cm';
 }
 
 function initRechner() {
@@ -2118,7 +1690,6 @@ function initRechner() {
   buildWaterInputs();
   loadPreset('VEG');
   window.presetsLoaded = true;
-  renderDil();
   renderRef();
   window.rechnerReady = true;
 }
@@ -2132,19 +1703,19 @@ initRechner();
 
 var OPT_NUTRIENTS = [
   // Makro
-  { key:'N',  label:'Stickstoff', color:'#4ade80', min:0, max:300, step:1,   dec:0, val:0, w:3   },
-  { key:'P',  label:'Phosphor',   color:'#fb923c', min:0, max:150, step:1,   dec:0, val:0,  w:2   },
-  { key:'K',  label:'Kalium',     color:'#60a5fa', min:0, max:400, step:1,   dec:0, val:0, w:2   },
-  { key:'Ca', label:'Calcium',    color:'#f472b6', min:0, max:300, step:1,   dec:0, val:0, w:2   },
-  { key:'Mg', label:'Magnesium',  color:'#a78bfa', min:0, max:150, step:1,   dec:0, val:0,  w:1   },
-  { key:'S',  label:'Schwefel',   color:'#facc15', min:0, max:200, step:1,   dec:0, val:0,  w:1   },
+  { key:'N',  label:'Stickstoff', label_en:'Nitrogen',   color:'#4ade80', min:0, max:300, step:1,    dec:0, val:0, w:3   },
+  { key:'P',  label:'Phosphor',   label_en:'Phosphorus', color:'#fb923c', min:0, max:150, step:1,    dec:0, val:0, w:2   },
+  { key:'K',  label:'Kalium',     label_en:'Potassium',  color:'#60a5fa', min:0, max:400, step:1,    dec:0, val:0, w:2   },
+  { key:'Ca', label:'Calcium',    label_en:'Calcium',    color:'#f472b6', min:0, max:300, step:1,    dec:0, val:0, w:2   },
+  { key:'Mg', label:'Magnesium',  label_en:'Magnesium',  color:'#a78bfa', min:0, max:150, step:1,    dec:0, val:0, w:1   },
+  { key:'S',  label:'Schwefel',   label_en:'Sulfur',     color:'#facc15', min:0, max:200, step:1,    dec:0, val:0, w:1   },
   // Mikro
-  { key:'Si', label:'Silizium',   color:'#94a3b8', min:0, max:150, step:1,   dec:0, val:0,  w:1.5 },
-  { key:'Fe', label:'Eisen',      color:'#f87171', min:0, max:20,  step:0.1, dec:1, val:0,   w:1.5 },
-  { key:'Mn', label:'Mangan',     color:'#34d399', min:0, max:5,   step:0.1, dec:1, val:0, w:1   },
-  { key:'Zn', label:'Zink',       color:'#818cf8', min:0, max:3,   step:0.1, dec:1, val:0, w:1   },
-  { key:'Cu', label:'Kupfer',     color:'#fb923c', min:0, max:2,   step:0.001,dec:2, val:0, w:1   },
-  { key:'B',  label:'Bor',        color:'#c084fc', min:0, max:3,   step:0.1, dec:1, val:0, w:1   }
+  { key:'Si', label:'Silizium',   label_en:'Silicon',    color:'#94a3b8', min:0, max:150, step:1,    dec:0, val:0, w:1.5 },
+  { key:'Fe', label:'Eisen',      label_en:'Iron',       color:'#f87171', min:0, max:20,  step:0.1,  dec:1, val:0, w:1.5 },
+  { key:'Mn', label:'Mangan',     label_en:'Manganese',  color:'#34d399', min:0, max:5,   step:0.1,  dec:1, val:0, w:1   },
+  { key:'Zn', label:'Zink',       label_en:'Zinc',       color:'#818cf8', min:0, max:3,   step:0.1,  dec:1, val:0, w:1   },
+  { key:'Cu', label:'Kupfer',     label_en:'Copper',     color:'#fb923c', min:0, max:2,   step:0.001,dec:2, val:0, w:1   },
+  { key:'B',  label:'Bor',        label_en:'Boron',      color:'#c084fc', min:0, max:3,   step:0.1,  dec:1, val:0, w:1   }
 ];
 
 var optVol = 50;
@@ -2174,7 +1745,7 @@ function onOptTap(val) {
   optTapPct = parseInt(val) / 100;
   var tp = Math.round(optTapPct*100);
   var lbl = document.getElementById('opt-tap-label');
-  if (lbl) lbl.textContent = tp===0?'100% Osmose':tp===100?'100% Leitung':tp+'% Leitung – '+(100-tp)+'% Osmose';
+  if (lbl) lbl.textContent = tp===0?(currentLang==='en'?'100% RO water':'100% Osmose'):tp===100?(currentLang==='en'?'100% Tap water':'100% Leitung'):tp+'% '+(currentLang==='en'?'Tap':'Leitung')+' – '+(100-tp)+'% '+(currentLang==='en'?'RO':'Osmose');
   var info = document.getElementById('opt-tap-info');
   if (info && optTapPct > 0) {
     var parts = [];
@@ -2185,7 +1756,7 @@ function onOptTap(val) {
     if (tap.S *optTapPct > 0.1) parts.push('S: '+( tap.S *optTapPct).toFixed(1));
     info.textContent = parts.join(' · ') + ' ppm';
   } else if (info) {
-    info.textContent = 'Reines Osmosewasser – keine Mineralien';
+    info.textContent = currentLang === 'en' ? 'Pure RO water – no minerals' : 'Reines Osmosewasser – keine Mineralien';
   }
   runOptimizer();
 }
@@ -2196,7 +1767,8 @@ function buildOptSliders() {
     var n = OPT_NUTRIENTS[i];
     var html = '<div class="slider-row" style="margin-bottom:18px;">';
     html += '<div class="slider-header">';
-    html += '<span class="slider-label" style="color:'+n.color+';">'+n.label+'</span>';
+    var lbl = (currentLang === 'en' && n.label_en) ? n.label_en : n.label;
+    html += '<span class="slider-label" style="color:'+n.color+';">'+lbl+'</span>';
     html += '<span class="slider-value" id="opt-lbl-'+n.key+'">'+n.val.toFixed(n.dec)+' ppm</span>';
     html += '</div>';
     html += '<input type="range" id="opt-'+n.key+'" min="'+n.min+'" max="'+n.max+'" step="'+n.step+'" value="'+n.val+'"';
@@ -2220,7 +1792,7 @@ function buildOptSliders() {
     wHtml += '</div>';
     wHtml += '<input type="range" id="opt-w-'+n.key+'" min="0" max="3" step="0.5" value="'+n.w+'"';
     wHtml += ' oninput="onOptWeight(\''+n.key+'\',this.value)">';
-    wHtml += '<div class="slider-minmax"><span>0 aus</span><span>3 muss</span></div>';
+    wHtml += '<div class="slider-minmax"><span class="prio-min-lbl">0 aus</span><span class="prio-max-lbl">3 muss</span></div>';
     wHtml += '</div>';
   }
   document.getElementById('opt-weight-sliders').innerHTML = wHtml;
@@ -2231,7 +1803,7 @@ function buildOptSliders() {
     optTapPct = parseInt(ts.value)/100;
     var tp = Math.round(optTapPct*100);
     var lbl = document.getElementById('opt-tap-label');
-    if (lbl) lbl.textContent = tp===0?'100% Osmose':tp===100?'100% Leitung':tp+'% Leitung – '+(100-tp)+'% Osmose';
+    if (lbl) lbl.textContent = tp===0?(currentLang==='en'?'100% RO water':'100% Osmose'):tp===100?(currentLang==='en'?'100% Tap water':'100% Leitung'):tp+'% '+(currentLang==='en'?'Tap':'Leitung')+' – '+(100-tp)+'% '+(currentLang==='en'?'RO':'Osmose');
   }
   document.getElementById('opt-result').innerHTML = '<div style="font-size:11px;color:#3d5c47;text-align:center;padding:20px;">Preset laden um zu starten...</div>';
 }
@@ -2246,13 +1818,6 @@ function onOptSlider(key, val) {
       break;
     }
   }
-  runOptimizer();
-}
-
-function onOptVol(val) {
-  optVol = parseInt(val);
-  var lbl = document.getElementById('opt-vol-label');
-  if (lbl) lbl.textContent = optVol + ' L';
   runOptimizer();
 }
 
@@ -2308,10 +1873,6 @@ function loadOptPreset(presetName, btn) {
   // Also sync volume
   var presetVol = state ? (state.volume||volume) : (PRESET_WATER[presetName]||{volume:50}).volume;
   optVol = presetVol;
-  var vs = document.getElementById('opt-vol-slider');
-  if (vs) vs.value = optVol;
-  var vl = document.getElementById('opt-vol-label');
-  if (vl) vl.textContent = optVol+' L';
 
   var btns = document.querySelectorAll('#page-optimierer .filter-btn');
   for (var i=0;i<btns.length;i++) btns[i].classList.remove('active');
@@ -2607,7 +2168,7 @@ function renderOptimizerResult(doses, salts, final, vol, tN, tP, tK, tCa, tMg, t
   var dec2=[0,0,0,0,0,0,0,2,2,2,2,2];
 
   html += '<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(74,222,128,0.1);">';
-  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:monospace;margin-bottom:8px;">ERREICHT / ZIEL (Salze + Leitungswasser)</div>';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:#3d5c47;font-family:monospace;margin-bottom:8px;">'+(currentLang==='en'?'ACHIEVED / TARGET (Salts + Tap water)':'ERREICHT / ZIEL (Salze + Leitungswasser)')+'</div>';
   for (var i=0;i<nkeys2.length;i++) {
     var ist=Math.round((final[nkeys2[i]]||0)*Math.pow(10,dec2[i]))/Math.pow(10,dec2[i]);
     var soll=targets2[i];
@@ -2679,7 +2240,7 @@ function transferToRechner(targetPreset) {
   setTimeout(function() {
     var fb = document.createElement('div');
     fb.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#131a15;border:1px solid #4ade80;border-radius:12px;padding:16px 28px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;letter-spacing:1px;z-index:9999;text-align:center;';
-    fb.textContent = '✓ Rezept → '+targetPreset+' übertragen!';
+    fb.textContent = currentLang==='en' ? '✓ Recipe → '+targetPreset+' transferred!' : '✓ Rezept → '+targetPreset+' übertragen!';
     document.body.appendChild(fb);
     setTimeout(function(){document.body.removeChild(fb);}, 1800);
   }, 100);
@@ -2693,7 +2254,7 @@ function transferToRechner(targetPreset) {
 
 var NUTRIENTS = [
   {
-    symbol:'N', name:'STICKSTOFF', sub:'Nitrogen', color:'#4ade80', bg:'rgba(74,222,128,0.15)',
+    symbol:'N', name:'STICKSTOFF', name_en:'NITROGEN', sub:'Nitrogen', color:'#4ade80', bg:'rgba(74,222,128,0.15)',
     kategorie:'makro', mobil:true,
     optimal:{ ppm:'150-250 ppm', ratio:'VEG hoch, BLOOM niedrig', ph:'5,5-7,0' },
     mangel:[
@@ -2720,7 +2281,7 @@ var NUTRIENTS = [
     fix_ueber:'CaNO3 und KNO3 reduzieren. In Blute N bewusst niedrig halten. EC senken, mehr P und K relativ zu N.'
   },
   {
-    symbol:'P', name:'PHOSPHOR', sub:'Phosphorus', color:'#fb923c', bg:'rgba(251,146,60,0.15)',
+    symbol:'P', name:'PHOSPHOR', name_en:'PHOSPHORUS', sub:'Phosphorus', color:'#fb923c', bg:'rgba(251,146,60,0.15)',
     kategorie:'makro', mobil:true,
     optimal:{ ppm:'50-100 ppm', ratio:'BLOOM hoch', ph:'5,5-6,2 (pH-sensitiv!)' },
     mangel:[
@@ -2745,7 +2306,7 @@ var NUTRIENTS = [
     fix_ueber:'MKP reduzieren. Weniger ist bei P oft mehr. Zn und Fe im Fetrilon prufen und ggf. erhohen.'
   },
   {
-    symbol:'K', name:'KALIUM', sub:'Potassium', color:'#60a5fa', bg:'rgba(96,165,250,0.15)',
+    symbol:'K', name:'KALIUM', name_en:'POTASSIUM', sub:'Potassium', color:'#60a5fa', bg:'rgba(96,165,250,0.15)',
     kategorie:'makro', mobil:true,
     optimal:{ ppm:'150-300 ppm', ratio:'BLOOM sehr hoch (2x N)', ph:'5,5-6,5' },
     mangel:[
@@ -2772,7 +2333,7 @@ var NUTRIENTS = [
     fix_ueber:'SOP und KNO3 reduzieren. K:Ca Verhaltnis prufen. Ca erhohen oder K senken.'
   },
   {
-    symbol:'Ca', name:'CALCIUM', sub:'Calcium', color:'#f472b6', bg:'rgba(244,114,182,0.15)',
+    symbol:'Ca', name:'CALCIUM', name_en:'CALCIUM', sub:'Calcium', color:'#f472b6', bg:'rgba(244,114,182,0.15)',
     kategorie:'makro', mobil:false,
     optimal:{ ppm:'150-250 ppm', ratio:'Ca:Mg = 2:1 bis 3:1', ph:'6,2-7,0 (beste Aufnahme)' },
     mangel:[
@@ -2796,7 +2357,7 @@ var NUTRIENTS = [
     fix_ueber:'CaNO3 reduzieren. Bittersalz/MgNO3 erhohen um Ca:Mg auszugleichen. Ziel 2:1-3:1.'
   },
   {
-    symbol:'Mg', name:'MAGNESIUM', sub:'Magnesium', color:'#a78bfa', bg:'rgba(167,139,250,0.15)',
+    symbol:'Mg', name:'MAGNESIUM', name_en:'MAGNESIUM', sub:'Magnesium', color:'#a78bfa', bg:'rgba(167,139,250,0.15)',
     kategorie:'makro', mobil:true,
     optimal:{ ppm:'50-100 ppm', ratio:'Ca:Mg = 2:1 bis 3:1', ph:'6,0-7,0' },
     mangel:[
@@ -2821,7 +2382,7 @@ var NUTRIENTS = [
     fix_ueber:'Bittersalz und MgNO3 reduzieren. CaNO3 leicht erhohen. Ziel Ca:Mg 2:1-3:1.'
   },
   {
-    symbol:'S', name:'SCHWEFEL', sub:'Sulfur', color:'#facc15', bg:'rgba(250,204,21,0.15)',
+    symbol:'S', name:'SCHWEFEL', name_en:'SULFUR', sub:'Sulfur', color:'#facc15', bg:'rgba(250,204,21,0.15)',
     kategorie:'makro', mobil:false,
     optimal:{ ppm:'50-150 ppm', ratio:'Meist ausreichend im Rezept', ph:'5,5-7,0' },
     mangel:[
@@ -2845,7 +2406,7 @@ var NUTRIENTS = [
     fix_ueber:'Bittersalz und SOP reduzieren. Im DWC selten notwendig.'
   },
   {
-    symbol:'Fe', name:'EISEN', sub:'Iron', color:'#f87171', bg:'rgba(248,113,113,0.15)',
+    symbol:'Fe', name:'EISEN', name_en:'IRON', sub:'Iron', color:'#f87171', bg:'rgba(248,113,113,0.15)',
     kategorie:'mikro', mobil:false,
     optimal:{ ppm:'2-5 ppm', ratio:'pH-sensitiv!', ph:'5,5-6,2 (kritisch)' },
     mangel:[
@@ -2869,7 +2430,7 @@ var NUTRIENTS = [
     fix_ueber:'Fetrilon reduzieren. pH prufen - unter 5,0 Fe-Toxizitat moglich.'
   },
   {
-    symbol:'Mn', name:'MANGAN', sub:'Manganese', color:'#34d399', bg:'rgba(52,211,153,0.15)',
+    symbol:'Mn', name:'MANGAN', name_en:'MANGANESE', sub:'Manganese', color:'#34d399', bg:'rgba(52,211,153,0.15)',
     kategorie:'mikro', mobil:false,
     optimal:{ ppm:'0,5-2 ppm', ratio:'Fetrilon ausreichend', ph:'5,5-6,5' },
     mangel:[
@@ -2892,7 +2453,7 @@ var NUTRIENTS = [
     fix_ueber:'Fetrilon reduzieren. pH prufen - unter 5,0 steigt Mn-Verfugbarkeit stark.'
   },
   {
-    symbol:'Zn', name:'ZINK', sub:'Zinc', color:'#818cf8', bg:'rgba(129,140,248,0.15)',
+    symbol:'Zn', name:'ZINK', name_en:'ZINC', sub:'Zinc', color:'#818cf8', bg:'rgba(129,140,248,0.15)',
     kategorie:'mikro', mobil:false,
     optimal:{ ppm:'0,5-1 ppm', ratio:'Fetrilon ausreichend', ph:'5,5-6,5' },
     mangel:[
@@ -2915,7 +2476,7 @@ var NUTRIENTS = [
     fix_ueber:'Fetrilon reduzieren. Selten notig.'
   },
   {
-    symbol:'Cu', name:'KUPFER', sub:'Copper', color:'#fb923c', bg:'rgba(251,146,60,0.15)',
+    symbol:'Cu', name:'KUPFER', name_en:'COPPER', sub:'Copper', color:'#fb923c', bg:'rgba(251,146,60,0.15)',
     kategorie:'mikro', mobil:false,
     optimal:{ ppm:'0,05-0,2 ppm', ratio:'Sehr geringe Menge', ph:'5,5-7,0' },
     mangel:[
@@ -2939,7 +2500,7 @@ var NUTRIENTS = [
     fix_ueber:'Fetrilon reduzieren! Cu-Toxizitat ist ernst. Reservoir wechseln bei starken Symptomen.'
   },
   {
-    symbol:'B', name:'BOR', sub:'Boron', color:'#c084fc', bg:'rgba(192,132,252,0.15)',
+    symbol:'B', name:'BOR', name_en:'BORON', sub:'Boron', color:'#c084fc', bg:'rgba(192,132,252,0.15)',
     kategorie:'mikro', mobil:false,
     optimal:{ ppm:'0,5-1 ppm', ratio:'Fetrilon ausreichend', ph:'5,5-7,0' },
     mangel:[
@@ -2962,7 +2523,7 @@ var NUTRIENTS = [
     fix_ueber:'Fetrilon reduzieren. B-Toxizitat sieht aus wie Salzstress.'
   },
   {
-    symbol:'Si', name:'SILIZIUM', sub:'Silicon', color:'#94a3b8', bg:'rgba(148,163,184,0.15)',
+    symbol:'Si', name:'SILIZIUM', name_en:'SILICON', sub:'Silicon', color:'#94a3b8', bg:'rgba(148,163,184,0.15)',
     kategorie:'mikro', mobil:false,
     optimal:{ ppm:'50-100 ppm', ratio:'Nicht essentiell aber nutzlich', ph:'5,5-6,5' },
     mangel:[
@@ -2986,7 +2547,7 @@ var NUTRIENTS = [
     fix_ueber:'KWG-Menge reduzieren. Reservoir auf weissliche Ablagerungen prufen.'
   },
   {
-    symbol:'pH', name:'pH-WERT', sub:'Saure/Base Gleichgewicht', color:'#a78bfa', bg:'rgba(167,139,250,0.15)',
+    symbol:'pH', name:'pH-WERT', name_en:'pH VALUE', sub:'Saure/Base Gleichgewicht', sub_en:'Acid/Base Balance', color:'#a78bfa', bg:'rgba(167,139,250,0.15)',
     kategorie:'ph', mobil:null,
     optimal:{ ppm:'5,5-6,2 DWC', ratio:'Tagliche Kontrolle', ph:'5,7-6,0 ideal' },
     mangel:[
@@ -3017,36 +2578,41 @@ function buildCards() {
   var html = '';
   for (var i=0; i<NUTRIENTS.length; i++) {
     var n = NUTRIENTS[i];
-    var mobilTag = n.mobil === true ? '<span class="tag tag-mobil">MOBIL</span>' :
-                   n.mobil === false ? '<span class="tag tag-immobil">IMMOBIL</span>' : '';
+    var isEN = currentLang === 'en';
+    var mobilTag = n.mobil === true ? '<span class="tag tag-mobil">'+(isEN?'MOBILE':'MOBIL')+'</span>' :
+                   n.mobil === false ? '<span class="tag tag-immobil">'+(isEN?'IMMOBILE':'IMMOBIL')+'</span>' : '';
     var katTag = n.kategorie === 'makro' ? '<span class="tag tag-makro">MAKRO</span>' :
                  n.kategorie === 'mikro' ? '<span class="tag tag-mikro">MIKRO</span>' :
                  '<span class="tag tag-ph">pH</span>';
+    var displayName = isEN ? (n.name_en || n.name) : n.name;
+    var displaySub = isEN ? (n.sub_en || n.sub) : n.sub;
 
     html += '<div class="card" data-kat="'+n.kategorie+'" data-mobil="'+(n.mobil===true?'mobil':n.mobil===false?'immobil':'')+'">';
     html += '<div class="card-header" onclick="toggleCard(this)">';
     html += '<div class="card-symbol" style="background:'+n.bg+';color:'+n.color+'">'+n.symbol+'</div>';
     html += '<div class="card-header-info">';
-    html += '<div class="card-name" style="color:'+n.color+'">'+n.name+'</div>';
-    html += '<div class="card-sub">'+n.sub+'</div>';
+    html += '<div class="card-name" style="color:'+n.color+'">'+displayName+'</div>';
+    html += '<div class="card-sub">'+displaySub+'</div>';
     html += '<div class="card-tags">'+katTag+mobilTag+'</div>';
     html += '</div>';
     html += '<div class="chevron">&#9660;</div>';
     html += '</div>';
 
+    var L = LANG[currentLang];
+
     html += '<div class="card-body">';
 
     // Optimal
     html += '<div class="optimal-section">';
-    html += '<div class="optimal-label">OPTIMALBEREICHE (DWC)</div>';
-    html += '<div class="optimal-row"><span class="optimal-key">Menge</span><span class="optimal-val">'+n.optimal.ppm+'</span></div>';
-    html += '<div class="optimal-row"><span class="optimal-key">Hinweis</span><span class="optimal-val">'+n.optimal.ratio+'</span></div>';
-    html += '<div class="optimal-row"><span class="optimal-key">pH-Fenster</span><span class="optimal-val">'+n.optimal.ph+'</span></div>';
+    html += '<div class="optimal-label">'+L.guideOptimal+'</div>';
+    html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'Amount':'Menge')+'</span><span class="optimal-val">'+n.optimal.ppm+'</span></div>';
+    html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'Note':'Hinweis')+'</span><span class="optimal-val">'+n.optimal.ratio+'</span></div>';
+    html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'pH window':'pH-Fenster')+'</span><span class="optimal-val">'+n.optimal.ph+'</span></div>';
     html += '</div>';
 
     // Mangel
     html += '<div class="sym-section">';
-    html += '<div class="sym-title mangel">&#8595; MANGEL-SYMPTOME</div>';
+    html += '<div class="sym-title mangel">'+L.guideMangel+'</div>';
     html += '<ul class="sym-list mangel">';
     for (var j=0; j<n.mangel.length; j++) html += '<li>'+n.mangel[j]+'</li>';
     html += '</ul></div>';
@@ -3055,30 +2621,10 @@ function buildCards() {
 
     // Uberschuss
     html += '<div class="sym-section">';
-    html += '<div class="sym-title ueber">&#8593; UBERSCHUSS-SYMPTOME</div>';
+    html += '<div class="sym-title ueber">'+L.guideUeber+'</div>';
     html += '<ul class="sym-list ueber">';
     for (var j=0; j<n.ueber.length; j++) html += '<li>'+n.ueber[j]+'</li>';
     html += '</ul></div>';
-
-    // Salze
-    html += '<div class="salz-section">';
-    html += '<div class="salz-title">QUELLEN IM REZEPT</div>';
-    for (var j=0; j<n.salze.length; j++) {
-      var s = n.salze[j];
-      html += '<div class="salz-item">';
-      html += '<div><div class="salz-name">'+s.name+'</div><div class="salz-detail">'+s.detail+'</div></div>';
-      html += '<div class="salz-pct">'+s.pct+'</div>';
-      html += '</div>';
-    }
-    html += '</div>';
-
-    // Fix
-    html += '<div class="fix-section">';
-    html += '<div class="fix-title">LOSUNG</div>';
-    html += '<div class="fix-mangel"><span>Mangel:</span> '+n.fix_mangel+'</div>';
-    html += '<div style="height:6px"></div>';
-    html += '<div class="fix-ueber"><span>Uberschuss:</span> '+n.fix_ueber+'</div>';
-    html += '</div>';
 
     html += '</div>'; // card-body
     html += '</div>'; // card
@@ -3433,7 +2979,7 @@ function filterDB(query) {
   var list = document.getElementById('db-list');
   if (!list) return;
   if (!query || query.length < 2) {
-    list.innerHTML = '<div style="font-size:9px;color:#374151;padding:8px;">Mindestens 2 Zeichen eingeben...</div>';
+    list.innerHTML = '<div style="font-size:9px;color:#374151;padding:8px;">'+(currentLang==='en'?'Enter at least 2 characters...':'Mindestens 2 Zeichen eingeben...')+'</div>';
     return;
   }
   var q = query.toLowerCase();
@@ -3488,7 +3034,7 @@ function addFromDB(idx) {
       presetStates[pn].maxes[key] = newSalt.origMax;
     }
   }
-  var cf=document.getElementById('db-feedback');if(cf){cf.textContent=s.label+' hinzugefugt!';setTimeout(function(){cf.textContent='';},2500);}
+  var cf=document.getElementById('db-feedback');if(cf){cf.textContent=s.label+(currentLang==='en'?' added!':' hinzugefugt!');setTimeout(function(){cf.textContent='';},2500);}
   buildSliders();
   render();
 }
@@ -3496,7 +3042,7 @@ function addFromDB(idx) {
 // Init DB list
 function initDB() {
   var list = document.getElementById('db-list');
-  if (list) list.innerHTML = '<div style="font-size:9px;color:#374151;padding:8px;">Mindestens 2 Zeichen eingeben...</div>';
+  if (list) list.innerHTML = '<div style="font-size:9px;color:#374151;padding:8px;">'+(currentLang==='en'?'Enter at least 2 characters...':'Mindestens 2 Zeichen eingeben...')+'</div>';
 }
 
 // Guide wird beim ersten Klick initialisiert
@@ -3507,77 +3053,85 @@ function initDB() {
 
 var STUDIES = {
   general: {
-    name: 'Allgemein',
-    desc: 'Gesamtspanne aller 5 Studien.',
+    name: 'Allgemein', name_en: 'General',
+    desc: 'Gesamtspanne aller 5 Studien.', desc_en: 'Overall range of all 5 studies.',
     summary: ['Zeigt Minimum bis Maximum uber alle Quellen','Breite Spanne = Studien uneinig (z.B. P, K)','Enge Spanne = Konsens (z.B. Mg, Fe, Mn)','Nutze andere Studien fur spezifischere Werte'],
+    summary_en: ['Shows min to max across all sources','Wide range = studies disagree (e.g. P, K)','Narrow range = consensus (e.g. Mg, Fe, Mn)','Use specific studies for more precise targets'],
     veg:   null,
     bloom: null
   },
   saloner2021: {
     name: 'Saloner & Bernstein 2021',
-    desc: 'Frontiers in Plant Science - N und Cannabinoide.',
+    desc: 'Frontiers in Plant Science - N und Cannabinoide.', desc_en: 'Frontiers in Plant Science - N and cannabinoids.',
     summary: ['N uber 160 ppm reduziert THC bis zu 69%','Zu viel N in Blute = mehr Biomasse, weniger Wirkstoff','P 30 ppm Minimum fur optimales Wachstum','Mg 35 ppm reicht fur maximale Cannabinoid-Konzentration','Empfehlung: N in Blute bewusst unter 160 ppm halten'],
+    summary_en: ['N above 160 ppm reduces THC by up to 69%','Too much N in bloom = more biomass, less potency','P 30 ppm minimum for optimal growth','Mg 35 ppm sufficient for maximum cannabinoid concentration','Recommendation: keep N in bloom deliberately below 160 ppm'],
     veg:   { N:[140,180], P:[20,40],  K:[80,175],  Ca:[100,150], Mg:[35,60],  S:[50,70],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   },
     bloom: { N:[80,160],  P:[20,40],  K:[80,175],  Ca:[100,150], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   }
   },
   bevan2021: {
     name: 'Bevan et al. 2021',
-    desc: 'Frontiers in Plant Science - DWC BLOOM Response Surface.',
+    desc: 'Frontiers in Plant Science - DWC BLOOM Response Surface.', desc_en: 'Frontiers in Plant Science - DWC BLOOM Response Surface.',
     summary: ['Optimaler Ertrag bei N=194, P=59 ppm','K zwischen 60-340 ppm: kein Unterschied im Ertrag','P uber 80 ppm bringt keinen weiteren Vorteil','DWC mit LED verwendet - sehr praxisnah','N steigert Biomasse aber senkt Qualitat bei Uberdosierung'],
+    summary_en: ['Optimal yield at N=194, P=59 ppm','K between 60-340 ppm: no yield difference','P above 80 ppm provides no further benefit','DWC with LED used - very practical reference','N increases biomass but decreases quality when overdosed'],
     veg:   { N:[160,200], P:[30,60],  K:[60,200],  Ca:[100,150], Mg:[35,70],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   },
     bloom: { N:[160,220], P:[40,80],  K:[60,200],  Ca:[100,160], Mg:[35,70],  S:[60,100], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   }
   },
   moher2024: {
     name: 'Moher et al. 2024',
-    desc: 'Frontiers in Plant Science - DWC VEG Response Surface.',
+    desc: 'Frontiers in Plant Science - DWC VEG Response Surface.', desc_en: 'Frontiers in Plant Science - DWC VEG Response Surface.',
     summary: ['Optimales N=200, P=60, K=117 ppm fur VEG Biomasse','Verwendete Haifa Salze - direkt vergleichbar','P uber 90 ppm zeigte negative Effekte','N und P haben starksten Einfluss auf VEG Biomasse','K-Einfluss war gering - breiter Toleranzbereich'],
+    summary_en: ['Optimal N=200, P=60, K=117 ppm for VEG biomass','Used Haifa salts - directly comparable','P above 90 ppm showed negative effects','N and P have strongest influence on VEG biomass','K influence was minor - wide tolerance range'],
     veg:   { N:[160,240], P:[30,90],  K:[60,175],  Ca:[100,150], Mg:[35,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   },
     bloom: { N:[100,180], P:[30,60],  K:[80,175],  Ca:[100,160], Mg:[35,60],  S:[60,90],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.6],B:[0.5,1.0], Si:[5,15]   }
   },
   cockson2019: {
     name: 'Cockson et al. 2019 (NCSU)',
-    desc: 'NC State University - Mikronaehrstoff-Studie.',
+    desc: 'NC State University - Mikronaehrstoff-Studie.', desc_en: 'NC State University - Micronutrient study.',
     summary: ['Bor optimal bei 0,875-1,0 ppm - viele Rezepte zu niedrig','Mangan optimal bei 0,88 ppm','Zink: sehr kleine Mengen ausreichend (0,1-0,3 ppm)','Basiert auf modifizierter Hoagland-Loesung','Wichtigste Referenz fur Mikronaehrstoff-Empfehlungen'],
+    summary_en: ['Boron optimal at 0.875-1.0 ppm - many recipes too low','Manganese optimal at 0.88 ppm','Zinc: very small amounts sufficient (0.1-0.3 ppm)','Based on modified Hoagland solution','Key reference for micronutrient recommendations'],
     veg:   { N:[150,210], P:[15,30],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,96],  Fe:[2,4],    Mn:[0.6,1],  Zn:[0.1,0.3],B:[0.7,1.0], Si:[5,15]   },
     bloom: { N:[100,160], P:[20,40],  K:[150,235], Ca:[125,200], Mg:[24,48],  S:[64,96],  Fe:[2,4],    Mn:[0.6,1],  Zn:[0.1,0.3],B:[0.7,1.0], Si:[5,15]   }
   },
   bugbee: {
-    name: 'Bugbee / Utah State (konservativ)',
-    desc: 'Utah State University - Minimale Nahrstoffmengen.',
+    name: 'Bugbee / Utah State (konservativ)', name_en: 'Bugbee / Utah State (conservative)',
+    desc: 'Utah State University - Minimale Nahrstoffmengen.', desc_en: 'Utah State University - Minimal nutrient amounts.',
     summary: ['P 8-25 ppm ausreichend - weit weniger als ublich dosiert','Theoretischer P-Bedarf nur 12-24 ppm bei normalem CO2','Si empfohlen: starkt Zellwande, reduziert Mehltau fast vollst.','Ca 100 ppm adequate - mehr bringt wenig','Konservativstes Rezept - weniger Salzstress, stabilerer pH'],
+    summary_en: ['P 8-25 ppm sufficient - far less than commonly dosed','Theoretical P requirement only 12-24 ppm at normal CO2','Si recommended: strengthens cell walls, reduces powdery mildew','Ca 100 ppm adequate - more provides little benefit','Most conservative recipe - less salt stress, more stable pH'],
     veg:   { N:[150,200], P:[8,25],   K:[80,175],  Ca:[100,160], Mg:[30,60],  S:[50,80],  Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.5],B:[0.7,1.0], Si:[5,15]  },
     bloom: { N:[100,160], P:[15,30],  K:[80,200],  Ca:[100,160], Mg:[30,60],  S:[60,100], Fe:[2,4],    Mn:[0.5,1],  Zn:[0.2,0.5],B:[0.7,1.0], Si:[5,15]  }
   }
 };
 
 var NUTRIENTS_AW = [
-  { key:'N',  label:'STICKSTOFF',  dec:0, color:'#4ade80'  },
-  { key:'P',  label:'PHOSPHOR',    dec:0, color:'#fb923c'  },
-  { key:'K',  label:'KALIUM',      dec:0, color:'#60a5fa'  },
-  { key:'Ca', label:'CALCIUM',     dec:0, color:'#f472b6'  },
-  { key:'Mg', label:'MAGNESIUM',   dec:0, color:'#a78bfa'  },
-  { key:'S',  label:'SCHWEFEL',    dec:0, color:'#facc15'  },
-  { key:'Fe', label:'EISEN',       dec:2, color:'#f87171'  },
-  { key:'Mn', label:'MANGAN',      dec:2, color:'#34d399'  },
-  { key:'Zn', label:'ZINK',        dec:2, color:'#818cf8'  },
-  { key:'B',  label:'BOR',         dec:2, color:'#c084fc'  },
-  { key:'Si', label:'SILIZIUM',    dec:1, color:'#94a3b8'  }
+  { key:'N',  label:'STICKSTOFF',  label_en:'NITROGEN',   dec:0, color:'#4ade80'  },
+  { key:'P',  label:'PHOSPHOR',    label_en:'PHOSPHORUS', dec:0, color:'#fb923c'  },
+  { key:'K',  label:'KALIUM',      label_en:'POTASSIUM',  dec:0, color:'#60a5fa'  },
+  { key:'Ca', label:'CALCIUM',     label_en:'CALCIUM',    dec:0, color:'#f472b6'  },
+  { key:'Mg', label:'MAGNESIUM',   label_en:'MAGNESIUM',  dec:0, color:'#a78bfa'  },
+  { key:'S',  label:'SCHWEFEL', label_en:'SULFUR',    dec:0, color:'#facc15'  },
+  { key:'Fe', label:'EISEN', label_en:'IRON',       dec:2, color:'#f87171'  },
+  { key:'Mn', label:'MANGAN', label_en:'MANGANESE',      dec:2, color:'#34d399'  },
+  { key:'Zn', label:'ZINK', label_en:'ZINC',        dec:2, color:'#818cf8'  },
+  { key:'B',  label:'BOR', label_en:'BORON',         dec:2, color:'#c084fc'  },
+  { key:'Si', label:'SILIZIUM', label_en:'SILICON', dec:1, color:'#94a3b8'  }
 ];
 
 var currentStudy = 'general';
 
 function setStudy(name, btn) {
   currentStudy = name;
+  var isEN = currentLang === 'en';
   var btns = document.querySelectorAll('[id^="study-btn-"]');
   for (var i=0; i<btns.length; i++) btns[i].classList.remove('active');
   btn.classList.add('active');
   var study = STUDIES[name];
-  document.getElementById('study-desc').textContent = study.desc;
+  document.getElementById('study-desc').textContent = isEN ? (study.desc_en || study.desc) : study.desc;
+  var summaryArr = isEN ? (study.summary_en || study.summary) : study.summary;
   var summaryEl = document.getElementById('study-summary');
-  if (study.summary && study.summary.length) {
+  if (summaryArr && summaryArr.length) {
     var html = '';
-    for (var i=0; i<study.summary.length; i++) {
-      html += '<div style="font-size:9px;color:#6b7280;padding:2px 0 2px 10px;border-left:2px solid #1a3d26;margin-bottom:3px;">'+study.summary[i]+'</div>';
+    for (var i=0; i<summaryArr.length; i++) {
+      html += '<div style="font-size:9px;color:#6b7280;padding:2px 0 2px 10px;border-left:2px solid #1a3d26;margin-bottom:3px;">'+summaryArr[i]+'</div>';
     }
     summaryEl.innerHTML = html;
   } else {
@@ -3653,13 +3207,13 @@ function getStudyRef(studyName, phase) {
 }
 
 function renderAuswertung() {
+  var isEN = currentLang === 'en';
   var presetList = [
     { name:'VEG',        ref:'veg',   color:'#4ade80' },
     { name:'BLOOM',      ref:'bloom', color:'#fb923c' },
     { name:'EXPERIMENT', ref:'bloom', color:'#a78bfa' }
   ];
 
-  // Calculate ppm for each preset using their own tapPct
   var results = [];
   for (var p=0; p<presetList.length; p++) {
     var pr = presetList[p];
@@ -3668,22 +3222,21 @@ function renderAuswertung() {
     results.push({ pr:pr, ppm:calcForDoses(d, t) });
   }
 
-  // Find max value per nutrient across all presets + soll for scaling
   var html = '';
   for (var n=0; n<NUTRIENTS_AW.length; n++) {
     var nut = NUTRIENTS_AW[n];
+    var nutLabel = isEN ? (nut.label_en || nut.label) : nut.label;
     var maxVal = 0.01;
     for (var p=0; p<results.length; p++) {
       var ist = results[p].ppm[nut.key] || 0;
       maxVal = Math.max(maxVal, ist);
     }
-    // Also consider soll max
     var sollVeg = getStudyRef(currentStudy,'veg')[nut.key] || [0,0];
     var sollBloom = getStudyRef(currentStudy,'bloom')[nut.key] || [0,0];
     maxVal = Math.max(maxVal, sollVeg[1]*1.3, sollBloom[1]*1.3);
 
     html += '<div class="aw-nutrient">';
-    html += '<div class="aw-label">'+nut.label+' (ppm)</div>';
+    html += '<div class="aw-label">'+nutLabel+' (ppm)</div>';
     html += '<div class="aw-cols">';
 
     for (var p=0; p<results.length; p++) {
@@ -3740,8 +3293,515 @@ function renderAuswertung() {
   document.getElementById('auswertung-content').innerHTML = html;
 }
 
-// Init auswertung when tab is shown
-var auswertungReady = false;
+// =====================
+// NÄHRSTOFF-UMRECHNER
+// =====================
+var CONV_FACTORS = [
+  { from:'CaO',   to:'Ca',  factor:0.7147, color:'#f472b6' },
+  { from:'MgO',   to:'Mg',  factor:0.6030, color:'#a78bfa' },
+  { from:'P₂O₅',  to:'P',   factor:0.4364, color:'#fb923c' },
+  { from:'K₂O',   to:'K',   factor:0.8301, color:'#60a5fa' },
+  { from:'SO₃',   to:'S',   factor:0.4005, color:'#facc15' },
+  { from:'SO₄',   to:'S',   factor:0.3338, color:'#facc15' },
+  { from:'Fe₂O₃', to:'Fe',  factor:0.6994, color:'#f87171' },
+  { from:'MnO',   to:'Mn',  factor:0.7745, color:'#34d399' },
+  { from:'ZnO',   to:'Zn',  factor:0.8034, color:'#818cf8' },
+  { from:'CuO',   to:'Cu',  factor:0.7989, color:'#fb923c' },
+  { from:'B₂O₃',  to:'B',   factor:0.3105, color:'#c084fc' },
+  { from:'N',     to:'N',   factor:1.0,    color:'#4ade80' },
+  { from:'Ca',    to:'CaO', factor:1.3993, color:'#f472b6', reverse:true },
+  { from:'Mg',    to:'MgO', factor:1.6581, color:'#a78bfa', reverse:true },
+  { from:'P',     to:'P₂O₅',factor:2.2913, color:'#fb923c', reverse:true },
+  { from:'K',     to:'K₂O', factor:1.2046, color:'#60a5fa', reverse:true },
+  { from:'S',     to:'SO₄', factor:2.9957, color:'#facc15', reverse:true },
+];
+
+var convVals = {};
+
+function buildConverter() {
+  var isEN = currentLang === 'en';
+  // Only show forward conversions (oxide → element)
+  var forward = CONV_FACTORS.filter(function(f){ return !f.reverse; });
+  var html = '';
+  forward.forEach(function(f) {
+    var id = 'conv-'+f.from.replace(/[₂₃₄₅]/g,'');
+    html += '<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:8px;">';
+    html += '<div>';
+    html += '<div style="font-size:10px;color:'+f.color+';font-family:\'Courier New\',monospace;margin-bottom:3px;">'+f.from+'</div>';
+    html += '<input type="number" id="'+id+'-in" min="0" max="100" step="0.01" placeholder="0.00"';
+    html += ' oninput="onConvInput(\''+id+'\','+f.factor+')"';
+    html += ' style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:6px;color:#e2f5e8;font-family:\'Courier New\',monospace;font-size:13px;padding:7px 10px;outline:none;">';
+    html += '</div>';
+    html += '<div style="font-size:14px;color:#374151;text-align:center;">→</div>';
+    html += '<div>';
+    html += '<div style="font-size:10px;color:'+f.color+';font-family:\'Courier New\',monospace;margin-bottom:3px;">'+f.to+' ×'+f.factor.toFixed(4)+'</div>';
+    html += '<div id="'+id+'-out" style="background:#0a1a0d;border:1px solid #0f2919;border-radius:6px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:13px;font-weight:700;padding:7px 10px;min-height:34px;">–</div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  var rows = document.getElementById('conv-rows');
+  if (rows) rows.innerHTML = html;
+
+  // Update static text
+  var t = document.getElementById('conv-title');
+  if(t) t.textContent = isEN ? 'NUTRIENT CONVERTER' : 'NÄHRSTOFF-UMRECHNER';
+  var ct = document.getElementById('conv-card-title');
+  if(ct) ct.textContent = isEN ? 'OXIDE → ELEMENT CONVERTER' : 'OXID → ELEMENT UMRECHNER';
+  var cn = document.getElementById('conv-note');
+  if(cn) cn.textContent = isEN ? 'Convert manufacturer data (e.g. CaO, P₂O₅, K₂O) to elemental nutrients' : 'Herstellerangaben (z.B. CaO, P₂O₅, K₂O) in elementare Nährstoffe umrechnen';
+  var ci = document.getElementById('conv-col-input');
+  if(ci) ci.textContent = isEN ? 'INPUT (%)' : 'EINGABE (%)';
+  var cr = document.getElementById('conv-col-result');
+  if(cr) cr.textContent = isEN ? 'RESULT (%)' : 'ERGEBNIS (%)';
+  var cf = document.getElementById('conv-factors-note');
+  if(cf) cf.textContent = isEN
+    ? 'Factors: CaO×0.715=Ca · MgO×0.603=Mg · P₂O₅×0.436=P · K₂O×0.830=K · SO₃×0.400=S · Fe₂O₃×0.699=Fe'
+    : 'Faktoren: CaO×0.715=Ca · MgO×0.603=Mg · P₂O₅×0.436=P · K₂O×0.830=K · SO₃×0.400=S · Fe₂O₃×0.699=Fe';
+}
+
+function onConvInput(id, factor) {
+  var inp = document.getElementById(id+'-in');
+  var out = document.getElementById(id+'-out');
+  if (!inp || !out) return;
+  var val = parseFloat(inp.value);
+  if (isNaN(val) || inp.value === '') {
+    out.textContent = '–';
+    out.style.color = '#4ade80';
+    return;
+  }
+  var result = val * factor;
+  out.textContent = result.toFixed(4) + ' %';
+  out.style.color = result > 0 ? '#4ade80' : '#6b7280';
+}
+var currentLang = 'de';
+
+var LANG = {
+  de: {
+    subtitle: 'NAHRSTOFFRECHNER · v1.0',
+    nav: { rechner:'RECHNER', optimierer:'OPTIMIERER', auswertung:'AUSWERTUNG', anleitung:'ANLEITUNG', einstellungen:'EINSTELLUNGEN', guide:'NAHRSTOFF-GUIDE' },
+    langBtn: '🌐 EN',
+    // Rechner
+    dosierungen: 'DOSIERUNGEN / LITER',
+    reservoirVolumen: 'Reservoir Volumen',
+    leitungswasserAnteil: 'Leitungswasser-Anteil',
+    osmose100: '100% Osmose',
+    leitung100: '100% Leitung',
+    verhaltnisse: 'VERHALTNISSE',
+    makronahrstoffe: 'MAKRONAHRSTOFFE (ppm)',
+    mikronahrstoffe: 'MIKRONAHRSTOFFE (ppm)',
+    gesamtmenge: 'GESAMTMENGE FUR',
+    kostenProAnsatz: 'KOSTEN PRO ANSATZ',
+    proLiter: 'PRO LITER',
+    proReservoir: 'PRO RESERVOIR',
+    verdunnung: 'VERDUNNUNG & NACHFULLEN',
+    nachfullrechner: 'NACHFULLRECHNER',
+    wieVielWasser: 'Wie viel Wasser um EC zu senken?',
+    reservoirAbgesunken: 'Reservoir abgesunken - was nachkippen?',
+    sollVolumen: 'Soll-Volumen',
+    istVolumen: 'Ist-Volumen',
+    istEC: 'Ist-EC',
+    auffullwasser: 'Auffullwasser',
+    nachfullplan: 'NACHFULLPLAN',
+    // Einstellungen
+    substanzDatenbank: 'SUBSTANZ-DATENBANK',
+    ausDbHinzufugen: 'AUS DATENBANK HINZUFUGEN',
+    substanzenInDB: 'Substanzen aus der Datenbank',
+    suchenPlaceholder: 'Suchen z.B. Calcium, Nitrate, Haifa...',
+    eigeneSalze: 'EIGENE SALZE',
+    salzHinzufugen: 'SALZ HINZUFUGEN',
+    wasserSpeichern: 'WASSER & SPEICHERN',
+    wasserwerte: 'WASSERWERTE ANPASSEN',
+    exportImport: 'EXPORT / IMPORT',
+    exportImportHinweis: 'Speichern und Laden direkt oben im Rechner-Tab möglich.',
+    standardWiederherstellen: '↺ STANDARD WIEDERHERSTELLEN',
+    // Buttons
+    an: 'AN',
+    aus: 'AUS',
+    speichern: 'SPEICHERN',
+    abbrechen: 'ABBRECHEN',
+    hinzufugen: '+ HINZUFUGEN',
+    salzHinzufugenBtn: '+ SALZ HINZUFUGEN',
+    // Stats
+    ionen: 'IONEN',
+    // EC states
+    zuNiedrig: 'zu niedrig',
+    optimal: 'optimal',
+    zuHoch: 'zu hoch',
+    // pH states
+    zuSauer: 'zu sauer',
+    leichtHoch: 'leicht hoch',
+    // Optimierer
+    wassermix: 'WASSERMIX',
+    makroZielwerte: 'MAKRONÄHRSTOFFE — ZIELWERTE',
+    mikroZielwerte: 'MIKRONÄHRSTOFFE — ZIELWERTE',
+    optimiertesRezept: 'OPTIMIERTES REZEPT',
+    prioritaeten: 'PRIORITÄTEN',
+    rezeptUebertragen: 'REZEPT ÜBERTRAGEN IN',
+    zielwerteAusPreset: 'ZIELWERTE LADEN AUS AKTUELLEM PRESET',
+    laedt: 'Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset',
+    presetLaden: 'Preset laden um zu starten...',
+    // Footer
+    footer: 'DWC NAHRSTOFFRECHNER 2026',
+    aktuelleVersionHerunterladen: '⬇ AKTUELLE VERSION HERUNTERLADEN',
+    guideAll: 'ALLE',
+    guideMobil: 'MOBIL',
+    guideImmobil: 'IMMOBIL',
+    guideOptimal: 'OPTIMALBEREICHE (DWC)',
+    guideMangel: '↓ MANGEL-SYMPTOME',
+    guideUeber: '↑ ÜBERSCHUSS-SYMPTOME',
+    auswertungTitle: 'REFERENZ-STUDIE',
+    auswertungFooter: 'DWC AUSWERTUNG 2026',
+    studyGeneral: 'ALLGEMEIN',
+    studyDescGeneral: 'Allgemeine DWC-Empfehlungen aus der Praxis',
+    optTitle: 'OPTIMIERTES REZEPT',
+    optPriorities: 'PRIORITÄTEN',
+    optPriorNote: 'Wie stark soll der Optimierer auf Abweichungen reagieren? 3 = muss stimmen, 1 = egal.',
+    optWaterMix: 'WASSERMIX',
+    optMakroZiel: 'MAKRONÄHRSTOFFE — ZIELWERTE',
+    optMikroZiel: 'MIKRONÄHRSTOFFE — ZIELWERTE',
+    optTransfer: 'REZEPT ÜBERTRAGEN IN',
+    optPresetHint: 'Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset',
+    optStart: 'Preset laden um zu starten...',
+    auswertungTitle: 'REFERENZ-STUDIE',
+    studyGeneral: 'ALLGEMEIN',
+    studyDescGeneral: 'Allgemeine DWC-Empfehlungen aus der Praxis',
+    auswertungFooter: 'DWC AUSWERTUNG 2026',
+  },
+  en: {
+    subtitle: 'NUTRIENT CALCULATOR · v1.0',
+    nav: { rechner:'CALCULATOR', optimierer:'OPTIMIZER', auswertung:'ANALYSIS', anleitung:'GUIDE', einstellungen:'SETTINGS', guide:'NUTRIENT GUIDE' },
+    langBtn: '🌐 DE',
+    // Rechner
+    dosierungen: 'DOSAGES / LITER',
+    reservoirVolumen: 'Reservoir Volume',
+    leitungswasserAnteil: 'Tap Water Ratio',
+    osmose100: '100% RO Water',
+    leitung100: '100% Tap Water',
+    verhaltnisse: 'RATIOS',
+    makronahrstoffe: 'MACRONUTRIENTS (ppm)',
+    mikronahrstoffe: 'MICRONUTRIENTS (ppm)',
+    gesamtmenge: 'TOTAL AMOUNT FOR',
+    kostenProAnsatz: 'COSTS PER BATCH',
+    proLiter: 'PER LITER',
+    proReservoir: 'PER RESERVOIR',
+    verdunnung: 'DILUTION & REFILL',
+    nachfullrechner: 'REFILL CALCULATOR',
+    wieVielWasser: 'How much water to lower EC?',
+    reservoirAbgesunken: 'Reservoir level dropped - what to add?',
+    sollVolumen: 'Target Volume',
+    istVolumen: 'Current Volume',
+    istEC: 'Current EC',
+    auffullwasser: 'Refill Water',
+    nachfullplan: 'REFILL PLAN',
+    // Einstellungen
+    substanzDatenbank: 'SUBSTANCE DATABASE',
+    ausDbHinzufugen: 'ADD FROM DATABASE',
+    substanzenInDB: 'Substances in database',
+    suchenPlaceholder: 'Search e.g. Calcium, Nitrate, Haifa...',
+    eigeneSalze: 'CUSTOM NUTRIENTS',
+    salzHinzufugen: 'ADD NUTRIENT',
+    wasserSpeichern: 'WATER & SAVE',
+    wasserwerte: 'ADJUST WATER VALUES',
+    exportImport: 'EXPORT / IMPORT',
+    exportImportHinweis: 'Save and load directly in the Calculator tab.',
+    standardWiederherstellen: '↺ RESTORE DEFAULTS',
+    // Buttons
+    an: 'ON',
+    aus: 'OFF',
+    speichern: 'SAVE',
+    abbrechen: 'CANCEL',
+    hinzufugen: '+ ADD',
+    salzHinzufugenBtn: '+ ADD NUTRIENT',
+    // Stats
+    ionen: 'IONS',
+    // EC states
+    zuNiedrig: 'too low',
+    optimal: 'optimal',
+    zuHoch: 'too high',
+    // pH states
+    zuSauer: 'too acidic',
+    leichtHoch: 'slightly high',
+    // Optimierer
+    wassermix: 'WATER MIX',
+    makroZielwerte: 'MACRONUTRIENTS — TARGET VALUES',
+    mikroZielwerte: 'MICRONUTRIENTS — TARGET VALUES',
+    optimiertesRezept: 'OPTIMIZED RECIPE',
+    prioritaeten: 'PRIORITIES',
+    rezeptUebertragen: 'TRANSFER RECIPE TO',
+    zielwerteAusPreset: 'LOAD TARGET VALUES FROM PRESET',
+    laedt: 'Loads PPM targets + water mix from selected preset',
+    presetLaden: 'Load a preset to start...',
+    // Footer
+    footer: 'DWC NUTRIENT CALCULATOR 2026',
+    aktuelleVersionHerunterladen: '⬇ DOWNLOAD LATEST VERSION',
+    guideAll: 'ALL',
+    guideMobil: 'MOBILE',
+    guideImmobil: 'IMMOBILE',
+    guideOptimal: 'OPTIMAL RANGES (DWC)',
+    guideMangel: '↓ DEFICIENCY SYMPTOMS',
+    guideUeber: '↑ EXCESS SYMPTOMS',
+    auswertungTitle: 'REFERENCE STUDY',
+    auswertungFooter: 'DWC ANALYSIS 2026',
+    studyGeneral: 'GENERAL',
+    studyDescGeneral: 'General DWC recommendations from research',
+    optTitle: 'OPTIMIZED RECIPE',
+    optPriorities: 'PRIORITIES',
+    optPriorNote: 'How strongly should the optimizer react to deviations? 3 = must match, 1 = not important.',
+    optWaterMix: 'WATER MIX',
+    optMakroZiel: 'MACRONUTRIENTS — TARGET VALUES',
+    optMikroZiel: 'MICRONUTRIENTS — TARGET VALUES',
+    optTransfer: 'TRANSFER RECIPE TO',
+    optPresetHint: 'Loads PPM target values + water mix from selected preset',
+    optStart: 'Load a preset to start...',
+    auswertungTitle: 'REFERENCE STUDY',
+    studyGeneral: 'GENERAL',
+    studyDescGeneral: 'General DWC recommendations from practice',
+    auswertungFooter: 'DWC ANALYSIS 2026',
+  }
+};
+
+function toggleLang() {
+  currentLang = currentLang === 'de' ? 'en' : 'de';
+  applyLang();
+}
+
+function applyLang() {
+  var L = LANG[currentLang];
+  var isEN = currentLang === 'en';
+  // Subtitle
+  var sub = document.getElementById('subtitle-text');
+  if (sub) sub.textContent = L.subtitle;
+  // Nav buttons
+  document.getElementById('nav-rechner').textContent = L.nav.rechner;
+  document.getElementById('nav-optimierer').textContent = L.nav.optimierer;
+  document.getElementById('nav-auswertung').textContent = L.nav.auswertung;
+  document.getElementById('nav-anleitung').textContent = L.nav.anleitung;
+  document.getElementById('nav-einstellungen').textContent = L.nav.einstellungen;
+  document.getElementById('nav-guide').textContent = L.nav.guide;
+  document.getElementById('lang-btn').textContent = L.langBtn;
+  // Card titles by data-lang attribute
+  var els = document.querySelectorAll('[data-lang]');
+  for (var i=0; i<els.length; i++) {
+    var key = els[i].getAttribute('data-lang');
+    if (L[key]) els[i].textContent = L[key];
+  }
+  // Rebuild dynamic pages
+  buildAnleitung();
+  buildOptimierTexts();
+  buildAuswertungTexts();
+  // Rebuild guide if already built
+  if (window.guideReady) { buildCards(); }
+  // Rebuild optimierer sliders if built
+  if (window.optBuilt) { buildOptSliders(); }
+  // Rebuild water inputs
+  buildWaterInputs();
+  // Rebuild converter if visible
+  if (document.getElementById('conv-rows')) buildConverter();
+  var dlBtn = document.getElementById('download-btn-text');
+  if (dlBtn) dlBtn.textContent = isEN ? 'DOWNLOAD LATEST VERSION' : 'AKTUELLE VERSION HERUNTERLADEN';
+  var nutNote = document.getElementById('nutrient-pct-note');
+  if (nutNote) nutNote.textContent = isEN ? 'Nutrient content in % (e.g. 13 for 13% N)' : 'Nahrstoffgehalt in % (z.B. 13 fur 13% N)';
+  // Translate static minmax labels
+  var osmTxt = isEN ? '0% RO' : '0% Osmose';
+  var leiTxt = isEN ? '100% Tap' : '100% Leitung';
+  var osmFull = isEN ? '100% RO water' : '100% Osmose';
+  var leiFullTxt = isEN ? '100% Tap water' : '100% Leitung';
+  var el2;
+  el2 = document.getElementById('tap-minmax-l'); if(el2) el2.textContent = osmTxt;
+  el2 = document.getElementById('tap-minmax-r'); if(el2) el2.textContent = leiTxt;
+  el2 = document.getElementById('ref-minmax-l'); if(el2) el2.textContent = osmFull;
+  el2 = document.getElementById('ref-minmax-r'); if(el2) el2.textContent = leiFullTxt;
+  el2 = document.getElementById('opt-minmax-l'); if(el2) el2.textContent = osmTxt;
+  el2 = document.getElementById('opt-minmax-r'); if(el2) el2.textContent = leiTxt;
+  el2 = document.getElementById('opt-tap-info'); if(el2 && !el2.textContent.includes('ppm')) el2.textContent = isEN ? 'Pure RO water – no minerals' : 'Reines Osmosewasser – keine Mineralien';
+  // Update tap-label current values
+  var tapLbl = document.getElementById('tap-label');
+  if (tapLbl) {
+    var t = Math.round(tapPct*100);
+    tapLbl.textContent = t===0?(isEN?'100% RO water':'100% Osmose'):t===100?(isEN?'100% Tap water':'100% Leitung'):t+'% '+(isEN?'Tap':'Leitung')+' - '+(100-t)+'% '+(isEN?'RO':'Osmose');
+  }
+  var refWaterLbl = document.getElementById('ref-water-label');
+  if (refWaterLbl) {
+    var rp = Math.round((refState ? refState.fillPct : 1)*100);
+    var rTxt = rp===0?(isEN?'100% RO water':'100% Osmose'):rp===100?(isEN?'100% Tap water':'100% Leitung'):rp+'% '+(isEN?'Tap':'Leitung')+' - '+(100-rp)+'% '+(isEN?'RO':'Osmose');
+    refWaterLbl.textContent = rTxt;
+  }
+  var optTapLbl = document.getElementById('opt-tap-label');
+  if (optTapLbl) {
+    var op = Math.round(optTapPct*100);
+    optTapLbl.textContent = op===0?(isEN?'100% RO water':'100% Osmose'):op===100?(isEN?'100% Tap water':'100% Leitung'):op+'% '+(isEN?'Tap':'Leitung')+' – '+(100-op)+'% '+(isEN?'RO':'Osmose');
+  }
+  // Priority slider labels
+  var prioMins = document.querySelectorAll('.prio-min-lbl');
+  var prioMaxs = document.querySelectorAll('.prio-max-lbl');
+  for(var i=0;i<prioMins.length;i++) prioMins[i].textContent = isEN ? '0 off' : '0 aus';
+  for(var i=0;i<prioMaxs.length;i++) prioMaxs[i].textContent = isEN ? '3 must' : '3 muss';
+  // DB search placeholder
+  var dbSearch = document.getElementById('db-search');
+  if (dbSearch) dbSearch.placeholder = isEN ? 'Search e.g. Calcium, Nitrate, Haifa...' : 'Suchen z.B. Calcium, Nitrate, Haifa...';
+  var dbNote = document.querySelector('#page-einstellungen .card-note');
+  if (dbNote) dbNote.textContent = isEN ? '317 substances in database - search and add directly' : '317 Substanzen aus der Datenbank - Suchen und direkt hinzufugen';
+  // Rebuild sliders and render to pick up new language
+  buildSliders();
+  render();
+}
+
+function buildAnleitung() {
+  var el = document.getElementById('anleitung-content');
+  if (!el) return;
+  var isEN = currentLang === 'en';
+  function step(color, label, text) {
+    return '<div style="background:#0f1a12;border-radius:10px;padding:12px;margin-bottom:10px;border-left:3px solid '+color+'"><div style="font-size:9px;color:'+color+';letter-spacing:2px;font-family:\'Courier New\',monospace;margin-bottom:6px;">'+label+'</div><p>'+text+'</p></div>';
+  }
+  function tip(text) {
+    return '<div style="background:#0f1a12;border-radius:10px;padding:10px 12px;border-left:3px solid #facc15;margin-bottom:6px;">💡 '+text+'</div>';
+  }
+  function card(icon, title, sub, content) {
+    return '<div class="card" style="margin-bottom:12px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div style="font-size:20px;">'+icon+'</div><div><div style="font-size:14px;font-weight:600;color:#e2f5e8;">'+title+'</div><div style="font-size:9px;color:#4a7a5a;font-family:\'Courier New\',monospace;letter-spacing:1px;">'+sub+'</div></div></div><div style="font-size:12px;color:#7aa888;line-height:1.7;">'+content+'</div></div>';
+  }
+
+  var html = '<div class="section-title">'+(isEN?'USER GUIDE':'BENUTZERHANDBUCH')+'</div><div class="divider"></div>';
+
+  // Chapter 1
+  html += card('🚀',
+    isEN ? '1. Getting Started' : '1. Erste Schritte',
+    isEN ? 'SETUP & BASICS' : 'SETUP & GRUNDLAGEN',
+    '<p style="margin-bottom:10px;">'+(isEN?'The calculator is designed for <strong style="color:#b8d4c0;">DWC systems (Deep Water Culture)</strong>. Follow these steps to set up your first nutrient solution.':'Der Rechner ist für <strong style="color:#b8d4c0;">DWC-Systeme (Deep Water Culture)</strong> entwickelt. Folge diesen Schritten für deine erste Nährstofflösung.')+'</p>'+
+    step('#4ade80',
+      isEN ? 'STEP 1 – ENTER WATER VALUES' : 'SCHRITT 1 – WASSERWERTE EINGEBEN',
+      isEN ? 'Go to <strong style="color:#b8d4c0;">Settings → Water Values</strong> and enter your tap water analysis (Ca, Mg, pH, EC, etc.). If you use RO water, leave everything at 0. The calculator subtracts your tap water minerals automatically from the target values.'
+           : 'Gehe zu <strong style="color:#b8d4c0;">Einstellungen → Wasserwerte</strong> und trage deine Wasseranalyse ein (Ca, Mg, pH, EC usw.). Bei Osmosewasser alles auf 0 lassen. Der Rechner zieht die Leitungswasser-Mineralien automatisch ab.'
+    )+
+    step('#4ade80',
+      isEN ? 'STEP 2 – ADD NUTRIENTS' : 'SCHRITT 2 – DÜNGER HINZUFÜGEN',
+      isEN ? 'Under <strong style="color:#b8d4c0;">Settings → Substance Database</strong> search for your nutrients (e.g. Calcium Nitrate, MKP, Epsom Salt) and click <strong style="color:#b8d4c0;">+ ADD</strong>. They appear as sliders in the calculator. You can also create custom nutrients under <strong style="color:#b8d4c0;">Custom Nutrients</strong>.'
+           : 'Unter <strong style="color:#b8d4c0;">Einstellungen → Substanz-Datenbank</strong> nach deinen Düngern suchen (z.B. Calciumnitrat, MKP, Bittersalz) und auf <strong style="color:#b8d4c0;">+ HINZUFÜGEN</strong> klicken. Sie erscheinen als Slider im Rechner. Eigene Dünger lassen sich unter <strong style="color:#b8d4c0;">Eigene Salze</strong> anlegen.'
+    )+
+    step('#4ade80',
+      isEN ? 'STEP 3 – SELECT PRESET & SET VOLUME' : 'SCHRITT 3 – PRESET & VOLUMEN WÄHLEN',
+      isEN ? 'Choose <strong style="color:#b8d4c0;">VEG</strong> for growth or <strong style="color:#b8d4c0;">BLOOM</strong> for flowering. Set your reservoir volume and tap water ratio. <strong style="color:#b8d4c0;">EXPERIMENT</strong> starts completely empty for a clean slate.'
+           : 'Wähle <strong style="color:#b8d4c0;">VEG</strong> für Wachstum oder <strong style="color:#b8d4c0;">BLOOM</strong> für Blüte. Reservoir-Volumen und Leitungswasser-Anteil einstellen. <strong style="color:#b8d4c0;">EXPERIMENT</strong> startet leer für einen freien Start.'
+    )+
+    step('#4ade80',
+      isEN ? 'STEP 4 – ADJUST SLIDERS & DONE' : 'SCHRITT 4 – SLIDER EINSTELLEN & FERTIG',
+      isEN ? 'Move the sliders to set dosages. The PPM bars, EC, pH and ion balance update in real time. The <strong style="color:#b8d4c0;">Total Amounts</strong> section below shows the exact quantities for your reservoir volume.'
+           : 'Slider bewegen um Dosierungen einzustellen. Die PPM-Balken, EC, pH und Ionenbilanz aktualisieren sich in Echtzeit. Unter <strong style="color:#b8d4c0;">Gesamtmenge</strong> siehst du die genauen Mengen für dein Reservoir-Volumen.'
+    )
+  );
+
+  // Chapter 2
+  html += card('🎚️',
+    isEN ? '2. Sliders & Dosages' : '2. Slider & Dosierungen',
+    isEN ? 'ADJUSTING NUTRIENTS' : 'SALZE EINSTELLEN',
+    '<p style="margin-bottom:10px;">'+(isEN?'Each slider corresponds to one nutrient. Dosage is shown in <strong style="color:#b8d4c0;">g/L</strong> (solids) or <strong style="color:#b8d4c0;">ml/L</strong> (liquids).':'Jeder Slider entspricht einem Salz. Die Dosierung ist in <strong style="color:#b8d4c0;">g/L</strong> (Feststoffe) oder <strong style="color:#b8d4c0;">ml/L</strong> (Flüssigkeiten) angegeben.')+'</p>'+
+    '<div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-bottom:10px;">'+
+    '<div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#4ade80;font-family:\'Courier New\',monospace;white-space:nowrap;align-self:center;">'+(isEN?'ON':'AN')+'</div><div>'+(isEN?'Nutrient is active and included in calculation':'Salz ist aktiv und wird in die Berechnung einbezogen')+'</div>'+
+    '<div style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);border-radius:4px;padding:2px 6px;font-size:9px;color:#60a5fa;font-family:\'Courier New\',monospace;white-space:nowrap;align-self:center;">✎</div><div>'+(isEN?'Opens edit panel – adjust name, nutrient content, price, density':'Öffnet das Edit-Panel – Name, Nährstoffgehalte, Preis, Dichte anpassen')+'</div>'+
+    '<div style="background:rgba(107,114,128,0.1);border:1px solid #374151;border-radius:4px;padding:2px 6px;font-size:9px;color:#6b7280;font-family:\'Courier New\',monospace;white-space:nowrap;align-self:center;">X</div><div>'+(isEN?'Remove nutrient from the list':'Salz aus der Liste entfernen')+'</div>'+
+    '</div>'+
+    step('#facc15', isEN?'TIP – SCALE EC':'TIPP – EC SKALIEREN', isEN?'The <strong style="color:#b8d4c0;">– / +</strong> buttons next to the EC value scale all nutrients proportionally by ±0.05 mS/cm.':'Die <strong style="color:#b8d4c0;">– / +</strong> Buttons neben dem EC-Wert skalieren alle Salze gleichmäßig um ±0,05 mS/cm.')
+  );
+
+  // Chapter 3
+  html += card('📊',
+    isEN ? '3. EC, pH & Ion Balance' : '3. EC, pH & Ionenbilanz',
+    isEN ? 'UNDERSTANDING WATER QUALITY' : 'WASSERQUALITÄT VERSTEHEN',
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">'+
+    '<div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:9px;color:#60a5fa;font-family:\'Courier New\',monospace;margin-bottom:4px;">'+(isEN?'BLUE':'BLAU')+'</div><div style="font-size:11px;">EC &lt; 1.2<br>'+(isEN?'too low':'zu niedrig')+'</div></div>'+
+    '<div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:9px;color:#4ade80;font-family:\'Courier New\',monospace;margin-bottom:4px;">'+(isEN?'GREEN':'GRÜN')+'</div><div style="font-size:11px;">EC 1.2–1.8<br>optimal</div></div>'+
+    '<div style="background:#0f1a12;border-radius:10px;padding:10px;text-align:center;"><div style="font-size:9px;color:#fb923c;font-family:\'Courier New\',monospace;margin-bottom:4px;">'+(isEN?'ORANGE':'ORANGE')+'</div><div style="font-size:11px;">EC &gt; 1.8<br>'+(isEN?'too high':'zu hoch')+'</div></div>'+
+    '</div>'+
+    '<p style="margin-bottom:10px;">'+(isEN?'<strong style="color:#b8d4c0;">pH estimate:</strong> Based on acid dosages and tap water pH. Always verify with a real pH meter. Target: <strong style="color:#4ade80;">5.5–6.2</strong>.':'<strong style="color:#b8d4c0;">pH-Schätzung:</strong> Basierend auf Säure-Dosierungen und Leitungswasser-pH. Immer mit echtem pH-Meter prüfen – Ziel: <strong style="color:#4ade80;">5,5–6,2</strong>.')+'</p>'+
+    '<p>'+(isEN?'<strong style="color:#b8d4c0;">Ion balance:</strong> Shows whether cations and anions are balanced. Below 5% is ideal. For liquid fertilizers <strong style="color:#6b7280;">n/a (blend)</strong> is shown.':'<strong style="color:#b8d4c0;">Ionenbilanz:</strong> Zeigt ob Kationen und Anionen ausgeglichen sind. Bei &lt;5% ist alles gut.')+'</p>'
+  );
+
+  // Chapter 4
+  html += card('🧪',
+    isEN ? '4. Adding Nutrients from DB' : '4. Nährstoffe aus Datenbank',
+    isEN ? 'DB & CUSTOM NUTRIENTS' : 'DB & CUSTOM SALZE',
+    '<p style="margin-bottom:10px;">'+(isEN?'Under <strong style="color:#b8d4c0;">Settings → Substance Database</strong> you find over 317 products – Plagron, Canna, Advanced Nutrients, Haifa and more.':'Unter <strong style="color:#b8d4c0;">Einstellungen → Substanz-Datenbank</strong> findest du über 317 Produkte.')+'</p>'+
+    step('#60a5fa', isEN?'ADD FROM DATABASE':'AUS DATENBANK HINZUFÜGEN', isEN?'Enter search term → find product → click <strong style="color:#b8d4c0;">+ ADD</strong>. The product then appears as a slider in the calculator.':'Suchbegriff eingeben → Produkt finden → <strong style="color:#b8d4c0;">+ HINZUFÜGEN</strong> klicken. Das Produkt erscheint als Slider im Rechner.')+
+    step('#60a5fa', isEN?'CREATE CUSTOM NUTRIENT':'EIGENES SALZ ANLEGEN', isEN?'Under <strong style="color:#b8d4c0;">Custom Nutrients</strong> you can add any product manually. Enter values in % by weight.':'Unter <strong style="color:#b8d4c0;">Eigene Salze</strong> kannst du beliebige Produkte manuell anlegen.')
+  );
+
+  // Chapter 5
+  html += card('💾',
+    isEN ? '5. Save & Load' : '5. Speichern & Laden',
+    isEN ? 'EXPORT / IMPORT' : 'EXPORT / IMPORT',
+    step('#4ade80', isEN?'WHAT IS SAVED':'WAS WIRD GESPEICHERT', isEN?'All 3 presets (VEG, BLOOM, EXPERIMENT) with dosages, slider maximums, volume and tap water ratio. Plus water values, custom nutrients and active states.':'Alle 3 Presets mit Dosierungen, Slider-Maxima, Volumen und Leitungswasser-Anteil. Dazu Wasserwerte, eigene Salze und aktive/inaktive Zustände.')+
+    step('#4ade80', isEN?'TIP – MULTIPLE SETUPS':'TIPP – MEHRERE SETUPS', isEN?'Save different JSON files for different grow phases. e.g. "VEG_Week3.json", "BLOOM_Week6.json".':'Speichere verschiedene JSON-Dateien für verschiedene Grow-Phasen. Z.B. "VEG_Woche3.json", "BLOOM_Woche6.json".')
+  );
+
+  // Chapter 6 – Optimizer
+  html += card('🎯',
+    isEN ? '6. Recipe Optimizer' : '6. Rezept-Optimierer',
+    isEN ? 'NNLS ALGORITHM' : 'NNLS ALGORITHMUS',
+    '<p style="margin-bottom:10px;">'+(isEN?'The optimizer automatically calculates the <strong style="color:#b8d4c0;">optimal nutrient mix</strong> for any target PPM values.':'Der Optimierer berechnet automatisch die <strong style="color:#b8d4c0;">optimale Salzmischung</strong> für beliebige Ziel-PPM-Werte.')+'</p>'+
+    step('#4ade80', isEN?'STEP 1 – WATER MIX':'SCHRITT 1 – WASSERMIX', isEN?'Set tap water ratio first. The optimizer automatically subtracts tap water minerals from target values.':'Leitungswasser-Anteil einstellen. Der Optimierer zieht Leitungswasser-Mineralien automatisch vom Zielwert ab.')+
+    step('#4ade80', isEN?'STEP 2 – LOAD PRESET':'SCHRITT 2 – PRESET LADEN', isEN?'Click VEG, BLOOM or EXPERIMENT to load current PPM values + water mix, or adjust target sliders manually.':'VEG, BLOOM oder EXPERIMENT klicken um PPM-Werte + Wassermix zu laden.')+
+    step('#4ade80', isEN?'STEP 3 – TRANSFER':'SCHRITT 3 – ÜBERTRAGEN', isEN?'Use <strong style="color:#b8d4c0;">→ VEG, → BLOOM or → EXPERIMENT</strong> to transfer the optimized recipe directly to a preset.':'Mit <strong style="color:#b8d4c0;">→ VEG, → BLOOM oder → EXPERIMENT</strong> das Rezept direkt ins Preset übertragen.')
+  );
+
+  // Chapter 7 – Tips
+  html += card('⚡',
+    isEN ? '7. Tips & Tricks' : '7. Tipps & Tricks',
+    isEN ? 'PRO TIPS' : 'PRO TIPPS',
+    '<div style="display:flex;flex-direction:column;gap:6px;">'+
+    tip((isEN?'<strong style="color:#b8d4c0;">pH always last</strong> – Mix all nutrients first, then measure and adjust pH with H3PO4 or HNO3.':'<strong style="color:#b8d4c0;">pH immer zuletzt</strong> – Erst alle Salze einrühren, dann pH messen und mit H3PO4 oder HNO3 korrigieren.'))+
+    tip((isEN?'<strong style="color:#b8d4c0;">Watch Ca:Mg ratio</strong> – Optimal 2:1 to 3:1. Too much Ca displaces Mg → interveinal chlorosis.':'<strong style="color:#b8d4c0;">Ca:Mg im Auge behalten</strong> – Optimal 2:1 bis 3:1. Zu viel Ca verdrängt Mg → intervenale Chlorose.'))+
+    tip((isEN?'<strong style="color:#b8d4c0;">Water temperature</strong> – Above 22°C Fe uptake drops sharply. Chiller at 18-20°C recommended.':'<strong style="color:#b8d4c0;">Wassertemperatur</strong> – Über 22°C sinkt die Fe-Aufnahme drastisch. Chiller auf 18-20°C empfohlen.'))+
+    tip((isEN?'<strong style="color:#b8d4c0;">Lower N in bloom</strong> – According to Saloner 2021, N above 160ppm reduces THC content by up to 69%.':'<strong style="color:#b8d4c0;">N in Blüte senken</strong> – Laut Saloner 2021 reduziert N über 160ppm den THC-Gehalt um bis zu 69%.'))+
+    tip((isEN?'<strong style="color:#b8d4c0;">Check air stones</strong> – Ca needs transpiration for uptake. Without sufficient O2 in water, no Ca uptake.':'<strong style="color:#b8d4c0;">Luftsteine prüfen</strong> – Ca braucht Transpiration für die Aufnahme. Ohne ausreichend O2 keine Ca-Aufnahme.'))+
+    '</div>'
+  );
+
+  html += '<div class="footer">'+(isEN?'DWC NUTRIENT CALCULATOR 2026':'VINCEMAANS DWC RECHNER v1.0 · 2026')+'</div>';
+  el.innerHTML = html;
+}
+
+function buildOptimierTexts() {
+  var isEN = currentLang === 'en';
+  var el;
+  el = document.getElementById('opt-main-note');
+  if (el) el.textContent = isEN ? 'Set target PPMs with sliders → optimal nutrient mix is calculated' : 'Ziel-PPMs mit Slidern einstellen → optimale Salzmischung wird berechnet';
+  el = document.getElementById('opt-preset-label');
+  if (el) el.textContent = isEN ? 'LOAD TARGET VALUES FROM CURRENT PRESET' : 'ZIELWERTE LADEN AUS AKTUELLEM PRESET';
+  el = document.getElementById('opt-preset-hint');
+  if (el) el.textContent = isEN ? 'Loads PPM targets + water mix from selected preset' : 'Lädt PPM-Zielwerte + Wassermix aus dem gewählten Preset';
+  el = document.getElementById('opt-prio-note');
+  if (el) el.innerHTML = isEN ? 'How strongly should the optimizer react to deviations from target? <strong style="color:#b8d4c0;">3 = must match</strong>, <strong style="color:#4a7a5a;">1 = irrelevant</strong>.' : 'Wie stark soll der Optimierer auf Abweichungen vom Zielwert reagieren? <strong style="color:#b8d4c0;">3 = muss stimmen</strong>, <strong style="color:#4a7a5a;">1 = egal</strong>.';
+  el = document.getElementById('opt-transfer-label');
+  if (el) el.textContent = isEN ? 'TRANSFER RECIPE TO' : 'REZEPT ÜBERTRAGEN IN';
+  var placeholder = document.getElementById('opt-result-placeholder');
+  if (placeholder) placeholder.textContent = isEN ? 'Load a preset to start...' : 'Preset laden um zu starten...';
+}
+
+function buildAuswertungTexts() {
+  var isEN = currentLang === 'en';
+  var title = document.getElementById('auswertung-title');
+  if (title) title.textContent = isEN ? 'REFERENCE STUDY' : 'REFERENZ-STUDIE';
+  var footer = document.getElementById('auswertung-footer');
+  if (footer) footer.textContent = isEN ? 'DWC ANALYSIS 2026' : 'DWC AUSWERTUNG 2026';
+  // Re-render study desc in correct language
+  var study = STUDIES[currentStudy];
+  if (study) {
+    var descEl = document.getElementById('study-desc');
+    if (descEl) descEl.textContent = isEN ? (study.desc_en || study.desc) : study.desc;
+    var summaryArr = isEN ? (study.summary_en || study.summary) : study.summary;
+    var summaryEl = document.getElementById('study-summary');
+    if (summaryEl && summaryArr) {
+      var html = '';
+      for (var i=0; i<summaryArr.length; i++) {
+        html += '<div style="font-size:9px;color:#6b7280;padding:2px 0 2px 10px;border-left:2px solid #1a3d26;margin-bottom:3px;">'+summaryArr[i]+'</div>';
+      }
+      summaryEl.innerHTML = html;
+    }
+  }
+  // Re-render auswertung content with new language labels
+  if (document.getElementById('auswertung-content') && document.getElementById('auswertung-content').innerHTML) {
+    renderAuswertung();
+  }
+}
 
 </script>
 </body>
