@@ -1861,25 +1861,29 @@ function doExport() {
     saltActive:{},
     saltKeys:[]
   };
-  // Save all preset states
+  // Save all preset states – always include volume + tapPct
   for(var pi=0; pi<PRESET_LIST.length; pi++) {
     var pname = PRESET_LIST[pi];
+    var pw = PRESET_WATER[pname] || { volume:50, tapPct:0.25 };
     if(presetStates[pname]) {
-      data.presetStates[pname]=presetStates[pname];
+      data.presetStates[pname] = presetStates[pname];
+      // Ensure volume/tapPct always present
+      if(data.presetStates[pname].volume === undefined) data.presetStates[pname].volume = pw.volume;
+      if(data.presetStates[pname].tapPct === undefined) data.presetStates[pname].tapPct = pw.tapPct;
     } else {
-      data.presetStates[pname]={doses:{},maxes:{}};
-      var p=PRESETS[pname]||{};
+      data.presetStates[pname] = { doses:{}, maxes:{}, volume:pw.volume, tapPct:pw.tapPct };
+      var p = PRESETS[pname] || {};
       for(var i=0;i<SALTS.length;i++) {
-        data.presetStates[pname].doses[SALTS[i].key]=p[SALTS[i].key]||0;
-        data.presetStates[pname].maxes[SALTS[i].key]=SALTS[i].origMax;
+        data.presetStates[pname].doses[SALTS[i].key] = p[SALTS[i].key]||0;
+        data.presetStates[pname].maxes[SALTS[i].key] = SALTS[i].origMax;
       }
     }
   }
-  // Save current preset doses (might be unsaved)
-  data.presetStates[currentPreset]={doses:{},maxes:{}};
+  // Save current preset (live state)
+  data.presetStates[currentPreset] = { doses:{}, maxes:{}, volume:volume, tapPct:tapPct };
   for(var i=0;i<SALTS.length;i++) {
-    data.presetStates[currentPreset].doses[SALTS[i].key]=doses[SALTS[i].key];
-    data.presetStates[currentPreset].maxes[SALTS[i].key]=SALTS[i].max;
+    data.presetStates[currentPreset].doses[SALTS[i].key] = doses[SALTS[i].key];
+    data.presetStates[currentPreset].maxes[SALTS[i].key] = SALTS[i].max;
   }
   for(var k in tap) data.tap[k]=tap[k];
   // Save custom salts, active states and which standard salts still exist
@@ -1930,7 +1934,11 @@ function applySnapshot(data) {
         PRESET_NAMES = {};
         PRESET_LIST.forEach(function(k) {
           PRESET_NAMES[k] = data.presetNames[k] || k;
-          PRESET_WATER[k] = { volume:50, tapPct:0.25 };
+          var savedState = data.presetStates ? data.presetStates[k] : null;
+          PRESET_WATER[k] = {
+            volume: (savedState && savedState.volume !== undefined) ? savedState.volume : 50,
+            tapPct: (savedState && savedState.tapPct !== undefined) ? savedState.tapPct : 0.25
+          };
           presetStates[k] = null;
         });
       } else {
