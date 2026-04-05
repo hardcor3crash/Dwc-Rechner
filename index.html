@@ -479,11 +479,11 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     <div class="card-title" data-lang="salzHinzufugen">SALZ HINZUFUGEN</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
       <div>
-        <div class="water-label">Name</div>
-        <input class="water-input" id="new-salt-label" type="text" placeholder="z.B. Kalisalpeter" style="width:100%;">
+        <div class="water-label" data-lang="labelName">Name</div>
+        <input class="water-input" id="new-salt-label" type="text" placeholder="z.B. Kalisalpeter" style="width:100%;" data-placeholder-de="z.B. Kalisalpeter" data-placeholder-en="e.g. potassium nitrate">
       </div>
       <div>
-        <div class="water-label">Einheit</div>
+        <div class="water-label" data-lang="labelUnit">Einheit</div>
         <select id="new-salt-unit" style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:'Space Mono',monospace;font-size:11px;padding:7px 8px;outline:none;">
           <option value="g/L">g/L</option>
           <option value="ml/L">ml/L</option>
@@ -492,47 +492,47 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     </div>
     <div class="card-note" style="margin-bottom:8px;" id="nutrient-pct-note">Nahrstoffgehalt in % (z.B. 13 fur 13% N)</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;">
-      <div><div class="water-label">NO3 %</div><input class="water-input" id="new-salt-NO3" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">NH4 %</div><input class="water-input" id="new-salt-NH4" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">N-org %</div><input class="water-input" id="new-salt-Norg" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">N-Urea %</div><input class="water-input" id="new-salt-NUrea" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">P %</div><input class="water-input" id="new-salt-P" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">K %</div><input class="water-input" id="new-salt-K" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Ca %</div><input class="water-input" id="new-salt-Ca" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Mg %</div><input class="water-input" id="new-salt-Mg" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">S %</div><input class="water-input" id="new-salt-S" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Si %</div><input class="water-input" id="new-salt-Si" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Fe %</div><input class="water-input" id="new-salt-Fe" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Mn %</div><input class="water-input" id="new-salt-Mn" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Zn %</div><input class="water-input" id="new-salt-Zn" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Cu %</div><input class="water-input" id="new-salt-Cu" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">B %</div><input class="water-input" id="new-salt-B" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#4ade80;">NO3 %</div><input class="water-input" id="new-salt-NO3" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#86efac;">NH4 %</div><input class="water-input" id="new-salt-NH4" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#6b7280;">N-org %</div><input class="water-input" id="new-salt-Norg" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#facc15;">N-Urea %</div><input class="water-input" id="new-salt-NUrea" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#f97316;">P %</div><input class="water-input" id="new-salt-P" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#60a5fa;">K %</div><input class="water-input" id="new-salt-K" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#f472b6;">Ca %</div><input class="water-input" id="new-salt-Ca" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#a78bfa;">Mg %</div><input class="water-input" id="new-salt-Mg" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#facc15;">S %</div><input class="water-input" id="new-salt-S" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#94a3b8;">Si %</div><input class="water-input" id="new-salt-Si" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#f87171;">Fe %</div><input class="water-input" id="new-salt-Fe" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#fb923c;">Mn %</div><input class="water-input" id="new-salt-Mn" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#34d399;">Zn %</div><input class="water-input" id="new-salt-Zn" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#22d3ee;">Cu %</div><input class="water-input" id="new-salt-Cu" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#e879f9;">B %</div><input class="water-input" id="new-salt-B" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
     </div>
     <div class="card-title" style="font-size:9px;margin-bottom:6px;color:#6b9e7a;">ENZYME (U/g)</div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:6px;">
-      <div><div class="water-label">ECU</div><input class="water-input" id="new-salt-ecu" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">FBGU</div><input class="water-input" id="new-salt-fbgu" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">BHU</div><input class="water-input" id="new-salt-bhu" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">PU</div><input class="water-input" id="new-salt-pu" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">EXU</div><input class="water-input" id="new-salt-exu" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#4ade80;">ECU</div><input class="water-input" id="new-salt-ecu" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#60a5fa;">FBGU</div><input class="water-input" id="new-salt-fbgu" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#c084fc;">BHU</div><input class="water-input" id="new-salt-bhu" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#fb923c;">PU</div><input class="water-input" id="new-salt-pu" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#f472b6;">EXU</div><input class="water-input" id="new-salt-exu" type="number" min="0" step="0.1" placeholder="0"></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px;margin-top:-4px;">
-      <div style="grid-column:span 1"><div class="water-label">Sonstige (U/L)</div><input class="water-input" id="new-salt-extra-ecu" type="number" min="0" step="1" placeholder="0"></div>
+      <div style="grid-column:span 1"><div class="water-label" style="color:#94a3b8;">Sonstige (U/L)</div><input class="water-input" id="new-salt-extra-ecu" type="number" min="0" step="1" placeholder="0"></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
-      <div><div class="water-label">Preis (EUR)</div><input class="water-input" id="new-salt-preis" type="number" min="0" step="0.01" placeholder="0.00"></div>
-      <div><div class="water-label">Gebinde (g oder ml)</div><input class="water-input" id="new-salt-menge" type="number" min="1" step="1" value="1000"></div>
-      <div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
-      <div><div class="water-label">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="any" placeholder="auto"></div>
+      <div><div class="water-label" data-lang="labelPrice">Preis (EUR)</div><input class="water-input" id="new-salt-preis" type="number" min="0" step="0.01" placeholder="0.00"></div>
+      <div><div class="water-label" data-lang="labelPackage">Gebinde (g oder ml)</div><input class="water-input" id="new-salt-menge" type="number" min="1" step="1" value="1000"></div>
+      <div><div class="water-label" data-lang="labelDensity">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
+      <div><div class="water-label" data-lang="labelSliderMax">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="any" placeholder="auto"></div>
     </div>
     <div class="card-title" style="font-size:9px;margin-bottom:6px;color:#a78bfa;">AMINOSÄUREN (mg/g)</div>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px;">
-      <div><div class="water-label">Glu</div><input class="water-input" id="new-salt-glu" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Gln</div><input class="water-input" id="new-salt-gln" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Asp</div><input class="water-input" id="new-salt-asp" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Gly</div><input class="water-input" id="new-salt-gly" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Pro</div><input class="water-input" id="new-salt-pro" type="number" min="0" step="0.1" placeholder="0"></div>
-      <div><div class="water-label">Arg</div><input class="water-input" id="new-salt-arg" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#a78bfa;">Glu</div><input class="water-input" id="new-salt-glu" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#c4b5fd;">Gln</div><input class="water-input" id="new-salt-gln" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#818cf8;">Asp</div><input class="water-input" id="new-salt-asp" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#93c5fd;">Gly</div><input class="water-input" id="new-salt-gly" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#6ee7b7;">Pro</div><input class="water-input" id="new-salt-pro" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#fcd34d;">Arg</div><input class="water-input" id="new-salt-arg" type="number" min="0" step="0.1" placeholder="0"></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px;">
       <div style="grid-column:span 1"><div class="water-label">Sonstige (mg/L)</div><input class="water-input" id="new-salt-extra-amino" type="number" min="0" step="0.1" placeholder="0"></div>
@@ -604,6 +604,7 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
     <button class="filter-btn" onclick="filterGuide('mikro',this)" id="guide-btn-mikro">MIKRO</button>
     <button class="filter-btn" onclick="filterGuide('mobil',this)" id="guide-btn-mobil" data-lang="guideMobil">MOBIL</button>
     <button class="filter-btn" onclick="filterGuide('immobil',this)" id="guide-btn-immobil" data-lang="guideImmobil">IMMOBIL</button>
+    <button class="filter-btn" onclick="filterGuide('bio',this)" id="guide-btn-bio" data-lang="guideBio">BIO</button>
   </div>
 
   <div id="cards"></div>
@@ -1414,7 +1415,6 @@ function render() {
       if (r.NH4  > 0) macroHtml += '<span style="font-size:8px;color:#fb923c;">NH4: '+fmt(r.NH4)+' ppm</span>';
       if (r.Norg > 0) macroHtml += '<span style="font-size:8px;color:#6b7280;">N-org: '+fmt(r.Norg)+' ppm</span>';
       if (r.NUrea> 0) macroHtml += '<span style="font-size:8px;color:#facc15;">N-Urea: '+fmt(r.NUrea)+' ppm</span>';
-      if (r.NH4 / r.N > 0.1) macroHtml += '<span style="font-size:8px;color:#f87171;">&#9888; NH4 &gt;10% - '+(isEN?'pH drop!':'pH Abfall!')+'</span>';
       macroHtml += '</div>';
     } else {
       macroHtml += '<div class="bar-bg"><div class="bar-fill" style="width:'+((m.val/maxPPM)*100)+'%;background:'+c+'"></div></div>';
@@ -1547,6 +1547,7 @@ function render() {
 }
 
 function buildSliders() {
+  var isEN = currentLang === 'en';
   var html='';
   for (var i=0; i<SALTS.length; i++) {
     var s=SALTS[i];
@@ -1566,44 +1567,50 @@ function buildSliders() {
     // Edit panel (hidden by default)
     html += '<div id="edit-'+s.key+'" style="display:none;margin-top:8px;padding:10px;background:#0a1a0a;border-radius:6px;border:1px solid #1a3d26;">';
     html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">';
-    html += '<div><div class="water-label">Name</div><input class="water-input" id="edit-label-'+s.key+'" type="text" value="'+s.label+'" style="width:100%"></div>';
-    html += '<div><div class="water-label">Einheit</div><select id="edit-unit-'+s.key+'" style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;padding:6px 8px;outline:none;"><option value="g/L"'+(s.unit==='g/L'?' selected':'')+'>g/L</option><option value="ml/L"'+(s.unit==='ml/L'?' selected':'')+'>ml/L</option></select></div>';
+    html += '<div><div class="water-label">'+(isEN?'Name':'Name')+'</div><input class="water-input" id="edit-label-'+s.key+'" type="text" value="'+s.label+'" style="width:100%"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Unit':'Einheit')+'</div><select id="edit-unit-'+s.key+'" style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;padding:6px 8px;outline:none;"><option value="g/L"'+(s.unit==='g/L'?' selected':'')+'>g/L</option><option value="ml/L"'+(s.unit==='ml/L'?' selected':'')+'>ml/L</option></select></div>';
     html += '</div>';
     html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px;">';
     var nuts=['NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
+    var nutColors={'NO3':'#4ade80','NH4':'#86efac','Norg':'#6b7280','NUrea':'#facc15','P':'#f97316','K':'#60a5fa','Ca':'#f472b6','Mg':'#a78bfa','S':'#facc15','Si':'#94a3b8','Fe':'#f87171','Mn':'#fb923c','Zn':'#34d399','Cu':'#22d3ee','B':'#e879f9'};
     for(var j=0;j<nuts.length;j++) {
       var n=nuts[j];
       var pct=Math.round(((s[n]||0)*100)*10000)/10000;
-      html += '<div><div class="water-label">'+n+' %</div><input class="water-input" id="edit-'+n+'-'+s.key+'" type="number" min="0" max="100" step="0.01" value="'+pct+'"></div>';
+      var nc=nutColors[n]||'#3d5c47';
+      html += '<div><div class="water-label" style="color:'+nc+'">'+n+' %</div><input class="water-input" id="edit-'+n+'-'+s.key+'" type="number" min="0" max="100" step="0.01" value="'+pct+'"></div>';
     }
     html += '</div>';
     html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:8px;">';
-    html += '<div><div class="water-label">Preis (EUR)</div><input class="water-input" id="edit-preis-'+s.key+'" type="number" min="0" step="0.01" value="'+(s.preis||0)+'"></div>';
-    html += '<div><div class="water-label">Gebinde (g/ml)</div><input class="water-input" id="edit-menge-'+s.key+'" type="number" min="1" step="1" value="'+(s.menge||1000)+'"></div>';
-    html += '<div><div class="water-label">Dichte (g/ml)</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
-    html += '<div><div class="water-label">Slider Max ('+s.unit+')</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="any" value="'+s.max+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Price (EUR)':'Preis (EUR)')+'</div><input class="water-input" id="edit-preis-'+s.key+'" type="number" min="0" step="0.01" value="'+(s.preis||0)+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Package (g/ml)':'Gebinde (g/ml)')+'</div><input class="water-input" id="edit-menge-'+s.key+'" type="number" min="1" step="1" value="'+(s.menge||1000)+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Density (g/ml)':'Dichte (g/ml)')+'</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Slider Max ('+s.unit+')':'Slider Max ('+s.unit+')')+'</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="any" value="'+s.max+'"></div>';
     html += '</div>';
-    html += '<div style="font-size:9px;letter-spacing:1px;color:#6b9e7a;margin-bottom:4px;">ENZYME (U/g)</div>';
+    html += '<div style="font-size:9px;letter-spacing:1px;color:#6b9e7a;margin-bottom:4px;">'+(isEN?'ENZYMES (U/g)':'ENZYME (U/g)')+'</div>';
     html += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:6px;">';
     var enzymes=['ecu','fbgu','bhu','pu','exu'];
+    var enzymeColors={'ecu':'#4ade80','fbgu':'#60a5fa','bhu':'#c084fc','pu':'#fb923c','exu':'#f472b6'};
     for(var j=0;j<enzymes.length;j++) {
       var en=enzymes[j];
-      html += '<div><div class="water-label">'+en.toUpperCase()+'</div><input class="water-input" id="edit-'+en+'-'+s.key+'" type="number" min="0" step="0.1" value="'+(s[en]||0)+'"></div>';
+      var ec=enzymeColors[en]||'#6b9e7a';
+      html += '<div><div class="water-label" style="color:'+ec+'">'+en.toUpperCase()+'</div><input class="water-input" id="edit-'+en+'-'+s.key+'" type="number" min="0" step="0.1" value="'+(s[en]||0)+'"></div>';
     }
     html += '</div>';
     html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:8px;margin-top:-4px;">';
-    html += '<div><div class="water-label">Sonstige (U/L)</div><input class="water-input" id="edit-extra-ecu-'+s.key+'" type="number" min="0" step="1" value="'+(s['extra_ecu']||0)+'"></div>';
+    html += '<div><div class="water-label">'+(currentLang==='en'?'Other (U/L)':'Sonstige (U/L)')+'</div><input class="water-input" id="edit-extra-ecu-'+s.key+'" type="number" min="0" step="1" value="'+(s['extra_ecu']||0)+'"></div>';
     html += '</div>';
-    html += '<div style="font-size:9px;letter-spacing:1px;color:#a78bfa;margin-bottom:4px;margin-top:4px;">AMINOSÄUREN (mg/g)</div>';
+    html += '<div style="font-size:9px;letter-spacing:1px;color:#a78bfa;margin-bottom:4px;margin-top:4px;">'+(isEN?'AMINO ACIDS (mg/g)':'AMINOSÄUREN (mg/g)')+'</div>';
     html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:6px;">';
     var aminos=['glu','gln','asp','gly','pro','arg'];
     var aminoLabels=['Glu','Gln','Asp','Gly','Pro','Arg'];
+    var aminoColors={'glu':'#a78bfa','gln':'#c4b5fd','asp':'#818cf8','gly':'#93c5fd','pro':'#6ee7b7','arg':'#fcd34d'};
     for(var j=0;j<aminos.length;j++) {
-      html += '<div><div class="water-label">'+aminoLabels[j]+'</div><input class="water-input" id="edit-'+aminos[j]+'-'+s.key+'" type="number" min="0" step="0.1" value="'+(s[aminos[j]]||0)+'"></div>';
+      var ac=aminoColors[aminos[j]]||'#a78bfa';
+      html += '<div><div class="water-label" style="color:'+ac+'">'+aminoLabels[j]+'</div><input class="water-input" id="edit-'+aminos[j]+'-'+s.key+'" type="number" min="0" step="0.1" value="'+(s[aminos[j]]||0)+'"></div>';
     }
     html += '</div>';
     html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:8px;">';
-    html += '<div><div class="water-label">Sonstige (mg/L)</div><input class="water-input" id="edit-extra-amino-'+s.key+'" type="number" min="0" step="0.1" value="'+(s.extra_amino||0)+'"></div>';
+    html += '<div><div class="water-label">'+(currentLang==='en'?'Other (mg/L)':'Sonstige (mg/L)')+'</div><input class="water-input" id="edit-extra-amino-'+s.key+'" type="number" min="0" step="0.1" value="'+(s.extra_amino||0)+'"></div>';
     html += '</div>';
     html += '<button onclick="saveSaltEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #2D6A2D;background:transparent;color:#4ade80;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;">'+(currentLang==='en'?'SAVE':'SPEICHERN')+'</button>';
     html += '<button onclick="toggleEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #374151;background:transparent;color:#6b7280;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;margin-left:6px;">'+(currentLang==='en'?'CANCEL':'ABBRECHEN')+'</button>';
@@ -1810,7 +1817,7 @@ function saveSaltEdit(key) {
     var n=nuts[j];
     salt[n] = (parseFloat(document.getElementById('edit-'+n+'-'+key).value)||0)/100;
   }
-  salt.N = salt.NO3 + salt.NH4 + (salt.Norg||0);
+  salt.N = salt.NO3 + salt.NH4 + (salt.Norg||0) + (salt.NUrea||0);
   // Enzyme fields (U/g)
   var enzymes=['ecu','fbgu','bhu','pu','exu'];
   for(var j=0;j<enzymes.length;j++) {
@@ -2463,7 +2470,7 @@ function loadOptPreset(presetName, btn) {
     if(s.key==='kwg'){K+=dose*67.24;Si+=dose*96.72;continue;}
     if(s.key==='h3po4'){P+=dose*1.685*0.85*1000*(30.97/97.99);continue;}
     if(s.key==='hno3'){N+=dose*0.5*14.01;continue;}
-    N+=factor*((s.NO3||0)+(s.NH4||0)+(s.Norg||0));
+    N+=factor*((s.NO3||0)+(s.NH4||0)+(s.Norg||0)+(s.NUrea||0));
     P+=factor*(s.P||0); K+=factor*(s.K||0); Ca+=factor*(s.Ca||0);
     Mg+=factor*(s.Mg||0); S+=factor*(s.S||0); Si+=factor*(s.Si||0);
     Fe+=factor*(s.Fe||0); Mn+=factor*(s.Mn||0); Zn+=factor*(s.Zn||0);
@@ -2511,7 +2518,7 @@ function getSaltContrib(s, dose) {
   if (s.key==='h3po4') return { N:0, P:dose*1.685*0.85*1000*(30.97/97.99), K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 };
   if (s.key==='hno3') return { N:dose*0.5*14.01, P:0, K:0, Ca:0, Mg:0, S:0, Si:0, Fe:0, Mn:0, Zn:0, Cu:0, B:0 };
   return {
-    N:  factor * ((s.NO3||0) + (s.NH4||0) + (s.Norg||0)),
+    N:  factor * ((s.NO3||0) + (s.NH4||0) + (s.Norg||0) + (s.NUrea||0)),
     P:  factor * (s.P||0),
     K:  factor * (s.K||0),
     Ca: factor * (s.Ca||0),
@@ -3194,6 +3201,44 @@ var NUTRIENTS = [
     fix_mangel:'H3PO4 oder HNO3 dosieren. pH-Meter kalibrieren. Ziel: 5,5-6,2.',
     fix_ueber:'Weniger H3PO4/HNO3. Mehr Leitungswasser-Anteil (puffert). Ziel: 5,5-6,2.'
   }
+  ,{
+    symbol:'E', name:'ENZYME', name_en:'ENZYMES', sub:'Biologische Katalysatoren (U/L)', sub_en:'Biological Catalysts (U/L)', color:'#4ade80', bg:'rgba(74,222,128,0.12)',
+    kategorie:'bio', mobil:null,
+    optimal:{ ppm:'Produktabhängig', ratio:'Cannazym: 1-4 ml/L · Pure Zym: 1-4 ml/L', ph:'5,5-6,5 (Enzymaktivität optimal)' },
+    komponenten:[
+      { name:'ECU – Endo Cellulase', name_en:'ECU – Endo Cellulase', color:'#4ade80', desc:'Baut Zellulose ab – den Hauptbestandteil abgestorbener Wurzelzellen. Verhindert Ansammlung von organischem Material und reduziert das Risiko von Fäulniserregern.', desc_en:'Breaks down cellulose – the main component of dead root cells. Prevents accumulation of organic material and reduces the risk of pathogens.' },
+      { name:'FBGU – Fungal Beta Glucanase', name_en:'FBGU – Fungal Beta Glucanase', color:'#60a5fa', desc:'Zersetzt Beta-Glucane aus Pilzzellwänden. Besonders wichtig bei Pythium-Befall oder zur Prävention. Baut Schleimschichten ab die Wurzeln verstopfen.', desc_en:'Breaks down beta-glucans from fungal cell walls. Especially important against Pythium or for prevention. Removes slime layers that clog roots.' },
+      { name:'BHU – Beta Hemicellulase', name_en:'BHU – Beta Hemicellulase', color:'#c084fc', desc:'Hydrolysiert Hemicellulose – ein weiterer Zellwandbestandteil. Arbeitet synergistisch mit Cellulase für vollständigen Zellwandabbau.', desc_en:'Hydrolyzes hemicellulose – another cell wall component. Works synergistically with cellulase for complete cell wall breakdown.' },
+      { name:'PU – Pektinase', name_en:'PU – Pectinase', color:'#fb923c', desc:'Spaltet Pektin, das die Zellwände zusammenhält. Löst organische Ablagerungen und verbessert die Nährstoffverfügbarkeit an der Wurzeloberfläche.', desc_en:'Cleaves pectin that holds cell walls together. Dissolves organic deposits and improves nutrient availability at the root surface.' },
+      { name:'EXU – Xylanase', name_en:'EXU – Xylanase', color:'#f472b6', desc:'Baut Xylan ab, einen Hauptbestandteil der Hemicellulose. Ergänzt BHU für einen vollständigen enzymatischen Kreislauf im Wurzelraum.', desc_en:'Breaks down xylan, a main component of hemicellulose. Complements BHU for a complete enzymatic cycle in the root zone.' }
+    ],
+    salze:[
+      { name:'Canna Cannazym', pct:'ECU 233 · PU 42 U/g', detail:'Cellulase + Pektinase, baut abgestorbene Wurzelzellen ab. Dichte 1,028 g/ml.' },
+      { name:'Plagron Pure Zym', pct:'ECU 53 · FBGU 143 · BHU 164 U/g', detail:'Breites Enzymspektrum, besonders wirksam gegen Beta-Glucane. Dichte 1,12 g/ml.' }
+    ],
+    fix_mangel:'Enzymdünger wie Cannazym oder Pure Zym dosieren. Reservoir regelmäßig wechseln. Wurzeln mit H₂O₂ behandeln wenn braun/schleimig.',
+    fix_ueber:'Enzyme sind nicht toxisch. Dosierung nach Herstellerangabe. Bei Schaumbildung Dosierung halbieren.'
+  },
+  {
+    symbol:'A', name:'AMINOSÄUREN', name_en:'AMINO ACIDS', sub:'Organische Stickstoffverbindungen (mg/L)', sub_en:'Organic Nitrogen Compounds (mg/L)', color:'#a78bfa', bg:'rgba(167,139,250,0.12)',
+    kategorie:'bio', mobil:null,
+    optimal:{ ppm:'Glu 5-20 mg/L · Gly 3-15 mg/L · Pro 2-10 mg/L', ratio:'Fischhydrolysat: 1-3 ml/L · Pflanzenhydrolysat: 0,5-2 ml/L', ph:'5,5-6,5' },
+    komponenten:[
+      { name:'Glu – Glutaminsäure', name_en:'Glu – Glutamic Acid', color:'#a78bfa', desc:'Häufigste Aminosäure in Pflanzen. Zentraler Knotenpunkt im Stickstoffstoffwechsel – überträgt N auf andere Aminosäuren. Fördert direktes Wurzelwachstum und wird sofort von der Pflanze aufgenommen.', desc_en:'Most abundant amino acid in plants. Central hub in nitrogen metabolism – transfers N to other amino acids. Promotes direct root growth and is immediately taken up by the plant.' },
+      { name:'Gln – Glutamin', name_en:'Gln – Glutamine', color:'#c4b5fd', desc:'Primärer N-Transporter in der Pflanze. Wird aus Glutaminsäure synthetisiert und transportiert Stickstoff zu Wachstumspunkten. Wichtig für Proteinbiosynthese und Chlorophyllbildung.', desc_en:'Primary N-transporter in the plant. Synthesized from glutamic acid and transports nitrogen to growth points. Important for protein biosynthesis and chlorophyll formation.' },
+      { name:'Asp – Asparaginsäure', name_en:'Asp – Aspartic Acid', color:'#818cf8', desc:'Schlüsselmolekül im Energiestoffwechsel. Beteiligt an der Synthese von Purinen und Pyrimidinen (DNA-Bausteine). Fördert Zellwachstum und Blütenentwicklung.', desc_en:'Key molecule in energy metabolism. Involved in the synthesis of purines and pyrimidines (DNA building blocks). Promotes cell growth and flower development.' },
+      { name:'Gly – Glycin', name_en:'Gly – Glycine', color:'#93c5fd', desc:'Kleinste Aminosäure, sehr gut von Wurzeln aufnehmbar. Vorläufer von Chlorophyll. Besonders hoch in Fischhydrolysaten. Stärkt Zellwände und fördert Stresstoleranz.', desc_en:'Smallest amino acid, easily absorbed by roots. Precursor of chlorophyll. Particularly high in fish hydrolysates. Strengthens cell walls and promotes stress tolerance.' },
+      { name:'Pro – Prolin', name_en:'Pro – Proline', color:'#6ee7b7', desc:'Wichtigste Stressschutz-Aminosäure. Akkumuliert bei Trocken-, Hitze- und Salzstress. Stabilisiert Proteine und Zellmembranen. In DWC besonders relevant bei Temperaturschwankungen.', desc_en:'Most important stress protection amino acid. Accumulates under drought, heat and salt stress. Stabilizes proteins and cell membranes. Especially relevant in DWC during temperature fluctuations.' },
+      { name:'Arg – Arginin', name_en:'Arg – Arginine', color:'#fcd34d', desc:'N-reichste Aminosäure (4 N-Atome). Vorläufer von Polyaminen und NO (Stickstoffmonoxid). Fördert Blütenansatz, Fruchtbildung und reguliert Blüteneinleitung.', desc_en:'N-richest amino acid (4 N atoms). Precursor of polyamines and NO (nitric oxide). Promotes flower set, fruit formation and regulates flowering induction.' }
+    ],
+    salze:[
+      { name:'BioBizz Bio Heaven', pct:'Glu ~10 mg/g · Gly ~8 mg/g', detail:'Aminosäurehydrolysat, fördert Stresstoleranz und Wurzeln' },
+      { name:'Plagron Fish Force', pct:'Gly ~15 mg/g · Glu ~8 mg/g', detail:'Fischhydrolysat, reich an Glycin und Prolin' },
+      { name:'Plagron Vita Start', pct:'Glu ~12 mg/g · Asp ~8 mg/g', detail:'Pflanzliche Aminosäuren für Jungpflanzen und Wachstum' }
+    ],
+    fix_mangel:'Fischhydrolysat oder Pflanzenhydrolysat dosieren. Glutaminsäure fördert N-Assimilation. Glycin und Prolin stärken Stresstoleranz.',
+    fix_ueber:'Dosierung halbieren. Reservoir wechseln. Organische Last in DWC im Blick behalten – Enzyme parallel einsetzen.'
+  }
 ];
 
 function buildCards() {
@@ -3203,8 +3248,9 @@ function buildCards() {
     var isEN = currentLang === 'en';
     var mobilTag = n.mobil === true ? '<span class="tag tag-mobil">'+(isEN?'MOBILE':'MOBIL')+'</span>' :
                    n.mobil === false ? '<span class="tag tag-immobil">'+(isEN?'IMMOBILE':'IMMOBIL')+'</span>' : '';
-    var katTag = n.kategorie === 'makro' ? '<span class="tag tag-makro">MAKRO</span>' :
-                 n.kategorie === 'mikro' ? '<span class="tag tag-mikro">MIKRO</span>' :
+    var katTag = n.kategorie === 'makro' ? '<span class="tag tag-makro">'+(isEN?'MACRO':'MAKRO')+'</span>' :
+                 n.kategorie === 'mikro' ? '<span class="tag tag-mikro">'+(isEN?'MICRO':'MIKRO')+'</span>' :
+                 n.kategorie === 'bio'  ? '<span class="tag tag-mikro" style="color:#a78bfa;border-color:rgba(167,139,250,0.3);">BIO</span>' :
                  '<span class="tag tag-ph">pH</span>';
     var displayName = isEN ? (n.name_en || n.name) : n.name;
     var displaySub = isEN ? (n.sub_en || n.sub) : n.sub;
@@ -3224,29 +3270,46 @@ function buildCards() {
 
     html += '<div class="card-body">';
 
-    // Optimal
-    html += '<div class="optimal-section">';
-    html += '<div class="optimal-label">'+L.guideOptimal+'</div>';
-    html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'Amount':'Menge')+'</span><span class="optimal-val">'+n.optimal.ppm+'</span></div>';
-    html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'Note':'Hinweis')+'</span><span class="optimal-val">'+n.optimal.ratio+'</span></div>';
-    html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'pH window':'pH-Fenster')+'</span><span class="optimal-val">'+n.optimal.ph+'</span></div>';
-    html += '</div>';
+    // Optimal – nur für normale Nährstoffkarten
+    if (n.kategorie !== 'bio') {
+      html += '<div class="optimal-section">';
+      html += '<div class="optimal-label">'+L.guideOptimal+'</div>';
+      html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'Amount':'Menge')+'</span><span class="optimal-val">'+n.optimal.ppm+'</span></div>';
+      html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'Note':'Hinweis')+'</span><span class="optimal-val">'+n.optimal.ratio+'</span></div>';
+      html += '<div class="optimal-row"><span class="optimal-key">'+(isEN?'pH window':'pH-Fenster')+'</span><span class="optimal-val">'+n.optimal.ph+'</span></div>';
+      html += '</div>';
+    }
 
-    // Mangel
-    html += '<div class="sym-section">';
-    html += '<div class="sym-title mangel">'+L.guideMangel+'</div>';
-    html += '<ul class="sym-list mangel">';
-    for (var j=0; j<n.mangel.length; j++) html += '<li>'+n.mangel[j]+'</li>';
-    html += '</ul></div>';
+    // Bio-Karten: Komponenten-Aufschlüsselung
+    if (n.komponenten && n.komponenten.length > 0) {
+      html += '<div class="sym-section">';
+      html += '<div class="sym-title" style="color:#a7c4b0;font-size:9px;letter-spacing:2px;">'+(isEN?'COMPONENTS':'KOMPONENTEN')+'</div>';
+      for (var j=0; j<n.komponenten.length; j++) {
+        var k=n.komponenten[j];
+        html += '<div style="margin-top:10px;padding:8px;background:rgba(0,0,0,0.2);border-radius:8px;border-left:3px solid '+k.color+';">';
+        html += '<div style="font-size:11px;font-weight:600;color:'+k.color+';margin-bottom:4px;">'+(isEN&&k.name_en?k.name_en:k.name)+'</div>';
+        html += '<div style="font-size:10px;color:#a7c4b0;line-height:1.5;">'+(isEN&&k.desc_en?k.desc_en:k.desc)+'</div>';
+        html += '</div>';
+      }
+      html += '</div>';
+    } else {
+      // Normale Nährstoff-Karten
+      html += '<div class="sym-section">';
+      html += '<div class="sym-title mangel">'+L.guideMangel+'</div>';
+      html += '<ul class="sym-list mangel">';
+      for (var j=0; j<n.mangel.length; j++) html += '<li>'+n.mangel[j]+'</li>';
+      html += '</ul></div>';
 
-    html += '<div class="section-divider"></div>';
+      html += '<div class="section-divider"></div>';
 
-    // Uberschuss
-    html += '<div class="sym-section">';
-    html += '<div class="sym-title ueber">'+L.guideUeber+'</div>';
-    html += '<ul class="sym-list ueber">';
-    for (var j=0; j<n.ueber.length; j++) html += '<li>'+n.ueber[j]+'</li>';
-    html += '</ul></div>';
+      html += '<div class="sym-section">';
+      html += '<div class="sym-title ueber">'+L.guideUeber+'</div>';
+      html += '<ul class="sym-list ueber">';
+      for (var j=0; j<n.ueber.length; j++) html += '<li>'+n.ueber[j]+'</li>';
+      html += '</ul></div>';
+    }
+
+
 
     html += '</div>'; // card-body
     html += '</div>'; // card
@@ -3274,7 +3337,8 @@ function filterGuide(type, btn) {
                (type === 'makro' && c.getAttribute('data-kat') === 'makro') ||
                (type === 'mikro' && (c.getAttribute('data-kat') === 'mikro' || c.getAttribute('data-kat') === 'ph')) ||
                (type === 'mobil' && c.getAttribute('data-mobil') === 'mobil') ||
-               (type === 'immobil' && c.getAttribute('data-mobil') === 'immobil');
+               (type === 'immobil' && c.getAttribute('data-mobil') === 'immobil') ||
+               (type === 'bio' && c.getAttribute('data-kat') === 'bio');
     c.style.display = show ? 'block' : 'none';
   }
 }
@@ -3827,7 +3891,6 @@ function calcForDoses(d, t) {
   var wCa=tap.Ca*t, wMg=tap.Mg*t, wK=tap.K*t, wN=tap.N*t, wS=tap.S*t, wSi=tap.Si*t;
   var N=wN, P=0, K=wK, Ca=wCa, Mg=wMg, S=wS, Si=wSi, Fe=0, Mn=0, Zn=0, B=0;
   var ECU=0, FBGU=0, BHU=0, PU=0, EXU=0, SONST=0;
-  var GLU=0, GLN=0, ASP=0, GLY=0, PRO=0, ARG=0, AMINO_SONST=0;
   for (var i=0; i<SALTS.length; i++) {
     var s=SALTS[i];
     if (!s.active) continue;
@@ -4099,6 +4162,12 @@ var LANG = {
     suchenPlaceholder: 'Suchen z.B. Calcium, Nitrate, Haifa...',
     eigeneSalze: 'EIGENE SALZE',
     salzHinzufugen: 'SALZ HINZUFUGEN',
+    labelName: 'Name',
+    labelUnit: 'Einheit',
+    labelPrice: 'Preis (EUR)',
+    labelPackage: 'Gebinde (g oder ml)',
+    labelDensity: 'Dichte (g/ml)',
+    labelSliderMax: 'Slider Max',
     wasserSpeichern: 'WASSER & SPEICHERN',
     wasserwerte: 'WASSERWERTE ANPASSEN',
     exportImport: 'EXPORT / IMPORT',
@@ -4136,6 +4205,7 @@ var LANG = {
     guideAll: 'ALLE',
     guideMobil: 'MOBIL',
     guideImmobil: 'IMMOBIL',
+    guideBio: 'BIO',
     guideOptimal: 'OPTIMALBEREICHE (DWC)',
     guideMangel: '↓ MANGEL-SYMPTOME',
     guideUeber: '↑ ÜBERSCHUSS-SYMPTOME',
@@ -4190,6 +4260,12 @@ var LANG = {
     suchenPlaceholder: 'Search e.g. Calcium, Nitrate, Haifa...',
     eigeneSalze: 'CUSTOM NUTRIENTS',
     salzHinzufugen: 'ADD NUTRIENT',
+    labelName: 'Name',
+    labelUnit: 'Unit',
+    labelPrice: 'Price (EUR)',
+    labelPackage: 'Package (g or ml)',
+    labelDensity: 'Density (g/ml)',
+    labelSliderMax: 'Slider Max',
     wasserSpeichern: 'WATER & SAVE',
     wasserwerte: 'ADJUST WATER VALUES',
     exportImport: 'EXPORT / IMPORT',
@@ -4227,6 +4303,7 @@ var LANG = {
     guideAll: 'ALL',
     guideMobil: 'MOBILE',
     guideImmobil: 'IMMOBILE',
+    guideBio: 'BIO',
     guideOptimal: 'OPTIMAL RANGES (DWC)',
     guideMangel: '↓ DEFICIENCY SYMPTOMS',
     guideUeber: '↑ EXCESS SYMPTOMS',
@@ -4331,6 +4408,20 @@ function applyLang() {
   if (dbSearch) dbSearch.placeholder = isEN ? 'Search e.g. Calcium, Nitrate, Haifa...' : 'Suchen z.B. Calcium, Nitrate, Haifa...';
   var dbNote = document.querySelector('#page-einstellungen .card-note');
   if (dbNote) dbNote.textContent = isEN ? '347 substances in database - search and add directly' : '347 Substanzen aus der Datenbank - Suchen und direkt hinzufugen';
+  // New elements
+  var extraAmino = document.querySelector('#new-salt-extra-amino')?.previousElementSibling;
+  var extraAminoLabel = document.querySelector('[id="new-salt-extra-amino"]');
+  if (extraAminoLabel && extraAminoLabel.previousElementSibling)
+    extraAminoLabel.previousElementSibling.textContent = isEN ? 'Other (mg/L)' : 'Sonstige (mg/L)';
+  var extraEcuLabel = document.querySelector('[id="new-salt-extra-ecu"]');
+  if (extraEcuLabel && extraEcuLabel.previousElementSibling)
+    extraEcuLabel.previousElementSibling.textContent = isEN ? 'Other (U/L)' : 'Sonstige (U/L)';
+  // Amino section title in custom form
+  var aminoFormTitle = document.querySelector('.card-title[style*="a78bfa"]');
+  if (aminoFormTitle) aminoFormTitle.textContent = isEN ? 'AMINO ACIDS (mg/g)' : 'AMINOSÄUREN (mg/g)';
+  // Translate placeholder
+  var saltLabelInput = document.getElementById('new-salt-label');
+  if (saltLabelInput) saltLabelInput.placeholder = isEN ? 'e.g. potassium nitrate' : 'z.B. Kalisalpeter';
   // Rebuild sliders and render to pick up new language
   buildSliders();
   render();
