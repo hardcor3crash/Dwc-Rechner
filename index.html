@@ -147,10 +147,10 @@ input[type=range]:disabled { opacity:0.35; }
 /* MICRO */
 
 /* TOTAL */
-.total-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; }
-.total-item { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid rgba(74,222,128,0.05); }
-.total-label { font-size:11px; color:#3d5c47; }
-.total-val { font-family:'Courier New',monospace; font-size:11px; color:#fbbf24; font-weight:600; }
+.total-grid { display:block; }
+.total-item { display:flex; justify-content:space-between; align-items:baseline; padding:5px 0; border-bottom:1px solid rgba(74,222,128,0.05); gap:6px; }
+.total-label { font-size:11px; color:#3d5c47; min-width:0; }
+.total-val { font-family:'Courier New',monospace; font-size:11px; color:#fbbf24; font-weight:600; white-space:nowrap; }
 
 /* WATER */
 .water-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
