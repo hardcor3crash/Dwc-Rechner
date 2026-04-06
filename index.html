@@ -1947,17 +1947,77 @@ function applySnapshot(data) {
       // Reset auswertung preset to first in list
       currentAwPreset = PRESET_LIST[0];
     }
-    // Restore custom salts (v3)
+    // Restore custom salts (v3/v4)
     if(data.version===3||data.version===4) {
-      // Remove existing custom salts
-      SALTS = SALTS.filter(function(s){return !s.custom;});
-      // Remove standard salts that were explicitly deleted (in old format only – don't remove new salts added after save)
-      if(data.saltKeys && data.saltKeys.length>0) {
-        SALTS = SALTS.filter(function(s){
-          // Keep if it's in saltKeys (applies to both standard and custom salts)
-          return data.saltKeys.indexOf(s.key) > -1;
-        });
+      // Map old hardcoded keys to DB labels
+      var legacyKeyMap = {
+        'caNO3':    'Haifa Cal AG Calciumnitrat',
+        'mgNO3':    'Magnesiumnitrat Mg(NO3)2',
+        'bittersalz':'EPSO Top Bittersalz MgSO4',
+        'mkp':      'Haifa MKP Monokaliumphosphat',
+        'sop':      'Haifa SOP Kaliumsulfat',
+        'kno3':     'Kaliumnitrat KNO3',
+        'kwg':      'Kaliwasserglas K2SiO3',
+        'h3po4':    'Phosphorsaeure 85%',
+        'hno3':     'Salpetersaeure 0.5M',
+        'wallup':   'Haifa Wall Up S',
+        'fetrilon': 'COMPO EXPERT Fetrilon Combi 1'
+      };
+
+      SALTS = [];
+      doses = {};
+      customSaltCounter = 0;
+
+      // Check if this is a legacy save with old standard salt keys
+      var hasLegacyKeys = data.saltKeys && data.saltKeys.some(function(k){ return legacyKeyMap[k]; });
+
+      if(hasLegacyKeys) {
+        // Rebuild from DB using legacy key order
+        var keysToLoad = data.saltKeys || [];
+        for(var i=0; i<keysToLoad.length; i++) {
+          var oldKey = keysToLoad[i];
+          var dbLabel = legacyKeyMap[oldKey];
+          if(dbLabel) {
+            // Find in DB
+            var dbEntry = null;
+            for(var j=0; j<SUBSTANCE_DB.length; j++) {
+              if(SUBSTANCE_DB[j].label === dbLabel) { dbEntry = SUBSTANCE_DB[j]; break; }
+            }
+            if(!dbEntry) continue;
+            customSaltCounter++;
+            var newKey = 'custom_' + customSaltCounter;
+            var newSalt = {
+              key:newKey, label:dbEntry.label, unit:dbEntry.unit,
+              min:0, max:dbEntry.sliderMax||2, origMax:dbEntry.sliderMax||2, step:dbEntry.step||0.001, val:0,
+              preis:(dbEntry.preis||0), menge:(dbEntry.menge||1000), active:true, custom:true, density:dbEntry.density||1,
+              N:dbEntry.N, NO3:(dbEntry.NO3||0), NH4:(dbEntry.NH4||0), Norg:(dbEntry.Norg||0), NUrea:(dbEntry.NUrea||0),
+              P:(dbEntry.P||0), K:(dbEntry.K||0), Ca:(dbEntry.Ca||0), Mg:(dbEntry.Mg||0), S:(dbEntry.S||0), Si:(dbEntry.Si||0),
+              Fe:(dbEntry.Fe||0), Mn:(dbEntry.Mn||0), Zn:(dbEntry.Zn||0), Cu:(dbEntry.Cu||0), B:(dbEntry.B||0),
+              ecu:0, fbgu:0, bhu:0, pu:0, exu:0, glu:0, gln:0, asp:0, gly:0, pro:0, arg:0, extra_ecu:0, extra_amino:0
+            };
+            SALTS.push(newSalt);
+            doses[newKey] = 0;
+            // Remap doses in presetStates
+            if(data.presetStates) {
+              for(var pname in data.presetStates) {
+                var ps = data.presetStates[pname];
+                if(ps && ps.doses && ps.doses[oldKey] !== undefined) {
+                  ps.doses[newKey] = ps.doses[oldKey];
+                  delete ps.doses[oldKey];
+                }
+                if(ps && ps.maxes && ps.maxes[oldKey] !== undefined) {
+                  ps.maxes[newKey] = ps.maxes[oldKey];
+                  delete ps.maxes[oldKey];
+                }
+              }
+            }
+            if(data.saltActive && data.saltActive[oldKey] !== undefined) {
+              data.saltActive[newKey] = data.saltActive[oldKey];
+            }
+          }
+        }
       }
+
       // Add saved custom salts
       if(data.customSalts && data.customSalts.length>0) {
         for(var i=0;i<data.customSalts.length;i++) {
@@ -1969,7 +2029,13 @@ function applySnapshot(data) {
           }
         }
       }
-      
+
+      // Non-legacy new format: saltKeys contains custom_ keys only
+      if(!hasLegacyKeys && data.saltKeys && data.saltKeys.length>0) {
+        SALTS = SALTS.filter(function(s){
+          return data.saltKeys.indexOf(s.key) > -1;
+        });
+      }
     }
     // Restore active states – salts NOT in saltActive but in saltKeys → active:false
     // This handles the case where standard salts were hidden and their state wasn't saved
