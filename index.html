@@ -478,35 +478,32 @@ select { background:#111916; border:1px solid #1a3d26; border-radius:10px; color
       <div><div class="water-label" style="color:#34d399;">Zn %</div><input class="water-input" id="new-salt-Zn" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#22d3ee;">Cu %</div><input class="water-input" id="new-salt-Cu" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#e879f9;">B %</div><input class="water-input" id="new-salt-B" type="number" min="0" max="100" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#67e8f9;">Mo %</div><input class="water-input" id="new-salt-Mo" type="number" min="0" max="100" step="0.001" placeholder="0"></div>
     </div>
     <div class="card-title" style="font-size:9px;margin-bottom:6px;color:#6b9e7a;">ENZYME (U/g)</div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:6px;">
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px;">
       <div><div class="water-label" style="color:#4ade80;">ECU</div><input class="water-input" id="new-salt-ecu" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#60a5fa;">FBGU</div><input class="water-input" id="new-salt-fbgu" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#c084fc;">BHU</div><input class="water-input" id="new-salt-bhu" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#fb923c;">PU</div><input class="water-input" id="new-salt-pu" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#f472b6;">EXU</div><input class="water-input" id="new-salt-exu" type="number" min="0" step="0.1" placeholder="0"></div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px;margin-top:-4px;">
-      <div style="grid-column:span 1"><div class="water-label" style="color:#94a3b8;">Sonstige (U/L)</div><input class="water-input" id="new-salt-extra-ecu" type="number" min="0" step="1" placeholder="0"></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
-      <div><div class="water-label" data-lang="labelPrice">Preis (EUR)</div><input class="water-input" id="new-salt-preis" type="number" min="0" step="0.01" placeholder="0.00"></div>
-      <div><div class="water-label" data-lang="labelPackage">Gebinde (g oder ml)</div><input class="water-input" id="new-salt-menge" type="number" min="1" step="1" value="1000"></div>
-      <div><div class="water-label" data-lang="labelDensity">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
-      <div><div class="water-label" data-lang="labelSliderMax">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="any" placeholder="auto"></div>
+      <div><div class="water-label" style="color:#94a3b8;">Sonst.</div><input class="water-input" id="new-salt-extra-ecu" type="number" min="0" step="0.1" placeholder="0"></div>
     </div>
     <div class="card-title" style="font-size:9px;margin-bottom:6px;color:#a78bfa;">AMINOSÄUREN (mg/g)</div>
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:6px;">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:10px;">
       <div><div class="water-label" style="color:#a78bfa;">Glu</div><input class="water-input" id="new-salt-glu" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#c4b5fd;">Gln</div><input class="water-input" id="new-salt-gln" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#818cf8;">Asp</div><input class="water-input" id="new-salt-asp" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#93c5fd;">Gly</div><input class="water-input" id="new-salt-gly" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#6ee7b7;">Pro</div><input class="water-input" id="new-salt-pro" type="number" min="0" step="0.1" placeholder="0"></div>
       <div><div class="water-label" style="color:#fcd34d;">Arg</div><input class="water-input" id="new-salt-arg" type="number" min="0" step="0.1" placeholder="0"></div>
+      <div><div class="water-label" style="color:#94a3b8;">Sonst.</div><input class="water-input" id="new-salt-extra-amino" type="number" min="0" step="0.1" placeholder="0"></div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px;">
-      <div style="grid-column:span 1"><div class="water-label">Sonstige (mg/L)</div><input class="water-input" id="new-salt-extra-amino" type="number" min="0" step="0.1" placeholder="0"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px;margin-top:8px;">
+      <div><div class="water-label" data-lang="labelPrice">Preis (EUR)</div><input class="water-input" id="new-salt-preis" type="number" min="0" step="0.01" placeholder="0.00"></div>
+      <div><div class="water-label" data-lang="labelPackage">Gebinde (g oder ml)</div><input class="water-input" id="new-salt-menge" type="number" min="1" step="1" value="1000"></div>
+      <div><div class="water-label" data-lang="labelDensity">Dichte (g/ml)</div><input class="water-input" id="new-salt-density" type="number" min="0.5" max="3" step="0.01" value="1.0"></div>
+      <div><div class="water-label" data-lang="labelSliderMax">Slider Max</div><input class="water-input" id="new-salt-max" type="number" min="0" step="any" placeholder="auto"></div>
     </div>
     <button class="btn-action" onclick="addCustomSalt()" style="border:1px solid #2D6A2D;color:#6ee7b7;" data-lang="salzHinzufugenBtn">+ SALZ HINZUFUGEN</button>
     <button class="btn-action" onclick="resetStandardSalts()" style="border:1px solid #374151;color:#6b7280;margin-left:8px;" data-lang="standardWiederherstellen">&#8635; STANDARD WIEDERHERSTELLEN</button>
@@ -1127,7 +1124,7 @@ function calc() {
   var t=tapPct;
   var wCa=tap.Ca*t, wMg=tap.Mg*t, wK=tap.K*t, wN=tap.N*t, wS=tap.S*t, wSi=tap.Si*t, wEC=tap.EC*t;
   
-  var N=wN, NO3=wN, NH4=0, Norg=0, NUrea=0, P=0, K=wK, Ca=wCa, Mg=wMg, S=wS, Si=wSi, Fe=0, Mn=0, Zn=0, Cu=0, B=0;
+  var N=wN, NO3=wN, NH4=0, Norg=0, NUrea=0, P=0, K=wK, Ca=wCa, Mg=wMg, S=wS, Si=wSi, Fe=0, Mn=0, Zn=0, Cu=0, B=0, Mo=0;
   var ECU=0, FBGU=0, BHU=0, PU=0, EXU=0, SONST=0;
   var GLU=0, GLN=0, ASP=0, GLY=0, PRO=0, ARG=0, AMINO_SONST=0;
 
@@ -1162,13 +1159,14 @@ function calc() {
     Zn += factor * (s.Zn || 0);
     Cu += factor * (s.Cu || 0);
     B  += factor * (s.B  || 0);
+    Mo += factor * (s.Mo || 0);
     ECU  += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.ecu  || 0);
     FBGU += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.fbgu || 0);
     BHU  += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.bhu  || 0);
     PU   += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.pu   || 0);
     EXU  += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.exu  || 0);
     // Sonstige Enzyme (U/L direkt)
-    if (d > 0) SONST += (s.extra_ecu || 0);
+    SONST += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.extra_ecu || 0);
     // Aminosäuren: dose × dichte × mg/g = mg/L
     var densityFactor = (s.unit==='ml/L' && s.density>1.001) ? s.density : 1;
     GLU  += d * densityFactor * (s.glu||0);
@@ -1177,7 +1175,7 @@ function calc() {
     GLY  += d * densityFactor * (s.gly||0);
     PRO  += d * densityFactor * (s.pro||0);
     ARG  += d * densityFactor * (s.arg||0);
-    if (d > 0) AMINO_SONST += (s.extra_amino||0);
+    AMINO_SONST += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.extra_amino || 0);
   }
 
   // EC - LMC Modell wie HydroBuddy (currentseparations.com/issues/18-3/cs18-3c.pdf)
@@ -1225,7 +1223,7 @@ function calc() {
                    lmc.Mn*(ecLiqMn/54.94)*2)*1e-3;
   var ec_lmc = Math.max(0, ec_solid + ec_liquid);
   var ec = ec_lmc + wEC;
-  return {N:N,NO3:NO3,NH4:NH4,Norg:Norg,NUrea:NUrea,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,ec:ec,ECU:ECU,FBGU:FBGU,BHU:BHU,PU:PU,EXU:EXU,SONST:SONST,GLU:GLU,GLN:GLN,ASP:ASP,GLY:GLY,PRO:PRO,ARG:ARG,AMINO_SONST:AMINO_SONST};
+  return {N:N,NO3:NO3,NH4:NH4,Norg:Norg,NUrea:NUrea,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,Mo:Mo,ec:ec,ECU:ECU,FBGU:FBGU,BHU:BHU,PU:PU,EXU:EXU,SONST:SONST,GLU:GLU,GLN:GLN,ASP:ASP,GLY:GLY,PRO:PRO,ARG:ARG,AMINO_SONST:AMINO_SONST};
 }
 
 function render() {
@@ -1322,7 +1320,8 @@ function render() {
     {label:isEN?'Manganese':'Mangan',   val:r.Mn, dec:2, color:'#34d399'},
     {label:isEN?'Zinc':'Zink',          val:r.Zn, dec:2, color:'#818cf8'},
     {label:isEN?'Copper':'Kupfer',      val:r.Cu, dec:2, color:'#fb923c'},
-    {label:isEN?'Boron':'Bor',          val:r.B,  dec:2, color:'#c084fc'}
+    {label:isEN?'Boron':'Bor',          val:r.B,  dec:2, color:'#c084fc'},
+    {label:isEN?'Molybdenum':'Molybdän',   val:r.Mo, dec:2, color:'#67e8f9'}
   ];
   var maxMikro = 0.01;
   for (var i=0; i<mikroData.length; i++) if (mikroData[i].val > maxMikro) maxMikro = mikroData[i].val;
@@ -1463,8 +1462,8 @@ function buildSliders() {
     html += '<div><div class="water-label">'+(isEN?'Unit':'Einheit')+'</div><select id="edit-unit-'+s.key+'" style="width:100%;background:#0f2919;border:1px solid #1a3d26;border-radius:4px;color:#4ade80;font-family:\'Courier New\',monospace;font-size:12px;padding:6px 8px;outline:none;"><option value="g/L"'+(s.unit==='g/L'?' selected':'')+'>g/L</option><option value="ml/L"'+(s.unit==='ml/L'?' selected':'')+'>ml/L</option></select></div>';
     html += '</div>';
     html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px;">';
-    var nuts=['NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
-    var nutColors={'NO3':'#4ade80','NH4':'#86efac','Norg':'#6b7280','NUrea':'#facc15','P':'#f97316','K':'#60a5fa','Ca':'#f472b6','Mg':'#a78bfa','S':'#facc15','Si':'#94a3b8','Fe':'#f87171','Mn':'#fb923c','Zn':'#34d399','Cu':'#22d3ee','B':'#e879f9'};
+    var nuts=['NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B','Mo'];
+    var nutColors={'NO3':'#4ade80','NH4':'#86efac','Norg':'#6b7280','NUrea':'#facc15','P':'#f97316','K':'#60a5fa','Ca':'#f472b6','Mg':'#a78bfa','S':'#facc15','Si':'#94a3b8','Fe':'#f87171','Mn':'#fb923c','Zn':'#34d399','Cu':'#22d3ee','B':'#e879f9','Mo':'#67e8f9'};
     for(var j=0;j<nuts.length;j++) {
       var n=nuts[j];
       var pct=Math.round(((s[n]||0)*100)*10000)/10000;
@@ -1472,14 +1471,8 @@ function buildSliders() {
       html += '<div><div class="water-label" style="color:'+nc+'">'+n+' %</div><input class="water-input" id="edit-'+n+'-'+s.key+'" type="number" min="0" max="100" step="0.01" value="'+pct+'"></div>';
     }
     html += '</div>';
-    html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:8px;">';
-    html += '<div><div class="water-label">'+(isEN?'Price (EUR)':'Preis (EUR)')+'</div><input class="water-input" id="edit-preis-'+s.key+'" type="number" min="0" step="0.01" value="'+(s.preis||0)+'"></div>';
-    html += '<div><div class="water-label">'+(isEN?'Package (g/ml)':'Gebinde (g/ml)')+'</div><input class="water-input" id="edit-menge-'+s.key+'" type="number" min="1" step="1" value="'+(s.menge||1000)+'"></div>';
-    html += '<div><div class="water-label">'+(isEN?'Density (g/ml)':'Dichte (g/ml)')+'</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
-    html += '<div><div class="water-label">'+(isEN?'Slider Max ('+s.unit+')':'Slider Max ('+s.unit+')')+'</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="any" value="'+s.max+'"></div>';
-    html += '</div>';
     html += '<div style="font-size:9px;letter-spacing:1px;color:#6b9e7a;margin-bottom:4px;">'+(isEN?'ENZYMES (U/g)':'ENZYME (U/g)')+'</div>';
-    html += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:6px;">';
+    html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:6px;">';
     var enzymes=['ecu','fbgu','bhu','pu','exu'];
     var enzymeColors={'ecu':'#4ade80','fbgu':'#60a5fa','bhu':'#c084fc','pu':'#fb923c','exu':'#f472b6'};
     for(var j=0;j<enzymes.length;j++) {
@@ -1487,12 +1480,10 @@ function buildSliders() {
       var ec=enzymeColors[en]||'#6b9e7a';
       html += '<div><div class="water-label" style="color:'+ec+'">'+en.toUpperCase()+'</div><input class="water-input" id="edit-'+en+'-'+s.key+'" type="number" min="0" step="0.1" value="'+(s[en]||0)+'"></div>';
     }
-    html += '</div>';
-    html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:8px;margin-top:-4px;">';
-    html += '<div><div class="water-label">'+(currentLang==='en'?'Other (U/L)':'Sonstige (U/L)')+'</div><input class="water-input" id="edit-extra-ecu-'+s.key+'" type="number" min="0" step="1" value="'+(s['extra_ecu']||0)+'"></div>';
+    html += '<div><div class="water-label" style="color:#94a3b8;">'+(isEN?'Other':'Sonst.')+'</div><input class="water-input" id="edit-extra-ecu-'+s.key+'" type="number" min="0" step="0.1" value="'+(s['extra_ecu']||0)+'"></div>';
     html += '</div>';
     html += '<div style="font-size:9px;letter-spacing:1px;color:#a78bfa;margin-bottom:4px;margin-top:4px;">'+(isEN?'AMINO ACIDS (mg/g)':'AMINOSÄUREN (mg/g)')+'</div>';
-    html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:6px;">';
+    html += '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px;">';
     var aminos=['glu','gln','asp','gly','pro','arg'];
     var aminoLabels=['Glu','Gln','Asp','Gly','Pro','Arg'];
     var aminoColors={'glu':'#a78bfa','gln':'#c4b5fd','asp':'#818cf8','gly':'#93c5fd','pro':'#6ee7b7','arg':'#fcd34d'};
@@ -1500,9 +1491,13 @@ function buildSliders() {
       var ac=aminoColors[aminos[j]]||'#a78bfa';
       html += '<div><div class="water-label" style="color:'+ac+'">'+aminoLabels[j]+'</div><input class="water-input" id="edit-'+aminos[j]+'-'+s.key+'" type="number" min="0" step="0.1" value="'+(s[aminos[j]]||0)+'"></div>';
     }
+    html += '<div><div class="water-label" style="color:#94a3b8;">'+(isEN?'Other':'Sonst.')+'</div><input class="water-input" id="edit-extra-amino-'+s.key+'" type="number" min="0" step="0.1" value="'+(s.extra_amino||0)+'"></div>';
     html += '</div>';
-    html += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:8px;">';
-    html += '<div><div class="water-label">'+(currentLang==='en'?'Other (mg/L)':'Sonstige (mg/L)')+'</div><input class="water-input" id="edit-extra-amino-'+s.key+'" type="number" min="0" step="0.1" value="'+(s.extra_amino||0)+'"></div>';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:8px;margin-top:6px;">';
+    html += '<div><div class="water-label">'+(isEN?'Price (EUR)':'Preis (EUR)')+'</div><input class="water-input" id="edit-preis-'+s.key+'" type="number" min="0" step="0.01" value="'+(s.preis||0)+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Package (g/ml)':'Gebinde (g/ml)')+'</div><input class="water-input" id="edit-menge-'+s.key+'" type="number" min="1" step="1" value="'+(s.menge||1000)+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Density (g/ml)':'Dichte (g/ml)')+'</div><input class="water-input" id="edit-density-'+s.key+'" type="number" min="0.5" max="3" step="0.01" value="'+(s.density||1.0)+'"></div>';
+    html += '<div><div class="water-label">'+(isEN?'Slider Max ('+s.unit+')':'Slider Max ('+s.unit+')')+'</div><input class="water-input" id="edit-max-'+s.key+'" type="number" min="0" step="any" value="'+s.max+'"></div>';
     html += '</div>';
     html += '<button onclick="saveSaltEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #2D6A2D;background:transparent;color:#4ade80;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;">'+(currentLang==='en'?'SAVE':'SPEICHERN')+'</button>';
     html += '<button onclick="toggleEdit(\''+s.key+'\')" style="padding:4px 12px;border-radius:4px;border:1px solid #374151;background:transparent;color:#6b7280;cursor:pointer;font-family:\'Courier New\',monospace;font-size:9px;letter-spacing:1px;margin-left:6px;">'+(currentLang==='en'?'CANCEL':'ABBRECHEN')+'</button>';
@@ -1660,7 +1655,7 @@ function saveSaltEdit(key) {
   salt.step = 0.001;
   var slEl2 = document.getElementById('slider-'+key);
   if (slEl2) slEl2.step = 0.001;
-  var nuts=['NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B'];
+  var nuts=['NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B','Mo'];
   for(var j=0;j<nuts.length;j++) {
     var n=nuts[j];
     salt[n] = (parseFloat(document.getElementById('edit-'+n+'-'+key).value)||0)/100;
@@ -1782,7 +1777,7 @@ function addCustomSalt() {
   }
 
   // Reset form
-  var fields = ['label','NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B','ecu','fbgu','bhu','pu','exu','extra-ecu','glu','gln','asp','gly','pro','arg','extra-amino','preis','menge','density','max'];
+  var fields = ['label','NO3','NH4','Norg','NUrea','P','K','Ca','Mg','S','Si','Fe','Mn','Zn','Cu','B','Mo','ecu','fbgu','bhu','pu','exu','extra-ecu','glu','gln','asp','gly','pro','arg','extra-amino','preis','menge','density','max'];
   for(var i=0;i<fields.length;i++) {
     var el = document.getElementById('new-salt-'+fields[i]);
     if(el) el.value = fields[i]==='menge'?'1000':'';
@@ -1993,7 +1988,7 @@ function applySnapshot(data) {
               N:dbEntry.N, NO3:(dbEntry.NO3||0), NH4:(dbEntry.NH4||0), Norg:(dbEntry.Norg||0), NUrea:(dbEntry.NUrea||0),
               P:(dbEntry.P||0), K:(dbEntry.K||0), Ca:(dbEntry.Ca||0), Mg:(dbEntry.Mg||0), S:(dbEntry.S||0), Si:(dbEntry.Si||0),
               Fe:(dbEntry.Fe||0), Mn:(dbEntry.Mn||0), Zn:(dbEntry.Zn||0), Cu:(dbEntry.Cu||0), B:(dbEntry.B||0),
-              ecu:0, fbgu:0, bhu:0, pu:0, exu:0, glu:0, gln:0, asp:0, gly:0, pro:0, arg:0, extra_ecu:0, extra_amino:0
+              Mo:0, ecu:0, fbgu:0, bhu:0, pu:0, exu:0, glu:0, gln:0, asp:0, gly:0, pro:0, arg:0, extra_ecu:0, extra_amino:0
             };
             SALTS.push(newSalt);
             doses[newKey] = 0;
@@ -2234,7 +2229,8 @@ var OPT_NUTRIENTS = [
   { key:'Mn', label:'Mangan',     label_en:'Manganese',  color:'#34d399', min:0, max:5,   step:0.1,  dec:1, val:0, w:1   },
   { key:'Zn', label:'Zink',       label_en:'Zinc',       color:'#818cf8', min:0, max:3,   step:0.1,  dec:1, val:0, w:1   },
   { key:'Cu', label:'Kupfer',     label_en:'Copper',     color:'#fb923c', min:0, max:2,   step:0.001,dec:2, val:0, w:1   },
-  { key:'B',  label:'Bor',        label_en:'Boron',      color:'#c084fc', min:0, max:3,   step:0.1,  dec:1, val:0, w:1   }
+  { key:'B',  label:'Bor',        label_en:'Boron',      color:'#c084fc', min:0, max:3,   step:0.1,  dec:1, val:0, w:1   },
+  { key:'Mo', label:'Molybdän',   label_en:'Molybdenum', color:'#67e8f9', min:0, max:0.1, step:0.001,dec:3, val:0, w:1   }
 ];
 
 var optVol = 50;
@@ -3263,57 +3259,57 @@ var SUBSTANCE_DB = [
   {label:"Phosphorsaeure 85%",formula:"H3PO4",unit:"ml/L",density:1.685,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0.44629,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:0.3,preis:18.90,menge:1000,step:0.001},
   {label:"Salpetersaeure 0.5M",formula:"HNO3 0.5M",unit:"ml/L",density:1.02,NO3:0.007005,NH4:0,NUrea:0,Norg:0,N:0.007005,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:5.0,preis:22.97,menge:2500,step:0.001},
   {label:"Haifa Wall Up S",formula:"Si+Fe",unit:"g/L",density:1.0,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0.20,Fe:0.05,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:0.15,preis:51.05,menge:1000,step:0.001},
-  {label:"COMPO EXPERT Fetrilon Combi 1",formula:"Micros",unit:"g/L",density:1.0,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0.019906,S:0,Si:0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:0.06,preis:29.26,menge:1000,step:0.001},
+  {label:"COMPO EXPERT Fetrilon Combi 1",formula:"Micros",unit:"g/L",density:1.0,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0.019906,S:0,Si:0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:0.06,preis:29.26,menge:1000,step:0.001,Mo:0.001},
   {label:"Haifa Cal AG Calciumnitrat",formula:"15-0-0+26CaO",unit:"g/L",density:1.0,NO3:0.138,NH4:0.012,NUrea:0,Norg:0,N:0.15,P:0,K:0,Ca:0.18582,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:1.5,preis:23.07,menge:25000,step:0.001},
   {label:"Magnesiumnitrat Mg(NO3)2",formula:"11-0-0+16MgO",unit:"g/L",density:1.0,NO3:0.11,NH4:0,NUrea:0,Norg:0,N:0.11,P:0,K:0,Ca:0,Mg:0.096516,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:0.8,preis:29.67,menge:25000,step:0.001},
   {label:"Haifa Wall Up S",formula:"Si+Fe",unit:"g/L",density:1.0,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0.20,Fe:0.05,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,sliderMax:0.15,preis:51.05,menge:1000,step:0.001},
-{label:"COMPO EXPERT Hakaphos Rot",formula:"8-12-24(+4)",unit:"g/L",density:1,NO3:0.03,NH4:0.05,NUrea:0,Norg:0,N:0.08,P:0.05237,K:0.199235,Ca:0,Mg:0.024121,S:0.124154,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Blau",formula:"15-10-15(+2)",unit:"g/L",density:1,NO3:0.04,NH4:0.11,NUrea:0,Norg:0,N:0.15,P:0.043642,K:0.124522,Ca:0,Mg:0.012061,S:0.120149,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Grün",formula:"20-5-10(+2)",unit:"g/L",density:1,NO3:0.07,NH4:0.13,NUrea:0,Norg:0,N:0.2,P:0.021821,K:0.083015,Ca:0,Mg:0.012061,S:0.108134,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Gelb",formula:"20-0-16(+1)",unit:"g/L",density:1,NO3:0.09,NH4:0.11,NUrea:0,Norg:0,N:0.2,P:0,K:0.132824,Ca:0,Mg:0.00603,S:0.088109,Si:0,Fe:0.00075,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+{label:"COMPO EXPERT Hakaphos Rot",formula:"8-12-24(+4)",unit:"g/L",density:1,NO3:0.03,NH4:0.05,NUrea:0,Norg:0,N:0.08,P:0.05237,K:0.199235,Ca:0,Mg:0.024121,S:0.124154,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00003},
+  {label:"COMPO EXPERT Hakaphos Blau",formula:"15-10-15(+2)",unit:"g/L",density:1,NO3:0.04,NH4:0.11,NUrea:0,Norg:0,N:0.15,P:0.043642,K:0.124522,Ca:0,Mg:0.012061,S:0.120149,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
+  {label:"COMPO EXPERT Hakaphos Grün",formula:"20-5-10(+2)",unit:"g/L",density:1,NO3:0.07,NH4:0.13,NUrea:0,Norg:0,N:0.2,P:0.021821,K:0.083015,Ca:0,Mg:0.012061,S:0.108134,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
+  {label:"COMPO EXPERT Hakaphos Gelb",formula:"20-0-16(+1)",unit:"g/L",density:1,NO3:0.09,NH4:0.11,NUrea:0,Norg:0,N:0.2,P:0,K:0.132824,Ca:0,Mg:0.00603,S:0.088109,Si:0,Fe:0.00075,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
   {label:"COMPO EXPERT Hakaphos Azerka",formula:"20-7-10(+3)",unit:"g/L",density:1,NO3:0.08,NH4:0.12,NUrea:0,Norg:0,N:0.2,P:0.030549,K:0.083015,Ca:0,Mg:0.018091,S:0.036045,Si:0,Fe:0.00075,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Amarillo",formula:"17-5-19",unit:"g/L",density:1,NO3:0.08,NH4:0.09,NUrea:0,Norg:0,N:0.17,P:0.021821,K:0.157728,Ca:0,Mg:0,S:0.092114,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"COMPO EXPERT Hakaphos Amarillo",formula:"17-5-19",unit:"g/L",density:1,NO3:0.08,NH4:0.09,NUrea:0,Norg:0,N:0.17,P:0.021821,K:0.157728,Ca:0,Mg:0,S:0.092114,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
   {label:"COMPO EXPERT Hakaphos Naranja",formula:"15-5-30(+2)",unit:"g/L",density:1,NO3:0.1,NH4:0.05,NUrea:0,Norg:0,N:0.15,P:0.021821,K:0.249044,Ca:0,Mg:0.012061,S:0.04005,Si:0,Fe:0.0005,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Basis 2",formula:"3-9-40(+4)",unit:"g/L",density:1,NO3:0.03,NH4:0,NUrea:0,Norg:0,N:0.03,P:0.039278,K:0.332059,Ca:0,Mg:0.024121,S:0,Si:0,Fe:0.0015,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Basis 3",formula:"3-15-36(+4)",unit:"g/L",density:1,NO3:0.03,NH4:0,NUrea:0,Norg:0,N:0.03,P:0.065463,K:0.298853,Ca:0,Mg:0.024121,S:0,Si:0,Fe:0.002,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Soft Spezial",formula:"16-8-22(+3)",unit:"g/L",density:1,NO3:0.1,NH4:0.06,NUrea:0,Norg:0,N:0.16,P:0.034914,K:0.182632,Ca:0,Mg:0.018091,S:0.050062,Si:0,Fe:0.0015,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.00025,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Soft Ultra",formula:"18-8-18(+3)",unit:"g/L",density:1,NO3:0.1,NH4:0.08,NUrea:0,Norg:0,N:0.18,P:0.034914,K:0.149426,Ca:0,Mg:0.018091,S:0.026032,Si:0,Fe:0.001,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"COMPO EXPERT Hakaphos Basis 2",formula:"3-9-40(+4)",unit:"g/L",density:1,NO3:0.03,NH4:0,NUrea:0,Norg:0,N:0.03,P:0.039278,K:0.332059,Ca:0,Mg:0.024121,S:0,Si:0,Fe:0.0015,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
+  {label:"COMPO EXPERT Hakaphos Basis 3",formula:"3-15-36(+4)",unit:"g/L",density:1,NO3:0.03,NH4:0,NUrea:0,Norg:0,N:0.03,P:0.065463,K:0.298853,Ca:0,Mg:0.024121,S:0,Si:0,Fe:0.002,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
+  {label:"COMPO EXPERT Hakaphos Soft Spezial",formula:"16-8-22(+3)",unit:"g/L",density:1,NO3:0.1,NH4:0.06,NUrea:0,Norg:0,N:0.16,P:0.034914,K:0.182632,Ca:0,Mg:0.018091,S:0.050062,Si:0,Fe:0.0015,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.00025,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.000025},
+  {label:"COMPO EXPERT Hakaphos Soft Ultra",formula:"18-8-18(+3)",unit:"g/L",density:1,NO3:0.1,NH4:0.08,NUrea:0,Norg:0,N:0.18,P:0.034914,K:0.149426,Ca:0,Mg:0.018091,S:0.026032,Si:0,Fe:0.001,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
   {label:"COMPO EXPERT Hakaphos Soft Elite",formula:"24-6-12(+2)",unit:"g/L",density:1,NO3:0.13,NH4:0.11,NUrea:0,Norg:0,N:0.24,P:0.026185,K:0.099618,Ca:0,Mg:0.012061,S:0.01602,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0002,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Soft Novell",formula:"11-11-30(+3)",unit:"g/L",density:1,NO3:0.07,NH4:0.04,NUrea:0,Norg:0,N:0.11,P:0.048006,K:0.249044,Ca:0,Mg:0.018091,S:0.050062,Si:0,Fe:0.001,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"COMPO EXPERT Hakaphos Soft Novell",formula:"11-11-30(+3)",unit:"g/L",density:1,NO3:0.07,NH4:0.04,NUrea:0,Norg:0,N:0.11,P:0.048006,K:0.249044,Ca:0,Mg:0.018091,S:0.050062,Si:0,Fe:0.001,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
   {label:"COMPO EXPERT Hakaphos Soft Plus",formula:"14-6-24(+3)",unit:"g/L",density:1,NO3:0.076,NH4:0.064,NUrea:0,Norg:0,N:0.14,P:0.026185,K:0.199235,Ca:0,Mg:0.018091,S:0.030037,Si:0,Fe:0.00075,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"COMPO EXPERT Hakaphos Basis 5",formula:"5-20-30(+5)",unit:"g/L",density:1,NO3:0.04,NH4:0.01,NUrea:0,Norg:0,N:0.05,P:0.087284,K:0.249044,Ca:0,Mg:0.030152,S:0.02403,Si:0,Fe:0.002,Mn:0.001,Zn:0.00025,Cu:0.0006,B:0.0003,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"COMPO EXPERT Hakaphos Basis 5",formula:"5-20-30(+5)",unit:"g/L",density:1,NO3:0.04,NH4:0.01,NUrea:0,Norg:0,N:0.05,P:0.087284,K:0.249044,Ca:0,Mg:0.030152,S:0.02403,Si:0,Fe:0.002,Mn:0.001,Zn:0.00025,Cu:0.0006,B:0.0003,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00003},
   {label:"Compo Expert Hakaphos Spezial",formula:"16-8-22(+3)",unit:"g/L",density:1.0,NO3:0.097,NH4:0.063,N:0.16,P:0.034912,K:0.182622,Ca:0.0,Mg:0.0181,S:0.04,Si:0.0,Fe:0.0015,Mn:0.0005,Zn:0.00015,Cu:0.0002,B:0.0002},
-  {label:"ICL Peters Professional Combi Sol",formula:"6-18-36+3MgO+TE",unit:"g/L",density:1.0,NO3:0.06,NH4:0.0,N:0.06,P:0.078552,K:0.298836,Ca:0.0,Mg:0.0181,S:0.0,Si:0.0,Fe:0.0025,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Professional Blossom Booster",formula:"10-30-20+2MgO+TE",unit:"g/L",density:1.0,NO3:0.052,NH4:0.048,N:0.1,P:0.13092,K:0.16602,Ca:0.0,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Professional Plant Starter",formula:"10-52-10+TE",unit:"g/L",density:1.0,NO3:0.076,NH4:0.024,N:0.1,P:0.226928,K:0.08301,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Professional Grow-Mix",formula:"21-7-21+3MgO+TE",unit:"g/L",density:1.0,NO3:0.063,NH4:0.147,N:0.21,P:0.030548,K:0.174321,Ca:0.0,Mg:0.0181,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Professional Allrounder",formula:"20-20-20+TE",unit:"g/L",density:1.0,NO3:0.045,NH4:0.155,N:0.2,P:0.08728,K:0.16602,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Professional Foliar Feed",formula:"27-15-12+TE",unit:"g/L",density:1.0,NO3:0.036,NH4:0.234,N:0.27,P:0.06546,K:0.099612,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0015,Mn:0.0007,Zn:0.0007,Cu:0.0007,B:0.0003},
-  {label:"ICL Peters Excel CalMag Finisher",formula:"14-5-21+7CaO+2MgO+TE",unit:"g/L",density:1.0,NO3:0.116,NH4:0.024,N:0.14,P:0.02182,K:0.174321,Ca:0.05,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Excel CalMag Grower",formula:"15-5-15+7CaO+3MgO+TE",unit:"g/L",density:1.0,NO3:0.115,NH4:0.035,N:0.15,P:0.02182,K:0.124515,Ca:0.05,Mg:0.0181,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Excel Hard Water Finisher",formula:"15-10-26+2MgO+TE",unit:"g/L",density:1.0,NO3:0.1,NH4:0.05,N:0.15,P:0.04364,K:0.215826,Ca:0.0,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Excel Extra Acidifier",formula:"15-14-25+TE",unit:"g/L",density:1.0,NO3:0.087,NH4:0.063,N:0.15,P:0.061096,K:0.207525,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Peters Excel Hard Water Grow Special",formula:"18-10-18+2MgO+TE",unit:"g/L",density:1.0,NO3:0.103,NH4:0.077,N:0.18,P:0.04364,K:0.149418,Ca:0.0,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
+  {label:"ICL Peters Professional Combi Sol",formula:"6-18-36+3MgO+TE",unit:"g/L",density:1.0,NO3:0.06,NH4:0.0,N:0.06,P:0.078552,K:0.298836,Ca:0.0,Mg:0.0181,S:0.0,Si:0.0,Fe:0.0025,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.00001},
+  {label:"ICL Peters Professional Blossom Booster",formula:"10-30-20+2MgO+TE",unit:"g/L",density:1.0,NO3:0.052,NH4:0.048,N:0.1,P:0.13092,K:0.16602,Ca:0.0,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Professional Plant Starter",formula:"10-52-10+TE",unit:"g/L",density:1.0,NO3:0.076,NH4:0.024,N:0.1,P:0.226928,K:0.08301,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Professional Grow-Mix",formula:"21-7-21+3MgO+TE",unit:"g/L",density:1.0,NO3:0.063,NH4:0.147,N:0.21,P:0.030548,K:0.174321,Ca:0.0,Mg:0.0181,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Professional Allrounder",formula:"20-20-20+TE",unit:"g/L",density:1.0,NO3:0.045,NH4:0.155,N:0.2,P:0.08728,K:0.16602,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Professional Foliar Feed",formula:"27-15-12+TE",unit:"g/L",density:1.0,NO3:0.036,NH4:0.234,N:0.27,P:0.06546,K:0.099612,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0015,Mn:0.0007,Zn:0.0007,Cu:0.0007,B:0.0003,Mo:0.00001},
+  {label:"ICL Peters Excel CalMag Finisher",formula:"14-5-21+7CaO+2MgO+TE",unit:"g/L",density:1.0,NO3:0.116,NH4:0.024,N:0.14,P:0.02182,K:0.174321,Ca:0.05,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Excel CalMag Grower",formula:"15-5-15+7CaO+3MgO+TE",unit:"g/L",density:1.0,NO3:0.115,NH4:0.035,N:0.15,P:0.02182,K:0.124515,Ca:0.05,Mg:0.0181,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Excel Hard Water Finisher",formula:"15-10-26+2MgO+TE",unit:"g/L",density:1.0,NO3:0.1,NH4:0.05,N:0.15,P:0.04364,K:0.215826,Ca:0.0,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Excel Extra Acidifier",formula:"15-14-25+TE",unit:"g/L",density:1.0,NO3:0.087,NH4:0.063,N:0.15,P:0.061096,K:0.207525,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Peters Excel Hard Water Grow Special",formula:"18-10-18+2MgO+TE",unit:"g/L",density:1.0,NO3:0.103,NH4:0.077,N:0.18,P:0.04364,K:0.149418,Ca:0.0,Mg:0.0121,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
   {label:"Fetrilon Combi 1 (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.033,N:0.033,P:0.0,K:0.0,Ca:0.0,Mg:0.019899,S:0.0,Si:0.0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005},
-  {label:"Excello Basis (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.22308,Mg:0.061506,S:0.03,Si:0.0,Fe:0.0025,Mn:0.0025,Zn:0.025,Cu:0.025,B:0.0025},
+  {label:"Excello Basis (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.22308,Mg:0.061506,S:0.03,Si:0.0,Fe:0.0025,Mn:0.0025,Zn:0.025,Cu:0.025,B:0.0025,Mo:0.00004},
   {label:"EPSO Top Bittersalz Magnesiumsulfat",formula:"16-13",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.09648,S:0.13,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0,sliderMax:0.6,preis:19.33,menge:25000,step:0.001},
   {label:"Terra Aquatica TriPart Grow",formula:"3-1-6+(0.8)",unit:"ml/L",density:1.1,NO3:0.02,NH4:0.01,N:0.03,P:0.004364,K:0.049806,Ca:0.0,Mg:0.004824,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Terra Aquatica TriPart Bloom",formula:"0-5-4+(3-5)",unit:"ml/L",density:1.1,NO3:0.0,NH4:0.0,N:0.0,P:0.02182,K:0.033204,Ca:0.0,Mg:0.01809,S:0.02,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Plagron CalMag Pro",formula:"5-0-0",unit:"ml/L",density:1.26,NO3:0.051,NH4:0.0,N:0.051,P:0.0,K:0.0,Ca:0.040755,Mg:0.019899,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Plagron Hydro Roots",formula:"0-20-0",unit:"ml/L",density:1.34,NO3:0.0,NH4:0.0,N:0.0,P:0.089462,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.00023},
+  {label:"Plagron Hydro Roots",formula:"0-20-0",unit:"ml/L",density:1.34,NO3:0.0,NH4:0.0,N:0.0,P:0.089462,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.00023,Mo:0.00007},
   {label:"Plagron Power Roots",formula:"0-0-2",unit:"ml/L",density:1.05,NO3:0.003,NH4:0.0,N:0.003,P:0.0,K:0.014112,Ca:0.0,Mg:0.0,S:0.0033,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Terra Aquatica Silica",formula:"SiO2+CaO+Mg+Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.096239,Mg:0.017788,S:0.0015,Si:0.201412,Fe:0.024,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Plagron Hydro A",formula:"3-0-1",unit:"ml/L",density:1.18,NO3:0.032,NH4:0.0,N:0.032,P:0.0,K:0.010791,Ca:0.042185,Mg:0.002412,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Plagron Hydro B",formula:"1-3-6",unit:"ml/L",density:1.16,NO3:0.011,NH4:0.0,N:0.011,P:0.013965,K:0.047316,Ca:0.0,Mg:0.008442,S:0.0112,Si:0.0,Fe:0.00044,Mn:0.00034,Zn:0.0001,Cu:4e-05,B:7e-05},
+  {label:"Plagron Hydro B",formula:"1-3-6",unit:"ml/L",density:1.16,NO3:0.011,NH4:0.0,N:0.011,P:0.013965,K:0.047316,Ca:0.0,Mg:0.008442,S:0.0112,Si:0.0,Fe:0.00044,Mn:0.00034,Zn:0.0001,Cu:4e-05,B:7e-05,Mo:0.000007},
   {label:"Plagron PK 13-14",formula:"0-13-14",unit:"ml/L",density:1.28,NO3:0.0,NH4:0.0,N:0.0,P:0.058478,K:0.119534,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Haifa Poly-Feed Allegro",formula:"20-5-10(+2)+ME",unit:"g/L",density:1.0,NO3:0.071,NH4:0.131,N:0.202,P:0.02182,K:0.08301,Ca:0.0,Mg:0.01206,S:0.1056,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Libretto",formula:"15-10-15(+2)+ME",unit:"g/L",density:1.0,NO3:0.042,NH4:0.108,N:0.15,P:0.04364,K:0.124515,Ca:0.0,Mg:0.01206,S:0.1188,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Aria",formula:"23-5-11(+2)+ME",unit:"g/L",density:1.0,NO3:0.114,NH4:0.116,N:0.23,P:0.02182,K:0.091311,Ca:0.0,Mg:0.01206,S:0.0444,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Ballade",formula:"12-12-36(+1)+ME",unit:"g/L",density:1.0,NO3:0.02,NH4:0.1,N:0.12,P:0.052368,K:0.298836,Ca:0.0,Mg:0.00603,S:0.0076,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Concerto",formula:"18-18-18+(2)+ME",unit:"g/L",density:1.0,NO3:0.08,NH4:0.096,N:0.176,P:0.078552,K:0.149418,Ca:0.0,Mg:0.01206,S:0.0116,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Polka",formula:"9-10-38(+3)+ME",unit:"g/L",density:1.0,NO3:0.091,NH4:0.0,N:0.091,P:0.04364,K:0.315438,Ca:0.0,Mg:0.01809,S:0.0252,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00035,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Sonate",formula:"15-5-30(+3)+ME",unit:"g/L",density:1.0,NO3:0.112,NH4:0.038,N:0.15,P:0.02182,K:0.24903,Ca:0.0,Mg:0.01809,S:0.0224,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Haifa Poly-Feed Tardo",formula:"8-12-24(+4)+ME",unit:"g/L",density:1.0,NO3:0.02,NH4:0.06,N:0.08,P:0.052368,K:0.199224,Ca:0.0,Mg:0.02412,S:0.1352,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025},
+  {label:"Haifa Poly-Feed Allegro",formula:"20-5-10(+2)+ME",unit:"g/L",density:1.0,NO3:0.071,NH4:0.131,N:0.202,P:0.02182,K:0.08301,Ca:0.0,Mg:0.01206,S:0.1056,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
+  {label:"Haifa Poly-Feed Libretto",formula:"15-10-15(+2)+ME",unit:"g/L",density:1.0,NO3:0.042,NH4:0.108,N:0.15,P:0.04364,K:0.124515,Ca:0.0,Mg:0.01206,S:0.1188,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
+  {label:"Haifa Poly-Feed Aria",formula:"23-5-11(+2)+ME",unit:"g/L",density:1.0,NO3:0.114,NH4:0.116,N:0.23,P:0.02182,K:0.091311,Ca:0.0,Mg:0.01206,S:0.0444,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
+  {label:"Haifa Poly-Feed Ballade",formula:"12-12-36(+1)+ME",unit:"g/L",density:1.0,NO3:0.02,NH4:0.1,N:0.12,P:0.052368,K:0.298836,Ca:0.0,Mg:0.00603,S:0.0076,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
+  {label:"Haifa Poly-Feed Concerto",formula:"18-18-18+(2)+ME",unit:"g/L",density:1.0,NO3:0.08,NH4:0.096,N:0.176,P:0.078552,K:0.149418,Ca:0.0,Mg:0.01206,S:0.0116,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
+  {label:"Haifa Poly-Feed Polka",formula:"9-10-38(+3)+ME",unit:"g/L",density:1.0,NO3:0.091,NH4:0.0,N:0.091,P:0.04364,K:0.315438,Ca:0.0,Mg:0.01809,S:0.0252,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00035,Cu:0.0001,B:0.00025,Mo:0.000035},
+  {label:"Haifa Poly-Feed Sonate",formula:"15-5-30(+3)+ME",unit:"g/L",density:1.0,NO3:0.112,NH4:0.038,N:0.15,P:0.02182,K:0.24903,Ca:0.0,Mg:0.01809,S:0.0224,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
+  {label:"Haifa Poly-Feed Tardo",formula:"8-12-24(+4)+ME",unit:"g/L",density:1.0,NO3:0.02,NH4:0.06,N:0.08,P:0.052368,K:0.199224,Ca:0.0,Mg:0.02412,S:0.1352,Si:0.0,Fe:0.0001,Mn:0.0005,Zn:0.00025,Cu:0.0001,B:0.00025,Mo:0.000025},
   {label:"Yara KRISTALON BRAUN",formula:"3-11-38 (+4+11)",unit:"g/L",density:1.0,NO3:0.03,NH4:0.0,N:0.03,P:0.048004,K:0.315438,Ca:0.0,Mg:0.02412,S:0.11,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
   {label:"Yara KRISTALON ORANGE",formula:"6-12-36 (+3+8)",unit:"g/L",density:1.0,NO3:0.045,NH4:0.015,N:0.06,P:0.052368,K:0.298836,Ca:0.0,Mg:0.01809,S:0.08,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
   {label:"Yara KRISTALON ROT",formula:"12-12-36 (+1+1)",unit:"g/L",density:1.0,NO3:0.101,NH4:0.019,N:0.12,P:0.052368,K:0.298836,Ca:0.0,Mg:0.00603,S:0.01,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
@@ -3321,19 +3317,19 @@ var SUBSTANCE_DB = [
   {label:"Yara KRISTALON BLAUMARKE",formula:"19-6-20(+3+3)",unit:"g/L",density:1.0,NO3:0.079,NH4:0.081,N:0.16,P:0.026184,K:0.16602,Ca:0.0,Mg:0.01809,S:0.03,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
   {label:"Yara KRISTALON AZUR",formula:"20+5+10 (+2+10)",unit:"g/L",density:1.0,NO3:0.079,NH4:0.121,N:0.2,P:0.02182,K:0.08301,Ca:0.0,Mg:0.01206,S:0.1,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
   {label:"Yara KRISTALON AZUR SPEZIAL",formula:"16-11-16(+4)",unit:"g/L",density:1.0,NO3:0.091,NH4:0.069,N:0.16,P:0.048004,K:0.132816,Ca:0.0,Mg:0.02412,S:0.05,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"ICL Peters Professional Pot Plant Special",formula:"15-11-29+TE",unit:"g/L",density:1.0,NO3:0.086,NH4:0.02,N:0.106,P:0.048004,K:0.240729,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002},
-  {label:"ICL Agrolution pHLow 114",formula:"10-10-40+TE",unit:"g/L",density:1.0,NO3:0.1,NH4:0.0,N:0.1,P:0.04364,K:0.33204,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0016,Mn:0.0006,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"ICL Solinure GT 4",formula:"14-6-23+2MgO+TE",unit:"g/L",density:1.0,NO3:0.061,NH4:0.079,N:0.14,P:0.026184,K:0.190923,Ca:0.0,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0004,Mn:0.0001,Zn:2e-05,Cu:2e-05,B:0.0001},
-  {label:"ICL Solinure ROT",formula:"12-12-36+TE",unit:"g/L",density:1.0,NO3:0.101,NH4:0.019,N:0.12,P:0.052368,K:0.298836,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.0005},
-  {label:"ICL Solinure GTR",formula:"9-0-41+2MgO+TE",unit:"g/L",density:1.0,NO3:0.083,NH4:0.007,N:0.09,P:0.0,K:0.340341,Ca:0.0,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0004,Mn:0.0001,Zn:2e-05,Cu:2e-05,B:0.0001},
-  {label:"ICL Solinure Orange",formula:"6-12-36+3MgO+TE",unit:"g/L",density:1.0,NO3:0.045,NH4:0.015,N:0.06,P:0.052368,K:0.298836,Ca:0.0,Mg:0.01809,S:0.0,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.0002},
+  {label:"ICL Peters Professional Pot Plant Special",formula:"15-11-29+TE",unit:"g/L",density:1.0,NO3:0.086,NH4:0.02,N:0.106,P:0.048004,K:0.240729,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0006,Zn:0.00015,Cu:0.00015,B:0.0002,Mo:0.0001},
+  {label:"ICL Agrolution pHLow 114",formula:"10-10-40+TE",unit:"g/L",density:1.0,NO3:0.1,NH4:0.0,N:0.1,P:0.04364,K:0.33204,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0016,Mn:0.0006,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00006},
+  {label:"ICL Solinure GT 4",formula:"14-6-23+2MgO+TE",unit:"g/L",density:1.0,NO3:0.061,NH4:0.079,N:0.14,P:0.026184,K:0.190923,Ca:0.0,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0004,Mn:0.0001,Zn:2e-05,Cu:2e-05,B:0.0001,Mo:0.00002},
+  {label:"ICL Solinure ROT",formula:"12-12-36+TE",unit:"g/L",density:1.0,NO3:0.101,NH4:0.019,N:0.12,P:0.052368,K:0.298836,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.0005,Mo:0.00004},
+  {label:"ICL Solinure GTR",formula:"9-0-41+2MgO+TE",unit:"g/L",density:1.0,NO3:0.083,NH4:0.007,N:0.09,P:0.0,K:0.340341,Ca:0.0,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0004,Mn:0.0001,Zn:2e-05,Cu:2e-05,B:0.0001,Mo:0.00002},
+  {label:"ICL Solinure Orange",formula:"6-12-36+3MgO+TE",unit:"g/L",density:1.0,NO3:0.045,NH4:0.015,N:0.06,P:0.052368,K:0.298836,Ca:0.0,Mg:0.01809,S:0.0,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.0002,Mo:0.00004},
   {label:"ICL  Universol Yellow",formula:"12-30-12+2.2MgO+TE",unit:"g/L",density:1.0,NO3:0.031,NH4:0.089,N:0.12,P:0.13092,K:0.099612,Ca:0.0,Mg:0.013266,S:0.0,Si:0.0,Fe:0.001,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001},
   {label:"ICL Universol Violett",formula:"10-10-30+3.3MgO+TE",unit:"g/L",density:1.0,NO3:0.068,NH4:0.032,N:0.1,P:0.04364,K:0.24903,Ca:0.0,Mg:0.019899,S:0.0624,Si:0.0,Fe:0.001,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001},
   {label:"ICL Universol Orange",formula:"16-5-25+3.4MgO+TE",unit:"g/L",density:1.0,NO3:0.104,NH4:0.052,N:0.156,P:0.02182,K:0.207525,Ca:0.0,Mg:0.0205,S:0.0,Si:0.0,Fe:0.001,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"ICL Universol Basis",formula:"4-19-35+4.1MgO+TE",unit:"g/L",density:1.0,NO3:0.04,NH4:0.0,N:0.04,P:0.082916,K:0.290535,Ca:0.0,Mg:0.024723,S:0.062,Si:0.0,Fe:0.0012,Mn:0.0008,Zn:0.0002,Cu:0.0002,B:0.0002},
-  {label:"ICL Universol Jade",formula:"8-10-26+4MgO+TE",unit:"g/L",density:1.0,NO3:0.048,NH4:0.032,NUrea:0,Norg:0,N:0.08,P:0.04364,K:0.21582,Ca:0.0,Mg:0.02412,S:0.0,Si:0.0,Fe:0.0006,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"ICL Universol Soft Water 113R",formula:"11-11-31+2CaO+2MgO+TE",unit:"g/L",density:1.0,NO3:0.098,NH4:0.012,N:0.11,P:0.048004,K:0.257331,Ca:0.0143,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"ICL Universol Soft Water 213R",formula:"14-7-22+5CaO+2MgO+TE",unit:"g/L",density:1.0,NO3:0.117,NH4:0.023,N:0.14,P:0.030548,K:0.182622,Ca:0.03575,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001},
+  {label:"ICL Universol Basis",formula:"4-19-35+4.1MgO+TE",unit:"g/L",density:1.0,NO3:0.04,NH4:0.0,N:0.04,P:0.082916,K:0.290535,Ca:0.0,Mg:0.024723,S:0.062,Si:0.0,Fe:0.0012,Mn:0.0008,Zn:0.0002,Cu:0.0002,B:0.0002,Mo:0.00002},
+  {label:"ICL Universol Jade",formula:"8-10-26+4MgO+TE",unit:"g/L",density:1.0,NO3:0.048,NH4:0.032,NUrea:0,Norg:0,N:0.08,P:0.04364,K:0.21582,Ca:0.0,Mg:0.02412,S:0.0,Si:0.0,Fe:0.0006,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
+  {label:"ICL Universol Soft Water 113R",formula:"11-11-31+2CaO+2MgO+TE",unit:"g/L",density:1.0,NO3:0.098,NH4:0.012,N:0.11,P:0.048004,K:0.257331,Ca:0.0143,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00001},
+  {label:"ICL Universol Soft Water 213R",formula:"14-7-22+5CaO+2MgO+TE",unit:"g/L",density:1.0,NO3:0.117,NH4:0.023,N:0.14,P:0.030548,K:0.182622,Ca:0.03575,Mg:0.01206,S:0.0,Si:0.0,Fe:0.0012,Mn:0.0004,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00001},
   {label:"Advanced Nutrients Grow",formula:"1-0-4",unit:"ml/L",density:1.09,NO3:0.01,NH4:0.0,N:0.01,P:0.0,K:0.033204,Ca:0.0,Mg:0.003,S:0.005,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Bloom",formula:"1-3-4",unit:"ml/L",density:1.11,NO3:0.04,NH4:0.006,N:0.046,P:0.013092,K:0.033204,Ca:0.0,Mg:0.0,S:0.002,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Micro",formula:"2-0-0",unit:"ml/L",density:1.13,NO3:0.02,NH4:0.0,N:0.02,P:0.0,K:0.0,Ca:0.024,Mg:0.001,S:0.0,Si:0.0,Fe:0.0005,Mn:0.0005,Zn:0.0,Cu:0.0,B:0.0002},
@@ -3346,10 +3342,10 @@ var SUBSTANCE_DB = [
   {label:"Advanced Nutrients B-52",formula:"2-1-4",unit:"ml/L",density:1.07,NO3:0.005,NH4:0.015,N:0.02,P:0.004364,K:0.033204,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Sensi Cal Mag Xtra",formula:"4-0-0",unit:"ml/L",density:1.17,NO3:0.04,NH4:0.0,N:0.04,P:0.0,K:0.0,Ca:0.032,Mg:0.011,S:0.0,Si:0.0,Fe:0.0009,Mn:0.0005,Zn:0.0005,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Revive",formula:"Input Formula Here",unit:"ml/L",density:1.05,NO3:0.006,NH4:0.004,N:0.01,P:0.0,K:0.0,Ca:0.01,Mg:0.005,S:0.0,Si:0.0,Fe:0.003,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Canna Aqua Vega A",formula:"6-3-8",unit:"ml/L",density:1.15,NO3:0.039,NH4:0.011,N:0.05,P:0.0,K:0.021583,Ca:0.016445,Mg:0.007839,S:0.0,Si:0.0,Fe:0.0039,Mn:5e-05,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Canna Aqua Vega B",formula:"6-3-8",unit:"ml/L",density:1.06,NO3:0.0,NH4:0.0,N:0.0,P:0.011346,K:0.034864,Ca:0.0,Mg:0.0,S:0.01,Si:0.0,Fe:0.0,Mn:0.0002,Zn:0.00011,Cu:1e-05,B:0.00011},
-  {label:"Canna Aqua Flores A",formula:"4-4-11",unit:"ml/L",density:1.13,NO3:0.031,NH4:0.003,N:0.034,P:0.0,K:0.049806,Ca:0.015015,Mg:0.0,S:0.0,Si:0.0,Fe:0.0045,Mn:5e-05,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Canna Aqua Flores B",formula:"4-4-11",unit:"ml/L",density:1.11,NO3:0.0,NH4:0.0,N:0.0,P:0.016147,K:0.028223,Ca:0.0,Mg:0.010251,S:0.018,Si:0.0,Fe:0.0,Mn:0.00018,Zn:0.0001,Cu:1e-05,B:0.0001},
+  {label:"Canna Aqua Vega A",formula:"6-3-8",unit:"ml/L",density:1.15,NO3:0.039,NH4:0.011,N:0.05,P:0.0,K:0.021583,Ca:0.016445,Mg:0.007839,S:0.0,Si:0.0,Fe:0.0039,Mn:5e-05,Zn:0.0,Cu:0.0,B:0.0,Mo:0.00003},
+  {label:"Canna Aqua Vega B",formula:"6-3-8",unit:"ml/L",density:1.06,NO3:0.0,NH4:0.0,N:0.0,P:0.011346,K:0.034864,Ca:0.0,Mg:0.0,S:0.01,Si:0.0,Fe:0.0,Mn:0.0002,Zn:0.00011,Cu:1e-05,B:0.00011,Mo:0.0000318},
+  {label:"Canna Aqua Flores A",formula:"4-4-11",unit:"ml/L",density:1.13,NO3:0.031,NH4:0.003,N:0.034,P:0.0,K:0.049806,Ca:0.015015,Mg:0.0,S:0.0,Si:0.0,Fe:0.0045,Mn:5e-05,Zn:0.0,Cu:0.0,B:0.0,Mo:0.00002},
+  {label:"Canna Aqua Flores B",formula:"4-4-11",unit:"ml/L",density:1.11,NO3:0.0,NH4:0.0,N:0.0,P:0.016147,K:0.028223,Ca:0.0,Mg:0.010251,S:0.018,Si:0.0,Fe:0.0,Mn:0.00018,Zn:0.0001,Cu:1e-05,B:0.0001,Mo:0.0000223},
   {label:"Advanced Nutrients Sensi Grow A",formula:"3-0-0",unit:"ml/L",density:1.15,NO3:0.03,NH4:0.0,N:0.03,P:0.0,K:0.0,Ca:0.03,Mg:0.005,S:0.0,Si:0.0,Fe:0.0004,Mn:0.0005,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Sensi Grow B",formula:"1-2-6",unit:"ml/L",density:1.17,NO3:0.0094,NH4:0.0006,N:0.01,P:0.008728,K:0.049806,Ca:0.0,Mg:0.0,S:0.013,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Sensi Bloom A",formula:"3-0-0",unit:"ml/L",density:1.14,NO3:0.022,NH4:0.008,N:0.03,P:0.0,K:0.0,Ca:0.021,Mg:0.006,S:0.0,Si:0.0,Fe:0.0004,Mn:0.0005,Zn:0.0,Cu:0.0,B:0.0},
@@ -3358,20 +3354,20 @@ var SUBSTANCE_DB = [
   {label:"Advanced Nutrients Connoisseur Grow B",formula:"1-2-7",unit:"ml/L",density:1.15,NO3:0.009,NH4:0.001,N:0.01,P:0.008728,K:0.058107,Ca:0.0,Mg:0.0,S:0.015,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Connoisseur Bloom A",formula:"3-0-0",unit:"ml/L",density:1.14,NO3:0.025,NH4:0.005,N:0.03,P:0.0,K:0.0,Ca:0.022,Mg:0.007,S:0.0,Si:0.0,Fe:0.0,Mn:0.0005,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Nutrients Connoisseur Bloom B",formula:"2-4-10",unit:"ml/L",density:1.21,NO3:0.0195,NH4:0.0005,N:0.02,P:0.017456,K:0.08301,Ca:0.0,Mg:0.0,S:0.004,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"ICL Micromax Premium Trace Elements  (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.15,Mn:0.025,Zn:0.01,Cu:0.01,B:0.002},
-  {label:"ICL Micromax WS TE-Mix (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.078,Mn:0.026,Zn:0.013,Cu:0.005,B:0.007},
-  {label:"Microfol Combi (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.05427,S:0.09,Si:0.0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005},
+  {label:"ICL Micromax Premium Trace Elements  (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.15,Mn:0.025,Zn:0.01,Cu:0.01,B:0.002,Mo:0.0004},
+  {label:"ICL Micromax WS TE-Mix (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.078,Mn:0.026,Zn:0.013,Cu:0.005,B:0.007,Mo:0.0032},
+  {label:"Microfol Combi (Micros)",formula:"Micros",unit:"g/L",density:1.0,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.0,Ca:0.0,Mg:0.05427,S:0.09,Si:0.0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005,Mo:0.001},
   {label:"Advanced Hydroponics Grow",formula:"2-4-7",unit:"ml/L",density:1.17,NO3:0.018,NH4:0.006,N:0.024,P:0.019202,K:0.061427,Ca:0.0,Mg:0.004824,S:0.0088,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Hydroponics Bloom",formula:"0-5-5",unit:"ml/L",density:1.17,NO3:0.003,NH4:0.004,N:0.007,P:0.024875,K:0.043995,Ca:0.0,Mg:0.012663,S:0.0224,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Advanced Hydroponics Micro",formula:"5-6-6",unit:"ml/L",density:1.2,NO3:0.053,NH4:0.0025,N:0.0555,P:0.0,K:0.049806,Ca:0.046117,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"ICL Solinure Weiss",formula:"5-5-30+3MgO+TE",unit:"g/L",density:1.0,NO3:0.116,NH4:0.034,N:0.15,P:0.02182,K:0.24903,Ca:0.0,Mg:0.01809,S:0.0,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.0002,Cu:9e-05,B:0.0002},
+  {label:"ICL Solinure Weiss",formula:"5-5-30+3MgO+TE",unit:"g/L",density:1.0,NO3:0.116,NH4:0.034,N:0.15,P:0.02182,K:0.24903,Ca:0.0,Mg:0.01809,S:0.0,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.0002,Cu:9e-05,B:0.0002,Mo:0.00004},
   {label:"Yara KRISTALON WEISSMARKE",formula:"5-5-30 (+3+2)",unit:"g/L",density:1.0,NO3:0.113,NH4:0.037,N:0.15,P:0.02182,K:0.24903,Ca:0.0,Mg:0.01809,S:0.02,Si:0.0,Fe:0.0007,Mn:0.0004,Zn:0.00025,Cu:0.0001,B:0.00025},
-  {label:"Plagron Cocos A",formula:"4-0-1",unit:"ml/L",density:1.16,NO3:0.031,NH4:0.006,N:0.037,P:0.0,K:0.023243,Ca:0.03003,Mg:0.0,S:0.0,Si:0.0,Fe:0.00025,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Plagron Cocos B",formula:"1-4-2",unit:"ml/L",density:1.11,NO3:0.003,NH4:0.0,N:0.003,P:0.014401,K:0.017432,Ca:0.0,Mg:0.010854,S:0.0108,Si:0.0,Fe:0.0,Mn:0.00024,Zn:9e-05,Cu:2e-05,B:0.00012},
-  {label:"Canna Hydro Vega A",formula:"5-2-7",unit:"ml/L",density:1.14,NO3:0.037,NH4:0.004,N:0.041,P:0.0,K:0.025733,Ca:0.027885,Mg:0.0,S:0.0,Si:0.0,Fe:0.00016,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Canna Hydro Vega B",formula:"5-2-7",unit:"ml/L",density:1.09,NO3:0.013,NH4:0.0,N:0.013,P:0.008292,K:0.030714,Ca:0.0,Mg:0.007236,S:0.007,Si:0.0,Fe:0.0,Mn:0.00012,Zn:0.0,Cu:1e-05,B:7e-05},
-  {label:"Canna Hydro Flores A",formula:"5-3-8",unit:"ml/L",density:1.11,NO3:0.031,NH4:0.003,N:0.034,P:0.0,K:0.025733,Ca:0.022165,Mg:0.0,S:0.0,Si:0.0,Fe:0.00017,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
-  {label:"Canna Hydro Flores B",formula:"5-3-8",unit:"ml/L",density:1.12,NO3:0.013,NH4:0.0,N:0.013,P:0.011783,K:0.044825,Ca:0.0,Mg:0.006633,S:0.011,Si:0.0,Fe:0.0,Mn:0.00012,Zn:0.0,Cu:1e-05,B:6e-05},
+  {label:"Plagron Cocos A",formula:"4-0-1",unit:"ml/L",density:1.16,NO3:0.031,NH4:0.006,N:0.037,P:0.0,K:0.023243,Ca:0.03003,Mg:0.0,S:0.0,Si:0.0,Fe:0.00025,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0,Mo:0.00005},
+  {label:"Plagron Cocos B",formula:"1-4-2",unit:"ml/L",density:1.11,NO3:0.003,NH4:0.0,N:0.003,P:0.014401,K:0.017432,Ca:0.0,Mg:0.010854,S:0.0108,Si:0.0,Fe:0.0,Mn:0.00024,Zn:9e-05,Cu:2e-05,B:0.00012,Mo:0.0000056},
+  {label:"Canna Hydro Vega A",formula:"5-2-7",unit:"ml/L",density:1.14,NO3:0.037,NH4:0.004,N:0.041,P:0.0,K:0.025733,Ca:0.027885,Mg:0.0,S:0.0,Si:0.0,Fe:0.00016,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0,Mo:0.00002},
+  {label:"Canna Hydro Vega B",formula:"5-2-7",unit:"ml/L",density:1.09,NO3:0.013,NH4:0.0,N:0.013,P:0.008292,K:0.030714,Ca:0.0,Mg:0.007236,S:0.007,Si:0.0,Fe:0.0,Mn:0.00012,Zn:0.0,Cu:1e-05,B:7e-05,Mo:0.000022},
+  {label:"Canna Hydro Flores A",formula:"5-3-8",unit:"ml/L",density:1.11,NO3:0.031,NH4:0.003,N:0.034,P:0.0,K:0.025733,Ca:0.022165,Mg:0.0,S:0.0,Si:0.0,Fe:0.00017,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0,Mo:0.00002},
+  {label:"Canna Hydro Flores B",formula:"5-3-8",unit:"ml/L",density:1.12,NO3:0.013,NH4:0.0,N:0.013,P:0.011783,K:0.044825,Ca:0.0,Mg:0.006633,S:0.011,Si:0.0,Fe:0.0,Mn:0.00012,Zn:0.0,Cu:1e-05,B:6e-05,Mo:0.0000224},
   {label:"Canna pH- Minus Bloom",formula:"0-59-0",unit:"ml/L",density:1.46,NO3:0.0,NH4:0.0,N:0.0,P:0.226492,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Terra Aquatica PH + Plus",formula:"0-0-10",unit:"ml/L",density:1.16,NO3:0.0,NH4:0.0,N:0.0,P:0.0,K:0.08301,Ca:0.0,Mg:0.0,S:0.0,Si:0.002342,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
   {label:"Terra Aquatica PH - Minus",formula:"3-10-0",unit:"ml/L",density:1.1,NO3:0.03,NH4:0.0,N:0.03,P:0.067206,K:0.0,Ca:0.0,Mg:0.0,S:0.0,Si:0.0,Fe:0.0,Mn:0.0,Zn:0.0,Cu:0.0,B:0.0},
@@ -3389,16 +3385,16 @@ var SUBSTANCE_DB = [
   {label:"Atami B'cuzz Blossom Builder",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.108018,K:0.254041,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Atami B'cuzz Coco Nutrition A",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0.050435,Ca:0.048649,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Atami B'cuzz Coco Nutrition B",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.019847,K:0.056636,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Atami B'cuzz Premium Plant Powder",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.030548,K:0.141134,Ca:0.0286,Mg:0.01809,S:0,Si:0,Fe:0.0009,Mn:0.0004,Zn:0.0005,Cu:4e-06,B:0.0002},
-  {label:"Athena Blended Bloom A",formula:"",unit:"ml/L",density:1.0,NO3:0.04541,NH4:0.00239,N:0.0478,P:0,K:0.049604,Ca:0.038278,Mg:0.002032,S:0,Si:0,Fe:0.000717,Mn:0.000155,Zn:5.4e-05,Cu:0,B:0.0001195},
+  {label:"Atami B'cuzz Premium Plant Powder",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.030548,K:0.141134,Ca:0.0286,Mg:0.01809,S:0,Si:0,Fe:0.0009,Mn:0.0004,Zn:0.0005,Cu:4e-06,B:0.0002,Mo:0.00003},
+  {label:"Athena Blended Bloom A",formula:"",unit:"ml/L",density:1.0,NO3:0.04541,NH4:0.00239,N:0.0478,P:0,K:0.049604,Ca:0.038278,Mg:0.002032,S:0,Si:0,Fe:0.000717,Mn:0.000155,Zn:5.4e-05,Cu:0,B:0.0001195,Mo:0.0000084},
   {label:"Athena Blended Bloom B",formula:"",unit:"ml/L",density:1.0,NO3:0.00577,NH4:0.002308,N:0.008078,P:0.030216,K:0.047903,Ca:0,Mg:0.010855,S:0.015002,Si:0,Fe:0,Mn:0,Zn:0,Cu:5.77e-05,B:0},
   {label:"Athena Blended CaMg",formula:"",unit:"ml/L",density:1.0,NO3:0.02224,NH4:0,N:0.02224,P:0,K:0,Ca:0.023375,Mg:0.012231,S:0,Si:0,Fe:0.0006672,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Athena Blended Grow A",formula:"",unit:"ml/L",density:1.0,NO3:0.045942,NH4:0.002418,N:0.04836,P:0,K:0.010037,Ca:0.050829,Mg:0.002296,S:0,Si:0,Fe:0.0007254,Mn:0.000157,Zn:5.4e-05,Cu:0,B:0.0001209},
+  {label:"Athena Blended Grow A",formula:"",unit:"ml/L",density:1.0,NO3:0.045942,NH4:0.002418,N:0.04836,P:0,K:0.010037,Ca:0.050829,Mg:0.002296,S:0,Si:0,Fe:0.0007254,Mn:0.000157,Zn:5.4e-05,Cu:0,B:0.0001209,Mo:0.0000085},
   {label:"Athena Blended Grow B",formula:"",unit:"ml/L",density:1.0,NO3:0.00912,NH4:0.00228,N:0.0114,P:0.014925,K:0.047321,Ca:0,Mg:0.010153,S:0.01482,Si:0,Fe:0,Mn:0,Zn:0,Cu:5.7e-05,B:0},
   {label:"Athena Blended PK",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.026655,K:0.063386,Ca:0,Mg:0.01464,S:0.022905,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Athena Pro Bloom",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.052368,K:0.199248,Ca:0,Mg:0.030029,S:0.09,Si:0,Fe:0.001,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Athena Pro Core",formula:"",unit:"g/L",density:1.0,NO3:0.14,NH4:0,N:0.14,P:0,K:0,Ca:0.17017,Mg:0,S:0,Si:0,Fe:0.0007,Mn:0.00025,Zn:0.0001,Cu:0.0001,B:0.00015},
-  {label:"Athena Pro Fade",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0.044524,Mg:0,S:0,Si:0,Fe:0.0006672,Mn:0.0001446,Zn:5e-05,Cu:5.56e-05,B:0.0001112},
+  {label:"Athena Pro Core",formula:"",unit:"g/L",density:1.0,NO3:0.14,NH4:0,N:0.14,P:0,K:0,Ca:0.17017,Mg:0,S:0,Si:0,Fe:0.0007,Mn:0.00025,Zn:0.0001,Cu:0.0001,B:0.00015,Mo:0.00002},
+  {label:"Athena Pro Fade",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0.044524,Mg:0,S:0,Si:0,Fe:0.0006672,Mn:0.0001446,Zn:5e-05,Cu:5.56e-05,B:0.0001112,Mo:0.0000078},
   {label:"Athena Pro Grow",formula:"",unit:"g/L",density:1.0,NO3:0.02,NH4:0,N:0.02,P:0.034912,K:0.16604,Ca:0,Mg:0.030029,S:0.08,Si:0,Fe:0.001,Mn:0,Zn:0,Cu:0,B:0},
   {label:"BioBizz Alg-a-mic",formula:"0.1-0.1-0.1",unit:"ml/L",density:1.0,NO3:0,NH4:0,NUrea:0,Norg:0.001,N:0.001,P:0.000436,K:0.00083,Ca:0.002,Mg:0.001,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"BioBizz Bio Bloom",formula:"2-7-4",unit:"ml/L",density:1.064,NO3:0.015,NH4:0.0040,NUrea:0,Norg:0.0,N:0.019,P:0.030112,K:0.034034,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
@@ -3419,20 +3415,20 @@ var SUBSTANCE_DB = [
   {label:"Canna Mono Magnesium",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0.051918,S:0.06888,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Canna Mono Phosphor",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.087366,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Canna Mono Stickstoff",formula:"",unit:"ml/L",density:1.0,NO3:0.092004,NH4:0.047396,N:0.1394,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Canna Mono Trace Mix",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.000565,Mn:0.0005045,Zn:0.0003027,Cu:3.03e-05,B:0.0003027},
+  {label:"Canna Mono Trace Mix",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.000565,Mn:0.0005045,Zn:0.0003027,Cu:3.03e-05,B:0.0003027,Mo:0.0000706},
   {label:"Canna PK 13/14",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.057747,K:0.118928,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Canna Rhizotonic",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.004069,K:0.010321,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Canna Terra Flores",formula:"",unit:"ml/L",density:1.0,NO3:0.01744,NH4:0.00545,N:0.02289,P:0.007611,K:0.033482,Ca:0,Mg:0.005258,S:0.00545,Si:0,Fe:0.0001526,Mn:0.000109,Zn:5.45e-05,Cu:1.09e-05,B:5.45e-05},
-  {label:"Canna Terra Vega",formula:"",unit:"ml/L",density:1.0,NO3:0.0218,NH4:0.00654,N:0.02834,P:0.005232,K:0.028052,Ca:0,Mg:0.006573,S:0.00763,Si:0,Fe:0.0001526,Mn:0.000109,Zn:5.45e-05,Cu:1.09e-05,B:5.45e-05},
+  {label:"Canna Terra Flores",formula:"",unit:"ml/L",density:1.0,NO3:0.01744,NH4:0.00545,N:0.02289,P:0.007611,K:0.033482,Ca:0,Mg:0.005258,S:0.00545,Si:0,Fe:0.0001526,Mn:0.000109,Zn:5.45e-05,Cu:1.09e-05,B:5.45e-05,Mo:0.0000109},
+  {label:"Canna Terra Vega",formula:"",unit:"ml/L",density:1.0,NO3:0.0218,NH4:0.00654,N:0.02834,P:0.005232,K:0.028052,Ca:0,Mg:0.006573,S:0.00763,Si:0,Fe:0.0001526,Mn:0.000109,Zn:5.45e-05,Cu:1.09e-05,B:5.45e-05,Mo:0.0000109},
   {label:"COMPO Bio Naturdünger mit Guano",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.07,P:0.017456,K:0.04151,Ca:0.10725,Mg:0.01809,S:0.028,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.07},
   {label:"COMPO Bio Tomaten Langzeit-Dünger",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.06,P:0.013092,K:0.04151,Ca:0.03575,Mg:0.002412,S:0.02,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.06},
-  {label:"COMPO Blühpflanzendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.02106,NH4:0.01404,N:0.0351,P:0.030635,K:0.05828,Ca:0,Mg:0,S:0,Si:0,Fe:0.000234,Mn:0.000117,Zn:2.34e-05,Cu:2.34e-05,B:0.000117},
-  {label:"COMPO COMPLETE Pflanzendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.05535,NH4:0.01845,N:0.0738,P:0.021471,K:0.061269,Ca:0.017589,Mg:0.014834,S:0,Si:0,Fe:0.0011439,Mn:0.0001599,Zn:3.69e-05,Cu:3.69e-05,B:0.0001722},
+  {label:"COMPO Blühpflanzendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.02106,NH4:0.01404,N:0.0351,P:0.030635,K:0.05828,Ca:0,Mg:0,S:0,Si:0,Fe:0.000234,Mn:0.000117,Zn:2.34e-05,Cu:2.34e-05,B:0.000117,Mo:0.0000117},
+  {label:"COMPO COMPLETE Pflanzendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.05535,NH4:0.01845,N:0.0738,P:0.021471,K:0.061269,Ca:0.017589,Mg:0.014834,S:0,Si:0,Fe:0.0011439,Mn:0.0001599,Zn:3.69e-05,Cu:3.69e-05,B:0.0001722,Mo:0.000016},
   {label:"COMPO GROW Blüte Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.020424,K:0.048567,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"COMPO GROW ORGANIC Blüte Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0.003696,N:0.04312,P:0.018818,K:0.042958,Ca:0,Mg:0.008172,S:0.007392,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.039424},
   {label:"COMPO GROW ORGANIC Wachstum Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.0525,P:0.00491,K:0.037359,Ca:0.011324,Mg:0.012512,S:0.015,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.0525},
   {label:"COMPO GROW Wachstum Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.015318,K:0.038853,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"COMPO Grünpflanzen- & Palmendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.03016,NH4:0.0174,N:0.04756,P:0.015187,K:0.057782,Ca:0,Mg:0,S:0,Si:0,Fe:0.00058,Mn:0.000232,Zn:2.32e-05,Cu:2.32e-05,B:0.000116},
+  {label:"COMPO Grünpflanzen- & Palmendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.03016,NH4:0.0174,N:0.04756,P:0.015187,K:0.057782,Ca:0,Mg:0,S:0,Si:0,Fe:0.00058,Mn:0.000232,Zn:2.32e-05,Cu:2.32e-05,B:0.000116,Mo:0.0000116},
   {label:"GÄRTNERGLÜCK Dolomitkalk",formula:"70% CaCO3 + 25% MgCO3",unit:"g/L",density:1.0,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0.28031,Mg:0.07209,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Domogran Ammoniumsulfat",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0.21,N:0.21,P:0,K:0,Ca:0,Mg:0,S:0.24,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Emerald Harvest Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.025093,K:0.038189,Ca:0,Mg:0.005756,S:0.0115,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
@@ -3441,36 +3437,36 @@ var SUBSTANCE_DB = [
   {label:"Emerald Harvest Grow",formula:"",unit:"ml/L",density:1.0,NO3:0.0171,NH4:0.0057,N:0.0228,P:0.004975,K:0.056786,Ca:0,Mg:0.002268,S:0.0057,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Emerald Harvest Honey Chome",formula:"",unit:"ml/L",density:1.0,NO3:0.00525,NH4:0,N:0.00525,P:0.002291,K:0.008717,Ca:0,Mg:0.005255,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Emerald Harvest King Kola",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0.001605,N:0.001605,P:0.009339,K:0.026649,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Emerald Harvest Micro",formula:"",unit:"ml/L",density:1.0,NO3:0.0464,NH4:0.0058,N:0.0522,P:0,K:0.00963,Ca:0.046446,Mg:0,S:0,Si:0,Fe:0.00116,Mn:0.000464,Zn:0.000348,Cu:5.8e-05,B:0.000232},
+  {label:"Emerald Harvest Micro",formula:"",unit:"ml/L",density:1.0,NO3:0.0464,NH4:0.0058,N:0.0522,P:0,K:0.00963,Ca:0.046446,Mg:0,S:0,Si:0,Fe:0.00116,Mn:0.000464,Zn:0.000348,Cu:5.8e-05,B:0.000232,Mo:0.0000232},
   {label:"Emerald Harvest Root Wizard",formula:"",unit:"ml/L",density:1.0,NO3:0.0052,NH4:0,N:0.0052,P:0.002269,K:0.008634,Ca:0,Mg:0.000521,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Ferty 9 Hydro",formula:"",unit:"g/L",density:1.0,NO3:0.1,NH4:0.05,N:0.15,P:0.030548,K:0.182644,Ca:0,Mg:0.03618,S:0.045,Si:0,Fe:0.0012,Mn:0.0005,Zn:0.0001,Cu:2e-05,B:0.0003},
-  {label:"Ferty Basis 1",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.061096,K:0.315476,Ca:0,Mg:0.03015,S:0.14,Si:0,Fe:0.002,Mn:0.0004,Zn:5e-05,Cu:3e-05,B:0.0002},
-  {label:"FloraFlex B1",formula:"",unit:"g/L",density:1.0,NO3:0.135,NH4:0.005,N:0.14,P:0,K:0.182644,Ca:0.07007,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
+  {label:"Ferty 9 Hydro",formula:"",unit:"g/L",density:1.0,NO3:0.1,NH4:0.05,N:0.15,P:0.030548,K:0.182644,Ca:0,Mg:0.03618,S:0.045,Si:0,Fe:0.0012,Mn:0.0005,Zn:0.0001,Cu:2e-05,B:0.0003,Mo:0.0001},
+  {label:"Ferty Basis 1",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.061096,K:0.315476,Ca:0,Mg:0.03015,S:0.14,Si:0,Fe:0.002,Mn:0.0004,Zn:5e-05,Cu:3e-05,B:0.0002,Mo:0.00006},
+  {label:"FloraFlex B1",formula:"",unit:"g/L",density:1.0,NO3:0.135,NH4:0.005,N:0.14,P:0,K:0.182644,Ca:0.07007,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Mo:0.00001},
   {label:"FloraFlex B2",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.122192,K:0.149436,Ca:0,Mg:0.069984,S:0.11,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"FloraFlex Bulky B",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.061096,K:0.315476,Ca:0,Mg:0.009998,S:0.11,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
+  {label:"FloraFlex Bulky B",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.061096,K:0.315476,Ca:0,Mg:0.009998,S:0.11,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Mo:0.00001},
   {label:"FloraFlex Full Tilt",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.205108,K:0.29057,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"FloraFlex V1",formula:"",unit:"g/L",density:1.0,NO3:0.13,NH4:0.01,N:0.14,P:0,K:0.033208,Ca:0.15015,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
+  {label:"FloraFlex V1",formula:"",unit:"g/L",density:1.0,NO3:0.13,NH4:0.01,N:0.14,P:0,K:0.033208,Ca:0.15015,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Mo:0.00001},
   {label:"FloraFlex V2",formula:"",unit:"g/L",density:1.0,NO3:0.04,NH4:0.02,N:0.06,P:0.074188,K:0.20755,Ca:0,Mg:0.019995,S:0.06,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Green House Feeding BioBloom",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.04,P:0.039276,K:0.074718,Ca:0.0572,Mg:0.02412,S:0.072,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04},
   {label:"Green House Feeding BioGrow",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.07,P:0.008728,K:0.033208,Ca:0.0572,Mg:0.02412,S:0.036,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.07},
   {label:"Haifa GrowClean",formula:"",unit:"g/L",density:1.0,NO3:0.05,NH4:0,N:0.05,P:0.135284,K:0.33208,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Haifa Multi-K Reci Kaliumnitrat",formula:"",unit:"g/L",density:1.0,NO3:0.135,NH4:0,N:0.135,P:0,K:0.386043,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Haifa Poly-Feed Cadenza",formula:"",unit:"g/L",density:1.0,NO3:0.097,NH4:0.083,N:0.18,P:0.052368,K:0.149436,Ca:0,Mg:0.01206,S:0.034,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"Haifa Poly-Feed Largo",formula:"",unit:"g/L",density:1.0,NO3:0.043,NH4:0.059,N:0.102,P:0.13092,K:0.12453,Ca:0,Mg:0.01206,S:0.016,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"Haifa Poly-Feed Menuet",formula:"",unit:"g/L",density:1.0,NO3:0.123,NH4:0.077,N:0.2,P:0.02182,K:0.16604,Ca:0,Mg:0.01809,S:0.0224,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"Haifa Poly-Feed Opera",formula:"",unit:"g/L",density:1.0,NO3:0.055,NH4:0.022,N:0.077,P:0.048004,K:0.157738,Ca:0,Mg:0.015075,S:0.02,Si:0,Fe:0.0012,Mn:0.0006,Zn:0.0003,Cu:0.0001,B:0.0004},
-  {label:"Haifa Poly-Feed Pavane",formula:"",unit:"g/L",density:1.0,NO3:0.085,NH4:0.005,N:0.09,P:0.06546,K:0.315476,Ca:0,Mg:0.01206,S:0.014,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"Haifa Poly-Feed Prelude",formula:"",unit:"g/L",density:1.0,NO3:0.034,NH4:0.086,N:0.12,P:0.157104,K:0.099624,Ca:0,Mg:0.01206,S:0.0328,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001},
-  {label:"Haifa Poly-Feed Volante",formula:"",unit:"g/L",density:1.0,NO3:0.077,NH4:0.022,N:0.099,P:0.07157,K:0.246569,Ca:0,Mg:0.02412,S:0.0324,Si:0,Fe:0.001,Mn:0.0008,Zn:0.0005,Cu:0.0001,B:0.0003},
+  {label:"Haifa Poly-Feed Cadenza",formula:"",unit:"g/L",density:1.0,NO3:0.097,NH4:0.083,N:0.18,P:0.052368,K:0.149436,Ca:0,Mg:0.01206,S:0.034,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00003},
+  {label:"Haifa Poly-Feed Largo",formula:"",unit:"g/L",density:1.0,NO3:0.043,NH4:0.059,N:0.102,P:0.13092,K:0.12453,Ca:0,Mg:0.01206,S:0.016,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00003},
+  {label:"Haifa Poly-Feed Menuet",formula:"",unit:"g/L",density:1.0,NO3:0.123,NH4:0.077,N:0.2,P:0.02182,K:0.16604,Ca:0,Mg:0.01809,S:0.0224,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00003},
+  {label:"Haifa Poly-Feed Opera",formula:"",unit:"g/L",density:1.0,NO3:0.055,NH4:0.022,N:0.077,P:0.048004,K:0.157738,Ca:0,Mg:0.015075,S:0.02,Si:0,Fe:0.0012,Mn:0.0006,Zn:0.0003,Cu:0.0001,B:0.0004,Mo:0.00004},
+  {label:"Haifa Poly-Feed Pavane",formula:"",unit:"g/L",density:1.0,NO3:0.085,NH4:0.005,N:0.09,P:0.06546,K:0.315476,Ca:0,Mg:0.01206,S:0.014,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00003},
+  {label:"Haifa Poly-Feed Prelude",formula:"",unit:"g/L",density:1.0,NO3:0.034,NH4:0.086,N:0.12,P:0.157104,K:0.099624,Ca:0,Mg:0.01206,S:0.0328,Si:0,Fe:0.0012,Mn:0.0002,Zn:0.0001,Cu:0.0001,B:0.0001,Mo:0.00003},
+  {label:"Haifa Poly-Feed Volante",formula:"",unit:"g/L",density:1.0,NO3:0.077,NH4:0.022,N:0.099,P:0.07157,K:0.246569,Ca:0,Mg:0.02412,S:0.0324,Si:0,Fe:0.001,Mn:0.0008,Zn:0.0005,Cu:0.0001,B:0.0003,Mo:0.0001},
   {label:"Haifa Soluble DUO 3-0-9+34",formula:"",unit:"g/L",density:1.0,NO3:0.03,NH4:0,N:0.03,P:0,K:0.074718,Ca:0.2431,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"HaifaStim eNergy",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"HaifaStim Wall-Up S",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.05,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Hesi Bio Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.014183,K:0.053963,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Hesi Bio Grow",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.002837,K:0.053963,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Hesi Blüh Complex",formula:"",unit:"ml/L",density:1.0,NO3:0.009044,NH4:0.00681,N:0.015854,P:0.012073,K:0.0318,Ca:0.000107,Mg:0.001604,S:0,Si:0,Fe:3.5e-05,Mn:1.7e-05,Zn:7.5e-06,Cu:2.1e-06,B:1.04e-05},
+  {label:"Hesi Blüh Complex",formula:"",unit:"ml/L",density:1.0,NO3:0.009044,NH4:0.00681,N:0.015854,P:0.012073,K:0.0318,Ca:0.000107,Mg:0.001604,S:0,Si:0,Fe:3.5e-05,Mn:1.7e-05,Zn:7.5e-06,Cu:2.1e-06,B:1.04e-05,Mo:0.0000017},
   {label:"Hesi Boost",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.004451,K:0.008468,Ca:0,Mg:0.006151,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Hesi Phosphor Plus",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.033872,K:0.044748,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Hesi TNT Complex",formula:"",unit:"ml/L",density:1.0,NO3:0.000313,NH4:0.000209,N:0.000522,P:0.010023,K:0.026869,Ca:0.0001045,Mg:0.001574,S:0,Si:0,Fe:4.7e-05,Mn:1.15e-05,Zn:9.4e-06,Cu:5.2e-06,B:2.2e-06},
+  {label:"Hesi TNT Complex",formula:"",unit:"ml/L",density:1.0,NO3:0.000313,NH4:0.000209,N:0.000522,P:0.010023,K:0.026869,Ca:0.0001045,Mg:0.001574,S:0,Si:0,Fe:4.7e-05,Mn:1.15e-05,Zn:9.4e-06,Cu:5.2e-06,B:2.2e-06,Mo:0.0000085},
   {label:"Hornmehl",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.12,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.12},
   {label:"Hornspäne",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.14,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.14},
   {label:"Humintech FULVITAL Plus Liquid",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0.016917,S:0.0442,Si:0,Fe:0.0156,Mn:0.0078,Zn:0.0104,Cu:0.0052,B:0},
@@ -3478,7 +3474,7 @@ var SUBSTANCE_DB = [
   {label:"Hy-Pro Hydro A",formula:"",unit:"ml/L",density:1.0,NO3:0.03045,NH4:0.00105,N:0.0315,P:0,K:0.017434,Ca:0.021021,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Hy-Pro Hydro B",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0.0077,N:0.0077,P:0.012001,K:0.034702,Ca:0,Mg:0.005505,S:0.012045,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Italpollina Hühnermistpellets",formula:"4-4-4+0.5Mg",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.04,P:0.017456,K:0.033208,Ca:0,Mg:0.003015,S:0,Si:0,Fe:0.008,Mn:0,Zn:0,Cu:0,B:0.002,Norg:0.04},
-  {label:"Jost Excello Kupfer Spezial",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0.17875,Mg:0.059094,S:0.0096,Si:0,Fe:0.026,Mn:0,Zn:0.025,Cu:0.05,B:0},
+  {label:"Jost Excello Kupfer Spezial",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0.17875,Mg:0.059094,S:0.0096,Si:0,Fe:0.026,Mn:0,Zn:0.025,Cu:0.05,B:0,Mo:0.0001},
   {label:"Kaliumchlorid KCl",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0.524686,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Knochenmehl-Pellets",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.07,P:0.06546,K:0,Ca:0.15015,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.07},
   {label:"Manna Bio Basiskur Universaldünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.0492,P:0.021471,K:0.030634,Ca:0,Mg:0.011125,S:0.00615,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.0492},
@@ -3492,9 +3488,9 @@ var SUBSTANCE_DB = [
   {label:"Manna Bio Wurzelforte",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0.018381,Ca:0,Mg:0,S:0.00615,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Manna Biorit",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.04,P:0.013092,K:0.066416,Ca:0.046475,Mg:0.00603,S:0.023,Si:0,Fe:0.0003,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04},
   {label:"Manna Greentime Spezial Profi",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.02182,K:0.074718,Ca:0.01287,Mg:0.00603,S:0.03,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Manna Hannalin Blüte",formula:"",unit:"g/L",density:1.0,NO3:0.025,NH4:0.055,N:0.08,P:0.069824,K:0.199248,Ca:0,Mg:0.019899,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0005,Cu:0.0005,B:0.0002},
-  {label:"Manna Hannalin Wachstum",formula:"",unit:"g/L",density:1.0,NO3:0.061,NH4:0.109,N:0.17,P:0.039276,K:0.116228,Ca:0,Mg:0.019899,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0005,Cu:0.0005,B:0.0002},
-  {label:"Manna Tomaten- und Gemüsezauber",formula:"",unit:"g/L",density:1.0,NO3:0.04,NH4:0.08,N:0.12,P:0.02182,K:0.199248,Ca:0,Mg:0.01206,S:0,Si:0,Fe:0.0007,Mn:0.0005,Zn:0.0001,Cu:0.0001,B:0.0003},
+  {label:"Manna Hannalin Blüte",formula:"",unit:"g/L",density:1.0,NO3:0.025,NH4:0.055,N:0.08,P:0.069824,K:0.199248,Ca:0,Mg:0.019899,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0005,Cu:0.0005,B:0.0002,Mo:0.00001},
+  {label:"Manna Hannalin Wachstum",formula:"",unit:"g/L",density:1.0,NO3:0.061,NH4:0.109,N:0.17,P:0.039276,K:0.116228,Ca:0,Mg:0.019899,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0005,Cu:0.0005,B:0.0002,Mo:0.00001},
+  {label:"Manna Tomaten- und Gemüsezauber",formula:"",unit:"g/L",density:1.0,NO3:0.04,NH4:0.08,N:0.12,P:0.02182,K:0.199248,Ca:0,Mg:0.01206,S:0,Si:0,Fe:0.0007,Mn:0.0005,Zn:0.0001,Cu:0.0001,B:0.0003,Mo:0.00001},
   {label:"Micromax Premium",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.15,Mn:0.025,Zn:0.01,Cu:0.01,B:0.002},
   {label:"Micromax WS TE-Mix",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.078,Mn:0.026,Zn:0.013,Cu:0.005,B:0.007},
   {label:"Neempresskuchen",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.05,P:0.004364,K:0.020755,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.05},
@@ -3506,16 +3502,16 @@ var SUBSTANCE_DB = [
   {label:"OBI Veganer Bio-Dünger",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.045,P:0.01091,K:0.070567,Ca:0,Mg:0.003015,S:0.037,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.045},
   {label:"Oscorna Animalin",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.07,P:0.017456,K:0.004151,Ca:0.03575,Mg:0.002412,S:0.007,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.07},
   {label:"Oscorna Bodenaktivator",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.03,P:0.008728,K:0,Ca:0.0858,Mg:0.009045,S:0.005,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.03},
-  {label:"Osmocote Bloom",formula:"",unit:"g/L",density:1.0,NO3:0.052,NH4:0.069,N:0.121,P:0.030548,K:0.149436,Ca:0,Mg:0.009045,S:0.083,Si:0,Fe:0.0035,Mn:0.0005,Zn:0.00021,Cu:0.00052,B:0.0001},
-  {label:"Osmocote Exact High K",formula:"",unit:"g/L",density:1.0,NO3:0.051,NH4:0.069,N:0.12,P:0.034912,K:0.157738,Ca:0,Mg:0.010854,S:0.084,Si:0,Fe:0.0035,Mn:0.00049,Zn:0.00021,Cu:0.0006,B:0.00018},
-  {label:"Plagron Alga Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.04026,P:0.012245,K:0.054694,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04026},
-  {label:"Plagron Alga Grow",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.04998,P:0.010386,K:0.042481,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04998},
+  {label:"Osmocote Bloom",formula:"",unit:"g/L",density:1.0,NO3:0.052,NH4:0.069,N:0.121,P:0.030548,K:0.149436,Ca:0,Mg:0.009045,S:0.083,Si:0,Fe:0.0035,Mn:0.0005,Zn:0.00021,Cu:0.00052,B:0.0001,Mo:0.00017},
+  {label:"Osmocote Exact High K",formula:"",unit:"g/L",density:1.0,NO3:0.051,NH4:0.069,N:0.12,P:0.034912,K:0.157738,Ca:0,Mg:0.010854,S:0.084,Si:0,Fe:0.0035,Mn:0.00049,Zn:0.00021,Cu:0.0006,B:0.00018,Mo:0.00018},
+  {label:"Plagron Alga Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.04026,P:0.012245,K:0.054694,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04026,Mo:0.000007},
+  {label:"Plagron Alga Grow",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.04998,P:0.010386,K:0.042481,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.04998,Mo:0.000005},
   {label:"Plagron Bat Guano",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.03,P:0.06546,K:0.033208,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.03},
   {label:"Plagron Green Sensation",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.049881,K:0.105435,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Plagron Sugar Royal",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.1071,P:0,K:0,Ca:0,Mg:0,S:0.01428,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.1071},
-  {label:"Plagron Terra Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0.01856,NH4:0.0058,N:0.02436,P:0.0081,K:0.037558,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Plagron Terra Grow",formula:"",unit:"ml/L",density:1.0,NO3:0.022,NH4:0.0066,N:0.0286,P:0.00528,K:0.02831,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Purgrün Bloom-Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0.0092,NH4:0.0092,N:0.0184,P:0.025093,K:0.066831,Ca:0,Mg:0,S:0,Si:0,Fe:0.00023,Mn:0.000115,Zn:2.3e-05,Cu:2.3e-05,B:0.000115},
+  {label:"Plagron Terra Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0.01856,NH4:0.0058,N:0.02436,P:0.0081,K:0.037558,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Mo:0.000003},
+  {label:"Plagron Terra Grow",formula:"",unit:"ml/L",density:1.0,NO3:0.022,NH4:0.0066,N:0.0286,P:0.00528,K:0.02831,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Mo:0.000003},
+  {label:"Purgrün Bloom-Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0.0092,NH4:0.0092,N:0.0184,P:0.025093,K:0.066831,Ca:0,Mg:0,S:0,Si:0,Fe:0.00023,Mn:0.000115,Zn:2.3e-05,Cu:2.3e-05,B:0.000115,Mo:0.0000115},
   {label:"Purgrün Grow-Dünger",formula:"",unit:"ml/L",density:1.0,NO3:0.0207,NH4:0.0207,N:0.0414,P:0.015056,K:0.057284,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Royal Queen Seeds Bio-Bloom",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.024438,K:0.046491,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Royal Queen Seeds Bio-Grow",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.0324,P:0.014139,K:0.026898,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.0324},
@@ -3523,17 +3519,17 @@ var SUBSTANCE_DB = [
   {label:"Terra Aquatica DualPart Coco Grow",formula:"",unit:"ml/L",density:1.0,NO3:0.03725,NH4:0.010814,N:0.048064,P:0,K:0.049878,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Terra Aquatica FinalPart",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0.031578,K:0.050061,Ca:0,Mg:0.021817,S:0.02412,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
   {label:"Terra Aquatica pH-",formula:"",unit:"ml/L",density:1.0,NO3:0.007526,NH4:0,N:0.007526,P:0.035703,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
-  {label:"Terra Aquatica TriPart Micro Hard Water",formula:"",unit:"ml/L",density:1.0,NO3:0.03878,NH4:0.01662,N:0.0554,P:0,K:0.011958,Ca:0.011091,Mg:0,S:0,Si:0,Fe:0.0013296,Mn:0.0007756,Zn:0.0002216,Cu:0.0001108,B:0.0001108},
-  {label:"Terra Aquatica TriPart Micro Soft Water",formula:"",unit:"ml/L",density:1.0,NO3:0.05,NH4:0.0125,N:0.0625,P:0,K:0.013491,Ca:0.053625,Mg:0,S:0,Si:0,Fe:0.0015,Mn:0.000875,Zn:0.00025,Cu:0.000125,B:0.000125},
+  {label:"Terra Aquatica TriPart Micro Hard Water",formula:"",unit:"ml/L",density:1.0,NO3:0.03878,NH4:0.01662,N:0.0554,P:0,K:0.011958,Ca:0.011091,Mg:0,S:0,Si:0,Fe:0.0013296,Mn:0.0007756,Zn:0.0002216,Cu:0.0001108,B:0.0001108,Mo:0.00002},
+  {label:"Terra Aquatica TriPart Micro Soft Water",formula:"",unit:"ml/L",density:1.0,NO3:0.05,NH4:0.0125,N:0.0625,P:0,K:0.013491,Ca:0.053625,Mg:0,S:0,Si:0,Fe:0.0015,Mn:0.000875,Zn:0.00025,Cu:0.000125,B:0.000125,Mo:0.00002},
   {label:"Vinasse-Extrakt",formula:"",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0.005,P:0.002182,K:0.29057,Ca:0,Mg:0,S:0.18,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.005},
   {label:"WUXAL Bio-Universaldünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0.0246,P:0.010735,K:0.020423,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,Norg:0.0246},
-  {label:"WUXAL Blütenpracht",formula:"",unit:"ml/L",density:1.0,NO3:0.00366,NH4:0,N:0.00366,P:0.042593,K:0.101284,Ca:0,Mg:0,S:0,Si:0,Fe:0.000244,Mn:0.000146,Zn:4.88e-05,Cu:4.88e-05,B:0.000122},
+  {label:"WUXAL Blütenpracht",formula:"",unit:"ml/L",density:1.0,NO3:0.00366,NH4:0,N:0.00366,P:0.042593,K:0.101284,Ca:0,Mg:0,S:0,Si:0,Fe:0.000244,Mn:0.000146,Zn:4.88e-05,Cu:4.88e-05,B:0.000122,Mo:0.0000122},
   {label:"WUXAL Calciumdünger",formula:"",unit:"ml/L",density:1.0,NO3:0,NH4:0,N:0,P:0,K:0,Ca:0.144788,Mg:0,S:0,Si:0,Fe:0,Mn:0.00675,Zn:0.00675,Cu:0,B:0},
-  {label:"WUXAL Grünpflanzen- & Palmendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.02023,NH4:0.02142,N:0.04165,P:0.025966,K:0.059276,Ca:0,Mg:0,S:0,Si:0,Fe:0.0001785,Mn:0.0001547,Zn:5.95e-05,Cu:8.33e-05,B:0.000119},
-  {label:"WUXAL Hanfdünger Blüte",formula:"",unit:"ml/L",density:1.0,NO3:0.006292,NH4:0.001716,N:0.008008,P:0,K:0.071231,Ca:0,Mg:0.003449,S:0,Si:0,Fe:0.000572,Mn:0.000137,Zn:4.58e-05,Cu:4.58e-05,B:0.0001144},
-  {label:"WUXAL Hanfdünger Wachstum",formula:"",unit:"ml/L",density:1.0,NO3:0.030375,NH4:0.030375,N:0.06075,P:0.031814,K:0.060522,Ca:0,Mg:0,S:0,Si:0,Fe:0.0001823,Mn:0.0001579,Zn:6.07e-05,Cu:8.5e-05,B:0.0001215},
-  {label:"WUXAL Super",formula:"",unit:"ml/L",density:1.0,NO3:0.02852,NH4:0.04588,N:0.0744,P:0.043291,K:0.061767,Ca:0,Mg:0,S:0,Si:0,Fe:0.000248,Mn:0.000149,Zn:4.96e-05,Cu:4.96e-05,B:0.000124},
-  {label:"WUXAL Universaldünger",formula:"",unit:"ml/L",density:1.0,NO3:0.02852,NH4:0.04588,N:0.0744,P:0.043291,K:0.061767,Ca:0,Mg:0,S:0,Si:0,Fe:0.000248,Mn:0.000149,Zn:4.96e-05,Cu:4.96e-05,B:0.000124},
+  {label:"WUXAL Grünpflanzen- & Palmendünger",formula:"",unit:"ml/L",density:1.0,NO3:0.02023,NH4:0.02142,N:0.04165,P:0.025966,K:0.059276,Ca:0,Mg:0,S:0,Si:0,Fe:0.0001785,Mn:0.0001547,Zn:5.95e-05,Cu:8.33e-05,B:0.000119,Mo:0.0000119},
+  {label:"WUXAL Hanfdünger Blüte",formula:"",unit:"ml/L",density:1.0,NO3:0.006292,NH4:0.001716,N:0.008008,P:0,K:0.071231,Ca:0,Mg:0.003449,S:0,Si:0,Fe:0.000572,Mn:0.000137,Zn:4.58e-05,Cu:4.58e-05,B:0.0001144,Mo:0.0000114},
+  {label:"WUXAL Hanfdünger Wachstum",formula:"",unit:"ml/L",density:1.0,NO3:0.030375,NH4:0.030375,N:0.06075,P:0.031814,K:0.060522,Ca:0,Mg:0,S:0,Si:0,Fe:0.0001823,Mn:0.0001579,Zn:6.07e-05,Cu:8.5e-05,B:0.0001215,Mo:0.0000121},
+  {label:"WUXAL Super",formula:"",unit:"ml/L",density:1.0,NO3:0.02852,NH4:0.04588,N:0.0744,P:0.043291,K:0.061767,Ca:0,Mg:0,S:0,Si:0,Fe:0.000248,Mn:0.000149,Zn:4.96e-05,Cu:4.96e-05,B:0.000124,Mo:0.0000124},
+  {label:"WUXAL Universaldünger",formula:"",unit:"ml/L",density:1.0,NO3:0.02852,NH4:0.04588,N:0.0744,P:0.043291,K:0.061767,Ca:0,Mg:0,S:0,Si:0,Fe:0.000248,Mn:0.000149,Zn:4.96e-05,Cu:4.96e-05,B:0.000124,Mo:0.0000124},
   {label:"Sequestrene NK 138 Fe (Syngenta)",formula:"3-0-15+6Fe EDDHA",unit:"g/L",density:1.0,NO3:0,NH4:0.03,N:0.03,P:0,K:0.125,Ca:0,Mg:0,S:0,Si:0,Fe:0.06,Mn:0,Zn:0,Cu:0,B:0},
   {label:"GH FloraMicro 5-0-1",formula:"5-0-1",unit:"ml/L",density:1.1,NO3:0.047,NH4:0.003,N:0.05,P:0,K:0.0083,Ca:0.05,Mg:0,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.00015,Cu:0.0001,B:0.0001},
   {label:"GH FloraGro 2-1-6",formula:"2-1-6",unit:"ml/L",density:1.1,NO3:0.0175,NH4:0.0025,N:0.02,P:0.00436,K:0.0498,Ca:0,Mg:0.005,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0},
@@ -3543,12 +3539,12 @@ var SUBSTANCE_DB = [
   {label:"Green House Powder Feeding Hybrids",formula:"15-7-22",unit:"g/L",density:1.0,NO3:0.10,NH4:0.05,N:0.15,P:0.030548,K:0.182622,Ca:0,Mg:0.03,S:0.04,Si:0,Fe:0.0012,Mn:0.0005,Zn:0.0001,Cu:0.00002,B:0.0003},
   {label:"Green House Powder Feeding Long Flowering",formula:"18-12-18",unit:"g/L",density:1.0,NO3:0.10,NH4:0.08,N:0.18,P:0.052368,K:0.149418,Ca:0,Mg:0.012,S:0,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0001,Cu:0.0004,B:0.0002},
   {label:"Green House Powder Feeding Booster PK+",formula:"0-30-27",unit:"g/L",density:1.0,NO3:0,NH4:0,N:0,P:0.130920,K:0.224127,Ca:0,Mg:0.05,S:0.09,Si:0,Fe:0.001,Mn:0.0005,Zn:0.0001,Cu:0.00002,B:0.0003},
-  {label:"Bilchim Microfol Combi",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0.054273,S:0.090003,Si:0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"Bilchim Microfol Combi",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0.054273,S:0.090003,Si:0,Fe:0.04,Mn:0.04,Zn:0.015,Cu:0.015,B:0.005,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.001},
   {label:"Biolchim Gold Dry",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0.205671,Fe:0,Mn:0.006,Zn:0.005,Cu:0,B:0.009,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Biolchim Keliron",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.06,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Calciumacetat 97% rein",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0.250142,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Canna Cocos A",formula:"",unit:"ml/L",density:1.17,NO3:0.038,NH4:0,NUrea:0,Norg:0,N:0.038,P:0,K:0.005811,Ca:0.045025,Mg:0.003618,S:0,Si:0,Fe:0.0002,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Canna Cocos B",formula:"",unit:"ml/L",density:1.1,NO3:0.007,NH4:0.001,NUrea:0,Norg:0,N:0.008,P:0.01702,K:0.018263,Ca:0,Mg:0.010855,S:0.007209,Si:0,Fe:0,Mn:0.00012,Zn:7e-05,Cu:1e-05,B:7e-05,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"Canna Cocos B",formula:"",unit:"ml/L",density:1.1,NO3:0.007,NH4:0.001,NUrea:0,Norg:0,N:0.008,P:0.01702,K:0.018263,Ca:0,Mg:0.010855,S:0.007209,Si:0,Fe:0,Mn:0.00012,Zn:7e-05,Cu:1e-05,B:7e-05,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.000022},
   {label:"Canna Hydro Flores A (Hartes Wasser)",formula:"",unit:"ml/L",density:1.119,NO3:0.031,NH4:0.003,NUrea:0,Norg:0,N:0.034,P:0,K:0.025735,Ca:0.022155,Mg:0,S:0,Si:0,Fe:0.00017,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Canna Hydro Flores B (Hartes Wasser)",formula:"",unit:"ml/L",density:1.12,NO3:0.013,NH4:0,NUrea:0,Norg:0,N:0.013,P:0.011783,K:0.044828,Ca:0,Mg:0.006633,S:0.011,Si:0,Fe:0,Mn:0.00012,Zn:6e-05,Cu:1e-05,B:6e-05,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Canna Hydro Vega A (Hartes Wasser)",formula:"",unit:"ml/L",density:1.145,NO3:0.037,NH4:0.004,NUrea:0,Norg:0,N:0.041,P:0,K:0.025735,Ca:0.027873,Mg:0,S:0,Si:0,Fe:0.00016,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
@@ -3571,9 +3567,9 @@ var SUBSTANCE_DB = [
   {label:"Yara Yara Harnstoff",formula:"46% N-Urea",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0.46,Norg:0,N:0.46,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Haifa BitterMag",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0.096486,S:0.128159,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Haifa MAG",formula:"",unit:"g/L",density:1,NO3:0.11,NH4:0,NUrea:0,Norg:0,N:0.11,P:0,K:0,Ca:0,Mg:0.096486,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Haifa Micro Combi",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.072,Mn:0.036,Zn:0.012,Cu:0.009,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Haifa Micro Hydroponic Mix",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.037,Mn:0.024,Zn:0.015,Cu:0.002,B:0.014,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Haifa Micro Soiless Mix",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.065,Mn:0.0348,Zn:0.0102,Cu:0.0076,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"Haifa Micro Combi",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.072,Mn:0.036,Zn:0.012,Cu:0.009,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.006},
+  {label:"Haifa Micro Hydroponic Mix",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.037,Mn:0.024,Zn:0.015,Cu:0.002,B:0.014,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.002},
+  {label:"Haifa Micro Soiless Mix",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0.065,Mn:0.0348,Zn:0.0102,Cu:0.0076,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.0048},
   {label:"Haifa ProteK Standart",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0.227811,K:0.307154,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Haifa ProteK Total",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0.232175,K:0.323757,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Haifa SOP Bio",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0.431676,Ca:0,Mg:0,S:0.180223,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
@@ -3587,8 +3583,8 @@ var SUBSTANCE_DB = [
   {label:"K+S soluSOP 52 ORGANIC",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0.435827,Ca:0,Mg:0,S:0.180223,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Magnesiumcitrat 16% Mg",formula:"",unit:"g/L",density:1,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0,Ca:0,Mg:0.159925,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Metrop Calgreen",formula:"",unit:"ml/L",density:1.5,NO3:0.0805,NH4:0.006,NUrea:0.0135,Norg:0,N:0.1,P:0,K:0,Ca:0.107204,Mg:0.012061,S:0,Si:0,Fe:0.0005,Mn:0.02,Zn:0.0002,Cu:0.0004,B:0.0005,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Metrop MR1",formula:"",unit:"ml/L",density:1.5,NO3:0.0309,NH4:0.0355,NUrea:0,Norg:0,N:0.0664,P:0.117833,K:0.11207,Ca:0,Mg:0.00603,S:0,Si:0,Fe:0.00113,Mn:0.01,Zn:0.00057,Cu:0.00057,B:0.00023,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Metrop MR2",formula:"",unit:"ml/L",density:1.5,NO3:0.0606,NH4:0.0044,NUrea:0,Norg:0,N:0.065,P:0.056298,K:0.214178,Ca:0,Mg:0.00603,S:0,Si:0,Fe:0.00113,Mn:0.00057,Zn:0.00057,Cu:0.00057,B:0.00023,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"Metrop MR1",formula:"",unit:"ml/L",density:1.5,NO3:0.0309,NH4:0.0355,NUrea:0,Norg:0,N:0.0664,P:0.117833,K:0.11207,Ca:0,Mg:0.00603,S:0,Si:0,Fe:0.00113,Mn:0.01,Zn:0.00057,Cu:0.00057,B:0.00023,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00001},
+  {label:"Metrop MR2",formula:"",unit:"ml/L",density:1.5,NO3:0.0606,NH4:0.0044,NUrea:0,Norg:0,N:0.065,P:0.056298,K:0.214178,Ca:0,Mg:0.00603,S:0,Si:0,Fe:0.00113,Mn:0.00057,Zn:0.00057,Cu:0.00057,B:0.00023,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.000008},
   {label:"Phosphorsäure 10% H3PO4",formula:"",unit:"ml/L",density:1.053,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0.031597,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Phosphorsäure 59% H3PO4",formula:"",unit:"ml/L",density:1.417,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0.186439,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Phosphorsäure 75% H3PO4",formula:"",unit:"ml/L",density:1.579,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0.23702,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
@@ -3603,7 +3599,7 @@ var SUBSTANCE_DB = [
   {label:"Plagron Start Up",formula:"",unit:"ml/L",density:1.2,glu:6,gln:2,asp:4,gly:8,pro:3,arg:2,extra_amino:0,NO3:0,NH4:0,NUrea:0,Norg:0.031,N:0.031,P:0.006983,K:0.027395,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Plagron Vita Start",formula:"",unit:"ml/L",density:1.22,glu:12,gln:4,asp:8,gly:5,pro:3,arg:4,extra_amino:0,NO3:0,NH4:0,NUrea:0,Norg:0.055,N:0.055,P:0.004801,K:0.029055,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Planta Ferty AS",formula:"",unit:"g/L",density:1,NO3:0.067,NH4:0.193,NUrea:0,Norg:0,N:0.26,P:0,K:0,Ca:0,Mg:0,S:0.128159,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
-  {label:"Planta Ferty Basis",formula:"",unit:"g/L",density:1,NO3:0.06,NH4:0,NUrea:0,Norg:0,N:0.06,P:0.061099,K:0.307154,Ca:0,Mg:0.024121,S:0.055028,Si:0,Fe:0.002,Mn:0.0004,Zn:5e-05,Cu:3e-05,B:0.0002,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
+  {label:"Planta Ferty Basis",formula:"",unit:"g/L",density:1,NO3:0.06,NH4:0,NUrea:0,Norg:0,N:0.06,P:0.061099,K:0.307154,Ca:0,Mg:0.024121,S:0.055028,Si:0,Fe:0.002,Mn:0.0004,Zn:5e-05,Cu:3e-05,B:0.0002,ecu:0,fbgu:0,bhu:0,pu:0,exu:0,Mo:0.00006},
   {label:"Planta Ferty Cal",formula:"",unit:"g/L",density:1,NO3:0.14,NH4:0.01,NUrea:0,Norg:0,N:0.15,P:0,K:0,Ca:0.192966,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"S3 Kaliwasserglas 28 Be",formula:"",unit:"ml/L",density:1.25,NO3:0,NH4:0,NUrea:0,Norg:0,N:0,P:0,K:0.066412,Ca:0,Mg:0,S:0,Si:0.093487,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
   {label:"Salpetersäure 3% HNO3",formula:"",unit:"g/L",density:1.015,NO3:0.00666,NH4:0,NUrea:0,Norg:0,N:0.00666,P:0,K:0,Ca:0,Mg:0,S:0,Si:0,Fe:0,Mn:0,Zn:0,Cu:0,B:0,ecu:0,fbgu:0,bhu:0,pu:0,exu:0},
@@ -3829,6 +3825,7 @@ var NUTRIENTS_AW = [
   { key:'Mn', label:'MANGAN', label_en:'MANGANESE',      dec:2, color:'#34d399'  },
   { key:'Zn', label:'ZINK', label_en:'ZINC',        dec:2, color:'#818cf8'  },
   { key:'B',  label:'BOR', label_en:'BORON',         dec:2, color:'#c084fc'  },
+  { key:'Mo', label:'MOLYBDÄN', label_en:'MOLYBDENUM',  dec:3, color:'#67e8f9'  },
   { key:'Si', label:'SILIZIUM', label_en:'SILICON', dec:1, color:'#94a3b8'  }
 ];
 
