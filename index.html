@@ -1987,8 +1987,7 @@ function applySnapshot(data) {
               preis:(dbEntry.preis||0), menge:(dbEntry.menge||1000), active:true, custom:true, density:dbEntry.density||1,
               N:dbEntry.N, NO3:(dbEntry.NO3||0), NH4:(dbEntry.NH4||0), Norg:(dbEntry.Norg||0), NUrea:(dbEntry.NUrea||0),
               P:(dbEntry.P||0), K:(dbEntry.K||0), Ca:(dbEntry.Ca||0), Mg:(dbEntry.Mg||0), S:(dbEntry.S||0), Si:(dbEntry.Si||0),
-              Fe:(dbEntry.Fe||0), Mn:(dbEntry.Mn||0), Zn:(dbEntry.Zn||0), Cu:(dbEntry.Cu||0), B:(dbEntry.B||0),
-              Mo:0, ecu:0, fbgu:0, bhu:0, pu:0, exu:0, glu:0, gln:0, asp:0, gly:0, pro:0, arg:0, extra_ecu:0, extra_amino:0
+              Fe:(dbEntry.Fe||0), Mn:(dbEntry.Mn||0), Zn:(dbEntry.Zn||0), Cu:(dbEntry.Cu||0), B:(dbEntry.B||0), Mo:(dbEntry.Mo||0), ecu:0, fbgu:0, bhu:0, pu:0, exu:0, glu:0, gln:0, asp:0, gly:0, pro:0, arg:0, extra_ecu:0, extra_amino:0
             };
             SALTS.push(newSalt);
             doses[newKey] = 0;
@@ -3644,7 +3643,7 @@ function loadDefaultRecipe() {
       preis:(s.preis||0), menge:(s.menge||1000), active:true, custom:true, density:s.density||1,
       N:s.N, NO3:(s.NO3||0), NH4:(s.NH4||0), Norg:(s.Norg||0), NUrea:(s.NUrea||0),
       P:(s.P||0), K:(s.K||0), Ca:(s.Ca||0), Mg:(s.Mg||0), S:(s.S||0), Si:(s.Si||0),
-      Fe:(s.Fe||0), Mn:(s.Mn||0), Zn:(s.Zn||0), Cu:(s.Cu||0), B:(s.B||0),
+      Fe:(s.Fe||0), Mn:(s.Mn||0), Zn:(s.Zn||0), Cu:(s.Cu||0), B:(s.B||0), Mo:(s.Mo||0),
       ecu:(s.ecu||0), fbgu:(s.fbgu||0), bhu:(s.bhu||0), pu:(s.pu||0), exu:(s.exu||0),
       glu:(s.glu||0), gln:(s.gln||0), asp:(s.asp||0), gly:(s.gly||0), pro:(s.pro||0), arg:(s.arg||0),
       extra_ecu:0, extra_amino:0
