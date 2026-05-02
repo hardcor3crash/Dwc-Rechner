@@ -1135,9 +1135,6 @@ function calc() {
     if (d===0) continue;
     // Apply density for liquid salts (DB values are %W/W, density converts to %W/V)
     var factor = d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * 1000;
-    if (s.key==='kwg') { K+=d*67.24; Si+=d*96.72; continue; }
-    if (s.key==='h3po4') { P+=d*1.685*0.85*1000*(30.97/97.99); continue; }
-    if (s.key==='hno3') { var nAdd=d*0.5*14.01; N+=nAdd; NO3+=nAdd; continue; }
     // Track NO3 vs NH4 separately
     var no3Add = factor * (s.NO3 !== undefined ? s.NO3 : (s.N||0));
     var nh4Add = factor * (s.NH4 || 0);
@@ -1178,51 +1175,49 @@ function calc() {
     AMINO_SONST += d * (s.unit==='ml/L' && s.density>1.001 ? s.density : 1) * (s.extra_amino || 0);
   }
 
-  // EC - LMC Modell wie HydroBuddy (currentseparations.com/issues/18-3/cs18-3c.pdf)
-  // Per-equivalent Werte. Feststoffe: Faktor 0.66 (empirisch), Flüssigdünger: kein Faktor
+  // EC - LMCv2 Modell (identisch zu HydroBuddy v1.9+)
+  // Debye-Hückel Ionenstärkekorrektur: EC_i = λ0_i × c_i × exp(−0.7025187 × √I × z_i^1.5)
+  // Quelle: hb_main.pas, github.com/danielfppps/hydrobuddy
   var lmc = {NO3:71.5, NH4:73.5, H2PO4:33.0, K:73.5, Ca:59.5, Mg:53.1, SO4:80.0, Fe:54.0, Mn:53.5};
 
-  // Separate solid and liquid EC contributions
-  var ecSolNO3=0,ecSolNH4=0,ecSolP=0,ecSolK=0,ecSolCa=0,ecSolMg=0,ecSolS=0,ecSolFe=0,ecSolMn=0;
-  var ecLiqNO3=0,ecLiqNH4=0,ecLiqP=0,ecLiqK=0,ecLiqCa=0,ecLiqMg=0,ecLiqS=0,ecLiqFe=0,ecLiqMn=0;
+  // Molare Konzentrationen in mol/L (Gesamtlösung inkl. Leitungswasser-Anteil)
+  var c_NO3 = NO3 / (14.01 * 1000);  // z = 1
+  var c_NH4 = NH4 / (14.01 * 1000);  // z = 1
+  var c_P   = P   / (30.97 * 1000);  // z = 1  (als H2PO4⁻)
+  var c_K   = K   / (39.10 * 1000);  // z = 1
+  var c_Ca  = Ca  / (40.08 * 1000);  // z = 2
+  var c_Mg  = Mg  / (24.31 * 1000);  // z = 2
+  var c_S   = S   / (32.06 * 1000);  // z = 2  (als SO4²⁻)
+  var c_Fe  = Fe  / (55.85 * 1000);  // z = 2
+  var c_Mn  = Mn  / (54.94 * 1000);  // z = 2
 
-  for(var eci=0;eci<SALTS.length;eci++){
-    var es=SALTS[eci];
-    if(!es.active) continue;
-    var ed=doses[es.key]||0;
-    if(ed===0) continue;
-    var isLiq = es.unit==='ml/L' && es.key!=='h3po4' && es.key!=='hno3' && es.key!=='kwg';
-    if(es.key==='kwg'){ecSolK+=ed*67.24; continue;}
-    if(es.key==='h3po4'){ecSolP+=ed*1.685*0.85*1000*(30.97/97.99); continue;}
-    if(es.key==='hno3'){ecSolNO3+=ed*0.5*14.01; continue;}
-    var ef = ed * (isLiq && es.density>1.001 ? es.density : 1) * 1000;
-    if(isLiq){
-      ecLiqNO3+=ef*(es.NO3||0); ecLiqNH4+=ef*(es.NH4||0);
-      ecLiqP+=ef*(es.P||0);     ecLiqK+=ef*(es.K||0);
-      ecLiqCa+=ef*(es.Ca||0);   ecLiqMg+=ef*(es.Mg||0);
-      ecLiqS+=ef*(es.S||0);     ecLiqFe+=ef*(es.Fe||0);
-      ecLiqMn+=ef*(es.Mn||0);
-    } else {
-      ecSolNO3+=ef*(es.NO3||0); ecSolNH4+=ef*(es.NH4||0);
-      ecSolP+=ef*(es.P||0);     ecSolK+=ef*(es.K||0);
-      ecSolCa+=ef*(es.Ca||0);   ecSolMg+=ef*(es.Mg||0);
-      ecSolS+=ef*(es.S||0);     ecSolFe+=ef*(es.Fe||0);
-      ecSolMn+=ef*(es.Mn||0);
-    }
-  }
+  // Ionenstärke I = Σ zi² × ci  (HydroBuddy-Formel, kein 0.5-Vorfaktor)
+  var I_str = c_NO3 + c_NH4 + c_P + c_K
+            + 4*c_Ca + 4*c_Mg + 4*c_S + 4*c_Fe + 4*c_Mn;
 
-  var ec_solid = (lmc.NO3*(ecSolNO3/14.01)+lmc.NH4*(ecSolNH4/14.01)+
-                  lmc.H2PO4*(ecSolP/30.97)+lmc.K*(ecSolK/39.10)+
-                  lmc.Ca*(ecSolCa/40.08)*2+lmc.Mg*(ecSolMg/24.31)*2+
-                  lmc.SO4*(ecSolS/32.06)*2+lmc.Fe*(ecSolFe/55.85)*2+
-                  lmc.Mn*(ecSolMn/54.94)*2)*1e-3 * 0.66;
-  var ec_liquid = (lmc.NO3*(ecLiqNO3/14.01)+lmc.NH4*(ecLiqNH4/14.01)+
-                   lmc.H2PO4*(ecLiqP/30.97)+lmc.K*(ecLiqK/39.10)+
-                   lmc.Ca*(ecLiqCa/40.08)*2+lmc.Mg*(ecLiqMg/24.31)*2+
-                   lmc.SO4*(ecLiqS/32.06)*2+lmc.Fe*(ecLiqFe/55.85)*2+
-                   lmc.Mn*(ecLiqMn/54.94)*2)*1e-3;
-  var ec_lmc = Math.max(0, ec_solid + ec_liquid);
-  var ec = ec_lmc + wEC;
+  // Debye-Hückel Korrekturfaktor je Ladungszahl z
+  var sqrtI  = Math.sqrt(Math.max(0, I_str));
+  var dh1 = Math.exp(-0.7025187 * sqrtI * 1.0);       // z=1: 1^1.5 = 1
+  var dh2 = Math.exp(-0.7025187 * sqrtI * 2.8284271); // z=2: 2^1.5 = 2√2
+
+  // EC in mS/cm  (λ0[S·cm²/mol] × c[mol/L] = mS/cm, Einheiten kürzen sich heraus)
+  // conc_factor = zi (Äquivalente: 1 für monovalent, 2 für divalent)
+  var ec_lmc = Math.max(0,
+    c_NO3 * lmc.NO3   * dh1 +
+    c_NH4 * lmc.NH4   * dh1 +
+    c_P   * lmc.H2PO4 * dh1 +
+    c_K   * lmc.K     * dh1 +
+    2*c_Ca * lmc.Ca   * dh2 +
+    2*c_Mg * lmc.Mg   * dh2 +
+    2*c_S  * lmc.SO4  * dh2 +
+    2*c_Fe * lmc.Fe   * dh2 +
+    2*c_Mn * lmc.Mn   * dh2
+  );
+  // Nicht erfasste Leitungswasser-Ionen (Na, Cl, HCO3 etc.) als Restbeitrag
+  var ec_tap_tracked = 2*(wCa/(40.08*1000))*lmc.Ca + 2*(wMg/(24.31*1000))*lmc.Mg
+                     + (wK/(39.10*1000))*lmc.K + (wN/(14.01*1000))*lmc.NO3
+                     + 2*(wS/(32.06*1000))*lmc.SO4;
+  var ec = ec_lmc + Math.max(0, wEC - ec_tap_tracked);
   return {N:N,NO3:NO3,NH4:NH4,Norg:Norg,NUrea:NUrea,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,Mo:Mo,ec:ec,ECU:ECU,FBGU:FBGU,BHU:BHU,PU:PU,EXU:EXU,SONST:SONST,GLU:GLU,GLN:GLN,ASP:ASP,GLY:GLY,PRO:PRO,ARG:ARG,AMINO_SONST:AMINO_SONST};
 }
 
