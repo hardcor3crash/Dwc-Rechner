@@ -1177,31 +1177,41 @@ function calc() {
 
   // EC - LMCv2 Modell (identisch zu HydroBuddy v1.9+)
   // Debye-Hückel Ionenstärkekorrektur: EC_i = λ0_i × c_i × exp(−0.7025187 × √I × z_i^1.5)
-  // Quelle: hb_main.pas, github.com/danielfppps/hydrobuddy
+  // LMCv2 nur auf Dünger-Ionen, wEC für Leitungswasser direkt addiert (wie HydroBuddy Water Quality)
   var lmc = {NO3:71.5, NH4:73.5, H2PO4:33.0, K:73.5, Ca:59.5, Mg:53.1, SO4:80.0, Fe:54.0, Mn:53.5};
 
-  // Molare Konzentrationen in mol/L (Gesamtlösung inkl. Leitungswasser-Anteil)
-  var c_NO3 = NO3 / (14.01 * 1000);  // z = 1
-  var c_NH4 = NH4 / (14.01 * 1000);  // z = 1
-  var c_P   = P   / (30.97 * 1000);  // z = 1  (als H2PO4⁻)
-  var c_K   = K   / (39.10 * 1000);  // z = 1
-  var c_Ca  = Ca  / (40.08 * 1000);  // z = 2
-  var c_Mg  = Mg  / (24.31 * 1000);  // z = 2
-  var c_S   = S   / (32.06 * 1000);  // z = 2  (als SO4²⁻)
-  var c_Fe  = Fe  / (55.85 * 1000);  // z = 2
-  var c_Mn  = Mn  / (54.94 * 1000);  // z = 2
+  // Nur Dünger-Anteil (Gesamtkonzentration minus Leitungswasser-Anteil)
+  var f_NO3 = Math.max(0, NO3 - wN);
+  var f_NH4 = Math.max(0, NH4);
+  var f_P   = Math.max(0, P);
+  var f_K   = Math.max(0, K   - wK);
+  var f_Ca  = Math.max(0, Ca  - wCa);
+  var f_Mg  = Math.max(0, Mg  - wMg);
+  var f_S   = Math.max(0, S   - wS);
+  var f_Fe  = Math.max(0, Fe);
+  var f_Mn  = Math.max(0, Mn);
+
+  // Molare Konzentrationen in mol/L (nur Dünger)
+  var c_NO3 = f_NO3 / (14.01 * 1000);  // z = 1
+  var c_NH4 = f_NH4 / (14.01 * 1000);  // z = 1
+  var c_P   = f_P   / (30.97 * 1000);  // z = 1  (als H2PO4⁻)
+  var c_K   = f_K   / (39.10 * 1000);  // z = 1
+  var c_Ca  = f_Ca  / (40.08 * 1000);  // z = 2
+  var c_Mg  = f_Mg  / (24.31 * 1000);  // z = 2
+  var c_S   = f_S   / (32.06 * 1000);  // z = 2  (als SO4²⁻)
+  var c_Fe  = f_Fe  / (55.85 * 1000);  // z = 2
+  var c_Mn  = f_Mn  / (54.94 * 1000);  // z = 2
 
   // Ionenstärke I = Σ zi² × ci  (HydroBuddy-Formel, kein 0.5-Vorfaktor)
   var I_str = c_NO3 + c_NH4 + c_P + c_K
             + 4*c_Ca + 4*c_Mg + 4*c_S + 4*c_Fe + 4*c_Mn;
 
   // Debye-Hückel Korrekturfaktor je Ladungszahl z
-  var sqrtI  = Math.sqrt(Math.max(0, I_str));
+  var sqrtI = Math.sqrt(Math.max(0, I_str));
   var dh1 = Math.exp(-0.7025187 * sqrtI * 1.0);       // z=1: 1^1.5 = 1
   var dh2 = Math.exp(-0.7025187 * sqrtI * 2.8284271); // z=2: 2^1.5 = 2√2
 
-  // EC in mS/cm  (λ0[S·cm²/mol] × c[mol/L] = mS/cm, Einheiten kürzen sich heraus)
-  // conc_factor = zi (Äquivalente: 1 für monovalent, 2 für divalent)
+  // EC-Düngerbeitrag in mS/cm  (λ0[S·cm²/mol] × c[mol/L] = mS/cm)
   var ec_lmc = Math.max(0,
     c_NO3 * lmc.NO3   * dh1 +
     c_NH4 * lmc.NH4   * dh1 +
@@ -1213,11 +1223,8 @@ function calc() {
     2*c_Fe * lmc.Fe   * dh2 +
     2*c_Mn * lmc.Mn   * dh2
   );
-  // Nicht erfasste Leitungswasser-Ionen (Na, Cl, HCO3 etc.) als Restbeitrag
-  var ec_tap_tracked = 2*(wCa/(40.08*1000))*lmc.Ca + 2*(wMg/(24.31*1000))*lmc.Mg
-                     + (wK/(39.10*1000))*lmc.K + (wN/(14.01*1000))*lmc.NO3
-                     + 2*(wS/(32.06*1000))*lmc.SO4;
-  var ec = ec_lmc + Math.max(0, wEC - ec_tap_tracked);
+  // Leitungswasser EC direkt addiert (alle Ionen inkl. Na, Cl, HCO3)
+  var ec = ec_lmc + wEC;
   return {N:N,NO3:NO3,NH4:NH4,Norg:Norg,NUrea:NUrea,P:P,K:K,Ca:Ca,Mg:Mg,S:S,Si:Si,Fe:Fe,Mn:Mn,Zn:Zn,Cu:Cu,B:B,Mo:Mo,ec:ec,ECU:ECU,FBGU:FBGU,BHU:BHU,PU:PU,EXU:EXU,SONST:SONST,GLU:GLU,GLN:GLN,ASP:ASP,GLY:GLY,PRO:PRO,ARG:ARG,AMINO_SONST:AMINO_SONST};
 }
 
